@@ -22,7 +22,7 @@ class UserInfomationView: UIView {
         imageView.backgroundColor = .gray
         return imageView
     }()
-    var userName:UILabel = {
+    var userNameLabel:UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.2 , height: ScreenSize.hight.value * 0.05))
         label.contentMode = .center
         label.text = "Name"
@@ -53,16 +53,16 @@ class UserInfomationView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setSubView(){
+    private func setSubView(){
         addSubview(backgroundImage)
         addSubview(glassView)
         addSubview(peopleView)
-        addSubview(userName)
+        addSubview(userNameLabel)
         addSubview(informationButton)
         addSubview(modifyPasswordButton)
         addSubview(logoutButton)
     }
-    func setConstraints(){
+    private func setConstraints(){
         let centerX = ScreenSize.centerX.value
         let space = ScreenSize.spaceY.value
         let glassViewTop = ScreenSize.centerY.value + ScreenSize.hight.value * 0.025 - glassView.frame.height * 0.5
@@ -70,17 +70,30 @@ class UserInfomationView: UIView {
         peopleView.center = CGPoint(
             x: centerX,
             y: glassViewTop + peopleView.frame.height * 0.5 + space)
-        userName.center = CGPoint(
+        userNameLabel.center = CGPoint(
             x: centerX,
-            y: peopleView.frame.maxY + userName.frame.height * 0.5 + space)
+            y: peopleView.frame.maxY + userNameLabel.frame.height * 0.5 + space)
         informationButton.center = CGPoint(
             x: centerX,
-            y: userName.frame.maxY + informationButton.frame.height * 0.5 + space)
+            y: userNameLabel.frame.maxY + informationButton.frame.height * 0.5 + space)
         modifyPasswordButton.center = CGPoint(
             x: centerX,
             y: informationButton.frame.maxY + modifyPasswordButton.frame.height * 0.5 + space)
         logoutButton.center = CGPoint(
             x: centerX,
             y: glassViewBotton - logoutButton.frame.height * 0.5 - space)
+    }
+    func setUserData(userImage:UIImage?,userName:String?){
+        if let userImage = userImage {
+            self.peopleView.image = userImage
+        }else{
+            self.peopleView.image = UIImage(systemName: "photo")
+        }
+        
+        if let userName = userName {
+            self.userNameLabel.text = userName
+        }else{
+            self.userNameLabel.text = "UnKnow"
+        }
     }
 }
