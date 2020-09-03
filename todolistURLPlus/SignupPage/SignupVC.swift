@@ -21,15 +21,27 @@ class SignupVC: UIViewController {
     
     //MARK:- ViewDidLoad
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        settingTF()
     }
     
     //MARK:- Functions
     
+    fileprivate func settingTF() {
+        userNameTF.delegate = self
+        mailTF.delegate = self
+        passwordTF.delegate = self
+        checkPasswordTF.delegate = self
+    }
+    
 
     @IBAction func signupBtnTapped(_ sender: CustomButton) {
     }
+    
+}
+
+extension SignupVC:UITextFieldDelegate{
     
 }

@@ -96,6 +96,21 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
+        <!--Main PageVC-->
+        <scene sceneID="8jz-1I-Q1E">
+            <objects>
+                <viewController id="RTa-hL-s91" customClass="MainPageVC" customModule="todolistURLPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f9g-wL-nVZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="gzj-ph-tU2"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tkh-Zo-q6B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1940" y="314"/>
+        </scene>
         <!--SignupVC-->
         <scene sceneID="I3T-ZO-YM0">
             <objects>
@@ -180,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3y1-gU-YhJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1724.6376811594205" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1939" y="-361"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IaK-f0-vY0">
