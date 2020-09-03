@@ -33,10 +33,10 @@ class CustomButton: UIButton {
 class ButtonFactory{
     static func makeButton(type:ButtonType,text:String) -> UIButton {
         let button = UIButton(frame: CGRect(
-        x: 0,
-        y: 0,
-        width: ScreenSize.width.value * 0.25,
-        height: ScreenSize.hight.value * 0.075))
+            x: 0,
+            y: 0,
+            width: ScreenSize.width.value * 0.35,
+            height: ScreenSize.hight.value * 0.075))
         button.setTitle(text, for: .normal)
         button.layer.cornerRadius = button.frame.size.height/4
         switch type {
@@ -53,5 +53,6 @@ class ButtonFactory{
         case normal,cancel
     }
 }
+
 
 

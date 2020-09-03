@@ -1,21 +1,5 @@
 import UIKit
-let fullScreenSize = UIScreen.main.bounds.size
 
-enum ScreenSize{
-    case centerX,centerY,width,hight
-    var value:CGFloat{
-        switch self {
-        case .centerX:
-            return fullScreenSize.width * 0.5
-        case .centerY:
-            return fullScreenSize.height * 0.5
-        case .width:
-            return fullScreenSize.width
-        case .hight:
-            return fullScreenSize.height
-        }
-    }
-}
 extension UIColor{
     static let backgroundColor = #colorLiteral(red: 0.9647054076, green: 0.9608286023, blue: 0.9606233239, alpha: 1)
     static let mainColor = #colorLiteral(red: 0.0949748382, green: 0.3313525617, blue: 0.4520905614, alpha: 1)
