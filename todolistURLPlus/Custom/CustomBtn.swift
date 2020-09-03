@@ -10,7 +10,6 @@ import UIKit
 
 
 class CustomButton: UIButton {
-    //純扣的話直接實例化
     override init(frame: CGRect) {
         super.init(frame:frame)
         setUpBtn()
@@ -27,6 +26,7 @@ class CustomButton: UIButton {
         backgroundColor = .glassColor
         layer.cornerRadius = frame.size.height/4
         tintColor = .white
+        
         
     }
 }
@@ -53,3 +53,5 @@ class ButtonFactory{
         case normal,cancel
     }
 }
+
+

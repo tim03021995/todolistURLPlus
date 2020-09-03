@@ -23,7 +23,7 @@ class CustomLogINTF:UITextField{
         textColor = .white
         backgroundColor = UIColor(white: 0, alpha: 0.1)
         borderStyle = .none
-
+        
         
         
 
