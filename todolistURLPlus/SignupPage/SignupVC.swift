@@ -8,6 +8,9 @@
 
 import UIKit
 
+//TODO 鍵盤位置 正則
+
+
 class SignupVC: UIViewController {
     //MARK:- Properties
     
@@ -20,7 +23,6 @@ class SignupVC: UIViewController {
     @IBOutlet weak var checkPasswordTF: CustomLogINTF!
     
     //MARK:- ViewDidLoad
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class SignupVC: UIViewController {
         checkPasswordTF.delegate = self
     }
     
+
 
     @IBAction func signupBtnTapped(_ sender: CustomButton) {
     }
