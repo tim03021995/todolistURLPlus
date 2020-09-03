@@ -29,7 +29,8 @@ class LoginPageVC: UIViewController {
     //MARK:- Functions
 
     @IBAction func signInTapped(_ sender: CustomButton) {
-        
+        let vc = UserInfoVC()
+        show(vc, sender: nil)
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {

@@ -1,6 +1,6 @@
 import UIKit
 
-class UserInfomationView: UIView {
+class UserInfoView: UIView {
     var backgroundImage : UIImageView = {
         var uiImage = #imageLiteral(resourceName: "backgroundBlurred")
         var imageView = UIImageView(image: uiImage, highlightedImage: nil)
