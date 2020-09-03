@@ -21,20 +21,29 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTF: CustomLogINTF!
     
     //MARK:- ViewDidLoad
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
+        naviBarSetting()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        accountTF.text = ""
+        passwordTF.text = ""
     }
     //MARK:- Functions
     
     fileprivate func propertiesSetting() {
         accountTF.delegate = self
+        accountTF.placeholder = "請輸入E-Mail"
         passwordTF.delegate = self
+        passwordTF.placeholder = "請輸入密碼"
         signInBtn.backgroundColor = .mainColor2
         signUpBtn.backgroundColor = .mainColor
-        naviBarSetting()
+        
+        
     }
     
     fileprivate func naviBarSetting(){
@@ -42,9 +51,18 @@ class LoginVC: UIViewController {
         barAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = barAppearance
     }
+    
+    func validateAccount(){
+        if accountTF.text == "" || passwordTF.text == "" {
+            //alert
+            present(.makeAlert(title: "test", message: "test", handler: {
+                print("123")
+            }), animated: true)
+        }
+    }
 
     @IBAction func signInTapped(_ sender: CustomButton) {
-        
+        validateAccount()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
@@ -58,7 +76,9 @@ class LoginVC: UIViewController {
 
 extension LoginVC : UITextFieldDelegate{
     
-    
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+      self.view.endEditing(true)
+    }
     
 }
+
