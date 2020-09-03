@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login PageVC-->
+        <!--LoginVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="signIVC" id="BYZ-38-t0r" customClass="LoginPageVC" customModule="todolistURLPlus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signIVC" id="BYZ-38-t0r" customClass="LoginVC" customModule="todolistURLPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,12 +20,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="帳號" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQh-C3-qh0" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
-                                <rect key="frame" x="60" y="324" width="294" height="45"/>
+                                <rect key="frame" x="60" y="274" width="294" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To DODO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsT-PP-cbg">
-                                <rect key="frame" x="20" y="188" width="374" height="36"/>
+                                <rect key="frame" x="20" y="138" width="374" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="密碼" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfg-Kb-sf8" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
-                                <rect key="frame" x="60" y="419" width="294" height="44.5"/>
+                                <rect key="frame" x="60" y="369" width="294" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -68,7 +68,7 @@
                             <constraint firstItem="PH6-ym-TKH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WUD-VD-hVI"/>
                             <constraint firstItem="jfg-Kb-sf8" firstAttribute="height" secondItem="SQh-C3-qh0" secondAttribute="height" id="Wja-cs-xGR"/>
                             <constraint firstAttribute="bottom" secondItem="PH6-ym-TKH" secondAttribute="bottom" constant="30" id="ZSc-be-M3v"/>
-                            <constraint firstItem="zsT-PP-cbg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="ZrF-pr-F4S"/>
+                            <constraint firstItem="zsT-PP-cbg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="ZrF-pr-F4S"/>
                             <constraint firstItem="zsT-PP-cbg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ak5-kE-Yjk"/>
                             <constraint firstItem="1GY-fj-Wh0" firstAttribute="top" secondItem="ogZ-eP-Qi1" secondAttribute="bottom" constant="30" id="bzh-d3-hBd"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="top" secondItem="zsT-PP-cbg" secondAttribute="bottom" constant="100" id="fOn-Ej-yKL"/>
@@ -86,6 +86,7 @@
                     <navigationItem key="navigationItem" id="HbE-Nj-duz"/>
                     <connections>
                         <outlet property="accountTF" destination="SQh-C3-qh0" id="gI0-YQ-sjS"/>
+                        <outlet property="naviItem" destination="HbE-Nj-duz" id="KgG-hT-kxk"/>
                         <outlet property="passwordTF" destination="jfg-Kb-sf8" id="Rqk-h0-kXH"/>
                         <outlet property="signInBtn" destination="ogZ-eP-Qi1" id="xPN-mc-Q8x"/>
                         <outlet property="signUpBtn" destination="1GY-fj-Wh0" id="6Yv-Uf-Eob"/>
@@ -108,52 +109,74 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fc9-ZG-NBr">
-                                <rect key="frame" x="20" y="144" width="374" height="36"/>
+                                <rect key="frame" x="20" y="94" width="374" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dAR-9D-UgO" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
-                                <rect key="frame" x="60" y="242" width="294" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dAR-9D-UgO" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
+                                <rect key="frame" x="60" y="230" width="294" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5kL-Bd-Nuq" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
-                                <rect key="frame" x="60" y="328" width="294" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5kL-Bd-Nuq" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
+                                <rect key="frame" x="60" y="325" width="294" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDL-ho-khu" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
-                                <rect key="frame" x="60" y="426" width="294" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDL-ho-khu" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
+                                <rect key="frame" x="60" y="419.5" width="294" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1uw-d6-u50" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
-                                <rect key="frame" x="60" y="537" width="294" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1uw-d6-u50" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
+                                <rect key="frame" x="60" y="515" width="294" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRN-51-uoN" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
-                                <rect key="frame" x="156" y="694" width="103.5" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRN-51-uoN" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
+                                <rect key="frame" x="155.5" y="737" width="103.5" height="45"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xhm-wI-hF8"/>
+                                    <action selector="signupBtnTapped:" destination="j1G-wh-VF1" eventType="touchUpInside" id="dRp-wm-k3T"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="1uw-d6-u50" firstAttribute="height" secondItem="ZDL-ho-khu" secondAttribute="height" multiplier="0.989011" id="0Db-eg-06v"/>
+                            <constraint firstItem="1uw-d6-u50" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="60" id="8GH-20-bce"/>
                             <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="Fc9-ZG-NBr" secondAttribute="trailing" constant="20" id="8Vb-QR-TcI"/>
+                            <constraint firstItem="dAR-9D-UgO" firstAttribute="height" secondItem="f9S-oR-EBy" secondAttribute="height" multiplier="0.05" id="8XP-Th-ZIH"/>
+                            <constraint firstItem="5kL-Bd-Nuq" firstAttribute="top" secondItem="dAR-9D-UgO" secondAttribute="bottom" constant="50" id="Ab0-TB-EdO"/>
+                            <constraint firstItem="5kL-Bd-Nuq" firstAttribute="height" secondItem="dAR-9D-UgO" secondAttribute="height" id="DaF-sg-ncG"/>
+                            <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="dAR-9D-UgO" secondAttribute="trailing" constant="60" id="E3v-wc-s4v"/>
+                            <constraint firstItem="CRN-51-uoN" firstAttribute="centerX" secondItem="f9S-oR-EBy" secondAttribute="centerX" id="JCP-Cq-cPT"/>
+                            <constraint firstItem="CRN-51-uoN" firstAttribute="height" secondItem="f9S-oR-EBy" secondAttribute="height" multiplier="0.05" id="KUx-oq-7Ej"/>
+                            <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="5kL-Bd-Nuq" secondAttribute="trailing" constant="60" id="L1P-ur-qUp"/>
+                            <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="ZDL-ho-khu" secondAttribute="trailing" constant="60" id="LpN-RU-aNY"/>
+                            <constraint firstItem="dAR-9D-UgO" firstAttribute="top" secondItem="Fc9-ZG-NBr" secondAttribute="bottom" constant="100" id="NPs-o7-wSI"/>
                             <constraint firstItem="Fc9-ZG-NBr" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="20" id="Pan-kW-0Mh"/>
-                            <constraint firstItem="Fc9-ZG-NBr" firstAttribute="top" secondItem="hWV-NR-JIg" secondAttribute="top" constant="100" id="gws-iy-oZ1"/>
+                            <constraint firstItem="CRN-51-uoN" firstAttribute="width" secondItem="f9S-oR-EBy" secondAttribute="width" multiplier="0.25" id="WmA-XA-6NW"/>
+                            <constraint firstItem="ZDL-ho-khu" firstAttribute="top" secondItem="5kL-Bd-Nuq" secondAttribute="bottom" constant="50" id="aEa-zX-ta1"/>
+                            <constraint firstItem="ZDL-ho-khu" firstAttribute="height" secondItem="5kL-Bd-Nuq" secondAttribute="height" multiplier="1.01124" id="cRD-vV-fFh"/>
+                            <constraint firstItem="Fc9-ZG-NBr" firstAttribute="top" secondItem="hWV-NR-JIg" secondAttribute="top" constant="50" id="gws-iy-oZ1"/>
+                            <constraint firstItem="ZDL-ho-khu" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="60" id="iIL-SW-esk"/>
+                            <constraint firstItem="1uw-d6-u50" firstAttribute="top" secondItem="ZDL-ho-khu" secondAttribute="bottom" constant="50" id="jWA-mZ-55d"/>
+                            <constraint firstItem="5kL-Bd-Nuq" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="60" id="sDD-d1-vHo"/>
+                            <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="1uw-d6-u50" secondAttribute="trailing" constant="60" id="tQH-c3-wtq"/>
+                            <constraint firstItem="hWV-NR-JIg" firstAttribute="bottom" secondItem="CRN-51-uoN" secondAttribute="bottom" constant="80" id="vxz-tl-DlZ"/>
+                            <constraint firstItem="dAR-9D-UgO" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="60" id="ykg-k9-xPq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hWV-NR-JIg"/>
                     </view>
+                    <connections>
+                        <outlet property="checkPasswordTF" destination="1uw-d6-u50" id="MtW-dd-5G5"/>
+                        <outlet property="mailTF" destination="5kL-Bd-Nuq" id="rMo-BH-EPy"/>
+                        <outlet property="passwordTF" destination="ZDL-ho-khu" id="fGh-I0-0Uz"/>
+                        <outlet property="userNameTF" destination="dAR-9D-UgO" id="qMS-56-Z5g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3y1-gU-YhJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
