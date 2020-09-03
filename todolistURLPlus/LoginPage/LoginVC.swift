@@ -8,9 +8,10 @@
 
 import UIKit
 
-class LoginPageVC: UIViewController {
+class LoginVC: UIViewController {
     //MARK:- Properties
-
+    @IBOutlet weak var naviItem: UINavigationItem!
+    
     @IBOutlet weak var signInBtn: CustomButton!
     
     @IBOutlet weak var signUpBtn: CustomButton!
@@ -20,13 +21,27 @@ class LoginPageVC: UIViewController {
     @IBOutlet weak var passwordTF: CustomLogINTF!
     
     //MARK:- ViewDidLoad
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        propertiesSetting()
+    }
+    //MARK:- Functions
+    
+    fileprivate func propertiesSetting() {
         accountTF.delegate = self
         passwordTF.delegate = self
         signInBtn.backgroundColor = .mainColor2
+        signUpBtn.backgroundColor = .mainColor
+        naviBarSetting()
     }
-    //MARK:- Functions
+    
+    fileprivate func naviBarSetting(){
+        let barAppearance =  UINavigationBarAppearance()
+        barAppearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = barAppearance
+    }
 
     @IBAction func signInTapped(_ sender: CustomButton) {
         let vc = UserInfoVC()
@@ -42,7 +57,7 @@ class LoginPageVC: UIViewController {
 
 //MARK:- Textfield
 
-extension LoginPageVC : UITextFieldDelegate{
+extension LoginVC : UITextFieldDelegate{
     
     
     
