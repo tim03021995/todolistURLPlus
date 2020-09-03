@@ -7,3 +7,27 @@
 //
 
 import UIKit
+
+class CustomLogINTF:UITextField{
+    override init(frame: CGRect) {
+        super.init(frame:frame)
+        setTF()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder:coder)
+        setTF()
+    }
+    
+    func setTF(){
+        textColor = .white
+        backgroundColor = UIColor(white: 0, alpha: 0.1)
+        borderStyle = .none
+
+        
+        
+
+        
+    }
+}
+
