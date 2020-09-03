@@ -9,8 +9,8 @@ class UserInfomationView: UIView {
         return imageView
     }()
     var glassView : UIView = {
-        var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.hight.value * 0.75))
-        glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.hight.value * 0.025)
+        var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.hight.value * 0.8))
+        glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.hight.value * 0.04)
         glassView.backgroundColor = .glassColor
         glassView.layer.cornerRadius = 15
         let centerPointX = glassView.center.x - ScreenSize.width.value * 0.05
@@ -18,15 +18,15 @@ class UserInfomationView: UIView {
         return glassView
     }()
     var peopleView:UIImageView = {
-        var imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
+        var imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 120, height: 120))
         imageView.backgroundColor = .gray
         return imageView
     }()
     var userNameLabel:UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.2 , height: ScreenSize.hight.value * 0.05))
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.3 , height: ScreenSize.hight.value * 0.1))
         label.contentMode = .center
         label.text = "Name"
-        label.font = .systemFont(ofSize: 30)
+        label.font = .systemFont(ofSize: 40)
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
         return label
@@ -65,17 +65,17 @@ class UserInfomationView: UIView {
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
         let space = ScreenSize.spaceY.value
-        let glassViewTop = ScreenSize.centerY.value + ScreenSize.hight.value * 0.025 - glassView.frame.height * 0.5
-        let glassViewBotton = ScreenSize.centerY.value + ScreenSize.hight.value * 0.025 + glassView.frame.height * 0.5
+        let glassViewTop = ScreenSize.centerY.value + ScreenSize.hight.value * 0.04 - glassView.frame.height * 0.5
+        let glassViewBotton = ScreenSize.centerY.value + ScreenSize.hight.value * 0.04 + glassView.frame.height * 0.5
         peopleView.center = CGPoint(
             x: centerX,
             y: glassViewTop + peopleView.frame.height * 0.5 + space)
         userNameLabel.center = CGPoint(
             x: centerX,
-            y: peopleView.frame.maxY + userNameLabel.frame.height * 0.5 + space)
+            y: peopleView.frame.maxY + userNameLabel.frame.height * 0.5 + space )
         informationButton.center = CGPoint(
             x: centerX,
-            y: userNameLabel.frame.maxY + informationButton.frame.height * 0.5 + space)
+            y: userNameLabel.frame.maxY + informationButton.frame.height * 0.5 + space * 1.5)
         modifyPasswordButton.center = CGPoint(
             x: centerX,
             y: informationButton.frame.maxY + modifyPasswordButton.frame.height * 0.5 + space)

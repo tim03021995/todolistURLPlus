@@ -30,7 +30,7 @@ enum ScreenSize{
         case .spaceX:
             return fullScreenSize.width * 0.1
         case .spaceY:
-            return fullScreenSize.height * 0.05
+            return fullScreenSize.height * 0.025
         }
     }
 }
