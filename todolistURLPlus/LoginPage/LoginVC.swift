@@ -44,8 +44,7 @@ class LoginVC: UIViewController {
     }
 
     @IBAction func signInTapped(_ sender: CustomButton) {
-        let vc = UserInfoVC()
-        show(vc, sender: nil)
+
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
