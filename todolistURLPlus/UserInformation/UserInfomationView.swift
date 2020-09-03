@@ -4,7 +4,7 @@ class UserInfomationView: UIView {
     var glassView : UIView = {
         var uiView = UIView (frame: CGRect(x: 30, y: 50, width: ScreenSize.width.value * 0.9, height: ScreenSize.hight.value * 0.75))
         uiView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.hight.value * 0.025)
-        uiView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.15)
+        uiView.backgroundColor = .glassColor
         uiView.layer.cornerRadius = 15
         return uiView
     }()
@@ -25,11 +25,21 @@ class UserInfomationView: UIView {
         label.textColor = .white
         return label
     }()
+    var informationButton:UIButton = {
+        var button = UIButton(frame: CGRect(
+            x: ScreenSize.centerX.value,
+            y: ScreenSize.centerY.value * 0.3,
+            width: ScreenSize.width.value * 0.9,
+            height: ScreenSize.hight.value * 0.75))
+        button.backgroundColor = .glassColor
+        return button
+    }()
     override init(frame: CGRect) {
         super .init(frame: frame)
         addSubview(backgroundImage)
         addSubview(glassView)
         addSubview(userName)
+        addSubview(informationButton)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

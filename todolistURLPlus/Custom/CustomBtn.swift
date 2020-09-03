@@ -30,3 +30,26 @@ class CustomButton: UIButton {
         
     }
 }
+class ButtonFactory{
+    static func makeButton(type:ButtonType,text:String) -> UIButton {
+        let button = UIButton(frame: CGRect(
+        x: 0,
+        y: 0,
+        width: ScreenSize.width.value * 0.25,
+        height: ScreenSize.hight.value * 0.075))
+        button.setTitle(text, for: .normal)
+        button.layer.cornerRadius = button.frame.size.height/4
+        switch type {
+        case .normal:
+            button.backgroundColor = .gray
+            button.setTitleColor(.white, for: .normal)
+        case .cancel:
+            button.backgroundColor = .darkGray
+            button.setTitleColor(.red, for: .normal)
+        }
+        return button
+    }
+    enum  ButtonType{
+        case normal,cancel
+    }
+}
