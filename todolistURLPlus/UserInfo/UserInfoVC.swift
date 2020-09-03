@@ -2,10 +2,10 @@ import UIKit
 
 import UIKit
 
-class UserInformationViewController: UIViewController {
+class UserInfoVC: UIViewController {
     override func loadView() {
         super .loadView()
-        let userInformationView = UserInfomationView()
+        let userInformationView = UserInfoView()
         userInformationView.setUserData(userImage: nil, userName: nil)
         self.view = userInformationView
     }
