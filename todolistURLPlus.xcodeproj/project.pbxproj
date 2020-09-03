@@ -18,9 +18,7 @@
 		D2B0644725008AC700000444 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B0644625008AC700000444 /* UserInfoView.swift */; };
 		D2B0644B25009FEB00000444 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = D2B0644A25009FEB00000444 /* .gitattributes */; };
 		D2B0644E2500B4C600000444 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2B0644D2500B4C600000444 /* SnapKit */; };
-		FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */; };
-		FBCF1EA52500BE2500E5F686 /* others.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA42500BE2500E5F686 /* others.swift */; };
-		FBEF303724FF5579003F5945 /* LoginPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF303624FF5579003F5945 /* LoginPageVC.swift */; };
+		D2B064532500E71500000444 /* CustomUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* CustomUserImage.swift */; };
 		FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC901952500E02400F6FA40 /* MainPageVC.swift */; };
 		FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */; };
 		FBCF1EA52500BE2500E5F686 /* others.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA42500BE2500E5F686 /* others.swift */; };
@@ -42,6 +40,7 @@
 		D2B0644425008AAB00000444 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		D2B0644625008AC700000444 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D2B0644A25009FEB00000444 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		D2B064522500E71500000444 /* CustomUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUserImage.swift; sourceTree = "<group>"; };
 		FBC901952500E02400F6FA40 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		FBCF1EA42500BE2500E5F686 /* others.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = others.swift; sourceTree = "<group>"; };
@@ -88,7 +87,7 @@
 				D2B06440250088B400000444 /* Ex */,
 				FBEF303B24FF8531003F5945 /* Networking */,
 				FBEF303A24FF6D23003F5945 /* Custom */,
-				D2B0644325008A3600000444 /* UserInformation */,
+				D2B0644325008A3600000444 /* UserInfo */,
 				D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */,
 				D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */,
 				D23505E224FCCAAF00F4CC6E /* ViewController.swift */,
@@ -109,13 +108,13 @@
 			path = Ex;
 			sourceTree = "<group>";
 		};
-		D2B0644325008A3600000444 /* UserInformation */ = {
+		D2B0644325008A3600000444 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
 				D2B0644425008AAB00000444 /* UserInfoVC.swift */,
 				D2B0644625008AC700000444 /* UserInfoView.swift */,
 			);
-			path = UserInformation;
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		FBC901942500DFFA00F6FA40 /* MainPage */ = {
@@ -147,6 +146,7 @@
 			children = (
 				FBEF303824FF6D1B003F5945 /* CustomBtn.swift */,
 				FBEF303C24FF8550003F5945 /* CustomTF.swift */,
+				D2B064522500E71500000444 /* CustomUserImage.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -239,6 +239,7 @@
 				FBCF1EA52500BE2500E5F686 /* others.swift in Sources */,
 				D23505E324FCCAAF00F4CC6E /* ViewController.swift in Sources */,
 				D2B064422500891A00000444 /* ColorSet.swift in Sources */,
+				D2B064532500E71500000444 /* CustomUserImage.swift in Sources */,
 				D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
 				FBEF303D24FF8550003F5945 /* CustomTF.swift in Sources */,
