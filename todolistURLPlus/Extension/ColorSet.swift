@@ -15,3 +15,20 @@ extension UIColor{
     static let glassColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.15)
     static let glassMainColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 }
+let fullScreenSize = UIScreen.main.bounds.size
+
+enum ScreenSize{
+    case centerX,centerY,width,hight
+    var value:CGFloat{
+        switch self {
+        case .centerX:
+            return fullScreenSize.width * 0.5
+        case .centerY:
+            return fullScreenSize.height * 0.5
+        case .width:
+            return fullScreenSize.width
+        case .hight:
+            return fullScreenSize.height
+        }
+    }
+}
