@@ -24,7 +24,7 @@ class CustomButton: UIButton {
     
     private func setUpBtn(){
         //TODO 設置按鈕
-        backgroundColor = .black
+        backgroundColor = .glassColor
         layer.cornerRadius = frame.size.height/4
         tintColor = .white
         

@@ -12,7 +12,6 @@ class LoginPageVC: UIViewController {
 
     @IBOutlet weak var signInBtn: CustomButton!
     
-    
     @IBOutlet weak var signUpBtn: CustomButton!
     
     override func viewDidLoad() {
