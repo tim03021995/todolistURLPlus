@@ -22,7 +22,7 @@ class SetInfoVC:UIViewController,UIImagePickerControllerDelegate & UINavigationC
     @objc func takeImage() {
         let photoController = UIImagePickerController()
         photoController.delegate = self
-        photoController.sourceType = .camera
+        photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
