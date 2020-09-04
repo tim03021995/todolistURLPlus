@@ -19,7 +19,7 @@ class userImageFactory{
         var  radius = ScreenSize.width.value
         switch size {
         case .large:
-            radius = radius * 0.9
+            radius = radius * 0.8
         case .medium:
             radius = radius * 0.3
         case .small:
@@ -30,7 +30,6 @@ class userImageFactory{
         y: 0,
         width: radius,
         height: radius)
-        print(radius)
         imageView.layer.cornerRadius = radius * 0.5
         imageView.clipsToBounds = true
         return imageView

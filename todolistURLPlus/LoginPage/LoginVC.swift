@@ -57,6 +57,9 @@ class LoginVC: UIViewController {
             //alert
             present(.makeAlert(title: "test", message: "test", handler: {
                 print("123")
+                #warning("帥哥的測試")
+                let vc = UserInfoVC()
+                self.show(vc, sender: nil)
             }), animated: true)
         }
     }

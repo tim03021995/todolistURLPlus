@@ -13,7 +13,8 @@ class UserInfoVC: UIViewController {
         super.viewDidLoad()
     }
     @objc func information (){
-        
+        let vc = SetInfoVC()
+        show(vc, sender: nil)
     }
     @objc func modifyPassword(){
         
