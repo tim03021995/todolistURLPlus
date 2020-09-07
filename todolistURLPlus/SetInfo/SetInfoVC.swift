@@ -18,6 +18,7 @@ class SetInfoVC:UIViewController,UIImagePickerControllerDelegate & UINavigationC
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        autoPushView()
     }
     @objc func takeImage() {
         let photoController = UIImagePickerController()

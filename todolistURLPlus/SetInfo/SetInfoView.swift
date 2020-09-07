@@ -16,7 +16,7 @@ class SetInfoView:UIView{
         return imageView
     }()
     var peopleView:UIImageView = {
-        var imageView = userImageFactory.makeImageView(size: .large, image: nil)
+        var imageView = UserImageFactory.makeImageView(size: .large, image: nil)
         imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -31,7 +31,6 @@ class SetInfoView:UIView{
         let font = textField.font!
         let newFont = font.withSize(30)
         textField.font = newFont
-        textField.addTarget(self, action: #selector(pushView), for: .touchDown)
         return textField
     }()
     var albumButton:UIButton = {
@@ -82,12 +81,8 @@ class SetInfoView:UIView{
             x: peopleView.frame.maxX - peopleView.frame.width * 0.1,
             y: peopleView.frame.maxY - peopleView.frame.width * 0.1)
     }
-    @objc func pushView(){
-        let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
-            self.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value * 0.5)
-        }
-        animate.startAnimation()
-    }
+
+    
     func setUserData(userImage:UIImage?,userName:String?){
         if let userImage = userImage {
             self.peopleView.image = userImage
@@ -101,12 +96,8 @@ class SetInfoView:UIView{
             self.nameTextField.text = "UnKnow"
         }
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let animate = UIViewPropertyAnimator(duration: 0.25, curve: .easeInOut) {
-            self.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value )
-        }
-        animate.startAnimation()
         self.endEditing(true)
     }
 }

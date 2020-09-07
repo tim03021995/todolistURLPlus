@@ -8,7 +8,7 @@
 
 import UIKit
 
-class userImageFactory{
+class UserImageFactory{
     static func makeImageView(size:ImageType,image:UIImage?)->UIImageView{
         let imageView = UIImageView()
         if let image = image {

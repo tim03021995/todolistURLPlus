@@ -18,7 +18,7 @@ class UserInfoView: UIView {
         return glassView
     }()
     var peopleView:UIImageView = {
-        var imageView = userImageFactory.makeImageView(size: .medium, image: nil)
+        var imageView = UserImageFactory.makeImageView(size: .medium, image: nil)
         imageView.backgroundColor = .gray
         return imageView
     }()

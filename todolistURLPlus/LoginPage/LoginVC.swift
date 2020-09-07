@@ -26,7 +26,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         propertiesSetting()
         naviBarSetting()
-        
+        autoPushView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +58,7 @@ class LoginVC: UIViewController {
             present(.makeAlert(title: "test", message: "test", handler: {
                 print("123")
                 #warning("帥哥的測試")
-                let vc = UserInfoVC()
+                let vc = MainPageVC()
                 self.show(vc, sender: nil)
             }), animated: true)
         }

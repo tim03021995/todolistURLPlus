@@ -22,6 +22,7 @@
 		D2B064532500E71500000444 /* CustomUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* CustomUserImage.swift */; };
 		FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Networking.swift */; };
 		FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */; };
+		D2B064532500E71500000444 /* UserImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* UserImageFactory.swift */; };
 		FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D62500F52F00E9289C /* Alert.swift */; };
 		FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC901952500E02400F6FA40 /* MainPageVC.swift */; };
 		FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */; };
@@ -48,6 +49,7 @@
 		D2B064522500E71500000444 /* CustomUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUserImage.swift; sourceTree = "<group>"; };
 		FB7AF8D82500FA3F00E9289C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInfo.swift; sourceTree = "<group>"; };
+		D2B064522500E71500000444 /* UserImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageFactory.swift; sourceTree = "<group>"; };
 		FB7AF8D62500F52F00E9289C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		FBC901952500E02400F6FA40 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				FBEF303B24FF8531003F5945 /* Networking */,
+				D291DEAE2505CE45001FE33E /* CardEditPage */,
 				FBC901942500DFFA00F6FA40 /* MainPage */,
 				FBEF303524FF5204003F5945 /* LoginPage */,
 				FBCF1EA12500BB5B00E5F686 /* SignupPage */,
@@ -114,6 +117,13 @@
 				D291DEAC2500FACF001FE33E /* SetInfoVC.swift */,
 			);
 			path = SetInfo;
+			sourceTree = "<group>";
+		};
+		D291DEAE2505CE45001FE33E /* CardEditPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CardEditPage;
 			sourceTree = "<group>";
 		};
 		D2B06440250088B400000444 /* Ex */ = {
@@ -164,7 +174,7 @@
 				FBEF303824FF6D1B003F5945 /* CustomBtn.swift */,
 				FBEF303C24FF8550003F5945 /* CustomTF.swift */,
 				FB7AF8D62500F52F00E9289C /* Alert.swift */,
-				D2B064522500E71500000444 /* CustomUserImage.swift */,
+				D2B064522500E71500000444 /* UserImageFactory.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -258,7 +268,7 @@
 			files = (
 				FBCF1EA52500BE2500E5F686 /* others.swift in Sources */,
 				D2B064422500891A00000444 /* ColorSet.swift in Sources */,
-				D2B064532500E71500000444 /* CustomUserImage.swift in Sources */,
+				D2B064532500E71500000444 /* UserImageFactory.swift in Sources */,
 				D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
 				FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */,
