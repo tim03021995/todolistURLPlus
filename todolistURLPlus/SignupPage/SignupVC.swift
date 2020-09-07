@@ -50,8 +50,22 @@ class SignupVC: UIViewController {
         //TODO 驗證正則
         
         //ＡＰＩ
-        
+        registerRequest()
         //跳頁
+    }
+    
+    func registerRequest(){
+        let parameters = ["username": "admin","password":"00000000","email" : "ishida624@gmail.com"]
+        let request = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters, contentType: .json)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
+            switch result{
+                
+            case .success(let a):
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
     
     func validateTextField () -> String? {
@@ -63,9 +77,7 @@ class SignupVC: UIViewController {
         
     }
     
-    func registerRequest(){
-    
-    }
+
     
 }
 

@@ -8,8 +8,14 @@
 
 import Foundation
 
-struct GetTokenSuccess:Codable{
-    var message:String
+struct ResponseStatus:Codable{
+    var status:Bool
+    var error:String?
+    var data:Data?
+}
+
+struct Data : Codable {
+    var userToken:String
 }
 
 
@@ -40,7 +46,7 @@ struct UserToken {
     
     mutating func updateToken(by token: String){
         userToken = token
-        print(userToken)
+//        print(userToken)
     }
     mutating func clearToken(){
         userToken = ""
@@ -51,21 +57,21 @@ struct UserToken {
 
 enum NetworkError:Error{
     
-    case invalidURL(String)
+    case invalidURL
     case errorResponse
-    case invalidData(String)
-    case decodedError(String)
+    case invalidData
+    case decodeError
     
     var description:String{
         switch self{
             
-        case .invalidURL(_): return "122333"
+        case .invalidURL: return "1"
             
         case .errorResponse: return "帳號或密碼錯誤"
             
-        case .invalidData(_): return ""
+        case .invalidData: return "3"
             
-        case .decodedError(_): return ""
+        case .decodeError: return "decode 失敗"
             
         }
     }

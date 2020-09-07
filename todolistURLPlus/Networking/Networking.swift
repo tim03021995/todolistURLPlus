@@ -19,7 +19,7 @@ struct HTTPRequest {
     let contentType:ContentType
     
     ///包裝request
-    func request()-> URLRequest{
+    func send()-> URLRequest{
         
         let url = URL(string: self.urlString)!
         var request = URLRequest(url: url)
@@ -41,7 +41,7 @@ struct NetworkManager {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
                 if let error = error {
-                    completion(.failure(.invalidData(error.localizedDescription)))
+                    completion(.failure(.invalidData))
                 }
                 //
                 guard let response = response as? HTTPURLResponse else {
@@ -50,19 +50,16 @@ struct NetworkManager {
                 }
                 switch response.statusCode {
                 case 200 ... 299:
-                    if let token = response.allHeaderFields[AnyHashable("userToken")] as? String {
-                        UserToken.shared.updateToken(by: token)
-                    }
                     print("Successs" , "\(response.statusCode)")
-                case 400:
-                    completion(.failure(.errorResponse))
-                    return
+//                case 400:
+//                    completion(.failure(.errorResponse))
+//                    return
                 default:
                     completion(.failure(.errorResponse))
                 }
                 //
                 guard let data = data else{
-                    completion(.failure(.invalidData("invalid Data")))
+                    completion(.failure(.invalidData))
                     return
                 }
                 do{
@@ -70,7 +67,7 @@ struct NetworkManager {
                     let decotedData = try decorder.decode(T.self, from: data)
                     completion(.success(decotedData))
                 }catch{
-                    completion(.failure(.invalidData("decode error")))
+                    completion(.failure(.decodeError))
                 }
                 
             }

@@ -55,11 +55,6 @@ class LoginVC: UIViewController {
         if accountTF.text == "" || passwordTF.text == "" {
             //alert
             present(.makeAlert(title: "test", message: "test", handler: {
-                print("123")
-                #warning("帥哥的測試")
-                let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.mainPageVC.rawValue) as! MainPageVC
-                self.navigationController?.pushViewController(vc, animated: true)
-                
             }), animated: true)
         }
     }
@@ -69,13 +64,17 @@ class LoginVC: UIViewController {
         let parameters = ["password":"00000000", "email" : "ishida624@gmail.com"]
         
         let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters, contentType: .json)
-        NetworkManager().sendRequest(with: request.request()) { (result:Result<GetTokenSuccess,NetworkError>) in
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
             
             switch result{
-            case .success(let message):
-                let vc = MainPageVC()
-                self.show(vc, sender: nil)
-                print(message)
+            case .success(let decodedData):
+                //存token
+                guard let token = decodedData.data?.userToken else { return }
+                UserToken.shared.updateToken(by: token)
+
+                self.navigationController?.pushViewController(MainPageVC(), animated: true)
+                
+                
             case .failure(let err):
                 self.present(.makeAlert(title: "錯誤", message: err.description, handler: {
                     self.dismiss(animated: true, completion: nil)
@@ -105,8 +104,10 @@ extension LoginVC : UITextFieldDelegate{
         switch textField {
         case accountTF:
             passwordTF.becomeFirstResponder()
+            //TODO 驗證
         default:
             self.view.endEditing(true)
+            //TODO 驗證
             //TODO 執行登入
         }
         return true
