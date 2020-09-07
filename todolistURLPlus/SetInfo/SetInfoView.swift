@@ -16,7 +16,7 @@ class SetInfoView:UIView{
         return imageView
     }()
     var peopleView:UIImageView = {
-        var imageView = userImageFactory.makeImageView(size: .large, image: nil)
+        var imageView = UserImageFactory.makeImageView(size: .large, image: nil)
         imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
         return imageView
