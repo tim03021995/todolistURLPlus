@@ -62,7 +62,7 @@ class UserInfoView: UIView {
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
         let space = ScreenSize.spaceY.value
-        let glassViewTop = ScreenSize.centerY.value + ScreenSize.hight.value * 0.04 - glassView.frame.height * 0.5
+        let glassViewTop = glassView.frame.minY
         let glassViewBotton = ScreenSize.centerY.value + ScreenSize.hight.value * 0.04 + glassView.frame.height * 0.5
         peopleView.center = CGPoint(
             x: centerX,
