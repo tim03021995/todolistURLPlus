@@ -23,11 +23,11 @@ class UserImageFactory{
         case .medium:
             radius = radius * 0.3
         case .small:
-            radius = radius * 0.1
+            radius = radius * 0.2
         }
         imageView.frame = CGRect(
-        x: 0,
-        y: 0,
+        x: 100,
+        y: 78,
         width: radius,
         height: radius)
         imageView.layer.cornerRadius = radius * 0.5

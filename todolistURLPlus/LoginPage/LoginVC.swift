@@ -66,7 +66,7 @@ class LoginVC: UIViewController {
 
     @IBAction func signInTapped(_ sender: CustomButton) {
         validateAccount()
-        let vc = UserInfoVC()
+        let vc = MainPageVC()
         show(vc, sender: nil)
     }
     
