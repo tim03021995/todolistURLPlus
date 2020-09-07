@@ -50,7 +50,7 @@ class MainPageVC: UIViewController {
         self.view.addSubview(welcomeLabel)
         
 
-        // Do any additional setup after loading the view.
+        
     }
     
 
