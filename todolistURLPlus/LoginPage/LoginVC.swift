@@ -83,7 +83,7 @@ class LoginVC: UIViewController {
             }
         }
         
-
+//        validateAccount()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
