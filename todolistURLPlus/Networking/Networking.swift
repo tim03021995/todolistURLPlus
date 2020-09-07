@@ -53,7 +53,6 @@ struct NetworkManager {
                     print("Successs" , "\(response.statusCode)")
 //                case 400:
 //                    completion(.failure(.errorResponse))
-//                    return
                 default:
                     completion(.failure(.errorResponse))
                 }

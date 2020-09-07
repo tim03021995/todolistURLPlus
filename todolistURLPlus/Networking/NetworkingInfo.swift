@@ -8,6 +8,7 @@
 
 import Foundation
 
+//MARK:- decode的資料結構
 struct ResponseStatus:Codable{
     var status:Bool
     var error:String?
@@ -18,9 +19,7 @@ struct Data : Codable {
     var userToken:String
 }
 
-
 enum HTTPMethod:String{
-    
     case GET
     case POST
     case PUT
@@ -28,7 +27,6 @@ enum HTTPMethod:String{
 }
 
 enum Endpoint:String {
-    
     case userToken
     case register
     case task
@@ -39,24 +37,8 @@ enum ContentType:String{
     case urlForm = "application/x-www-form-urlencoded; charset=utf-8"
 }
 
-struct UserToken {
-    private(set) var userToken = ""
-    private init(){}
-    static var shared = UserToken()
-    
-    mutating func updateToken(by token: String){
-        userToken = token
-//        print(userToken)
-    }
-    mutating func clearToken(){
-        userToken = ""
-        print("Token cleared")
-    }
-    
-}
 
 enum NetworkError:Error{
-    
     case invalidURL
     case errorResponse
     case invalidData
@@ -74,6 +56,22 @@ enum NetworkError:Error{
         case .decodeError: return "decode 失敗"
             
         }
+    }
+    
+}
+//MARK:- Token
+struct UserToken {
+    private(set) var userToken = ""
+    private init(){}
+    static var shared = UserToken()
+    
+    mutating func updateToken(by token: String){
+        userToken = token
+//        print(userToken)
+    }
+    mutating func clearToken(){
+        userToken = ""
+        print("Token cleared")
     }
     
 }
