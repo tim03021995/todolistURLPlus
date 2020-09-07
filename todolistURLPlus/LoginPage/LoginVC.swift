@@ -26,7 +26,8 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         propertiesSetting()
         naviBarSetting()
-        
+        #warning("Alvin新增，鍵盤擴充功能")
+        autoPushView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
