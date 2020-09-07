@@ -18,10 +18,15 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background1" translatesAutoresizingMaskIntoConstraints="NO" id="Fuw-2L-Pfk">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQh-C3-qh0" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="123" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQh-C3-qh0" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="60" y="274" width="294" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To DODO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsT-PP-cbg">
                                 <rect key="frame" x="20" y="118" width="374" height="36"/>
@@ -102,10 +107,19 @@
         <!--Main PageVC-->
         <scene sceneID="8jz-1I-Q1E">
             <objects>
-                <viewController id="RTa-hL-s91" customClass="MainPageVC" customModule="todolistURLPlus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainPageVC" id="RTa-hL-s91" customClass="MainPageVC" customModule="todolistURLPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f9g-wL-nVZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jimmy的小天地" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rye-jH-XNe">
+                                <rect key="frame" x="186" y="438" width="120" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="gzj-ph-tU2"/>
                     </view>
@@ -153,7 +167,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRN-51-uoN" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="155.5" y="757" width="103.5" height="45"/>
-                                <state key="normal" title="Sign Up"/>
+                                <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="signUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xhm-wI-hF8"/>
                                     <action selector="signupBtnTapped:" destination="j1G-wh-VF1" eventType="touchUpInside" id="dRp-wm-k3T"/>

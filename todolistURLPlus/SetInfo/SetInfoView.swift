@@ -9,14 +9,10 @@
 import UIKit
 class SetInfoView:UIView{
     var backgroundImage : UIImageView = {
-        var uiImage = #imageLiteral(resourceName: "backgroundBlurred")
-        var imageView = UIImageView(image: uiImage, highlightedImage: nil)
-        imageView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.hight.value)
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+        return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
     var peopleView:UIImageView = {
-        var imageView = userImageFactory.makeImageView(size: .large, image: nil)
+        var imageView = UserImageFactory.makeImageView(size: .large, image: nil)
         imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
         return imageView

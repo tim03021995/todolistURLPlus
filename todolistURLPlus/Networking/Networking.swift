@@ -11,14 +11,14 @@ import Foundation
 
 struct HTTPRequest {
     
-    let baseURL = "http://35.185.131.56:8000/api/"
+    let baseURL = "http://35.185.131.56:8002/api/"
     let endpoint:Endpoint
     var urlString:String { baseURL + endpoint.rawValue }
     let method: HTTPMethod
     let parameters: [String : Any]
     let contentType:ContentType
     
-    
+    ///包裝request
     func request()-> URLRequest{
         
         let url = URL(string: self.urlString)!
@@ -45,7 +45,7 @@ struct NetworkManager {
                 }
                 //
                 guard let response = response as? HTTPURLResponse else {
-                    completion(.failure(.errorResponse("no response")))
+                    completion(.failure(.errorResponse))
                     return
                 }
                 switch response.statusCode {
@@ -55,12 +55,10 @@ struct NetworkManager {
                     }
                     print("Successs" , "\(response.statusCode)")
                 case 400:
-                    completion(.failure(.errorResponse("帳號密碼格式錯誤")))
+                    completion(.failure(.errorResponse))
                     return
                 default:
-                    completion(.failure(.errorResponse("\(response.statusCode)")))
-                    
-                    
+                    completion(.failure(.errorResponse))
                 }
                 //
                 guard let data = data else{

@@ -26,8 +26,8 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         propertiesSetting()
         naviBarSetting()
-        #warning("Alvin新增，鍵盤擴充功能")
         autoPushView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,8 +43,6 @@ class LoginVC: UIViewController {
         passwordTF.placeholder = "請輸入密碼"
         signInBtn.backgroundColor = .mainColor2
         signUpBtn.backgroundColor = .mainColor
-        
-        
     }
     
     fileprivate func naviBarSetting(){
@@ -59,16 +57,33 @@ class LoginVC: UIViewController {
             present(.makeAlert(title: "test", message: "test", handler: {
                 print("123")
                 #warning("帥哥的測試")
-                let vc = UserInfoVC()
-                self.show(vc, sender: nil)
+                let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.mainPageVC.rawValue) as! MainPageVC
+                self.navigationController?.pushViewController(vc, animated: true)
+                
             }), animated: true)
         }
     }
 
     @IBAction func signInTapped(_ sender: CustomButton) {
-        validateAccount()
-        let vc = UserInfoVC()
-        show(vc, sender: nil)
+        
+        let parameters = ["password":"00000000", "email" : "ishida624@gmail.com"]
+        
+        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters, contentType: .json)
+        NetworkManager().sendRequest(with: request.request()) { (result:Result<GetTokenSuccess,NetworkError>) in
+            
+            switch result{
+            case .success(let message):
+                let vc = MainPageVC()
+                self.show(vc, sender: nil)
+                print(message)
+            case .failure(let err):
+                self.present(.makeAlert(title: "錯誤", message: err.description, handler: {
+                    self.dismiss(animated: true, completion: nil)
+                }), animated: true)
+            }
+        }
+        
+//        validateAccount()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
@@ -84,6 +99,17 @@ extension LoginVC : UITextFieldDelegate{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case accountTF:
+            passwordTF.becomeFirstResponder()
+        default:
+            self.view.endEditing(true)
+            //TODO 執行登入
+        }
+        return true
     }
     
 }

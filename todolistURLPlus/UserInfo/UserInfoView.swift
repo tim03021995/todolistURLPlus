@@ -2,11 +2,7 @@ import UIKit
 
 class UserInfoView: UIView {
     var backgroundImage : UIImageView = {
-        var uiImage = #imageLiteral(resourceName: "backgroundBlurred")
-        var imageView = UIImageView(image: uiImage, highlightedImage: nil)
-        imageView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.hight.value)
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+        return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
     var glassView : UIView = {
         var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.hight.value * 0.8))
@@ -18,7 +14,7 @@ class UserInfoView: UIView {
         return glassView
     }()
     var peopleView:UIImageView = {
-        var imageView = userImageFactory.makeImageView(size: .medium, image: nil)
+        var imageView = UserImageFactory.makeImageView(size: .medium, image: nil)
         imageView.backgroundColor = .gray
         return imageView
     }()
