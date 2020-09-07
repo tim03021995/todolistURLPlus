@@ -53,6 +53,39 @@ class ButtonFactory{
         case normal,cancel
     }
 }
+class ColorButtonFactory{
+    static func makeButton(type:ButtonType) -> UIButton {
+        let button = UIButton(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: ScreenSize.hight.value * 0.045,
+            height: ScreenSize.hight.value * 0.045))
+        button.layer.cornerRadius = button.frame.size.height * 0.5
+        let color  : UIColor = {
+            switch type {
+            case .red:
+                return UIColor.buttonRed
+            case .orange:
+                return UIColor.buttonOrange
+            case .yello:
+                return UIColor.buttonYello
+            case .green:
+                return UIColor.buttonGreen
+            case .blue:
+                return UIColor.buttonBlue
+            case .darkBlue:
+                return UIColor.button2u04
+            case .purple:
+                return UIColor.buttonPurple
+            }
+        }()
+        button.backgroundColor = color 
+        return button
+    }
+    enum  ButtonType{
+        case red,orange,yello,green,blue,darkBlue,purple
+    }
+}
 
-    
+
 
