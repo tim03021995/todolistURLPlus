@@ -27,6 +27,12 @@ class SignupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTF()
+        
+        //TODO 鍵盤上移事件
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        userNameTF.becomeFirstResponder()
     }
     
     //MARK:- Functions
@@ -41,10 +47,48 @@ class SignupVC: UIViewController {
 
 
     @IBAction func signupBtnTapped(_ sender: CustomButton) {
+        //TODO 驗證正則
+        
+        //ＡＰＩ
+        
+        //跳頁
+    }
+    
+    func validateTextField () -> String? {
+        if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
+            return "輸入框不得為空白"
+        }else {
+            return nil
+        }
+        
+    }
+    
+    func registerRequest(){
+    
     }
     
 }
 
 extension SignupVC:UITextFieldDelegate{
+    
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+      self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case userNameTF:
+            mailTF.becomeFirstResponder()
+        case mailTF :
+            passwordTF.becomeFirstResponder()
+        case passwordTF:
+            checkPasswordTF.becomeFirstResponder()
+        default:
+            self.view.endEditing(true)
+        }
+        return true
+    }
     
 }

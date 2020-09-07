@@ -8,8 +8,13 @@
 
 import Foundation
 
+struct GetTokenSuccess:Codable{
+    var message:String
+}
+
 
 enum HTTPMethod:String{
+    
     case GET
     case POST
     case PUT
@@ -47,7 +52,7 @@ struct UserToken {
 enum NetworkError:Error{
     
     case invalidURL(String)
-    case errorResponse(String)
+    case errorResponse
     case invalidData(String)
     case decodedError(String)
     
@@ -56,7 +61,7 @@ enum NetworkError:Error{
             
         case .invalidURL(_): return "122333"
             
-        case .errorResponse(_): return ""
+        case .errorResponse: return "帳號或密碼錯誤"
             
         case .invalidData(_): return ""
             
