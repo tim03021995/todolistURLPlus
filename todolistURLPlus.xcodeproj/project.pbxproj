@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5332F8AD250679F900192A5F /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5332F8AC250679F900192A5F /* CardCell.swift */; };
 		D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */; };
 		D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */; };
 		D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E424FCCAAF00F4CC6E /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5332F8AC250679F900192A5F /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		D23505DB24FCCAAF00F4CC6E /* todolistURLPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todolistURLPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				FBC901952500E02400F6FA40 /* MainPageVC.swift */,
+				5332F8AC250679F900192A5F /* CardCell.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */,
 				D2B0644725008AC700000444 /* UserInfoView.swift in Sources */,
 				D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */,
+				5332F8AD250679F900192A5F /* CardCell.swift in Sources */,
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,
 				FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */,
 				FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */,
