@@ -16,6 +16,7 @@
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
 		D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAF2505D0D8001FE33E /* CardEditVC.swift */; };
 		D291DEB22505D371001FE33E /* CardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEB12505D371001FE33E /* CardEditView.swift */; };
+		D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEB32505D9D7001FE33E /* BackGroundFactory.swift */; };
 		D2B064422500891A00000444 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064412500891A00000444 /* ColorSet.swift */; };
 		D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B0644425008AAB00000444 /* UserInfoVC.swift */; };
 		D2B0644725008AC700000444 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B0644625008AC700000444 /* UserInfoView.swift */; };
@@ -43,6 +44,7 @@
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
 		D291DEAF2505D0D8001FE33E /* CardEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditVC.swift; sourceTree = "<group>"; };
 		D291DEB12505D371001FE33E /* CardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditView.swift; sourceTree = "<group>"; };
+		D291DEB32505D9D7001FE33E /* BackGroundFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundFactory.swift; sourceTree = "<group>"; };
 		D2B064412500891A00000444 /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		D2B0644425008AAB00000444 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		D2B0644625008AC700000444 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				FBEF303C24FF8550003F5945 /* CustomTF.swift */,
 				FB7AF8D62500F52F00E9289C /* Alert.swift */,
 				D2B064522500E71500000444 /* UserImageFactory.swift */,
+				D291DEB32505D9D7001FE33E /* BackGroundFactory.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				FBEF303D24FF8550003F5945 /* CustomTF.swift in Sources */,
 				FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */,
 				FBEF303924FF6D1B003F5945 /* CustomBtn.swift in Sources */,
+				D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */,
 				D2B0644725008AC700000444 /* UserInfoView.swift in Sources */,
 				D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */,
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,
