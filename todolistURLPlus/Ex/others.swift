@@ -11,6 +11,7 @@ import UIKit
 enum StoryboardID:String{
     case signUpVC
     case signInVC
+    case mainPageVC
     
 }
 let fullScreenSize = UIScreen.main.bounds.size
