@@ -29,6 +29,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var passwordErrorLabel: UILabel!
     
     @IBOutlet weak var checkPasswordErrorLabel: UILabel!
+    
     //MARK:- ViewDidLoad
     
     override func viewDidLoad() {
