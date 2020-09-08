@@ -78,7 +78,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        present(CardEditVC(), animated: true, completion: nil)
+        let cardVC = CardEditVC()
+        let image = UIImage(named: "joey")
+        cardVC.setInformation(title: "JimmyTest", script: "I am Jimmy", image: image)
+        present(cardVC, animated: true, completion: nil)
     }
     ///設定卡片CollectionView
     func setUpCollectionView()
@@ -96,7 +99,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
         
         // cell與邊界的間距
-//        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
         
         // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
@@ -119,7 +122,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(backgroundImage)
         self.view.addSubview(headImage)
         self.view.addSubview(welcomeLabel)
-        self.view.addSubview(cardCollectionView)
         setUpCollectionView()
     }
     }

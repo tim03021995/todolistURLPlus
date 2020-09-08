@@ -18,7 +18,7 @@ class CardEditVC: UIViewController {
         view.colorsCollectionView.delegate = self
         view.colorsCollectionView.dataSource = self
         view.setUserData(
-            image: UIImage(named: "joey") ,
+            image: UIImage(named: "joey")! ,
             title: "Title",
             script: "Learning English use a limited vocabulary and are read at a slower pace than VOA's other English broadcasts. Previously known as Special English.")
         self.view = view
