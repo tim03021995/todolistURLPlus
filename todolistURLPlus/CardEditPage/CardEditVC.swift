@@ -32,6 +32,6 @@ class CardEditVC: UIViewController {
 }
 extension CardEditVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+            
     }
 }
