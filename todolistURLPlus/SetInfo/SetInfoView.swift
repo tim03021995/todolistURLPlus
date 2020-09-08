@@ -83,7 +83,7 @@ class SetInfoView:UIView{
         if let userImage = userImage {
             self.peopleView.image = userImage
         }else{
-            self.peopleView.image = UIImage(systemName: "photo")
+            self.peopleView.image = UIImage(systemName: "photo")!
         }
         
         if let userName = userName {

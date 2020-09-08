@@ -20,7 +20,7 @@ class UserInfoVC: UIViewController {
     }
     func setUserData(userImage:UIImage?, userName: String?){
         userInformationView.setUserData(
-            userImage: userImage ?? UIImage(systemName: "photo"),
+            userImage: userImage ?? UIImage(systemName: "photo")!,
             userName: userName ?? "Unknow")
         self.view = userInformationView
     }
