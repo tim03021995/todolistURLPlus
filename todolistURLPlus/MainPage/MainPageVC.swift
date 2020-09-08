@@ -51,13 +51,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(backgroundImage)
-        self.view.addSubview(headImage)
-        self.view.addSubview(welcomeLabel)
-        
-        setUpCollectionView()
-        self.view.addSubview(cardCollectionView)
-
+        setUI()
         
     }
     
@@ -119,6 +113,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "cell")
         self.cardCollectionView.backgroundColor = .clear
         self.view.addSubview(cardCollectionView)
+    }
+    func setUI()
+    {
+        self.view.addSubview(backgroundImage)
+        self.view.addSubview(headImage)
+        self.view.addSubview(welcomeLabel)
+        self.view.addSubview(cardCollectionView)
+        setUpCollectionView()
     }
     }
 
