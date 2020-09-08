@@ -22,7 +22,7 @@ class BackGroundFactory{
                 uiImage = #imageLiteral(resourceName: "backgroundBlurred.png")
             }
             let imageView = UIImageView(image: uiImage, highlightedImage: nil)
-            imageView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.hight.value)
+            imageView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value)
             imageView.contentMode = .scaleAspectFill
             return imageView
         }()

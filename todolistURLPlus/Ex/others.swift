@@ -17,7 +17,7 @@ enum StoryboardID:String{
 let fullScreenSize = UIScreen.main.bounds.size
 
 enum ScreenSize{
-    case centerX,centerY,width,hight,spaceX,spaceY
+    case centerX,centerY,width,height,spaceX,spaceY
     var value:CGFloat{
         switch self {
         case .centerX:
@@ -26,7 +26,7 @@ enum ScreenSize{
             return fullScreenSize.height * 0.5
         case .width:
             return fullScreenSize.width
-        case .hight:
+        case .height:
             return fullScreenSize.height
         case .spaceX:
             return fullScreenSize.width * 0.1

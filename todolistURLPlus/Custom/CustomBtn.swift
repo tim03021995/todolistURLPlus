@@ -36,7 +36,7 @@ class ButtonFactory{
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.35,
-            height: ScreenSize.hight.value * 0.075))
+            height: ScreenSize.height.value * 0.075))
         button.setTitle(text, for: .normal)
         button.layer.cornerRadius = button.frame.size.height/4
         switch type {
@@ -58,8 +58,8 @@ class ColorButtonFactory{
         let button = UIButton(frame: CGRect(
             x: 0,
             y: 0,
-            width: ScreenSize.hight.value * 0.045,
-            height: ScreenSize.hight.value * 0.045))
+            width: ScreenSize.height.value * 0.045,
+            height: ScreenSize.height.value * 0.045))
         button.layer.cornerRadius = button.frame.size.height * 0.5
         let color  : UIColor = {
             switch type {

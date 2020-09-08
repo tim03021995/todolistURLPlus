@@ -5,12 +5,12 @@ class UserInfoView: UIView {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
     var glassView : UIView = {
-        var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.hight.value * 0.8))
-        glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.hight.value * 0.04)
+        var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.height.value * 0.8))
+        glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.height.value * 0.04)
         glassView.backgroundColor = .glassColor
         glassView.layer.cornerRadius = 15
         let centerPointX = glassView.center.x - ScreenSize.width.value * 0.05
-        let glassViewBotton = glassView.center.y + glassView.frame.height * 0.5 - ScreenSize.hight.value * 0.2
+        let glassViewBotton = glassView.center.y + glassView.frame.height * 0.5 - ScreenSize.height.value * 0.2
         return glassView
     }()
     var peopleView:UIImageView = {
@@ -19,7 +19,7 @@ class UserInfoView: UIView {
         return imageView
     }()
     var userNameLabel:UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.3 , height: ScreenSize.hight.value * 0.1))
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.3 , height: ScreenSize.height.value * 0.1))
         label.contentMode = .center
         label.text = "Name"
         label.font = .systemFont(ofSize: 40)
@@ -63,7 +63,7 @@ class UserInfoView: UIView {
         let centerX = ScreenSize.centerX.value
         let space = ScreenSize.spaceY.value
         let glassViewTop = glassView.frame.minY
-        let glassViewBotton = ScreenSize.centerY.value + ScreenSize.hight.value * 0.04 + glassView.frame.height * 0.5
+        let glassViewBotton = ScreenSize.centerY.value + ScreenSize.height.value * 0.04 + glassView.frame.height * 0.5
         peopleView.center = CGPoint(
             x: centerX,
             y: glassViewTop + peopleView.frame.height * 0.5 + space)

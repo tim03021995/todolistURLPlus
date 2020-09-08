@@ -105,9 +105,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         // cell的寬、高
         layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
-                                 height: ScreenSize.hight.value * 0.45)
-        
-        //cell與cell間距
+                                 height: ScreenSize.height.value * 0.45) // cell的寬、高
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
         
         // cell與邊界的間距
@@ -117,9 +115,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         self.cardCollectionView = UICollectionView(frame: CGRect(
             x: 0,
-            y: (ScreenSize.hight.value * 0.4),
+            y: (ScreenSize.height.value * 0.4),
             width: ScreenSize.width.value ,
-            height: (ScreenSize.hight.value * 0.5)),
+            height: (ScreenSize.height.value * 0.5)),
                                                    collectionViewLayout: layout)
         self.cardCollectionView.dataSource = self
         self.cardCollectionView.delegate = self
