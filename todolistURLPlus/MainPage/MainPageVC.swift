@@ -22,12 +22,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         {
             let head = UserImageFactory.makeImageView(size: .small, image: nil)
             head.backgroundColor = .gray
-//            let nvBottom = navigationController?.navigationBar.frame.maxY
-//            let space = 15
-//            head.center = CGPoint(
-//                x: space + Int(head.frame.width * 0.5),
-//                y: Int(nvBottom!) + space + Int(head.frame.width * 0.3)
-//            )
+            let bottomOfNaviBar = navigationController?.navigationBar.frame.maxY ?? 0
+            let radius = head.frame.width * 0.5
+            let space = CGFloat(15)
+            let yPoint = bottomOfNaviBar + space + radius
+            let xPoint = space + radius
+            head.center = CGPoint(x: xPoint, y: yPoint)
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
             head.addGestureRecognizer(tap)
             head.isUserInteractionEnabled = true
