@@ -55,20 +55,22 @@ class LoginVC: UIViewController {
         
     }
     
-//    func validateAccount(){
-//        if accountTF.text == "" || passwordTF.text == "" {
-//            //alert
-//            present(.makeAlert(title: "test", message: "test", handler: {
-//            }), animated: true)
-//        }
-//    }
+    func validateAccount()->[String:Any]?{
+        if let account = accountTF.text , let password = passwordTF.text {
+            if account.isValidEMail && password.isValidPassword{
+                return ["password":password,"email":account]
+            }
+        }
+        return nil
+    }
 
     @IBAction func signInTapped(_ sender: CustomButton) {
 
         
-        let parameters = ["password":"00000000", "email" : "ishida624@gmail.com"]
+        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
+//        guard let parameters = validateAccount() else{ return }
         
-        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters, contentType: .json)
+        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: test, contentType: .json)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
             
             switch result{
