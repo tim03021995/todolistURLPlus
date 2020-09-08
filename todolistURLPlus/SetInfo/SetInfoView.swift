@@ -77,20 +77,14 @@ class SetInfoView:UIView{
             x: peopleView.frame.maxX - peopleView.frame.width * 0.1,
             y: peopleView.frame.maxY - peopleView.frame.width * 0.1)
     }
-
     
-    func setUserData(userImage:UIImage?,userName:String?){
-        if let userImage = userImage {
-            self.peopleView.image = userImage
-        }else{
-            self.peopleView.image = UIImage(systemName: "photo")!
-        }
-        
-        if let userName = userName {
-            self.nameTextField.text = userName
-        }else{
-            self.nameTextField.text = "UnKnow"
-        }
+    
+    func setUserData(userImage:UIImage,userName:String){
+        self.peopleView.image = userImage
+        self.nameTextField.text = userName
+    }
+    func setPhoto(userImage:UIImage){
+        self.peopleView.image = userImage
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

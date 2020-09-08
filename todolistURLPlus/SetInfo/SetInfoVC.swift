@@ -7,13 +7,11 @@
 //
 
 import UIKit
-class SetInfoVC:UIViewController,UIImagePickerControllerDelegate & UINavigationControllerDelegate{
-    var userImage:UIImage?
-    var userName:String?
+class SetInfoVC:UIViewController{
+    let setInfoView = SetInfoView()
+    
     override func loadView() {
         super .loadView()
-        let setInfoView = SetInfoView()
-        setInfoView.setUserData(userImage: userImage, userName: userName)
         self.view = setInfoView
     }
     override func viewDidLoad() {
@@ -26,13 +24,21 @@ class SetInfoVC:UIViewController,UIImagePickerControllerDelegate & UINavigationC
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    let image = info[.originalImage] as? UIImage
-        userImage = image
-        let setInfoView = SetInfoView()
-        setInfoView.setUserData(userImage: userImage, userName: userName)
+    func setUserData(userImage:UIImage?, userName: String?){
+        setInfoView.setUserData(
+            userImage: userImage ?? UIImage(systemName: "photo")!,
+            userName: userName ?? "Unknow")
         self.view = setInfoView
-    dismiss(animated: true, completion: nil)
+    }
+}
+extension SetInfoVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage{
+            setInfoView.setPhoto(userImage: image)
+        }
+
+        self.view = setInfoView
+        dismiss(animated: true, completion: nil)
     }
 }
 
