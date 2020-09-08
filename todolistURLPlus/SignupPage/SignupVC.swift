@@ -22,6 +22,13 @@ class SignupVC: UIViewController {
     
     @IBOutlet weak var checkPasswordTF: CustomLogINTF!
     
+    @IBOutlet weak var nameErrorLabel: UILabel!
+    
+    @IBOutlet weak var mailErrorLabel: UILabel!
+    
+    @IBOutlet weak var passwordErrorLabel: UILabel!
+    
+    @IBOutlet weak var checkPasswordErrorLabel: UILabel!
     //MARK:- ViewDidLoad
     
     override func viewDidLoad() {

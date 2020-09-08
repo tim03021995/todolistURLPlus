@@ -8,16 +8,16 @@
 
 import UIKit
 class SetInfoView:UIView{
-    var backgroundImage : UIImageView = {
+    private var backgroundImage : UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
-    var peopleView:UIImageView = {
+    private var peopleView:UIImageView = {
         var imageView = UserImageFactory.makeImageView(size: .large, image: nil)
         imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    var nameTextField:UITextField = {
+    private var nameTextField:UITextField = {
         var textField = UITextField(frame: CGRect(
             x: 0,
             y: 0,
@@ -29,7 +29,7 @@ class SetInfoView:UIView{
         textField.font = newFont
         return textField
     }()
-    var albumButton:UIButton = {
+    private var albumButton:UIButton = {
         var button = UIButton(frame: CGRect(
             x: 0,
             y: 0,
@@ -41,7 +41,7 @@ class SetInfoView:UIView{
         button.backgroundColor = .gray
         return button
     }()
-    var saveButton:UIButton = {
+    private var saveButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "Save")
         return button
     }()
