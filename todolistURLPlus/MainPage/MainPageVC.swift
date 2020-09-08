@@ -47,18 +47,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }()
     ///設置卡片(collectionView)
     var cardCollectionView: UICollectionView!
-//        {
-//       let myCollectionView =
-//        UICollectionView(frame: CGRect(
-//        x: ScreenSize.width.value * 0.05,
-//        y: (ScreenSize.hight.value * 0.6),
-//        width: (ScreenSize.width.value * 0.7) ,
-//        height: (ScreenSize.hight.value * 0.4)))
-//            myCollectionView.backgroundColor = .yellow
-//            self.cardCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-//
-//            return myCollectionView
-//    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,40 +72,57 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 600
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .blue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CardCell
+        cell.setUp()
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        show(CardEditVC(), sender: nil)
+        let vc = CardEditVC()
+        let taskData = TaskData( title:"Joey",
+        script: "English is a West Germanic language that was first spoken in early medieval England and eventually became a global lingua franca.[4][5] It is named after the Angles, one of the ancient Germanic peoples that migrated to the area of Great Britain that later took their name, England. Both names derive from Anglia, a peninsula on the Baltic Sea. English is most closely related to Frisian and Low Saxon, while its vocabulary has been significantly influenced by other Germanic languages, particularly Old Norse (a North Germanic language), as well as Latin and French.[6][7][8]",
+        image: UIImage(named: "joey"),
+        color: .blue)
+        vc.setTaskData(data: taskData)
+        present(vc, animated: true, completion: nil)
     }
+    ///設定卡片CollectionView
     func setUpCollectionView()
     {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10) // section與section之間的距離(如果只有一個section，可以想像成frame)
+        
+        // section與section之間的距離(如果只有一個section，可以想像成frame)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        
+        // cell的寬、高
         layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
-                                 height: ScreenSize.hight.value * 0.45) // cell的寬、高
-        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
-        // 滑動方向為「垂直」的話即「上下」的間距;滑動方向為「平行」則為「左右」的間距
+                                 height: ScreenSize.height.value * 0.45)
         
-        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10) // 滑動方向為「垂直」的話即「左右」的間距;滑動方向為「平行」則為「上下」的間距
-        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
+        // cell與cell的間距
+        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
         
+        // cell與邊界的間距
+//        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+        
+        // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+        
+        //設定collectionView的大小
         self.cardCollectionView = UICollectionView(frame: CGRect(
             x: 0,
-            y: (ScreenSize.hight.value * 0.4),
+            y: (ScreenSize.height.value * 0.4),
             width: ScreenSize.width.value ,
-            height: (ScreenSize.hight.value * 0.5)),
+            height: (ScreenSize.height.value * 0.5)),
                                                    collectionViewLayout: layout)
         self.cardCollectionView.dataSource = self
         self.cardCollectionView.delegate = self
-        self.cardCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        self.cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "cell")
         self.cardCollectionView.backgroundColor = .clear
         self.view.addSubview(cardCollectionView)
     }

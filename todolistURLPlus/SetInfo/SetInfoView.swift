@@ -22,7 +22,7 @@ class SetInfoView:UIView{
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.hight.value * 0.1 ))
+            height: ScreenSize.height.value * 0.1 ))
         textField.textAlignment = .center
         let font = textField.font!
         let newFont = font.withSize(30)

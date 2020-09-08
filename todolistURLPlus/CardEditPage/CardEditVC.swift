@@ -9,21 +9,29 @@
 import UIKit
 
 class CardEditVC: UIViewController {
-    
+    private let cardEditView = CardEditView()
     override func loadView() {
         super.loadView()
-        let view = CardEditView()
-        view.setUserData(
-            image: UIImage(named: "joey") ,
-            title: "Title",
-            script: "Learning English use a limited vocabulary and are read at a slower pace than VOA's other English broadcasts. Previously known as Special English.")
-        self.view = view
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+
+
+}
+    func setTaskData(data:TaskData){
+        cardEditView.setUserData(
+        image: data.image ?? UIImage(systemName: "photo")!,
+        title: data.title,
+        script: data.script ?? "Unknow")
+        self.cardEditView.colorsCollectionView.dataSource = self
+        self.cardEditView.colorsCollectionView.delegate = self
+        self.view = cardEditView
     }
     
-    
+}
+extension CardEditVC:UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
 }

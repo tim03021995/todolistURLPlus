@@ -15,7 +15,7 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.hight.value * 0.05 ))
+            height: ScreenSize.height.value * 0.05 ))
         textField.textAlignment = .center
         let font = textField.font!
         let newFont = font.withSize(30)
@@ -27,7 +27,7 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.hight.value * 0.2))
+            height: ScreenSize.height.value * 0.2))
         textView.font = UIFont(name: "Helvetica-Light", size: 20)
         textView.backgroundColor = .backgroundColor
         textView.textAlignment = .center
@@ -50,38 +50,34 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.7,
-            height: ScreenSize.hight.value * 0.1))
+            height: ScreenSize.height.value * 0.1))
         view.layer.cornerRadius = view.frame.width * 0.05
         view.backgroundColor = .lightGray
         return view
     }()
-    var colorButtonRed:UIButton = {
-        var button = ColorButtonFactory.makeButton(type: .red)
-        return button 
-    }()
-    var colorButtonOrange:UIButton = {
-        var button = ColorButtonFactory.makeButton(type: .orange)
-        return button
-    }()
-    var colorButtonYello:UIButton = {
-        var button = ColorButtonFactory.makeButton(type: .yello)
-        return button
-    }()
-    var colorButtonGreen:UIButton = {
-        var button = ColorButtonFactory.makeButton(type: .green)
-        return button
-    }()
-    var colorButtonBlue:UIButton = {
-        var button = ColorButtonFactory.makeButton(type: .blue)
-        return button
-    }()
-    var colorButtonDarkBlue:UIButton = {
-        var button = ColorButtonFactory.makeButton(type: .darkBlue)
-        return button
-    }()
-    var colorButtonPurple:UIButton = {
-        var button = ColorButtonFactory.makeButton(type: .purple)
-        return button
+
+    var colorsCollectionView:UICollectionView =
+    {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        //        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10) // section與section之間的距離(如果只有一個section，可以想像成frame)
+        layout.itemSize = CGSize(width: ScreenSize.height.value * 0.045,
+                                 height: ScreenSize.height.value * 0.045) // cell的寬、高
+        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
+        // 滑動方向為「垂直」的話即「上下」的間距;滑動方向為「平行」則為「左右」的間距
+        
+        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10) // 滑動方向為「垂直」的話即「左右」的間距;滑動方向為「平行」則為「上下」的間距
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
+        let view = UICollectionView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: ScreenSize.width.value * 0.7,
+            height: ScreenSize.height.value * 0.1),
+                                    collectionViewLayout: layout
+        )
+        view.layer.cornerRadius = view.frame.width * 0.05
+        view.backgroundColor = .lightGray
+        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -97,14 +93,7 @@ class CardEditView: UIView {
         addSubview(titleTextField)
         addSubview(textView)
         addSubview(imageView)
-        addSubview(colorView)
-        colorView.addSubview(colorButtonRed)
-        colorView.addSubview(colorButtonOrange)
-        colorView.addSubview(colorButtonYello)
-        colorView.addSubview(colorButtonGreen)
-        colorView.addSubview(colorButtonBlue)
-        colorView.addSubview(colorButtonDarkBlue)
-        colorView.addSubview(colorButtonPurple)
+        addSubview(colorsCollectionView)
     }
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
@@ -121,47 +110,15 @@ class CardEditView: UIView {
         imageView.center = CGPoint(
             x: centerX,
             y: textView.frame.maxY + space + imageView.frame.height * 0.5)
-        colorView.center = CGPoint(
+
+        colorsCollectionView.center = CGPoint(
             x: centerX,
             y: imageView.frame.maxY + space + colorView.frame.height * 0.5)
-        colorButtonRed.center = CGPoint(
-            x: colorViewSpaceX,
-            y: colorViewCenterY)
-        colorButtonOrange.center = CGPoint(
-            x:  colorButtonRed.frame.maxX + colorViewSpaceX,
-            y: colorViewCenterY)
-        colorButtonYello.center = CGPoint(
-        x:  colorButtonOrange.frame.maxX + colorViewSpaceX,
-        y: colorViewCenterY)
-        colorButtonGreen.center = CGPoint(
-        x: colorButtonYello.frame.maxX + colorViewSpaceX,
-        y:  colorViewCenterY)
-        colorButtonBlue.center = CGPoint(
-        x: colorButtonGreen.frame.maxX + colorViewSpaceX,
-        y:  colorViewCenterY)
-        colorButtonDarkBlue.center = CGPoint(
-        x:colorButtonBlue.frame.maxX + colorViewSpaceX,
-        y:  colorViewCenterY)
-        colorButtonPurple.center = CGPoint(
-        x:colorButtonDarkBlue.frame.maxX + colorViewSpaceX,
-        y:  colorViewCenterY)
     }
-    func setUserData(image:UIImage?,title:String?,script:String?){
-        if let image = image {
+    func setUserData(image:UIImage,title:String,script:String){
             imageView.image = image
-        }else{
-            imageView.image = UIImage(systemName: "photo")
-        }
-        if let title = title {
             titleTextField.text = title
-        }else{
-            titleTextField.text = "UnKnow"
-        }
-        if let script = script {
             textView.text = script
-        }else{
-            textView.text = "UnKnow"
-        }
     }
     
 }
@@ -172,7 +129,7 @@ class  CellOfTextView: UITableViewCell {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.hight.value * 0.4))
+            height: ScreenSize.height.value * 0.4))
         textView.font = UIFont(name: "Helvetica-Light", size: 20)
         textView.textAlignment = .left
         return textView
@@ -181,3 +138,42 @@ class  CellOfTextView: UITableViewCell {
 class CellOfImageView:UITableViewCell {
     
 }
+class CellOfColorsScrollView:UITableViewCell{
+    
+}
+extension CardEditVC:UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.layer.cornerRadius = cell.frame.size.height * 0.5
+        let color  : UIColor = {
+            switch indexPath.row {
+            case 0 :
+                return UIColor.buttonRed
+            case 1 :
+                return UIColor.buttonOrange
+            case 2 :
+                return UIColor.buttonYello
+            case 3 :
+                return UIColor.buttonGreen
+            case 4 :
+                return UIColor.buttonBlue
+            case 5 :
+                return UIColor.button2u04
+            case 6 :
+                return UIColor.buttonPurple
+            default:
+                return UIColor.buttonRed
+            }
+        }()
+        cell.backgroundColor = color
+        return cell
+    }
+    
+    
+
+}
+

@@ -13,6 +13,7 @@
 		D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E424FCCAAF00F4CC6E /* Main.storyboard */; };
 		D23505E824FCCAB400F4CC6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D23505E724FCCAB400F4CC6E /* Assets.xcassets */; };
 		D23505EB24FCCAB400F4CC6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E924FCCAB400F4CC6E /* LaunchScreen.storyboard */; };
+		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
 		D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAF2505D0D8001FE33E /* CardEditVC.swift */; };
@@ -23,11 +24,10 @@
 		D2B0644725008AC700000444 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B0644625008AC700000444 /* UserInfoView.swift */; };
 		D2B0644B25009FEB00000444 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = D2B0644A25009FEB00000444 /* .gitattributes */; };
 		D2B0644E2500B4C600000444 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2B0644D2500B4C600000444 /* SnapKit */; };
-		D2B064532500E71500000444 /* CustomUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* CustomUserImage.swift */; };
-		FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Networking.swift */; };
-		FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */; };
 		D2B064532500E71500000444 /* UserImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* UserImageFactory.swift */; };
 		FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D62500F52F00E9289C /* Alert.swift */; };
+		FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Networking.swift */; };
+		FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */; };
 		FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC901952500E02400F6FA40 /* MainPageVC.swift */; };
 		FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */; };
 		FBCF1EA52500BE2500E5F686 /* others.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA42500BE2500E5F686 /* others.swift */; };
@@ -45,6 +45,7 @@
 		D23505E724FCCAB400F4CC6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D23505EA24FCCAB400F4CC6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D23505EC24FCCAB400F4CC6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D24D01D225074D4F00016630 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D291DEAA2500FAB3001FE33E /* SetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoView.swift; sourceTree = "<group>"; };
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
 		D291DEAF2505D0D8001FE33E /* CardEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditVC.swift; sourceTree = "<group>"; };
@@ -54,11 +55,10 @@
 		D2B0644425008AAB00000444 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		D2B0644625008AC700000444 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D2B0644A25009FEB00000444 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
-		D2B064522500E71500000444 /* CustomUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUserImage.swift; sourceTree = "<group>"; };
-		FB7AF8D82500FA3F00E9289C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInfo.swift; sourceTree = "<group>"; };
 		D2B064522500E71500000444 /* UserImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageFactory.swift; sourceTree = "<group>"; };
 		FB7AF8D62500F52F00E9289C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		FB7AF8D82500FA3F00E9289C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInfo.swift; sourceTree = "<group>"; };
 		FBC901952500E02400F6FA40 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		FBCF1EA42500BE2500E5F686 /* others.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = others.swift; sourceTree = "<group>"; };
@@ -132,6 +132,7 @@
 			children = (
 				D291DEAF2505D0D8001FE33E /* CardEditVC.swift */,
 				D291DEB12505D371001FE33E /* CardEditView.swift */,
+				D24D01D225074D4F00016630 /* TaskModel.swift */,
 			);
 			path = CardEditPage;
 			sourceTree = "<group>";
@@ -279,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBCF1EA52500BE2500E5F686 /* others.swift in Sources */,
+				D24D01D325074D4F00016630 /* TaskModel.swift in Sources */,
 				D2B064422500891A00000444 /* ColorSet.swift in Sources */,
 				D291DEB22505D371001FE33E /* CardEditView.swift in Sources */,
 				D2B064532500E71500000444 /* UserImageFactory.swift in Sources */,
@@ -445,7 +447,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X5J69Q9BS;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -466,7 +468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X5J69Q9BS;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
