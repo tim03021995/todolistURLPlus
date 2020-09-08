@@ -13,7 +13,8 @@ class CardEditVC: UIViewController {
     override func loadView() {
         super.loadView()
         let view = CardEditView()
-        view.colorCollectionView.delegate = self
+        view.colorsCollectionView.delegate = self
+        view.colorsCollectionView.dataSource = self
         view.setUserData(
             image: UIImage(named: "joey") ,
             title: "Title",

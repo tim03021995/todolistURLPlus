@@ -54,8 +54,9 @@ class ButtonFactory{
     }
 }
 class ColorButtonFactory{
-    static func makeButton(type:ButtonType) -> UIButton {
-        let button = UIButton(frame: CGRect(
+    static func makeButton(type:ButtonType) -> UICollectionViewCell{
+        
+        let button = UICollectionViewCell(frame: CGRect(
             x: 0,
             y: 0,
             width: ScreenSize.height.value * 0.045,
