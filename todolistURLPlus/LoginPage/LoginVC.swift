@@ -19,7 +19,10 @@ class LoginVC: UIViewController {
     @IBOutlet weak var accountTF: CustomLogINTF!
     
     @IBOutlet weak var passwordTF: CustomLogINTF!
+    //
+    @IBOutlet weak var accountErrorLabel: UILabel!
     
+    @IBOutlet weak var passwordErrorLabel: UILabel!
     //MARK:- ViewDidLoad
     
     override func viewDidLoad() {
@@ -49,15 +52,16 @@ class LoginVC: UIViewController {
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = barAppearance
+        
     }
     
-    func validateAccount(){
-        if accountTF.text == "" || passwordTF.text == "" {
-            //alert
-            present(.makeAlert(title: "test", message: "test", handler: {
-            }), animated: true)
-        }
-    }
+//    func validateAccount(){
+//        if accountTF.text == "" || passwordTF.text == "" {
+//            //alert
+//            present(.makeAlert(title: "test", message: "test", handler: {
+//            }), animated: true)
+//        }
+//    }
 
     @IBAction func signInTapped(_ sender: CustomButton) {
 
@@ -82,12 +86,12 @@ class LoginVC: UIViewController {
             }
         }
         
-//        validateAccount()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
         let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC.rawValue ) as! SignupVC
         navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }
@@ -104,13 +108,20 @@ extension LoginVC : UITextFieldDelegate{
         switch textField {
         case accountTF:
             passwordTF.becomeFirstResponder()
-            //TODO 驗證
         default:
             self.view.endEditing(true)
-            //TODO 驗證
             //TODO 執行登入
         }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case accountTF :
+            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail格式錯誤"
+        default:
+            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式為8-12位數字與至少一個英文字母"
+        }
     }
     
     

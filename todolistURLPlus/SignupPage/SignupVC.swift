@@ -76,14 +76,14 @@ class SignupVC: UIViewController {
         }
     }
     
-    func validateTextField () -> String? {
-        if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
-            return "輸入框不得為空白"
-        }else {
-            return nil
-        }
-        
-    }
+//    func validateTextField () -> String? {
+//        if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
+//            return "輸入框不得為空白"
+//        }else {
+//            return nil
+//        }
+//        
+//    }
     
 
     
