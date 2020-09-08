@@ -3,10 +3,9 @@ import UIKit
 import UIKit
 
 class UserInfoVC: UIViewController {
+    let userInformationView = UserInfoView()
     override func loadView() {
         super .loadView()
-        let userInformationView = UserInfoView()
-        userInformationView.setUserData(userImage: nil, userName: nil)
         self.view = userInformationView
     }
     override func viewDidLoad() {
@@ -18,5 +17,11 @@ class UserInfoVC: UIViewController {
     }
     @objc func modifyPassword(){
         
+    }
+    func setUserData(userImage:UIImage?, userName: String?){
+        userInformationView.setUserData(
+            userImage: userImage ?? UIImage(systemName: "photo")!,
+            userName: userName ?? "Unknow")
+        self.view = userInformationView
     }
 }

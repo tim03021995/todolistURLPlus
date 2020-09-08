@@ -1,10 +1,10 @@
 import UIKit
 
 class UserInfoView: UIView {
-    var backgroundImage : UIImageView = {
+    private var backgroundImage : UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
-    var glassView : UIView = {
+    private var glassView : UIView = {
         var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.height.value * 0.8))
         glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.height.value * 0.04)
         glassView.backgroundColor = .glassColor
@@ -13,12 +13,12 @@ class UserInfoView: UIView {
         let glassViewBotton = glassView.center.y + glassView.frame.height * 0.5 - ScreenSize.height.value * 0.2
         return glassView
     }()
-    var peopleView:UIImageView = {
+    private var peopleView:UIImageView = {
         var imageView = UserImageFactory.makeImageView(size: .medium, image: nil)
         imageView.backgroundColor = .gray
         return imageView
     }()
-    var userNameLabel:UILabel = {
+    private var userNameLabel:UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.3 , height: ScreenSize.height.value * 0.1))
         label.contentMode = .center
         label.text = "Name"
@@ -27,17 +27,17 @@ class UserInfoView: UIView {
         label.textColor = .white
         return label
     }()
-    var informationButton:UIButton = {
+    private var informationButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "information")
         button.addTarget(self, action: #selector(UserInfoVC.information), for: .touchDown)
         return button
     }()
-    var modifyPasswordButton:UIButton = {
+    private var modifyPasswordButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text:
             "modify password")
         return button
     }()
-    var logoutButton:UIButton = {
+    private var logoutButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .cancel, text: "logout out")
         return button
     }()
@@ -80,17 +80,8 @@ class UserInfoView: UIView {
             x: centerX,
             y: glassViewBotton - logoutButton.frame.height * 0.5 - space)
     }
-    func setUserData(userImage:UIImage?,userName:String?){
-        if let userImage = userImage {
+    func setUserData(userImage:UIImage,userName:String){
             self.peopleView.image = userImage
-        }else{
-            self.peopleView.image = UIImage(systemName: "photo")
-        }
-        
-        if let userName = userName {
             self.userNameLabel.text = userName
-        }else{
-            self.userNameLabel.text = "UnKnow"
-        }
     }
 }

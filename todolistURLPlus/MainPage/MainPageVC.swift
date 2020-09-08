@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-   
+    
     
     ///設置背景
     let userName = ""
@@ -19,58 +19,53 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }()
     ///設置頭貼
     lazy var headImage: UIImageView =
-    {
-        let head = UserImageFactory.makeImageView(size: .small, image: nil)
-        head.backgroundColor = .gray
-        let nvBottom = navigationController?.navigationBar.frame.maxY
-        let space = 15
-        head.center = CGPoint(
-            x: space + Int(head.frame.width * 0.5),
-            y: Int(nvBottom!) + space + Int(head.frame.width * 0.3)
-        )
-        return head
+        {
+            let head = UserImageFactory.makeImageView(size: .small, image: nil)
+            head.backgroundColor = .gray
+            let bottomOfNaviBar = navigationController?.navigationBar.frame.maxY ?? 0
+            let radius = head.frame.width * 0.5
+            let space = CGFloat(15)
+            let yPoint = bottomOfNaviBar + space + radius
+            let xPoint = space + radius
+            head.center = CGPoint(x: xPoint, y: yPoint)
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
+            head.addGestureRecognizer(tap)
+            head.isUserInteractionEnabled = true
+            return head
     }()
     ///設置歡迎標籤
     lazy var welcomeLabel: UILabel =
-    {
-       let label = UILabel()
-        label.frame = CGRect(x: ScreenSize.width.value * 0.05,
-                             y: self.headImage.frame.maxY * 1.05,
-                             width: ScreenSize.width.value * 0.9,
-                             height: self.headImage.frame.height  * 0.8)
-        label.text = "Welcome back \(self.userName)"
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        label.textColor = .white
-        return label
+        {
+            let label = UILabel()
+            label.frame = CGRect(x: ScreenSize.width.value * 0.05,
+                                 y: self.headImage.frame.maxY * 1.05,
+                                 width: ScreenSize.width.value * 0.9,
+                                 height: self.headImage.frame.height  * 0.8)
+            label.text = "Welcome back \(self.userName)"
+            label.adjustsFontSizeToFitWidth = true
+            label.textAlignment = .center
+            label.font = UIFont.boldSystemFont(ofSize: 30)
+            label.textColor = .white
+            return label
     }()
     ///設置卡片(collectionView)
     var cardCollectionView: UICollectionView!
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(backgroundImage)
-        self.view.addSubview(headImage)
-        self.view.addSubview(welcomeLabel)
-        
-        setUpCollectionView()
-        self.view.addSubview(cardCollectionView)
-
+        setUI()
         
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 600
         
@@ -85,10 +80,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CardEditVC()
-        let taskData = TaskData( title:"Joey",
-        script: "English is a West Germanic language that was first spoken in early medieval England and eventually became a global lingua franca.[4][5] It is named after the Angles, one of the ancient Germanic peoples that migrated to the area of Great Britain that later took their name, England. Both names derive from Anglia, a peninsula on the Baltic Sea. English is most closely related to Frisian and Low Saxon, while its vocabulary has been significantly influenced by other Germanic languages, particularly Old Norse (a North Germanic language), as well as Latin and French.[6][7][8]",
-        image: UIImage(named: "joey"),
-        color: .blue)
+        let taskData = TaskData( title:"This is Joey",
+                                 script: "I am Jimmy",
+                                 image: UIImage(named: "joey"),
+                                 color: .blue)
         vc.setTaskData(data: taskData)
         present(vc, animated: true, completion: nil)
     }
@@ -108,7 +103,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
         
         // cell與邊界的間距
-//        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
         
         // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
@@ -126,5 +121,23 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.cardCollectionView.backgroundColor = .clear
         self.view.addSubview(cardCollectionView)
     }
+    func setUI()
+    {
+        self.view.addSubview(backgroundImage)
+        self.view.addSubview(headImage)
+        self.view.addSubview(welcomeLabel)
+        setUpCollectionView()
     }
+    //增加點擊手勢觸發跳轉個人資料設定
+    @objc func tapToProfileSetting()
+    {
+        let user = UserInfoVC()
+        let image = UIImage(named: "joey")
+        user.setUserData(userImage: image, userName: "I am Joey")
+//        show(UserInfoVC(), sender: nil)
+        present(user, animated: true, completion: nil)
+    }
+    
+}
+
 
