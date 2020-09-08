@@ -93,14 +93,6 @@ class CardEditView: UIView {
         addSubview(titleTextField)
         addSubview(textView)
         addSubview(imageView)
-        //        addSubview(colorView)
-        //        colorView.addSubview(colorButtonRed)
-        //        colorView.addSubview(colorButtonOrange)
-        //        colorView.addSubview(colorButtonYello)
-        //        colorView.addSubview(colorButtonGreen)
-        //        colorView.addSubview(colorButtonBlue)
-        //        colorView.addSubview(colorButtonDarkBlue)
-        //        colorView.addSubview(colorButtonPurple)
         addSubview(colorsCollectionView)
     }
     private func setConstraints(){
@@ -124,7 +116,6 @@ class CardEditView: UIView {
             y: imageView.frame.maxY + space + colorView.frame.height * 0.5)
     }
     func setUserData(image:UIImage,title:String,script:String){
-
             imageView.image = image
             titleTextField.text = title
             textView.text = script
@@ -150,18 +141,13 @@ class CellOfImageView:UITableViewCell {
 class CellOfColorsScrollView:UITableViewCell{
     
 }
-extension CardEditVC:UICollectionViewDelegate,UICollectionViewDataSource{
+extension CardEditVC:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-//        cell.frame = CGRect(
-//            x: 0,
-//            y: 0,
-//            width: ScreenSize.height.value * 0.045,
-//            height: ScreenSize.height.value * 0.045)
         cell.layer.cornerRadius = cell.frame.size.height * 0.5
         let color  : UIColor = {
             switch indexPath.row {
@@ -188,8 +174,6 @@ extension CardEditVC:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        show(CardEditVC(), sender: nil)
-    }
+
 }
+

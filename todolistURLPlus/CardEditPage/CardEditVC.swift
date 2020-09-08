@@ -12,20 +12,26 @@ class CardEditVC: UIViewController {
     private let cardEditView = CardEditView()
     override func loadView() {
         super.loadView()
-        cardEditView.colorsCollectionView.delegate = self
-        cardEditView.colorsCollectionView.dataSource = self
-        self.view = cardEditView
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
 }
     func setTaskData(data:TaskData){
         cardEditView.setUserData(
         image: data.image ?? UIImage(systemName: "photo")!,
         title: data.title,
         script: data.script ?? "Unknow")
+        self.cardEditView.colorsCollectionView.dataSource = self
+        self.cardEditView.colorsCollectionView.delegate = self
         self.view = cardEditView
     }
     
 }
-
+extension CardEditVC:UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+}
