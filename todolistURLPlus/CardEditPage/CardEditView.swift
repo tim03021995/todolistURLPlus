@@ -158,6 +158,9 @@ class  CellOfTextView: UITableViewCell {
 class CellOfImageView:UITableViewCell {
     
 }
+class CellOfColorsScrollView:UITableViewCell{
+    
+}
 extension CardEditVC:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7

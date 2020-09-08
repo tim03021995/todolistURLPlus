@@ -9,7 +9,9 @@
 import UIKit
 
 class CardEditVC: UIViewController {
-    
+    var image:UIImage?
+    var cardTitle:String?
+    var script:String?
     override func loadView() {
         super.loadView()
         let view = CardEditView()
@@ -25,6 +27,11 @@ class CardEditVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    }
+    func setInformation(title:String?,script:String?,image:UIImage?){
+            self.cardTitle = title ?? "UnKnow"
+        self.script = script ?? "UnKnow"
+        self.image = image ?? UIImage.init(systemName: "photo")
     }
     
     
