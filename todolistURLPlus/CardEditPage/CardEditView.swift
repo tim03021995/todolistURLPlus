@@ -83,6 +83,9 @@ class CardEditView: UIView {
         var button = ColorButtonFactory.makeButton(type: .purple)
         return button
     }()
+//    var colorCollectionView:UICollectionView = {
+//        
+//    }
     
     override init(frame: CGRect) {
         super .init(frame: frame)
