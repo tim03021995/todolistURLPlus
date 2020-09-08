@@ -94,19 +94,26 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        show(CardEditVC(), sender: nil)
+//        show(CardEditVC(), sender: nil)
+        present(CardEditVC(), animated: true, completion: nil)
     }
     func setUpCollectionView()
     {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10) // section與section之間的距離(如果只有一個section，可以想像成frame)
-        layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
-                                 height: ScreenSize.hight.value * 0.45) // cell的寬、高
-        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
-        // 滑動方向為「垂直」的話即「上下」的間距;滑動方向為「平行」則為「左右」的間距
+        // section與section之間的距離(如果只有一個section，可以想像成frame)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         
-        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10) // 滑動方向為「垂直」的話即「左右」的間距;滑動方向為「平行」則為「上下」的間距
-        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
+        // cell的寬、高
+        layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
+                                 height: ScreenSize.hight.value * 0.45)
+        
+        //cell與cell間距
+        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
+        
+        // cell與邊界的間距
+        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+        // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         
         self.cardCollectionView = UICollectionView(frame: CGRect(
             x: 0,
