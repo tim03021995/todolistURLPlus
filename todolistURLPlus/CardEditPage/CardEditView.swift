@@ -123,22 +123,11 @@ class CardEditView: UIView {
             x: centerX,
             y: imageView.frame.maxY + space + colorView.frame.height * 0.5)
     }
-    func setUserData(image:UIImage?,title:String?,script:String?){
-        if let image = image {
+    func setUserData(image:UIImage,title:String,script:String){
+
             imageView.image = image
-        }else{
-            imageView.image = UIImage(systemName: "photo")
-        }
-        if let title = title {
             titleTextField.text = title
-        }else{
-            titleTextField.text = "UnKnow"
-        }
-        if let script = script {
             textView.text = script
-        }else{
-            textView.text = "UnKnow"
-        }
     }
     
 }
@@ -156,6 +145,9 @@ class  CellOfTextView: UITableViewCell {
     }()
 }
 class CellOfImageView:UITableViewCell {
+    
+}
+class CellOfColorsScrollView:UITableViewCell{
     
 }
 extension CardEditVC:UICollectionViewDelegate,UICollectionViewDataSource{
