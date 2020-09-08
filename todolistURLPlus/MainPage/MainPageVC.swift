@@ -101,7 +101,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10) // section與section之間的距離(如果只有一個section，可以想像成frame)
         layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
-                                 height: ScreenSize.hight.value * 0.45) // cell的寬、高
+                                 height: ScreenSize.height.value * 0.45) // cell的寬、高
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
         // 滑動方向為「垂直」的話即「上下」的間距;滑動方向為「平行」則為「左右」的間距
         
@@ -110,9 +110,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         self.cardCollectionView = UICollectionView(frame: CGRect(
             x: 0,
-            y: (ScreenSize.hight.value * 0.4),
+            y: (ScreenSize.height.value * 0.4),
             width: ScreenSize.width.value ,
-            height: (ScreenSize.hight.value * 0.5)),
+            height: (ScreenSize.height.value * 0.5)),
                                                    collectionViewLayout: layout)
         self.cardCollectionView.dataSource = self
         self.cardCollectionView.delegate = self

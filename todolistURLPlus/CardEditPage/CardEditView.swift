@@ -15,7 +15,7 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.hight.value * 0.05 ))
+            height: ScreenSize.height.value * 0.05 ))
         textField.textAlignment = .center
         let font = textField.font!
         let newFont = font.withSize(30)
@@ -27,7 +27,7 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.hight.value * 0.2))
+            height: ScreenSize.height.value * 0.2))
         textView.font = UIFont(name: "Helvetica-Light", size: 20)
         textView.backgroundColor = .backgroundColor
         textView.textAlignment = .center
@@ -50,7 +50,7 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.7,
-            height: ScreenSize.hight.value * 0.1))
+            height: ScreenSize.height.value * 0.1))
         view.layer.cornerRadius = view.frame.width * 0.05
         view.backgroundColor = .lightGray
         return view
@@ -83,9 +83,17 @@ class CardEditView: UIView {
         var button = ColorButtonFactory.makeButton(type: .purple)
         return button
     }()
-//    var colorCollectionView:UICollectionView = {
-//        
-//    }
+    var colorCollectionView:UICollectionView =
+    {
+        let view = UICollectionView(frame: CGRect(
+        x: 0,
+        y: 0,
+        width: ScreenSize.width.value * 0.7,
+        height: ScreenSize.height.value * 0.1))
+        view.layer.cornerRadius = view.frame.width * 0.05
+        view.backgroundColor = .lightGray
+        return view
+    }()
     
     override init(frame: CGRect) {
         super .init(frame: frame)
@@ -175,12 +183,15 @@ class  CellOfTextView: UITableViewCell {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.hight.value * 0.4))
+            height: ScreenSize.height.value * 0.4))
         textView.font = UIFont(name: "Helvetica-Light", size: 20)
         textView.textAlignment = .left
         return textView
     }()
 }
 class CellOfImageView:UITableViewCell {
+    
+}
+extension CardEditVC:UICollectionViewDelegate{
     
 }
