@@ -72,7 +72,6 @@ class LoginVC: UIViewController {
                 //存token
                 guard let token = decodedData.data?.userToken else { return }
                 UserToken.shared.updateToken(by: token)
-                #warning("Jimmy")
                 self.navigationController?.pushViewController(MainPageVC(), animated: true)
                 
                 
@@ -113,6 +112,8 @@ extension LoginVC : UITextFieldDelegate{
         }
         return true
     }
+    
+    
     
 }
 
