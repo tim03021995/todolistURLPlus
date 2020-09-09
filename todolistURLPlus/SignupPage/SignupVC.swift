@@ -21,7 +21,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var passwordTF: CustomLogINTF!
     
     @IBOutlet weak var checkPasswordTF: CustomLogINTF!
-    
+    //
     @IBOutlet weak var nameErrorLabel: UILabel!
     
     @IBOutlet weak var mailErrorLabel: UILabel!
@@ -29,6 +29,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var passwordErrorLabel: UILabel!
     
     @IBOutlet weak var checkPasswordErrorLabel: UILabel!
+    
     //MARK:- ViewDidLoad
     
     override func viewDidLoad() {
@@ -38,10 +39,10 @@ class SignupVC: UIViewController {
         //TODO 鍵盤上移事件
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        userNameTF.becomeFirstResponder()
-    }
-    
+//    override func viewWillAppear(_ animated: Bool) {
+//        userNameTF.becomeFirstResponder()
+//    }
+//
     //MARK:- Functions
     
     fileprivate func settingTF() {
@@ -75,14 +76,14 @@ class SignupVC: UIViewController {
         }
     }
     
-    func validateTextField () -> String? {
-        if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
-            return "輸入框不得為空白"
-        }else {
-            return nil
-        }
-        
-    }
+//    func validateTextField () -> String? {
+//        if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
+//            return "輸入框不得為空白"
+//        }else {
+//            return nil
+//        }
+//        
+//    }
     
 
     
@@ -108,6 +109,21 @@ extension SignupVC:UITextFieldDelegate{
             self.view.endEditing(true)
         }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case userNameTF:
+            nameErrorLabel.text = userNameTF.text!.isValidName ? "" : "名稱字元必須介於2 - 16"
+        case mailTF:
+            mailErrorLabel.text = mailTF.text!.isValidEMail ? "" : "Email格式錯誤"
+        case passwordTF:
+            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式錯誤"
+        case checkPasswordTF:
+            checkPasswordErrorLabel.text = checkPasswordTF.text == passwordTF.text ? "" : "確認密碼與密碼不同"
+        default:
+            break
+        }
     }
     
 }
