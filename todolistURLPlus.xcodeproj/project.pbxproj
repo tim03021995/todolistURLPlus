@@ -14,6 +14,7 @@
 		D23505E824FCCAB400F4CC6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D23505E724FCCAB400F4CC6E /* Assets.xcassets */; };
 		D23505EB24FCCAB400F4CC6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E924FCCAB400F4CC6E /* LaunchScreen.storyboard */; };
 		D249010C2508EBB2003E9497 /* GlassFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249010B2508EBB2003E9497 /* GlassFactory.swift */; };
+		D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D249010E25090551003E9497 /* IQKeyboardManagerSwift */; };
 		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
@@ -77,6 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2B0644E2500B4C600000444 /* SnapKit in Frameworks */,
+				D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +227,7 @@
 			name = todolistURLPlus;
 			packageProductDependencies = (
 				D2B0644D2500B4C600000444 /* SnapKit */,
+				D249010E25090551003E9497 /* IQKeyboardManagerSwift */,
 			);
 			productName = todolistURLPlus;
 			productReference = D23505DB24FCCAAF00F4CC6E /* todolistURLPlus.app */;
@@ -256,6 +259,7 @@
 			mainGroup = D23505D224FCCAAF00F4CC6E;
 			packageReferences = (
 				D2B0644C2500B4C600000444 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D249010D25090551003E9497 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = D23505DC24FCCAAF00F4CC6E /* Products */;
 			projectDirPath = "";
@@ -515,6 +519,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D249010D25090551003E9497 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.6;
+			};
+		};
 		D2B0644C2500B4C600000444 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -526,6 +538,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D249010E25090551003E9497 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D249010D25090551003E9497 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		D2B0644D2500B4C600000444 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D2B0644C2500B4C600000444 /* XCRemoteSwiftPackageReference "SnapKit" */;
