@@ -41,7 +41,7 @@ struct NetworkManager {
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
-                if let error = error {
+                if error != nil {
                     completion(.failure(.invalidURL))
                 }
                 //
@@ -51,7 +51,7 @@ struct NetworkManager {
                 }
                 switch response.statusCode {
                 case 200 ... 299:
-                    print("Successs" , "\(response.statusCode)")
+                    print("Successs" , "Status Code:\(response.statusCode)")
 //                case 400:
 //                    completion(.failure(.errorResponse))
                 default:
@@ -66,6 +66,7 @@ struct NetworkManager {
                     let decorder = JSONDecoder()
                     let decotedData = try decorder.decode(T.self, from: data)
                     completion(.success(decotedData))
+                    print("\(response.statusCode)")
                 }catch{
                     completion(.failure(.decodeError))
                 }

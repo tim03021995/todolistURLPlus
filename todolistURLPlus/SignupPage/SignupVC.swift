@@ -30,13 +30,21 @@ class SignupVC: UIViewController {
     
     @IBOutlet weak var checkPasswordErrorLabel: UILabel!
     
+    @IBOutlet weak var registerBtn: CustomButton!
+    
+    
     //MARK:- ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTF()
-        
         //TODO 鍵盤上移事件
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerBtn.isEnabled = false
+
     }
     
     //MARK:- Functions
@@ -49,44 +57,71 @@ class SignupVC: UIViewController {
     }
     
 
-
+    @IBAction func tfValueChange(_ sender: CustomLogINTF) {
+        switch sender {
+        case checkPasswordTF:
+            
+            let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
+                self.registerBtn.backgroundColor = self.checkPasswordTF.text == self.passwordTF.text ? .mainColor : .glassColor
+            }
+            animate.startAnimation()
+            
+            registerBtn.isEnabled = checkPasswordTF.text == passwordTF.text ? true : false
+        default:
+            break
+        }
+        
+    }
+    
+    
     @IBAction func signupBtnTapped(_ sender: CustomButton) {
         //TODO 驗證正則
         
-        //ＡＰＩ
         registerRequest()
-        //跳頁
     }
     
     func registerRequest(){
-        let parameters = ["username": "admin","password":"00000000","email" : "ishida624@gmail.com"]
-        let request = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters, contentType: .json)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
-            switch result{
-                
-            case .success(let message):
-                print(message)
-            case .failure(let err):
-                print(err)
+//        let parameters = ["username": "admin1", "password":"000000001", "email" : "1shida624@gmail.com"]
+        guard let parameters = validate() else {return}
+        
+            let request = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters, contentType: .json)
+            NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
+                switch result{
+                    
+                case .success(let message):
+                    print(message)
+                    if let errorMessage = message.error {
+                        print(errorMessage)
+                    }else {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                case .failure(let err):
+                    print(err)
+                }
             }
-        }
+        
     }
     
-//    func validateTextField () -> String? {
-//        if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
-//            return "輸入框不得為空白"
-//        }else {
-//            return nil
-//        }
-//        
-//    }
-    
 
+    
+    
+    func validate() -> [String:Any]? {
+        if userNameTF.text!.isValidName , mailTF.text!.isValidEMail , passwordTF.text!.isValidPassword , passwordTF.text! == checkPasswordTF.text {
+            return ["username": userNameTF.text , "password":passwordTF.text , "email" : mailTF.text ]
+        }else if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
+            present(.makeAlert(title: "錯誤", message: "輸入框不可空白", handler: {
+                self.dismiss(animated: true, completion: nil)
+            }), animated: true)
+        }
+        return nil
+    }
     
 }
 
+//MARK:- TextFieldDelegate
+
+
 extension SignupVC:UITextFieldDelegate{
-    
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -122,4 +157,5 @@ extension SignupVC:UITextFieldDelegate{
         }
     }
     
+
 }
