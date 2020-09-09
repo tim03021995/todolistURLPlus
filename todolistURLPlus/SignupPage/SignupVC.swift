@@ -39,10 +39,6 @@ class SignupVC: UIViewController {
         //TODO 鍵盤上移事件
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        userNameTF.becomeFirstResponder()
-//    }
-//
     //MARK:- Functions
     
     fileprivate func settingTF() {
@@ -68,8 +64,8 @@ class SignupVC: UIViewController {
         NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
             switch result{
                 
-            case .success(let a):
-                print(a)
+            case .success(let message):
+                print(message)
             case .failure(let err):
                 print(err)
             }

@@ -30,6 +30,8 @@ enum Endpoint:String {
     case userToken
     case register
     case task
+    case card
+    
 }
 
 enum ContentType:String{
@@ -47,7 +49,7 @@ enum NetworkError:Error{
     var description:String{
         switch self{
             
-        case .invalidURL: return "1"
+        case .invalidURL: return "Something's wrong with URL"
             
         case .errorResponse: return "帳號或密碼錯誤"
             
