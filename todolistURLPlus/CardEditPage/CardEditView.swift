@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import SnapKit
 
 class CardEditView: UIView {
-    
+    var scrollView:UIScrollView = {
+        var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value))
+        scrollView.contentSize = CGSize(width: ScreenSize.width.value, height: ScreenSize.height.value * 1.2)
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        scrollView.backgroundColor = .backgroundColor
+        return scrollView
+    }()
     var titleTextField:UITextField = {
         var textField = UITextField(frame: CGRect(
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.height.value * 0.05 ))
+            height: ScreenSize.height.value * 0.1 ))
         textField.textAlignment = .center
         let font = textField.font!
         let newFont = font.withSize(30)
@@ -27,7 +36,8 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.height.value * 0.2))
+            height: ScreenSize.height.value * 0.4))
+        textView.layer.cornerRadius=5
         textView.font = UIFont(name: "Helvetica-Light", size: 20)
         textView.backgroundColor = .backgroundColor
         textView.textAlignment = .center
@@ -55,23 +65,23 @@ class CardEditView: UIView {
         view.backgroundColor = .lightGray
         return view
     }()
-
+    
     var colorsCollectionView:UICollectionView =
     {
+        let viewWidth = ScreenSize.width.value * 0.7
+        let allItemWidth = ScreenSize.height.value * 0.045 * 7
+        let space = (viewWidth - allItemWidth) / 7
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        //        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10) // section與section之間的距離(如果只有一個section，可以想像成frame)
         layout.itemSize = CGSize(width: ScreenSize.height.value * 0.045,
-                                 height: ScreenSize.height.value * 0.045) // cell的寬、高
-        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
-        // 滑動方向為「垂直」的話即「上下」的間距;滑動方向為「平行」則為「左右」的間距
-        
-        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10) // 滑動方向為「垂直」的話即「左右」的間距;滑動方向為「平行」則為「上下」的間距
-        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
+                                 height: ScreenSize.height.value * 0.045)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: space, bottom: 0, right: space);
+        layout.minimumLineSpacing = space
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         let view = UICollectionView(frame: CGRect(
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.7,
-            height: ScreenSize.height.value * 0.1),
+            height: ScreenSize.height.value * 0.2),
                                     collectionViewLayout: layout
         )
         view.layer.cornerRadius = view.frame.width * 0.05
@@ -85,64 +95,62 @@ class CardEditView: UIView {
         self.backgroundColor = .backgroundColor
         setSubView()
         setConstraints()
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     private func setSubView(){
-        addSubview(titleTextField)
-        addSubview(textView)
-        addSubview(imageView)
-        addSubview(colorsCollectionView)
+        addSubview(scrollView)
+        scrollView.addSubview(titleTextField)
+        scrollView.addSubview(textView)
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(colorsCollectionView)
     }
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
         //let centerY = ScreenSize.centerY.value
         let space = ScreenSize.spaceY.value
-        let colorViewCenterY = colorView.frame.height * 0.5
-        let colorViewSpaceX = colorView.frame.width * 0.075
+        //       let colorViewCenterY = colorView.frame.height * 0.5
+        //      let colorViewSpaceX = colorView.frame.width * 0.075
         titleTextField.center = CGPoint(
             x: centerX,
             y: space * 2)
         textView.center = CGPoint(
             x: centerX,
             y: titleTextField.frame.maxY + space + textView.frame.height * 0.5)
-        imageView.center = CGPoint(
-            x: centerX,
-            y: textView.frame.maxY + space + imageView.frame.height * 0.5)
-
+        
         colorsCollectionView.center = CGPoint(
             x: centerX,
             y: imageView.frame.maxY + space + colorView.frame.height * 0.5)
+        imageView.snp.makeConstraints { (make) in
+            make.top.equalTo(textView.snp.bottom).offset(space)
+            make.width.equalTo(textView.snp.width)
+            make.height.equalTo(imageView.snp.width)
+            make.centerX.equalTo(textView.snp.centerX)
+        }
+        colorsCollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(imageView.snp.bottom).offset(space)
+            make.centerX.equalTo(textView)
+            make.width.equalTo(imageView)
+            make.height.equalTo(colorsCollectionView.snp.width).multipliedBy(0.2)
+        }
+        
+
     }
     func setUserData(image:UIImage,title:String,script:String){
-            imageView.image = image
-            titleTextField.text = title
-            textView.text = script
+        imageView.image = image
+        titleTextField.text = title
+        textView.text = script
+        textView.resetHight(textView)
     }
     
 }
 
-class  CellOfTextView: UITableViewCell {
-    var textView:UITextView = {
-        var textView = UITextView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.height.value * 0.4))
-        textView.font = UIFont(name: "Helvetica-Light", size: 20)
-        textView.textAlignment = .left
-        return textView
-    }()
-}
-class CellOfImageView:UITableViewCell {
-    
-}
-class CellOfColorsScrollView:UITableViewCell{
-    
-}
+
 extension CardEditVC:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return 7
     }
     
@@ -172,8 +180,7 @@ extension CardEditVC:UICollectionViewDataSource{
         cell.backgroundColor = color
         return cell
     }
-    
-    
-
 }
+
+
 
