@@ -44,7 +44,23 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }()
     //按下按鈕的標籤值
     var btnTag = 0
-    lazy var singleBtn: UIButton =
+    lazy var checkMark: UIImageView =
+    {
+        let imageView = UIImageView(image: UIImage(named: "checkMark"))
+        let x = ScreenSize.width.value * 0.2
+        let y = (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY
+        let width = ScreenSize.width.value * 0.15 * 0.5
+        let height = ScreenSize.height.value * 0.1 * 0.5
+        imageView.frame = CGRect(
+            x: x,
+            y: y,
+            width: width,
+            height: height)
+        
+        imageView.isHidden = true
+        return imageView
+    }()
+    lazy var singleBtn: UIButton = 
         {
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
@@ -62,6 +78,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                                   left: 0,
                                                   bottom: -button.frame.height * 0.7,
                                                   right: 0)
+
             return button
     }()
     lazy var mutipleBtn: UIButton =
@@ -118,6 +135,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         case 0:
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
             singleCell.setUp()
+            singleCell.title.text = "123"
             return singleCell
             
         default:
@@ -224,6 +242,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         setUpMutipleCardCollectionView()
         self.view.addSubview(singleBtn)
         self.view.addSubview(mutipleBtn)
+        self.view.addSubview(checkMark)
     }
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
@@ -240,12 +259,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             btnTag = 0
             singleCardCollectionView.isHidden = false
             mutipleCardCollectionView.isHidden = true
-       
+        checkMark.isHidden = false
         print("btnTag = \(btnTag)")
     }
     @objc func tapMutipleBtn()
     {
         btnTag = 1
+        
         singleCardCollectionView.isHidden = true
         mutipleCardCollectionView.isHidden = false
         print("btnTag = \(btnTag)")
