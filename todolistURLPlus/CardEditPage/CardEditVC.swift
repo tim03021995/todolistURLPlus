@@ -9,6 +9,11 @@
 import UIKit
 
 class CardEditVC: UIViewController {
+    var taskData = TaskData(){
+        didSet{
+            setTaskData(data: taskData)
+        }
+    }
     private let cardEditView = CardEditView()
     override func loadView() {
         super.loadView()
@@ -19,22 +24,41 @@ class CardEditVC: UIViewController {
         autoPushView()
         
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        upDate()
+    }
     func setTaskData(data:TaskData){
-        cardEditView.setUserData(
+        self.cardEditView.setUserData(
             image: data.image ?? UIImage(systemName: "photo")!,
-            title: data.title,
-            script: data.script ?? "Unknow")
-        self.cardEditView.colorsCollectionView.dataSource = self
+            title: data.title ?? "Unknow",
+            script: data.script ?? "Unknow",
+            color: data.color ?? ColorsButtonType.red)
         self.cardEditView.colorsCollectionView.delegate = self
         self.cardEditView.scrollView.delegate = self
         self.cardEditView.textView.delegate = self
         self.view = cardEditView
     }
+    func setTask(card:Int,task:Int){
+        taskData = TaskData( title:"This is Joey",
+                                 script: "I am Jimmy ,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after the Angles, one of,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after ",
+                                 image: UIImage(named: "joey"),
+                                 color: .blue)
+        setTaskData(data: taskData)
+        print("Get API")
+    }
+    func selectColor(color:ColorsButtonType){
+        
+    }
+    func upDate(){
+        
+    }
     
 }
 extension CardEditVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let colorType = ColorsButtonType.allCases[indexPath.row]
+        self.taskData.color = colorType
+        print(colorType)
     }
 }
 extension CardEditVC:UIScrollViewDelegate{
