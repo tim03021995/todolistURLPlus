@@ -30,6 +30,11 @@ class SetInfoVC:UIViewController{
             userName: userName ?? "Unknow")
         self.view = setInfoView
     }
+    @objc func save(){
+        print("updata")
+        self.dismiss(animated: true, completion: nil)        
+    }
+
 }
 extension SetInfoVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -41,4 +46,3 @@ extension SetInfoVC:UIImagePickerControllerDelegate & UINavigationControllerDele
         dismiss(animated: true, completion: nil)
     }
 }
-

@@ -155,7 +155,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CardEditVC()
         let taskData = TaskData( title:"This is Joey",
-                                 script: "I am Jimmy",
+                                 script: "I am Jimmy ,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after the Angles, one of,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after ",
                                  image: UIImage(named: "joey"),
                                  color: .blue)
         vc.setTaskData(data: taskData)
@@ -247,10 +247,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
     {
-        let user = UserInfoVC()
-        let image = UIImage(named: "joey")
-        user.setUserData(userImage: image, userName: "I am Joey")
-        present(user, animated: true, completion: nil)
+        let vc = UserInfoVC()
+        present(vc, animated: true, completion: nil)
     }
     
 
@@ -287,4 +285,5 @@ enum CollectionViewCellIdentifier: String
         }
     }
 }
+
 

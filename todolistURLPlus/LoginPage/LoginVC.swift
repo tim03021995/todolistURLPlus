@@ -76,7 +76,7 @@ class LoginVC: UIViewController {
             switch result{
             case .success(let decodedData):
                 //存token
-                guard let token = decodedData.data?.userToken else { return }
+                guard let token = decodedData.loginData?.userToken else { return }
                 UserToken.shared.updateToken(by: token)
                 self.navigationController?.pushViewController(MainPageVC(), animated: true)
                 
