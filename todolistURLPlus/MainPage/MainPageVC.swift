@@ -44,7 +44,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }()
     //按下按鈕的標籤值
     var btnTag = 0
-    lazy var checkMark: UIImageView =
+    lazy var singleCheckMark: UIImageView =
     {
         let imageView = UIImageView(image: UIImage(named: "checkMark"))
         let x = ScreenSize.width.value * 0.2
@@ -57,18 +57,33 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             width: width,
             height: height)
         
-        imageView.isHidden = true
         return imageView
     }()
+    lazy var mutipleCheckMark: UIImageView =
+       {
+           let imageView = UIImageView(image: UIImage(named: "checkMark"))
+           let x = ScreenSize.width.value * 0.55
+           let y = (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY
+           let width = ScreenSize.width.value * 0.15 * 0.5
+           let height = ScreenSize.height.value * 0.1 * 0.5
+           imageView.frame = CGRect(
+               x: x,
+               y: y,
+               width: width,
+               height: height)
+           
+           imageView.isHidden = true
+           return imageView
+       }()
     lazy var singleBtn: UIButton = 
         {
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
             button.setBackgroundImage(UIImage(named: "single"), for: .normal)
             button.setTitle("單人模式", for: .normal)
+//            button.titleLabel?.frame = CGRect(x:button.frame.minX , y:button.frame.maxY,width: button.frame.width, height: button.frame.height * 0.2)
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60)
-            button.titleLabel?.frame = CGRect(x:button.frame.minX , y:button.frame.maxY,width: button.frame.width, height: button.frame.height * 0.2)
             button.setTitleColor(.white, for: .normal)
             button.frame = CGRect(x: ScreenSize.width.value * 0.2,
                                   y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
@@ -76,7 +91,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                   height: ScreenSize.height.value * 0.1)
             button.titleEdgeInsets = UIEdgeInsets(top: 0,
                                                   left: 0,
-                                                  bottom: -button.frame.height * 0.7,
+                                                  bottom: -button.frame.height * 0.85,
                                                   right: 0)
 
             return button
@@ -101,7 +116,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             
             button.titleEdgeInsets = UIEdgeInsets(top: 0,
                                                   left: 0,
-                                                  bottom: -button.frame.height * 0.7,
+                                                  bottom: -button.frame.height * 0.85,
                                                   right: 0)
             
             return button
@@ -109,6 +124,27 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     ///設置卡片(collectionView)
     var singleCardCollectionView: UICollectionView!
     var mutipleCardCollectionView: UICollectionView!
+    
+    lazy var creatBtn: UIButton =
+    {
+        let btn = UIButton()
+        let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.8
+        btn.frame = CGRect(x: ScreenSize.width.value * 0.25,
+                           y: self.singleCardCollectionView.frame.maxY,
+                           width: ScreenSize.width.value * 0.5,
+                           height: height)
+        btn.backgroundColor = .clear
+        btn.setTitle("Creat a new card", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.contentHorizontalAlignment = .center
+        btn.contentVerticalAlignment = .center
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+        btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchDown)
+        return btn
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -124,31 +160,34 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
      // Pass the selected object to the new view controller.
      }
      */
+    //MARK: collectionViewDataSource
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 600
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch collectionView.tag {
         case 0:
+            return 5
+        default:
+            
+            return 10
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        switch collectionView {
+        case singleCardCollectionView:
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
             singleCell.setUp()
             singleCell.title.text = "123"
-            return singleCell
+            singleCell.backgroundView = UIImageView(image: UIImage(named:"joey"))
             
+            return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
             mutipleCell.setUp()
+            mutipleCell.backgroundView = UIImageView(image: UIImage(named:"singleFace"))
             return mutipleCell
         }
-//        let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleCell", for: indexPath) as! CardCell
-        
-//        let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mutipleCell", for: indexPath) as! CardCell
-//        let cell: [CardCell] = [singleCell,mutipleCell]
-//        singleCell.setUp()
-        
+     
         
     }
     
@@ -194,8 +233,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.singleCardCollectionView.delegate = self
         self.singleCardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "singleCell")
 
-               singleCardCollectionView.tag = 0
-        self.singleCardCollectionView.backgroundColor = .black
+        self.singleCardCollectionView.tag = 0
+        self.singleCardCollectionView.backgroundColor = .clear
         self.view.addSubview(singleCardCollectionView)
     }
     func setUpMutipleCardCollectionView()
@@ -230,7 +269,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.mutipleCardCollectionView.dataSource = self
         self.mutipleCardCollectionView.delegate = self
         self.mutipleCardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "mutipleCell")
-        self.mutipleCardCollectionView.backgroundColor = .brown
+        self.mutipleCardCollectionView.backgroundColor = .clear
+        self.mutipleCardCollectionView.isHidden = true
         self.view.addSubview(mutipleCardCollectionView)
     }
     func setUI()
@@ -238,11 +278,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(backgroundImage)
         self.view.addSubview(headImage)
         self.view.addSubview(welcomeLabel)
-        setUpSingleCardCollectionView()
         setUpMutipleCardCollectionView()
+        setUpSingleCardCollectionView()
         self.view.addSubview(singleBtn)
         self.view.addSubview(mutipleBtn)
-        self.view.addSubview(checkMark)
+        self.view.addSubview(singleCheckMark)
+        self.view.addSubview(mutipleCheckMark)
+        self.view.addSubview(creatBtn)
     }
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
@@ -254,22 +296,30 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 
     @objc func tapSingleBtn()
     {
-            btnTag = 0
-            singleCardCollectionView.isHidden = false
-            mutipleCardCollectionView.isHidden = true
-        checkMark.isHidden = false
-        print("btnTag = \(btnTag)")
+        
+        mutipleCheckMark.isHidden = true
+        btnTag = 0
+        singleCardCollectionView.isHidden = false
+        mutipleCardCollectionView.isHidden = true
+        singleCheckMark.isHidden = false
+        
     }
     @objc func tapMutipleBtn()
     {
         btnTag = 1
-        
+        mutipleCheckMark.isHidden = false
+        singleCheckMark.isHidden = true
         singleCardCollectionView.isHidden = true
         mutipleCardCollectionView.isHidden = false
-        print("btnTag = \(btnTag)")
+        
     }
     
+    @objc func creatNewCard()
+    {
+        print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行")
+    }
 }
+
 
 
 
