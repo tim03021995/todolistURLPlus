@@ -228,10 +228,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
     {
-        let user = UserInfoVC()
-        let image = UIImage(named: "joey")
-        user.setUserData(userImage: image, userName: "I am Joey")
-        present(user, animated: true, completion: nil)
+        let vc = UserInfoVC()
+        present(vc, animated: true, completion: nil)
     }
     
 
