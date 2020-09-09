@@ -17,6 +17,7 @@ struct HTTPRequest {
     let method: HTTPMethod
     let parameters: [String : Any]
     let contentType:ContentType
+    var headers : [String:String]?
     
     ///包裝request
     func send()-> URLRequest{
@@ -41,7 +42,7 @@ struct NetworkManager {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
                 if let error = error {
-                    completion(.failure(.invalidData))
+                    completion(.failure(.invalidURL))
                 }
                 //
                 guard let response = response as? HTTPURLResponse else {
