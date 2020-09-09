@@ -2,15 +2,17 @@ import UIKit
 
 class UserInfoView: UIView {
     private var backgroundImage : UIImageView = {
-        return BackGroundFactory.makeImage(type: .backgroundBlurred)
+        return BackGroundFactory.makeImage(type: .background1)
     }()
-    private var glassView : UIView = {
-        var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.height.value * 0.8))
-        glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.height.value * 0.04)
-        glassView.backgroundColor = .glassColor
-        glassView.layer.cornerRadius = 15
-        let centerPointX = glassView.center.x - ScreenSize.width.value * 0.05
-        let glassViewBotton = glassView.center.y + glassView.frame.height * 0.5 - ScreenSize.height.value * 0.2
+//    private var glassView : UIView = {
+//        var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.height.value * 0.8))
+//        glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.height.value * 0.04)
+//        glassView.backgroundColor = .glassColor
+//        glassView.layer.cornerRadius = 15
+//        return glassView
+//    }()
+    private var glassView : UIVisualEffectView = {
+        var glassView = GlassFactory.makeGlass()
         return glassView
     }()
     var peopleView:UIImageView = {

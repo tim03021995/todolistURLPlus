@@ -47,9 +47,6 @@ class CardEditVC: UIViewController {
         setTaskData(data: taskData)
         print("Get API")
     }
-    func selectColor(color:ColorsButtonType){
-        
-    }
     func upDate(){
         
     }
