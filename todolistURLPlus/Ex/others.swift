@@ -58,3 +58,18 @@ extension UIViewController
         animate.startAnimation()
     }
 }
+extension UITextView{
+        func resetHight(_ textView:UITextView){
+        let maxHeight:CGFloat = ScreenSize.height.value * 0.4
+        let frame = textView.frame
+        let constrainSize=CGSize(width:frame.size.width,height:CGFloat(MAXFLOAT))
+        var size = textView.sizeThatFits(constrainSize)
+        if size.height >= maxHeight{
+            size.height = maxHeight
+            textView.isScrollEnabled=true
+        }else{
+            textView.isScrollEnabled=false
+        }
+        textView.frame.size.height=size.height
+    }
+}

@@ -43,6 +43,7 @@ class SetInfoView:UIView{
     }()
     private var saveButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "Save")
+        button.addTarget(self , action: #selector(SetInfoVC.save), for: .touchDown)
         return button
     }()
     
@@ -90,5 +91,6 @@ class SetInfoView:UIView{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.endEditing(true)
     }
+
 }
 

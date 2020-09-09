@@ -13,12 +13,12 @@ class UserInfoView: UIView {
         let glassViewBotton = glassView.center.y + glassView.frame.height * 0.5 - ScreenSize.height.value * 0.2
         return glassView
     }()
-    private var peopleView:UIImageView = {
+    var peopleView:UIImageView = {
         var imageView = UserImageFactory.makeImageView(size: .medium, image: nil)
         imageView.backgroundColor = .gray
         return imageView
     }()
-    private var userNameLabel:UILabel = {
+    var userNameLabel:UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.3 , height: ScreenSize.height.value * 0.1))
         label.contentMode = .center
         label.text = "Name"
