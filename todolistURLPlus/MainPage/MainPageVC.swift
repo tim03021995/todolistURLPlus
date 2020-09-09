@@ -10,8 +10,6 @@ import UIKit
 import SnapKit
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-    
-    
     ///設置背景
     let userName = ""
     let backgroundImage:UIImageView = {
@@ -23,11 +21,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             let head = UserImageFactory.makeImageView(size: .small, image: nil)
             head.backgroundColor = .gray
             let bottomOfNaviBar = navigationController?.navigationBar.frame.maxY ?? 0
-            let radius = head.frame.width * 0.5
-            let space = CGFloat(15)
-            let yPoint = bottomOfNaviBar + space + radius
-            let xPoint = space + radius
-            head.center = CGPoint(x: xPoint, y: yPoint)
+            head.frame = CGRect(x: 0, y: bottomOfNaviBar, width: head.frame.width, height: head.frame.height)
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
             head.addGestureRecognizer(tap)
             head.isUserInteractionEnabled = true
@@ -37,10 +31,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     lazy var welcomeLabel: UILabel =
         {
             let label = UILabel()
-            label.frame = CGRect(x: ScreenSize.width.value * 0.05,
-                                 y: self.headImage.frame.maxY * 1.05,
-                                 width: ScreenSize.width.value * 0.9,
-                                 height: self.headImage.frame.height  * 0.8)
+            label.frame = CGRect(x: 0,
+                                 y: self.headImage.frame.maxY,
+                                 width: ScreenSize.width.value,
+                                 height: self.headImage.frame.height * 0.4)
             label.text = "Welcome back \(self.userName)"
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
@@ -48,12 +42,59 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             label.textColor = .white
             return label
     }()
+    //按下按鈕的標籤值
+    var btnTag = 0
+    lazy var singleBtn: UIButton =
+        {
+            let button = UIButton()
+            button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
+            button.setBackgroundImage(UIImage(named: "single"), for: .normal)
+            button.setTitle("單人模式", for: .normal)
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 60)
+            button.titleLabel?.frame = CGRect(x:button.frame.minX , y:button.frame.maxY,width: button.frame.width, height: button.frame.height * 0.2)
+            button.setTitleColor(.white, for: .normal)
+            button.frame = CGRect(x: ScreenSize.width.value * 0.2,
+                                  y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
+                                  width: ScreenSize.width.value * 0.15,
+                                  height: ScreenSize.height.value * 0.1)
+            button.titleEdgeInsets = UIEdgeInsets(top: 0,
+                                                  left: 0,
+                                                  bottom: -button.frame.height * 0.7,
+                                                  right: 0)
+            return button
+    }()
+    lazy var mutipleBtn: UIButton =
+        {
+            let button = UIButton()
+            button.addTarget(self, action: #selector(self.tapMutipleBtn), for: .touchDown)
+            
+            button.setBackgroundImage(UIImage(named: "mutiple"), for: .normal)
+            button.setTitle("多人模式", for: .normal)
+            
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 60)
+            //
+            button.setTitleColor(.white, for: .normal)
+            button.frame = CGRect(x: ScreenSize.width.value * 0.55,
+                                  y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
+                                  width: ScreenSize.width.value * 0.15,
+                                  height: ScreenSize.height.value * 0.1)
+            
+            
+            button.titleEdgeInsets = UIEdgeInsets(top: 0,
+                                                  left: 0,
+                                                  bottom: -button.frame.height * 0.7,
+                                                  right: 0)
+            
+            return button
+    }()
     ///設置卡片(collectionView)
-    var cardCollectionView: UICollectionView!
+    var singleCardCollectionView: UICollectionView!
+    var mutipleCardCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
     }
     
     
@@ -72,10 +113,25 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CardCell
-        cell.setUp()
         
-        return cell
+        switch collectionView.tag {
+        case 0:
+            let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
+            singleCell.setUp()
+            return singleCell
+            
+        default:
+            let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
+            mutipleCell.setUp()
+            return mutipleCell
+        }
+//        let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleCell", for: indexPath) as! CardCell
+        
+//        let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mutipleCell", for: indexPath) as! CardCell
+//        let cell: [CardCell] = [singleCell,mutipleCell]
+//        singleCell.setUp()
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -88,45 +144,86 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         present(vc, animated: true, completion: nil)
     }
     ///設定卡片CollectionView
-    func setUpCollectionView()
+    func setUpSingleCardCollectionView()
     {
+
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        
+
         // section與section之間的距離(如果只有一個section，可以想像成frame)
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        
+
         // cell的寬、高
         layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
                                  height: ScreenSize.height.value * 0.45)
-        
+
         // cell與cell的間距
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
-        
+
         // cell與邊界的間距
         layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
-        
+
         // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
-        
+
         //設定collectionView的大小
-        self.cardCollectionView = UICollectionView(frame: CGRect(
+        self.singleCardCollectionView = UICollectionView(frame: CGRect(
             x: 0,
             y: (ScreenSize.height.value * 0.4),
             width: ScreenSize.width.value ,
             height: (ScreenSize.height.value * 0.5)),
-                                                   collectionViewLayout: layout)
-        self.cardCollectionView.dataSource = self
-        self.cardCollectionView.delegate = self
-        self.cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "cell")
-        self.cardCollectionView.backgroundColor = .clear
-        self.view.addSubview(cardCollectionView)
+                                                         collectionViewLayout: layout)
+        self.singleCardCollectionView.dataSource = self
+        self.singleCardCollectionView.delegate = self
+        self.singleCardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "singleCell")
+
+               singleCardCollectionView.tag = 0
+        self.singleCardCollectionView.backgroundColor = .black
+        self.view.addSubview(singleCardCollectionView)
+    }
+    func setUpMutipleCardCollectionView()
+    {
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+
+        // section與section之間的距離(如果只有一個section，可以想像成frame)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+
+        // cell的寬、高
+        layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
+                                 height: ScreenSize.height.value * 0.45)
+
+        // cell與cell的間距
+        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
+
+        // cell與邊界的間距
+        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+
+        // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+
+        //設定collectionView的大小
+        self.mutipleCardCollectionView = UICollectionView(frame: CGRect(
+            x: 0,
+            y: (ScreenSize.height.value * 0.4),
+            width: ScreenSize.width.value ,
+            height: (ScreenSize.height.value * 0.5)),
+                                                          collectionViewLayout: layout)
+        self.mutipleCardCollectionView.tag = 1
+        self.mutipleCardCollectionView.dataSource = self
+        self.mutipleCardCollectionView.delegate = self
+        self.mutipleCardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "mutipleCell")
+        self.mutipleCardCollectionView.backgroundColor = .brown
+        self.view.addSubview(mutipleCardCollectionView)
     }
     func setUI()
     {
         self.view.addSubview(backgroundImage)
         self.view.addSubview(headImage)
         self.view.addSubview(welcomeLabel)
-        setUpCollectionView()
+        setUpSingleCardCollectionView()
+        setUpMutipleCardCollectionView()
+        self.view.addSubview(singleBtn)
+        self.view.addSubview(mutipleBtn)
     }
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
@@ -134,10 +231,40 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         let user = UserInfoVC()
         let image = UIImage(named: "joey")
         user.setUserData(userImage: image, userName: "I am Joey")
-//        show(UserInfoVC(), sender: nil)
         present(user, animated: true, completion: nil)
+    }
+    
+
+    @objc func tapSingleBtn()
+    {
+            btnTag = 0
+            singleCardCollectionView.isHidden = false
+            mutipleCardCollectionView.isHidden = true
+       
+        print("btnTag = \(btnTag)")
+    }
+    @objc func tapMutipleBtn()
+    {
+        btnTag = 1
+        singleCardCollectionView.isHidden = true
+        mutipleCardCollectionView.isHidden = false
+        
     }
     
 }
 
+
+
+enum CollectionViewCellIdentifier: String
+{
+    case singleCell, mutipleCell
+    var identifier: String
+    {
+        switch self
+        {
+        case .singleCell: return "singleCell"
+        case .mutipleCell: return "mutipleCell"
+        }
+    }
+}
 

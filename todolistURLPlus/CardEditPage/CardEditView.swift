@@ -143,6 +143,7 @@ class CellOfColorsScrollView:UITableViewCell{
 }
 extension CardEditVC:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return 7
     }
     
