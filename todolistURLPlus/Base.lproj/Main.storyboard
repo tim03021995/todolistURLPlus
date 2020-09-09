@@ -140,21 +140,33 @@
                                 <rect key="frame" x="60" y="210" width="294" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <action selector="tfValueChange:" destination="j1G-wh-VF1" eventType="editingChanged" id="zdg-Tx-iyD"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5kL-Bd-Nuq" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="60" y="305" width="294" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <action selector="tfValueChange:" destination="j1G-wh-VF1" eventType="editingDidEnd" id="MUc-c4-8Uo"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDL-ho-khu" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="60" y="399.5" width="294" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <action selector="tfValueChange:" destination="j1G-wh-VF1" eventType="editingDidEnd" id="pWg-R9-iIu"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1uw-d6-u50" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="60" y="495" width="294" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                <connections>
+                                    <action selector="tfValueChange:" destination="j1G-wh-VF1" eventType="editingChanged" id="Aw7-q4-Etj"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRN-51-uoN" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="155.5" y="757" width="103.5" height="45"/>
@@ -242,6 +254,7 @@
                         <outlet property="nameErrorLabel" destination="EI6-8t-2RH" id="Gwc-b4-GLO"/>
                         <outlet property="passwordErrorLabel" destination="KxV-jQ-JGH" id="03M-mK-3Dr"/>
                         <outlet property="passwordTF" destination="ZDL-ho-khu" id="fGh-I0-0Uz"/>
+                        <outlet property="registerBtn" destination="CRN-51-uoN" id="Ou2-lU-0aS"/>
                         <outlet property="userNameTF" destination="dAR-9D-UgO" id="qMS-56-Z5g"/>
                     </connections>
                 </viewController>

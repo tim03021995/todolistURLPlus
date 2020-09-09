@@ -16,6 +16,7 @@ struct ResponseStatus:Codable{
     
     enum CodingKeys: String, CodingKey {
         case status
+        case error
         case loginData = "login_data"
     }
 }
