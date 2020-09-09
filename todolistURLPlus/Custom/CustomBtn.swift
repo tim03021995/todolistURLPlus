@@ -83,11 +83,32 @@ class ColorButtonFactory{
 //        button.backgroundColor = color
 //        return button
 //    }
-    enum  ButtonType{
+    enum  ButtonType:CaseIterable{
         case red,orange,yello,green,blue,darkBlue,purple
     }
 }
-
+enum  ColorsButtonType:CaseIterable{
+    case red,orange,yello,green,blue,darkBlue,purple
+    
+    var color:UIColor{
+        switch self{
+        case .red:
+            return UIColor.buttonRed
+        case .orange:
+            return UIColor.buttonOrange
+        case .yello:
+            return UIColor.buttonYello
+        case .green:
+            return UIColor.buttonGreen
+        case .blue:
+            return UIColor.buttonBlue
+        case .darkBlue:
+            return UIColor.button2u04
+        case .purple:
+            return UIColor.buttonPurple
+        }
+}
+}
 
 
 
