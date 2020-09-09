@@ -248,7 +248,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         btnTag = 1
         singleCardCollectionView.isHidden = true
         mutipleCardCollectionView.isHidden = false
-        
+        print("btnTag = \(btnTag)")
     }
     
 }
