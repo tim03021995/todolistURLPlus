@@ -36,6 +36,7 @@ class CardEditVC: UIViewController {
         self.cardEditView.colorsCollectionView.delegate = self
         self.cardEditView.scrollView.delegate = self
         self.cardEditView.textView.delegate = self
+        self.cardEditView.colorsCollectionView.reloadData()
         self.view = cardEditView
     }
     func setTask(card:Int,task:Int){

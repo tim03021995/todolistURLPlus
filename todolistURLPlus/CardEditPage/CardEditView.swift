@@ -157,7 +157,9 @@ extension CardEditView:UICollectionViewDataSource{
                 cell.layer.borderWidth = 0.5
                 cell.layer.masksToBounds = true
             }else{
-                
+                cell.layer.borderColor = UIColor.clear.cgColor
+                cell.layer.borderWidth = 0.5
+                cell.layer.masksToBounds = true
             }
         }
         return cell
