@@ -193,11 +193,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CardEditVC()
-        let taskData = TaskData( title:"This is Joey",
-                                 script: "I am Jimmy ,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after the Angles, one of,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after ",
-                                 image: UIImage(named: "joey"),
-                                 color: .blue)
-        vc.setTaskData(data: taskData)
+        vc.setTask(card: 0, task: 0)
         present(vc, animated: true, completion: nil)
     }
     ///設定卡片CollectionView
