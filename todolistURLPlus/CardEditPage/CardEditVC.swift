@@ -56,7 +56,6 @@ extension CardEditVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let colorType = ColorsButtonType.allCases[indexPath.row]
         self.taskData.color = colorType
-        print(colorType)
     }
 }
 extension CardEditVC:UIScrollViewDelegate{

@@ -133,7 +133,6 @@ class CardEditView: UIView {
         titleTextField.text = title
         textView.text = script
         textView.resetHight(textView)
-        print(color)
         self.selectColor = color
     }
     

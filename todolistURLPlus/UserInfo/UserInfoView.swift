@@ -53,7 +53,7 @@ class UserInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     private func setSubView(){
-        addSubview(backgroundImage)
+        //addSubview(backgroundImage)
         addSubview(glassView)
         addSubview(peopleView)
         addSubview(userNameLabel)
@@ -68,7 +68,7 @@ class UserInfoView: UIView {
         let glassViewBotton = ScreenSize.centerY.value + ScreenSize.height.value * 0.04 + glassView.frame.height * 0.5
         peopleView.center = CGPoint(
             x: centerX,
-            y: glassViewTop + peopleView.frame.height * 0.5 + space)
+            y: glassViewTop + peopleView.frame.height * 0.5 + space * 4)
         userNameLabel.center = CGPoint(
             x: centerX,
             y: peopleView.frame.maxY + userNameLabel.frame.height * 0.5 + space )
@@ -80,7 +80,7 @@ class UserInfoView: UIView {
             y: informationButton.frame.maxY + modifyPasswordButton.frame.height * 0.5 + space)
         logoutButton.center = CGPoint(
             x: centerX,
-            y: glassViewBotton - logoutButton.frame.height * 0.5 - space)
+            y: glassViewBotton - logoutButton.frame.height * 0.5 - space * 5)
     }
     func setUserData(userImage:UIImage,userName:String){
             self.peopleView.image = userImage

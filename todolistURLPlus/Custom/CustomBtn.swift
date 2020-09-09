@@ -84,11 +84,11 @@ class ColorButtonFactory{
 //        return button
 //    }
     enum  ButtonType:CaseIterable{
-        case red,orange,yello,green,blue,darkBlue,purple
+        case red,orange,yellow,green,blue,darkBlue,purple
     }
 }
 enum  ColorsButtonType:CaseIterable{
-    case red,orange,yello,green,blue,darkBlue,purple
+    case red,orange,yellow,green,blue,darkBlue,purple
     
     var color:UIColor{
         switch self{
@@ -96,8 +96,8 @@ enum  ColorsButtonType:CaseIterable{
             return UIColor.buttonRed
         case .orange:
             return UIColor.buttonOrange
-        case .yello:
-            return UIColor.buttonYello
+        case .yellow:
+            return UIColor.buttonYellow
         case .green:
             return UIColor.buttonGreen
         case .blue:
