@@ -34,8 +34,8 @@ class LoginVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = ""
-        passwordTF.text = ""
+        accountTF.text = "test@test.com"
+        passwordTF.text = "test12345"
     }
     //MARK:- Functions
     
@@ -67,10 +67,10 @@ class LoginVC: UIViewController {
     @IBAction func signInTapped(_ sender: CustomButton) {
 
         
-        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
-//        guard let parameters = validateAccount() else{ return }
+//        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
+        guard let parameters = validateAccount() else{ return }
         
-        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: test, contentType: .json)
+        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters, contentType: .json)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
             
             switch result{
