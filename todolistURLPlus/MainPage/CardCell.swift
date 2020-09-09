@@ -12,7 +12,6 @@ class CardCell: UICollectionViewCell {
     
     lazy var title: UILabel =
     {
-        print("title")
         let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
             y: self.frame.height * 0.7,
             width: self.frame.width * 0.8,
