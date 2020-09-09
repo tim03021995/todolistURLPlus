@@ -74,6 +74,11 @@ class SignupVC: UIViewController {
     }
     
     
+    @IBAction func backBtnTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @IBAction func signupBtnTapped(_ sender: CustomButton) {
         //TODO 驗證正則
         
@@ -101,14 +106,15 @@ class SignupVC: UIViewController {
             }
         
     }
-    
 
     
-    
     func validate() -> [String:Any]? {
-        if userNameTF.text!.isValidName , mailTF.text!.isValidEMail , passwordTF.text!.isValidPassword , passwordTF.text! == checkPasswordTF.text {
-            return ["username": userNameTF.text , "password":passwordTF.text , "email" : mailTF.text ]
-        }else if userNameTF.text == "" || mailTF.text == "" || passwordTF.text == "" || checkPasswordTF.text == "" {
+        guard let name = userNameTF.text , let mail = mailTF.text , let password = passwordTF.text else { return nil }
+        
+        if name.isValidName , mail.isValidEMail , password.isValidPassword , password == checkPasswordTF.text {
+            return ["username": name , "password":password , "email" : mail ]
+            
+        }else if name == "" || mail == "" || password == "" || checkPasswordTF.text == "" {
             present(.makeAlert(title: "錯誤", message: "輸入框不可空白", handler: {
                 self.dismiss(animated: true, completion: nil)
             }), animated: true)
