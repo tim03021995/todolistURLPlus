@@ -68,17 +68,20 @@ class CardEditView: UIView {
     
     var colorsCollectionView:UICollectionView =
     {
+        let viewWidth = ScreenSize.width.value * 0.7
+        let allItemWidth = ScreenSize.height.value * 0.045 * 7
+        let space = (viewWidth - allItemWidth) / 7
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: ScreenSize.height.value * 0.045,
                                  height: ScreenSize.height.value * 0.045)
-        layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.02))
-        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: space, bottom: 0, right: space);
+        layout.minimumLineSpacing = space
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         let view = UICollectionView(frame: CGRect(
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.7,
-            height: ScreenSize.height.value * 0.1),
+            height: ScreenSize.height.value * 0.2),
                                     collectionViewLayout: layout
         )
         view.layer.cornerRadius = view.frame.width * 0.05
@@ -120,17 +123,17 @@ class CardEditView: UIView {
         colorsCollectionView.center = CGPoint(
             x: centerX,
             y: imageView.frame.maxY + space + colorView.frame.height * 0.5)
-        imageView.snp.makeConstraints { (make ) in
-            make.top.equalTo(textView.snp.bottom).offset(10)
+        imageView.snp.makeConstraints { (make) in
+            make.top.equalTo(textView.snp.bottom).offset(space)
             make.width.equalTo(textView.snp.width)
             make.height.equalTo(imageView.snp.width)
             make.centerX.equalTo(textView.snp.centerX)
         }
         colorsCollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(imageView.snp.bottom).offset(10)
+            make.top.equalTo(imageView.snp.bottom).offset(space)
             make.centerX.equalTo(textView)
             make.width.equalTo(imageView)
-            make.height.equalTo(colorsCollectionView.snp.width).multipliedBy(0.14)
+            make.height.equalTo(colorsCollectionView.snp.width).multipliedBy(0.2)
         }
         
 
