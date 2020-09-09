@@ -19,7 +19,10 @@ class LoginVC: UIViewController {
     @IBOutlet weak var accountTF: CustomLogINTF!
     
     @IBOutlet weak var passwordTF: CustomLogINTF!
+    //
+    @IBOutlet weak var accountErrorLabel: UILabel!
     
+    @IBOutlet weak var passwordErrorLabel: UILabel!
     //MARK:- ViewDidLoad
     
     override func viewDidLoad() {
@@ -49,22 +52,25 @@ class LoginVC: UIViewController {
         let barAppearance =  UINavigationBarAppearance()
         barAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = barAppearance
+        
     }
     
-    func validateAccount(){
-        if accountTF.text == "" || passwordTF.text == "" {
-            //alert
-            present(.makeAlert(title: "test", message: "test", handler: {
-            }), animated: true)
+    func validateAccount()->[String:Any]?{
+        if let account = accountTF.text , let password = passwordTF.text {
+            if account.isValidEMail && password.isValidPassword{
+                return ["password":password,"email":account]
+            }
         }
+        return nil
     }
 
     @IBAction func signInTapped(_ sender: CustomButton) {
 
         
-        let parameters = ["password":"00000000", "email" : "ishida624@gmail.com"]
+        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
+//        guard let parameters = validateAccount() else{ return }
         
-        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters, contentType: .json)
+        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: test, contentType: .json)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
             
             switch result{
@@ -72,7 +78,6 @@ class LoginVC: UIViewController {
                 //存token
                 guard let token = decodedData.data?.userToken else { return }
                 UserToken.shared.updateToken(by: token)
-                #warning("Jimmy")
                 self.navigationController?.pushViewController(MainPageVC(), animated: true)
                 
                 
@@ -83,12 +88,12 @@ class LoginVC: UIViewController {
             }
         }
         
-//        validateAccount()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
         let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC.rawValue ) as! SignupVC
         navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }
@@ -105,14 +110,23 @@ extension LoginVC : UITextFieldDelegate{
         switch textField {
         case accountTF:
             passwordTF.becomeFirstResponder()
-            //TODO 驗證
         default:
             self.view.endEditing(true)
-            //TODO 驗證
             //TODO 執行登入
         }
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case accountTF :
+            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail格式錯誤"
+        default:
+            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式為8-12位數字與至少一個英文字母"
+        }
+    }
+    
+    
     
 }
 

@@ -9,6 +9,7 @@
 import UIKit
 
 class CardCell: UICollectionViewCell {
+    
     lazy var title: UILabel =
     {
         print("title")

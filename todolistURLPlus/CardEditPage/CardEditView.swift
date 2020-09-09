@@ -147,6 +147,7 @@ class CardEditView: UIView {
 
 extension CardEditVC:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return 7
     }
     
