@@ -12,10 +12,16 @@ import Foundation
 struct ResponseStatus:Codable{
     var status:Bool
     var error:String?
-    var data:Data?
+    var loginData: LoginData?
+    
+    enum CodingKeys: String, CodingKey {
+        case status
+        case loginData = "login_data"
+    }
 }
 
-struct Data : Codable {
+
+struct LoginData : Codable {
     var userToken:String
 }
 

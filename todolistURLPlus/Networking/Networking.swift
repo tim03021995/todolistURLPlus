@@ -17,6 +17,7 @@ struct HTTPRequest {
     let method: HTTPMethod
     let parameters: [String : Any]
     let contentType:ContentType
+    var headers : [String:String]?
     
     ///包裝request
     func send()-> URLRequest{
