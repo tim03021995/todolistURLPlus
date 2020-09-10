@@ -46,7 +46,23 @@ class CardEditVC: UIViewController {
                                  color: .blue)
         setTaskData(data: taskData)
         print("Get API")
+        getTask()//如果data 是nil 就是gil還沒改好
     }
+    #warning("標記一下")
+    func getTask(){
+        let headers = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .task, method: .GET, headers: headers)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
+            switch result {
+                
+            case .success(let a):
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
     func upDate(){
         
     }
