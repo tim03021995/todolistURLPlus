@@ -27,8 +27,10 @@ class ListPageVC: UIViewController {
             label.textColor = .white
             return label
     }()
+    
     lazy var listBaseView: ListBaseView =
     {
+        //test
         let view = ListBaseView()
         view.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value)
         return view
