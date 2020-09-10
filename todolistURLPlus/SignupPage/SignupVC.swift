@@ -88,7 +88,7 @@ class SignupVC: UIViewController {
 //        let parameters = ["username": "admin1", "password":"000000001", "email" : "1shida624@gmail.com"]
         guard let parameters = validate() else {return}
         
-        let request = HTTPRequest(endpoint: .register, method: .POST, contentType: .json, parameters: parameters)
+        let request = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters)
         
             NetworkManager().sendRequest(with: request.send()) { (result:Result<LoginInReaponse,NetworkError>) in
                 switch result{
@@ -116,7 +116,7 @@ class SignupVC: UIViewController {
             
         }else if name == "" || mail == "" || password == "" || checkPasswordTF.text == "" {
             present(.makeAlert(title: "錯誤", message: "輸入框不可空白", handler: {
-                self.dismiss(animated: true, completion: nil)
+//                self.dismiss(animated: true, completion: nil)
             }), animated: true)
         }
         return nil

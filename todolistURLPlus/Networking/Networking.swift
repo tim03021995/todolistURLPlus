@@ -14,17 +14,15 @@ struct HTTPRequest {
     let baseURL = "http://35.185.131.56:8002/api/"
     let endpoint:Endpoint
     var urlString:String {
-        
         if let id = id {
             return baseURL + endpoint.rawValue + "/{\(id)}"
         } else {
             return baseURL + endpoint.rawValue
         }
-        
     }
     
     let method: HTTPMethod
-    let contentType:ContentType
+//    let contentType:ContentType
     var parameters: [String : Any]?
     var headers : [String:String]?
     var id : Int?
@@ -40,7 +38,7 @@ struct HTTPRequest {
         
         request.httpMethod = method.rawValue
         
-        request.addValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+        request.addValue(ContentType.json.rawValue, forHTTPHeaderField: "Content-Type")
         
         if let parameters = parameters{
             request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())

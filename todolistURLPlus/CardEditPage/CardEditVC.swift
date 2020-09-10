@@ -51,7 +51,7 @@ class CardEditVC: UIViewController {
     #warning("標記一下")
     func getTask(){
         let headers = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .task, method: .GET, contentType: .json, headers: headers)
+        let request = HTTPRequest(endpoint: .task, method: .GET, headers: headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
             switch result {
                 

@@ -22,25 +22,12 @@ enum Endpoint:String {
     case task
     case card
     
-//    func addID(id : Int)-> String?{
-//        switch self {
-//        case .task :
-//            return Endpoint.task.rawValue + "/\(id)"
-//        case .userToken:
-//            break
-//        case .register:
-//            break
-//        case .card:
-//            break
-//        }
-//        return nil
-//    }
+
     
 }
 
 enum ContentType:String{
     case json = "application/json"
-    case urlForm = "application/x-www-form-urlencoded; charset=utf-8"
 }
 
 
