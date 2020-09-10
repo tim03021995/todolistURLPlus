@@ -29,7 +29,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
-        naviBarSetting()
+        
         IQKeyboardManager.shared.enable = true
     }
     
@@ -41,22 +41,8 @@ class LoginVC: UIViewController {
     
 
     
-    
-    func getCard(){
-        let a = ["userToken":"wHFO20zr5znbvUR"]
-        let request = HTTPRequest(endpoint: .card, method: .GET, headers: a)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<CardResponse,NetworkError>) in
-            switch result {
-                
-            case .success(let a):
-                print(a)
-            case .failure(let err):
-                print(err)
-            }
-        }
-    }
-    
     fileprivate func propertiesSetting() {
+        naviBarSetting()
         accountTF.delegate = self
         accountTF.placeholder = "E-Mail"
         passwordTF.delegate = self
@@ -85,7 +71,7 @@ class LoginVC: UIViewController {
 
         
         guard let parameters = validateAccount() else{ return }
-        
+
         let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             

@@ -351,4 +351,18 @@ enum CollectionViewCellIdentifier: String
     }
 }
 
-
+#warning("這邊GET Card")
+func getCard(){
+    let a = ["userToken":UserToken.shared.userToken]
+    let request = HTTPRequest(endpoint: .card, method: .GET, headers: a)
+    NetworkManager().sendRequest(with: request.send()) { (result:Result<CardResponse,NetworkError>) in
+        switch result {
+            
+        case .success(let data):
+            print(data)//這裡是成功解包的東西 直接拿data裡的東西
+            // data.cardData........
+        case .failure(let err):
+            print(err)
+        }
+    }
+}

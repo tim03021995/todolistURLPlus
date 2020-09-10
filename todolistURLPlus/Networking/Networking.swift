@@ -106,7 +106,6 @@ struct NetworkManager {
                     let decorder = JSONDecoder()
                     let decotedData = try decorder.decode(T.self, from: data)
                     completion(.success(decotedData))
-                    print("\(response.statusCode)")
                 }catch{
                     print(error)
                     completion(.failure(.decodeError))
