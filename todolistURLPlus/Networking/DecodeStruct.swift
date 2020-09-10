@@ -29,7 +29,7 @@ struct LoginData : Codable {
 
 struct TaskReaponse: Codable {
     let status: Bool
-    let taskData: [TaskResponse]?
+    var taskData: [TaskDetails]?
 
     enum CodingKeys: String, CodingKey {
         case status
@@ -37,12 +37,13 @@ struct TaskReaponse: Codable {
     }
 }
 
-struct TaskResponse: Codable {
+struct TaskDetails: Codable {
     let id: Int
     let item: String
     let status: Int
-    let createUser, updateUser: String
-    let description:String
+    let createUser:String
+    let updateUser: String
+    let description:String?
 //    let tag: ?
 //    let image: ?
     let cardID: Int
@@ -62,16 +63,17 @@ struct TaskResponse: Codable {
 
 //MARK:- Card 資料結構
 
-struct CardResponse:Codable {
-    let status : Bool
-    let cardData: [CardData]?
+struct CardResponse: Codable {
+    let status: Bool
+    let cardData: CardData
 
     enum CodingKeys: String, CodingKey {
         case status
         case cardData = "card_data"
     }
-    
 }
+
+// MARK: - CardData
 struct CardData: Codable {
     let id: Int
     let username, email: String
@@ -105,6 +107,7 @@ struct ShowCard: Codable {
     }
 }
 
+// MARK: - Pivot
 struct Pivot: Codable {
     let usersID, cardID: Int
 
@@ -114,22 +117,21 @@ struct Pivot: Codable {
     }
 }
 
+// MARK: - ShowTask
 struct ShowTask: Codable {
     let id: Int
     let item: String
     let status: Int
     let createUser, updateUser: String
-    let description:String
-//    let tag: ?
-//    let image: ?
+    let description:String?
     let cardID: Int
     let createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
-        case id, item, status, description
+        case id, item, status
         case createUser = "create_user"
         case updateUser = "update_user"
-//        case tag, image
+        case description = "description"
         case cardID = "card_id"
         case createdAt = "created_at"
         case updatedAt = "updated_at"

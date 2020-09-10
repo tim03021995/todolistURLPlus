@@ -41,6 +41,8 @@ class SignupVC: UIViewController {
         //TODO 鍵盤上移事件
     }
     
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
         registerBtn.isEnabled = false

@@ -39,6 +39,23 @@ class LoginVC: UIViewController {
     }
     //MARK:- Functions
     
+
+    
+    
+    func getCard(){
+        let a = ["userToken":"wHFO20zr5znbvUR"]
+        let request = HTTPRequest(endpoint: .card, method: .GET, headers: a)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<CardResponse,NetworkError>) in
+            switch result {
+                
+            case .success(let a):
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
     fileprivate func propertiesSetting() {
         accountTF.delegate = self
         accountTF.placeholder = "E-Mail"
@@ -67,7 +84,6 @@ class LoginVC: UIViewController {
     @IBAction func signInTapped(_ sender: CustomButton) {
 
         
-//        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
         guard let parameters = validateAccount() else{ return }
         
         let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)

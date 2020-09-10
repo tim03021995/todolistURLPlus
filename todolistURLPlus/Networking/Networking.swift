@@ -38,7 +38,6 @@ struct HTTPRequest {
         
         
         let url = URL(string: self.urlString)!
-        print(url.absoluteString)
         
         var request = URLRequest(url: url)
         
@@ -102,12 +101,14 @@ struct NetworkManager {
                     completion(.failure(.invalidData))
                     return
                 }
+                
                 do{
                     let decorder = JSONDecoder()
                     let decotedData = try decorder.decode(T.self, from: data)
                     completion(.success(decotedData))
                     print("\(response.statusCode)")
                 }catch{
+                    print(error)
                     completion(.failure(.decodeError))
                 }
                 
