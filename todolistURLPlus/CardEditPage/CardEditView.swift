@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 class CardEditView: UIView {
+    var selectColor:ColorsButtonType?
     var scrollView:UIScrollView = {
         var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value))
         scrollView.contentSize = CGSize(width: ScreenSize.width.value, height: ScreenSize.height.value * 1.2)
@@ -47,51 +48,40 @@ class CardEditView: UIView {
         var imageView = UIImageView(frame: CGRect(
             x: 0,
             y: 0,
-            width: ScreenSize.width.value * 0.7,
-            height: ScreenSize.width.value * 0.7))
+            width: ScreenSize.width.value * 0.8,
+            height: ScreenSize.width.value * 0.8))
         imageView.layer.cornerRadius = imageView.frame.width * 0.05
         imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
-    var colorView:UIView = {
-        var view = UIView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: ScreenSize.width.value * 0.7,
-            height: ScreenSize.height.value * 0.1))
-        view.layer.cornerRadius = view.frame.width * 0.05
-        view.backgroundColor = .lightGray
-        return view
-    }()
-    
-    var colorsCollectionView:UICollectionView =
-    {
-        let viewWidth = ScreenSize.width.value * 0.7
-        let allItemWidth = ScreenSize.height.value * 0.045 * 7
-        let space = (viewWidth - allItemWidth) / 7
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: ScreenSize.height.value * 0.045,
-                                 height: ScreenSize.height.value * 0.045)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: space, bottom: 0, right: space);
-        layout.minimumLineSpacing = space
-        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
-        let view = UICollectionView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: ScreenSize.width.value * 0.7,
-            height: ScreenSize.height.value * 0.2),
-                                    collectionViewLayout: layout
-        )
-        view.layer.cornerRadius = view.frame.width * 0.05
-        view.backgroundColor = .lightGray
-        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        return view
-    }()
-    
+    var colorsCollectionView:UICollectionView = {
+    let viewWidth = ScreenSize.width.value * 0.8
+    let cellWidth = ScreenSize.height.value * 0.045
+    let allItemWidth = cellWidth * 7
+    let space = (viewWidth - allItemWidth) / 8
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    layout.itemSize = CGSize(width: cellWidth,
+                                height: cellWidth)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: space, bottom: 0, right: 0);
+    layout.minimumLineSpacing = space
+    layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+    let view = UICollectionView(frame: CGRect(
+        x: 0,
+        y: 0,
+        width: ScreenSize.width.value * 0.7,
+        height: ScreenSize.height.value * 0.2),
+                                collectionViewLayout: layout
+    )
+    view.layer.cornerRadius = view.frame.width * 0.05
+    view.backgroundColor = .lightGray
+    view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+    return view
+}()
     override init(frame: CGRect) {
         super .init(frame: frame)
+        colorsCollectionView.dataSource = self
         self.backgroundColor = .backgroundColor
         setSubView()
         setConstraints()
@@ -122,7 +112,7 @@ class CardEditView: UIView {
         
         colorsCollectionView.center = CGPoint(
             x: centerX,
-            y: imageView.frame.maxY + space + colorView.frame.height * 0.5)
+            y: imageView.frame.maxY + space + colorsCollectionView.frame.height * 0.5)
         imageView.snp.makeConstraints { (make) in
             make.top.equalTo(textView.snp.bottom).offset(space)
             make.width.equalTo(textView.snp.width)
@@ -138,47 +128,56 @@ class CardEditView: UIView {
         
 
     }
-    func setUserData(image:UIImage,title:String,script:String){
+    func setUserData(image:UIImage,title:String,script:String,color:ColorsButtonType){
         imageView.image = image
         titleTextField.text = title
         textView.text = script
         textView.resetHight(textView)
+        self.selectColor = color
     }
     
 }
 
 
-extension CardEditVC:UICollectionViewDataSource{
+extension CardEditView:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 7
+        ColorsButtonType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         cell.layer.cornerRadius = cell.frame.size.height * 0.5
-        let color  : UIColor = {
-            switch indexPath.row {
-            case 0 :
-                return UIColor.buttonRed
-            case 1 :
-                return UIColor.buttonOrange
-            case 2 :
-                return UIColor.buttonYello
-            case 3 :
-                return UIColor.buttonGreen
-            case 4 :
-                return UIColor.buttonBlue
-            case 5 :
-                return UIColor.button2u04
-            case 6 :
-                return UIColor.buttonPurple
-            default:
-                return UIColor.buttonRed
-            }
-        }()
+        let colorType = ColorsButtonType.allCases[indexPath.row]
+        let color = colorType.color
         cell.backgroundColor = color
+        if let selectColor = selectColor {
+            if selectColor == colorType{
+                cell.layer.borderColor = UIColor.white.cgColor
+                cell.layer.borderWidth = 0.5
+                cell.layer.masksToBounds = true
+            }else{
+                cell.layer.borderColor = UIColor.clear.cgColor
+                cell.layer.borderWidth = 0.5
+                cell.layer.masksToBounds = true
+            }
+        }
         return cell
+        
+    }
+    func showBlurEffect() {
+    //创建一个模糊效果
+    let blurEffect = UIBlurEffect(style: .light)
+    //创建一个承载模糊效果的视图
+    let blurView = UIVisualEffectView(effect: blurEffect)
+    blurView.frame = CGRect(x: 0, y: 64, width: 100 , height:100)
+    let label = UILabel(frame: CGRect(x: 10, y: 100, width: 100, height: 100))
+    label.text = "bfjnecsjdkcmslc,samosacmsacdfvneaui"
+    label.font = UIFont.boldSystemFont(ofSize: 30)
+    label.numberOfLines = 0
+    label.textAlignment = .center
+    label.textColor = UIColor.white
+    blurView.contentView.addSubview(label)
+    addSubview(blurView)
     }
 }
 

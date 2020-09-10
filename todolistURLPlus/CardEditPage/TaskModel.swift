@@ -8,8 +8,8 @@
 
 import UIKit
 struct TaskData{
-    var title:String
+    var title:String?
     var script:String?
     var image:UIImage?
-    var color:ColorButtonFactory.ButtonType
+    var color:ColorsButtonType?
 }
