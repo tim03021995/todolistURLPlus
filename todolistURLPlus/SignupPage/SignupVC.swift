@@ -40,13 +40,8 @@ class SignupVC: UIViewController {
         settingTF()
         //TODO 鍵盤上移事件
     }
-    
-
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         registerBtn.isEnabled = false
-
     }
     
     //MARK:- Functions
@@ -58,8 +53,7 @@ class SignupVC: UIViewController {
         checkPasswordTF.delegate = self
     }
     
-
-    @IBAction func tfValueChange(_ sender: CustomLogINTF) {
+    @IBAction func textfieldValueChange(_ sender: CustomLogINTF) {
         switch sender {
         case checkPasswordTF:
             
@@ -72,7 +66,6 @@ class SignupVC: UIViewController {
         default:
             break
         }
-        
     }
     
     
@@ -82,33 +75,37 @@ class SignupVC: UIViewController {
     
     
     @IBAction func signupBtnTapped(_ sender: CustomButton) {
-        //TODO 驗證正則
-        registerRequest()
+        register()
     }
     
-    func registerRequest(){
-//        let parameters = ["username": "admin1", "password":"000000001", "email" : "1shida624@gmail.com"]
-        guard let parameters = validate() else {return}
+    
+    
+    func register(){
+        //驗證資料 成功的話包裝
+        guard let parameters = validate() else {
+            self.present(.makeAlert(title: "Error", message: "輸入錯誤", handler: {
+            }), animated: true)
+            return
+        }
         
-        let request = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters)
+        let rgisterRequest = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters)
         
-            NetworkManager().sendRequest(with: request.send()) { (result:Result<LoginInReaponse,NetworkError>) in
-                switch result{
-                    
-                case .success(let message):
-                    print(message)
-                    if let errorMessage = message.error {
-                        print(errorMessage)
-                    }else {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
-                case .failure(let err):
-                    print(err)
+        NetworkManager().sendRequest(with: rgisterRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
+            switch result{
+                
+            case .success(let message):
+                print(message)
+                if let errorMessage = message.error {
+                    print(errorMessage)
+                }else {
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
+            case .failure(let err):
+                print(err.description)
             }
+        }
         
     }
-
     
     func validate() -> [String:Any]? {
         guard let name = userNameTF.text , let mail = mailTF.text , let password = passwordTF.text else { return nil }
@@ -118,22 +115,20 @@ class SignupVC: UIViewController {
             
         }else if name == "" || mail == "" || password == "" || checkPasswordTF.text == "" {
             present(.makeAlert(title: "錯誤", message: "輸入框不可空白", handler: {
-//                self.dismiss(animated: true, completion: nil)
             }), animated: true)
         }
         return nil
     }
-    
 }
+
+
 
 //MARK:- TextFieldDelegate
 
-
 extension SignupVC:UITextFieldDelegate{
     
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -166,6 +161,6 @@ extension SignupVC:UITextFieldDelegate{
     }
     
     
-
-
+    
+    
 }

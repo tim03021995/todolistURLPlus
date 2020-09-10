@@ -39,7 +39,7 @@ class LoginVC: UIViewController {
     }
     //MARK:- Functions
     
-
+    
     
     fileprivate func propertiesSetting() {
         naviBarSetting()
@@ -58,6 +58,7 @@ class LoginVC: UIViewController {
         
     }
     
+    
     func validateAccount()->[String:Any]?{
         if let account = accountTF.text , let password = passwordTF.text {
             if account.isValidEMail && password.isValidPassword{
@@ -66,21 +67,27 @@ class LoginVC: UIViewController {
         }
         return nil
     }
-
-    @IBAction func signInTapped(_ sender: CustomButton) {
-
-        
+    
+    func signIn(){
+        //驗證帳密 , 成功的話包裝
         guard let parameters = validateAccount() else{ return }
-
-        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<LoginInReaponse,NetworkError>) in
+        
+        //包裝需要的參數
+        let getTokenRequest = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)
+        
+        NetworkManager().sendRequest(with: getTokenRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
+                
             case .success(let decodedData):
-                //存token
-                guard let token = decodedData.loginData?.userToken else { return }
-                UserToken.shared.updateToken(by: token)
-                self.navigationController?.pushViewController(MainPageVC(), animated: true)
+                
+                if let err = decodedData.error{
+                    print(err)
+                }else{
+                    //存token
+                    guard let token = decodedData.loginData?.userToken else { return }
+                    UserToken.shared.updateToken(by: token)
+                    self.navigationController?.pushViewController(MainPageVC(), animated: true)                }
                 
                 
             case .failure(let err):
@@ -89,12 +96,14 @@ class LoginVC: UIViewController {
                 }), animated: true)
             }
         }
-        
+    }
+    
+    @IBAction func signInTapped(_ sender: CustomButton) {
+        signIn()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
         let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC.rawValue ) as! SignupVC
-//        navigationController?.pushViewController(vc, animated: true)
         present(vc, animated: true, completion: nil)
         
     }
@@ -106,7 +115,7 @@ class LoginVC: UIViewController {
 extension LoginVC : UITextFieldDelegate{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -115,7 +124,7 @@ extension LoginVC : UITextFieldDelegate{
             passwordTF.becomeFirstResponder()
         default:
             self.view.endEditing(true)
-            //TODO 執行登入
+            signIn()
         }
         return true
     }
@@ -125,7 +134,7 @@ extension LoginVC : UITextFieldDelegate{
         case accountTF :
             accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail's format wrong "
         default:
-            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式錯誤,必須8-12字元數字與密碼 "
+            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式錯誤,必須8-12字,包含數字與至少一個英文字母"
         }
     }
     
