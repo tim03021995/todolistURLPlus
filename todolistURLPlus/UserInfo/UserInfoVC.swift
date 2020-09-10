@@ -1,7 +1,5 @@
 import UIKit
 
-import UIKit
-
 class UserInfoVC: UIViewController {
     let userInformationView = UserInfoView()
     override func loadView() {
