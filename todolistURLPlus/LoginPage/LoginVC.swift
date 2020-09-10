@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class LoginVC: UIViewController {
     //MARK:- Properties
@@ -29,8 +30,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         propertiesSetting()
         naviBarSetting()
-        autoPushView()
-        
+        IQKeyboardManager.shared.enable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
