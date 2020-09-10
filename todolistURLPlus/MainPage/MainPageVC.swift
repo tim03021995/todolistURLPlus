@@ -165,6 +165,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         super.viewDidLoad()
         setUI()
     }
+
+
     
     /*
      // MARK: - Navigation
