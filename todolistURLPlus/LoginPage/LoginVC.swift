@@ -70,8 +70,8 @@ class LoginVC: UIViewController {
         let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
 //        guard let parameters = validateAccount() else{ return }
         
-        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: test, contentType: .json)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
+        let request = HTTPRequest(endpoint: .userToken, method: .POST, contentType: .json, parameters: test)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
             case .success(let decodedData):

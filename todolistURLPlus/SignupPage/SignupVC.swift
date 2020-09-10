@@ -76,7 +76,6 @@ class SignupVC: UIViewController {
     
     @IBAction func signupBtnTapped(_ sender: CustomButton) {
         //TODO 驗證正則
-        
         registerRequest()
     }
     
@@ -84,8 +83,9 @@ class SignupVC: UIViewController {
 //        let parameters = ["username": "admin1", "password":"000000001", "email" : "1shida624@gmail.com"]
         guard let parameters = validate() else {return}
         
-            let request = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters, contentType: .json)
-            NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
+        let request = HTTPRequest(endpoint: .register, method: .POST, contentType: .json, parameters: parameters)
+        
+            NetworkManager().sendRequest(with: request.send()) { (result:Result<LoginInReaponse,NetworkError>) in
                 switch result{
                     
                 case .success(let message):
@@ -157,5 +157,7 @@ extension SignupVC:UITextFieldDelegate{
         }
     }
     
+    
+
 
 }
