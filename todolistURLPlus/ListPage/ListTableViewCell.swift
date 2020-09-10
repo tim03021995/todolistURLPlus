@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TVVCCell: UITableViewCell {
+class ListTableViewCell: UITableViewCell {
     
     var cellTitleLabel = UILabel()
     var littleBall = UIView()
@@ -19,6 +19,7 @@ class TVVCCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1)
         setLittleCircle()
         setTitleLabel()
         setTitleCircleConstriants()
