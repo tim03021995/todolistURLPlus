@@ -8,23 +8,6 @@
 
 import Foundation
 
-//MARK:- decode的資料結構
-struct ResponseStatus:Codable{
-    var status:Bool
-    var error:String?
-    var loginData: LoginData?
-    
-    enum CodingKeys: String, CodingKey {
-        case status
-        case error
-        case loginData = "login_data"
-    }
-}
-
-
-struct LoginData : Codable {
-    var userToken:String
-}
 
 enum HTTPMethod:String{
     case GET
@@ -38,6 +21,20 @@ enum Endpoint:String {
     case register
     case task
     case card
+    
+//    func addID(id : Int)-> String?{
+//        switch self {
+//        case .task :
+//            return Endpoint.task.rawValue + "/\(id)"
+//        case .userToken:
+//            break
+//        case .register:
+//            break
+//        case .card:
+//            break
+//        }
+//        return nil
+//    }
     
 }
 
@@ -76,7 +73,7 @@ struct UserToken {
     
     mutating func updateToken(by token: String){
         userToken = token
-//        print(userToken)
+        print(userToken)
     }
     mutating func clearToken(){
         userToken = ""

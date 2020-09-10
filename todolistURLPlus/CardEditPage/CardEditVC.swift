@@ -46,12 +46,31 @@ class CardEditVC: UIViewController {
                                  color: .blue)
         setTaskData(data: taskData)
         print("Get API")
+        getTask()//如果data 是nil 就是gil還沒改好
     }
-    func selectColor(color:ColorsButtonType){
-        
+    #warning("標記一下")
+    func getTask(){
+        let headers = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .task, method: .GET, contentType: .json, headers: headers)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
+            switch result {
+                
+            case .success(let a):
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
+    
     func upDate(){
         
+    }
+    @objc func takeImage() {
+        let photoController = UIImagePickerController()
+        photoController.delegate = self
+        photoController.sourceType = .photoLibrary
+        present(photoController, animated: true, completion: nil)
     }
     
 }
@@ -59,7 +78,6 @@ extension CardEditVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let colorType = ColorsButtonType.allCases[indexPath.row]
         self.taskData.color = colorType
-        print(colorType)
     }
 }
 extension CardEditVC:UIScrollViewDelegate{
@@ -85,5 +103,13 @@ extension CardEditVC:UITextViewDelegate{
             textView.isScrollEnabled=false
         }
         textView.frame.size.height=size.height
+    }
+}
+extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage{
+            taskData.image = image
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
