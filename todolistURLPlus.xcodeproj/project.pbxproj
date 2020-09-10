@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5332F8AD250679F900192A5F /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5332F8AC250679F900192A5F /* CardCell.swift */; };
+		53C16106250910E700C91D16 /* ListPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C16105250910E700C91D16 /* ListPageVC.swift */; };
+		9718BB8E2509BE14002C8E71 /* TVVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8C2509BE14002C8E71 /* TVVC.swift */; };
+		9718BB8F2509BE14002C8E71 /* TVVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8D2509BE14002C8E71 /* TVVCCell.swift */; };
 		D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */; };
 		D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */; };
 		D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E424FCCAAF00F4CC6E /* Main.storyboard */; };
@@ -43,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		5332F8AC250679F900192A5F /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		53C16105250910E700C91D16 /* ListPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageVC.swift; sourceTree = "<group>"; };
+		9718BB8C2509BE14002C8E71 /* TVVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVVC.swift; sourceTree = "<group>"; };
+		9718BB8D2509BE14002C8E71 /* TVVCCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVVCCell.swift; sourceTree = "<group>"; };
 		D23505DB24FCCAAF00F4CC6E /* todolistURLPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todolistURLPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +95,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53C1610425090F4C00C91D16 /* ListPage */ = {
+			isa = PBXGroup;
+			children = (
+				53C16105250910E700C91D16 /* ListPageVC.swift */,
+				9718BB8C2509BE14002C8E71 /* TVVC.swift */,
+				9718BB8D2509BE14002C8E71 /* TVVCCell.swift */,
+			);
+			path = ListPage;
+			sourceTree = "<group>";
+		};
 		D23505D224FCCAAF00F4CC6E = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +129,7 @@
 				FBEF303B24FF8531003F5945 /* Networking */,
 				D291DEAE2505CE45001FE33E /* CardEditPage */,
 				FBC901942500DFFA00F6FA40 /* MainPage */,
+				53C1610425090F4C00C91D16 /* ListPage */,
 				FBEF303524FF5204003F5945 /* LoginPage */,
 				FBCF1EA12500BB5B00E5F686 /* SignupPage */,
 				D2B0644325008A3600000444 /* UserInfo */,
@@ -311,10 +328,12 @@
 				D2B064532500E71500000444 /* UserImageFactory.swift in Sources */,
 				D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */,
 				D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */,
+				9718BB8F2509BE14002C8E71 /* TVVCCell.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
 				D249011225090A40003E9497 /* ForgotPasswordVC.swift in Sources */,
 				FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
+				53C16106250910E700C91D16 /* ListPageVC.swift in Sources */,
 				D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */,
 				FBEF303D24FF8550003F5945 /* CustomTF.swift in Sources */,
 				FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */,
@@ -326,6 +345,7 @@
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,
 				FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */,
 				FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */,
+				9718BB8E2509BE14002C8E71 /* TVVC.swift in Sources */,
 				FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */,
 				FBEF303724FF5579003F5945 /* LoginVC.swift in Sources */,
 				FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */,

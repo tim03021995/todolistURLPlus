@@ -44,6 +44,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }()
     //按下按鈕的標籤值
     var btnTag = 0
+    //點擊單人按鈕附加打勾圖案
     lazy var singleCheckMark: UIImageView =
     {
         let imageView = UIImageView(image: UIImage(named: "checkMark"))
@@ -59,6 +60,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         return imageView
     }()
+    
+    //點擊雙人按鈕附加打勾圖案
     lazy var mutipleCheckMark: UIImageView =
        {
            let imageView = UIImageView(image: UIImage(named: "checkMark"))
@@ -75,20 +78,22 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
            imageView.isHidden = true
            return imageView
        }()
+    
+    //單人模式的按鈕
     lazy var singleBtn: UIButton = 
         {
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
-            button.setBackgroundImage(UIImage(named: "single"), for: .normal)
+            button.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
+            button.tintColor = .white
             button.setTitle("單人模式", for: .normal)
-//            button.titleLabel?.frame = CGRect(x:button.frame.minX , y:button.frame.maxY,width: button.frame.width, height: button.frame.height * 0.2)
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60)
             button.setTitleColor(.white, for: .normal)
             button.frame = CGRect(x: ScreenSize.width.value * 0.2,
                                   y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
-                                  width: ScreenSize.width.value * 0.15,
-                                  height: ScreenSize.height.value * 0.1)
+                                  width: ScreenSize.width.value * 0.2,
+                                  height: ScreenSize.width.value * 0.2)
             button.titleEdgeInsets = UIEdgeInsets(top: 0,
                                                   left: 0,
                                                   bottom: -button.frame.height * 0.85,
@@ -96,29 +101,30 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 
             return button
     }()
+    
+    //雙人模式的按鈕
     lazy var mutipleBtn: UIButton =
         {
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapMutipleBtn), for: .touchDown)
             
-            button.setBackgroundImage(UIImage(named: "mutiple"), for: .normal)
+            button.setBackgroundImage(UIImage(systemName: "person.3"), for: .normal)
             button.setTitle("多人模式", for: .normal)
+            button.tintColor = .white
             
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60)
-            //
             button.setTitleColor(.white, for: .normal)
             button.frame = CGRect(x: ScreenSize.width.value * 0.55,
                                   y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
-                                  width: ScreenSize.width.value * 0.15,
-                                  height: ScreenSize.height.value * 0.1)
+                                  width: ScreenSize.width.value * 0.25,
+                                  height: ScreenSize.width.value * 0.2)
             
             
             button.titleEdgeInsets = UIEdgeInsets(top: 0,
                                                   left: 0,
                                                   bottom: -button.frame.height * 0.85,
                                                   right: 0)
-            
             return button
     }()
     ///設置卡片(collectionView)
@@ -178,22 +184,26 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
             singleCell.setUp()
             singleCell.title.text = "123"
-            singleCell.backgroundView = UIImageView(image: UIImage(named:"joey"))
+            singleCell.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
             
             return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
             mutipleCell.setUp()
-            mutipleCell.backgroundView = UIImageView(image: UIImage(named:"singleFace"))
+            mutipleCell.backgroundView = UIImageView(image: UIImage(named:"redCard"))
+            
             return mutipleCell
         }
-     
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = CardEditVC()
-        vc.setTask(card: 0, task: 0)
+//        let vc = CardEditVC()
+//        let taskData = TaskData( title:"This is Joey",
+//                                 script: "I am Jimmy ,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after the Angles, one of,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after ",
+//                                 image: UIImage(named: "joey"),
+//                                 color: .blue)
+//        vc.setTaskData(data: taskData)
+        let vc = ListPageVC()
         present(vc, animated: true, completion: nil)
     }
     ///設定卡片CollectionView
@@ -229,7 +239,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.singleCardCollectionView.delegate = self
         self.singleCardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "singleCell")
 
-        self.singleCardCollectionView.tag = 0
         self.singleCardCollectionView.backgroundColor = .clear
         self.view.addSubview(singleCardCollectionView)
     }
@@ -261,7 +270,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             width: ScreenSize.width.value ,
             height: (ScreenSize.height.value * 0.5)),
                                                           collectionViewLayout: layout)
-        self.mutipleCardCollectionView.tag = 1
         self.mutipleCardCollectionView.dataSource = self
         self.mutipleCardCollectionView.delegate = self
         self.mutipleCardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "mutipleCell")

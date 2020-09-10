@@ -25,7 +25,7 @@ class CardCell: UICollectionViewCell {
     }()
     func setUp()
        {
-        self.backgroundColor = .blue
+        self.backgroundColor = .clear
         self.layer.cornerRadius = self.frame.width * 0.05
         self.clipsToBounds = true
         self.title.text = "Are you crying Are you crying Are you crying, Because very crying, so say three times."
