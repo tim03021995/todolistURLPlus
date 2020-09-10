@@ -34,16 +34,16 @@ class LoginVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = ""
-        passwordTF.text = ""
+        accountTF.text = "test@test.com"
+        passwordTF.text = "test12345"
     }
     //MARK:- Functions
     
     fileprivate func propertiesSetting() {
         accountTF.delegate = self
-        accountTF.placeholder = "請輸入E-Mail"
+        accountTF.placeholder = "E-Mail"
         passwordTF.delegate = self
-        passwordTF.placeholder = "請輸入密碼"
+        passwordTF.placeholder = "Password"
         signInBtn.backgroundColor = .mainColor2
         signUpBtn.backgroundColor = .mainColor
     }
@@ -67,11 +67,11 @@ class LoginVC: UIViewController {
     @IBAction func signInTapped(_ sender: CustomButton) {
 
         
-        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
-//        guard let parameters = validateAccount() else{ return }
+//        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
+        guard let parameters = validateAccount() else{ return }
         
-        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: test, contentType: .json)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
+        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
             case .success(let decodedData):
@@ -82,7 +82,7 @@ class LoginVC: UIViewController {
                 
                 
             case .failure(let err):
-                self.present(.makeAlert(title: "錯誤", message: err.description, handler: {
+                self.present(.makeAlert(title: "Error", message: err.description, handler: {
                     self.dismiss(animated: true, completion: nil)
                 }), animated: true)
             }
@@ -92,7 +92,8 @@ class LoginVC: UIViewController {
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
         let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC.rawValue ) as! SignupVC
-        navigationController?.pushViewController(vc, animated: true)
+//        navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true, completion: nil)
         
     }
     
@@ -120,9 +121,9 @@ extension LoginVC : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case accountTF :
-            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail格式錯誤"
+            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail's format wrong "
         default:
-            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式為8-12位數字與至少一個英文字母"
+            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式錯誤,必須8-12字元數字與密碼 "
         }
     }
     

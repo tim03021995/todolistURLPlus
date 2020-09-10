@@ -54,35 +54,6 @@ class ButtonFactory{
     }
 }
 class ColorButtonFactory{
-//    static func makeButton(type:ButtonType) -> UICollectionViewCell{
-//
-//        let button = UICollectionViewCell(frame: CGRect(
-//            x: 0,
-//            y: 0,
-//            width: ScreenSize.height.value * 0.045,
-//            height: ScreenSize.height.value * 0.045))
-//        button.layer.cornerRadius = button.frame.size.height * 0.5
-//        let color  : UIColor = {
-//            switch type {
-//            case .red:
-//                return UIColor.buttonRed
-//            case .orange:
-//                return UIColor.buttonOrange
-//            case .yello:
-//                return UIColor.buttonYello
-//            case .green:
-//                return UIColor.buttonGreen
-//            case .blue:
-//                return UIColor.buttonBlue
-//            case .darkBlue:
-//                return UIColor.button2u04
-//            case .purple:
-//                return UIColor.buttonPurple
-//            }
-//        }()
-//        button.backgroundColor = color
-//        return button
-//    }
     enum  ButtonType:CaseIterable{
         case red,orange,yellow,green,blue,darkBlue,purple
     }
@@ -107,8 +78,19 @@ enum  ColorsButtonType:CaseIterable{
         case .purple:
             return UIColor.buttonPurple
         }
+    }
 }
+class ConerRadiusButton: UIButton {
+     override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.height / 2
+    }
 }
-
+class ConerRadiusButtonBackground: UIVisualEffectView{
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.height / 2
+    }
+}
 
 

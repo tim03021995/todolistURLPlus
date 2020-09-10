@@ -33,6 +33,7 @@
 		D2B0644E2500B4C600000444 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2B0644D2500B4C600000444 /* SnapKit */; };
 		D2B064532500E71500000444 /* UserImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* UserImageFactory.swift */; };
 		FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C0D4C25075D9500C68391 /* StringExtension.swift */; };
+		FB34E1192509E05E000F5EAD /* DecodeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB34E1182509E05E000F5EAD /* DecodeStruct.swift */; };
 		FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D62500F52F00E9289C /* Alert.swift */; };
 		FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Networking.swift */; };
 		FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */; };
@@ -71,6 +72,7 @@
 		D2B0644A25009FEB00000444 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		D2B064522500E71500000444 /* UserImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageFactory.swift; sourceTree = "<group>"; };
 		FB2C0D4C25075D9500C68391 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		FB34E1182509E05E000F5EAD /* DecodeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeStruct.swift; sourceTree = "<group>"; };
 		FB7AF8D62500F52F00E9289C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		FB7AF8D82500FA3F00E9289C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInfo.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			children = (
 				FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */,
 				FB7AF8D82500FA3F00E9289C /* Networking.swift */,
+				FB34E1182509E05E000F5EAD /* DecodeStruct.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				5332F8AD250679F900192A5F /* CardCell.swift in Sources */,
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,
 				FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */,
+				FB34E1192509E05E000F5EAD /* DecodeStruct.swift in Sources */,
 				FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */,
 				9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */,
 				FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */,
