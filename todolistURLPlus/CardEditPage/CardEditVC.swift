@@ -66,13 +66,18 @@ class CardEditVC: UIViewController {
     func upDate(){
         
     }
+    @objc func takeImage() {
+        let photoController = UIImagePickerController()
+        photoController.delegate = self
+        photoController.sourceType = .photoLibrary
+        present(photoController, animated: true, completion: nil)
+    }
     
 }
 extension CardEditVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let colorType = ColorsButtonType.allCases[indexPath.row]
         self.taskData.color = colorType
-        print(colorType)
     }
 }
 extension CardEditVC:UIScrollViewDelegate{
@@ -98,5 +103,13 @@ extension CardEditVC:UITextViewDelegate{
             textView.isScrollEnabled=false
         }
         textView.frame.size.height=size.height
+    }
+}
+extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage{
+            taskData.image = image
+        }
+        dismiss(animated: true, completion: nil)
     }
 }

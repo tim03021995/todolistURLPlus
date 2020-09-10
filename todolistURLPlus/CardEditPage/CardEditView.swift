@@ -56,6 +56,30 @@ class CardEditView: UIView {
         imageView.clipsToBounds = true
         return imageView
     }()
+    private var albumButtonBackground:UIVisualEffectView = {
+        var button = ConerRadiusButtonBackground(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: ScreenSize.width.value * 0.1,
+            height: ScreenSize.width.value * 0.1))
+        let blurEffect = UIBlurEffect(style: .systemChromeMaterialDark)
+        button.effect = blurEffect
+        button.clipsToBounds = true
+        return button
+    }()
+    private var albumButton:UIButton = {
+        var button = ConerRadiusButton(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: ScreenSize.width.value * 0.1,
+            height: ScreenSize.width.value * 0.1))
+        button.setImage(UIImage(systemName: "camera"), for: .normal)
+        button.layer.cornerRadius = button.frame.height * 0.5
+        button.addTarget(self, action: #selector(CardEditVC.takeImage), for: .touchDown)
+        button.backgroundColor = .clear
+        button.tintColor = .textColor
+        return button
+    }()
     var colorsCollectionView:UICollectionView = {
     let viewWidth = ScreenSize.width.value * 0.8
     let cellWidth = ScreenSize.height.value * 0.045
@@ -96,6 +120,8 @@ class CardEditView: UIView {
         scrollView.addSubview(textView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(colorsCollectionView)
+       scrollView.addSubview(albumButtonBackground)
+       scrollView.addSubview(albumButton)
     }
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
@@ -125,6 +151,15 @@ class CardEditView: UIView {
             make.width.equalTo(imageView)
             make.height.equalTo(colorsCollectionView.snp.width).multipliedBy(0.2)
         }
+        albumButtonBackground.snp.makeConstraints { (make) in
+            make.right.equalTo(imageView).offset(-10)
+            make.bottom.equalTo(imageView).offset(-10)
+            make.height.equalTo(imageView).multipliedBy(0.1)
+            make.width.equalTo(imageView).multipliedBy(0.1)
+        }
+        albumButton.snp.makeConstraints { (make) in
+            make.height.left.right.bottom.equalTo(albumButtonBackground)
+        }
         
 
     }
@@ -133,7 +168,6 @@ class CardEditView: UIView {
         titleTextField.text = title
         textView.text = script
         textView.resetHight(textView)
-        print(color)
         self.selectColor = color
     }
     
