@@ -37,16 +37,17 @@ enum NetworkError:Error{
     case invalidData
     case decodeError
     
+    #warning("錯誤訊息可以都寫在這 分不同properties")
     var description:String{
         switch self{
             
         case .invalidURL: return "Something's wrong with URL"
             
-        case .errorResponse: return "帳號或密碼錯誤"
+        case .errorResponse: return "Wrong EMail or Password"
             
-        case .invalidData: return "3"
+        case .invalidData: return "No Data"
             
-        case .decodeError: return "decode 失敗"
+        case .decodeError: return "Decode failure"
             
         }
     }

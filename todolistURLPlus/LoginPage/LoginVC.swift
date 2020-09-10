@@ -41,9 +41,9 @@ class LoginVC: UIViewController {
     
     fileprivate func propertiesSetting() {
         accountTF.delegate = self
-        accountTF.placeholder = "請輸入E-Mail"
+        accountTF.placeholder = "E-Mail"
         passwordTF.delegate = self
-        passwordTF.placeholder = "請輸入密碼"
+        passwordTF.placeholder = "Password"
         signInBtn.backgroundColor = .mainColor2
         signUpBtn.backgroundColor = .mainColor
     }
@@ -82,7 +82,7 @@ class LoginVC: UIViewController {
                 
                 
             case .failure(let err):
-                self.present(.makeAlert(title: "錯誤", message: err.description, handler: {
+                self.present(.makeAlert(title: "Error", message: err.description, handler: {
                     self.dismiss(animated: true, completion: nil)
                 }), animated: true)
             }
@@ -121,9 +121,9 @@ extension LoginVC : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case accountTF :
-            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail格式錯誤"
+            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail's format wrong "
         default:
-            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式為8-12位數字與至少一個英文字母"
+            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式錯誤,必須8-12字元數字與密碼 "
         }
     }
     

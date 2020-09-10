@@ -20,11 +20,17 @@ struct HTTPRequest {
             return baseURL + endpoint.rawValue
         }
     }
-    
+    //    let contentType:ContentType
+
     let method: HTTPMethod
-//    let contentType:ContentType
+    
+    ///body要放的東西
     var parameters: [String : Any]?
+    
+    ///headers要放的東西
     var headers : [String:String]?
+    
+    ///如果有要帶 ID 的話
     var id : Int?
     
     ///包裝request
@@ -86,8 +92,8 @@ struct NetworkManager {
                 switch response.statusCode {
                 case 200 ... 299:
                     print("Successs" , "Status Code:\(response.statusCode)")
-                    //                case 400:
-                //                    completion(.failure(.errorResponse))
+                case 400:
+                    completion(.failure(.errorResponse))
                 default:
                     completion(.failure(.errorResponse))
                 }
