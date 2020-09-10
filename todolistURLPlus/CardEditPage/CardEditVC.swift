@@ -44,6 +44,7 @@ class CardEditVC: UIViewController {
                                  script: "I am Jimmy ,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after the Angles, one of,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after ",
                                  image: UIImage(named: "joey"),
                                  color: .blue)
+        getTask()
         setTaskData(data: taskData)
         print("Get API")
         getTask()//如果data 是nil 就是gil還沒改好
@@ -54,7 +55,6 @@ class CardEditVC: UIViewController {
         let request = HTTPRequest(endpoint: .task, method: .GET, headers: headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
             switch result {
-                
             case .success(let a):
                 print(a)
             case .failure(let err):
