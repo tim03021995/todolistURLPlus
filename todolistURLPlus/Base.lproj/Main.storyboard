@@ -43,7 +43,7 @@
                                     <action selector="signUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4jM-4c-PEY"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfg-Kb-sf8" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="123" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfg-Kb-sf8" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="60" y="369" width="294" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go"/>
@@ -200,6 +200,14 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBB-z2-T7R">
+                                <rect key="frame" x="30" y="74" width="20" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" image="arrow.left" catalog="system"/>
+                                <connections>
+                                    <action selector="backBtnTapped:" destination="j1G-wh-VF1" eventType="touchUpInside" id="dSk-k5-zqR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -226,11 +234,13 @@
                             <constraint firstItem="h1M-eF-6lF" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="60" id="Xxt-8p-pUt"/>
                             <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="Cd0-Yj-E2q" secondAttribute="trailing" constant="60" id="Ywt-dO-0IE"/>
                             <constraint firstItem="ZDL-ho-khu" firstAttribute="top" secondItem="5kL-Bd-Nuq" secondAttribute="bottom" constant="50" id="aEa-zX-ta1"/>
+                            <constraint firstItem="NBB-z2-T7R" firstAttribute="top" secondItem="hWV-NR-JIg" secondAttribute="top" constant="30" id="avK-Bd-D1b"/>
                             <constraint firstItem="ZDL-ho-khu" firstAttribute="height" secondItem="5kL-Bd-Nuq" secondAttribute="height" multiplier="1.01124" id="cRD-vV-fFh"/>
                             <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="h1M-eF-6lF" secondAttribute="trailing" constant="60" id="cdQ-n9-tM7"/>
                             <constraint firstItem="KxV-jQ-JGH" firstAttribute="top" secondItem="ZDL-ho-khu" secondAttribute="bottom" id="eC4-YL-hJB"/>
                             <constraint firstItem="h1M-eF-6lF" firstAttribute="top" secondItem="1uw-d6-u50" secondAttribute="bottom" id="giu-pV-L33"/>
                             <constraint firstItem="Fc9-ZG-NBr" firstAttribute="top" secondItem="hWV-NR-JIg" secondAttribute="top" constant="30" id="gws-iy-oZ1"/>
+                            <constraint firstItem="NBB-z2-T7R" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="30" id="gzJ-gj-YlH"/>
                             <constraint firstItem="ZDL-ho-khu" firstAttribute="leading" secondItem="hWV-NR-JIg" secondAttribute="leading" constant="60" id="iIL-SW-esk"/>
                             <constraint firstItem="EI6-8t-2RH" firstAttribute="top" secondItem="dAR-9D-UgO" secondAttribute="bottom" id="jNR-ke-r4J"/>
                             <constraint firstItem="1uw-d6-u50" firstAttribute="top" secondItem="ZDL-ho-khu" secondAttribute="bottom" constant="50" id="jWA-mZ-55d"/>
@@ -282,6 +292,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="background1" width="768" height="1366"/>
         <image name="backgroundBlurred" width="768" height="1366"/>
     </resources>
