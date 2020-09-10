@@ -48,10 +48,6 @@ struct HTTPRequest {
             request.allHTTPHeaderFields = headers
         }
         
-        
-        //        if let id = id {
-        //            print(url.absoluteString + "/{\(id)}")
-        //        }
         return request
     }
     
@@ -59,7 +55,7 @@ struct HTTPRequest {
         let url = URL(string: self.urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        request.addValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+        request.addValue(ContentType.json.rawValue, forHTTPHeaderField: "Content-Type")
         
         if let headers = headers{
             request.allHTTPHeaderFields = headers
