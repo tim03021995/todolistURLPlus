@@ -7,7 +7,7 @@
 //
 
 import UIKit
-struct TaskData{
+struct TaskDetail{
     var title:String?
     var script:String?
     var image:UIImage?

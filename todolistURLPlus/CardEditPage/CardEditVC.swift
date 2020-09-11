@@ -9,7 +9,7 @@
 import UIKit
 
 class CardEditVC: UIViewController {
-    var taskData = TaskData(){
+    var taskData = TaskDetail(){
         didSet{
             setTaskData(data: taskData)
         }
@@ -27,7 +27,7 @@ class CardEditVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         upDate()
     }
-    func setTaskData(data:TaskData){
+    func setTaskData(data:TaskDetail){
         self.cardEditView.setUserData(
             image: data.image ?? UIImage(systemName: "photo")!,
             title: data.title ?? "Unknow",
@@ -40,10 +40,11 @@ class CardEditVC: UIViewController {
         self.view = cardEditView
     }
     func setTask(card:Int,task:Int){
-        taskData = TaskData( title:"This is Joey",
+        taskData = TaskDetail( title:"This is Joey",
                                  script: "I am Jimmy ,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after the Angles, one of,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after ",
                                  image: UIImage(named: "joey"),
                                  color: .blue)
+        getTask()
         setTaskData(data: taskData)
         print("Get API")
         getTask()//如果data 是nil 就是gil還沒改好
@@ -54,7 +55,6 @@ class CardEditVC: UIViewController {
         let request = HTTPRequest(endpoint: .task, method: .GET, headers: headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
             switch result {
-                
             case .success(let a):
                 print(a)
             case .failure(let err):
