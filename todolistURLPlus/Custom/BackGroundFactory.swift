@@ -8,7 +8,9 @@
 
 import UIKit
 class BackGroundFactory{
-
+    enum backGroundType{
+        case background1,background2,backgroundBlurred
+    }
     static func makeImage(type:backGroundType)->UIImageView{
         
         let backgroundImage : UIImageView = {
@@ -28,7 +30,5 @@ class BackGroundFactory{
         }()
         return backgroundImage
     }
-    enum backGroundType{
-        case background1,background2,backgroundBlurred
-    }
+
 }

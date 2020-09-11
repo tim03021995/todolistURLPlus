@@ -7,6 +7,7 @@ extension UIColor{
     static let textColor = #colorLiteral(red: 0.9529419541, green: 0.9490631223, blue: 0.9488599896, alpha: 1)
     static let glassColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
     static let glassMainColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2472174658)
+    
     static let buttonRed = #colorLiteral(red: 0.8031061292, green: 0.3946214318, blue: 0.5201846957, alpha: 1)
     static let buttonOrange = #colorLiteral(red: 0.8083509803, green: 0.6261803508, blue: 0.3564614356, alpha: 1)
     static let buttonYellow = #colorLiteral(red: 0.8021969199, green: 0.7417273521, blue: 0.3489557505, alpha: 1)

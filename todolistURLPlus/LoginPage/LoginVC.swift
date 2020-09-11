@@ -29,21 +29,24 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
-        naviBarSetting()
+        
         IQKeyboardManager.shared.enable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = ""
-        passwordTF.text = ""
+        accountTF.text = "test@test.com"
+        passwordTF.text = "test12345"
     }
     //MARK:- Functions
     
+    
+    
     fileprivate func propertiesSetting() {
+        naviBarSetting()
         accountTF.delegate = self
-        accountTF.placeholder = "請輸入E-Mail"
+        accountTF.placeholder = "E-Mail"
         passwordTF.delegate = self
-        passwordTF.placeholder = "請輸入密碼"
+        passwordTF.placeholder = "Password"
         signInBtn.backgroundColor = .mainColor2
         signUpBtn.backgroundColor = .mainColor
     }
@@ -55,6 +58,7 @@ class LoginVC: UIViewController {
         
     }
     
+    
     func validateAccount()->[String:Any]?{
         if let account = accountTF.text , let password = passwordTF.text {
             if account.isValidEMail && password.isValidPassword{
@@ -63,36 +67,44 @@ class LoginVC: UIViewController {
         }
         return nil
     }
-
-    @IBAction func signInTapped(_ sender: CustomButton) {
-
+    
+    func signIn(){
+        //驗證帳密 , 成功的話包裝
+        guard let parameters = validateAccount() else{ return }
         
-        let test = ["password":"00000000", "email" : "ishida624@gmail.com"]
-//        guard let parameters = validateAccount() else{ return }
+        //包裝需要的參數
+        let getTokenRequest = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)
         
-        let request = HTTPRequest(endpoint: .userToken, method: .POST, parameters: test, contentType: .json)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<ResponseStatus,NetworkError>) in
+        NetworkManager().sendRequest(with: getTokenRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
+                
             case .success(let decodedData):
-                //存token
-                guard let token = decodedData.loginData?.userToken else { return }
-                UserToken.shared.updateToken(by: token)
-                self.navigationController?.pushViewController(MainPageVC(), animated: true)
+                
+                if let err = decodedData.error{
+                    print(err)
+                }else{
+                    //存token
+                    guard let token = decodedData.loginData?.userToken else { return }
+                    UserToken.shared.updateToken(by: token)
+                    self.navigationController?.pushViewController(MainPageVC(), animated: true)                }
                 
                 
             case .failure(let err):
-                self.present(.makeAlert(title: "錯誤", message: err.description, handler: {
+                self.present(.makeAlert(title: "Error", message: err.description, handler: {
                     self.dismiss(animated: true, completion: nil)
                 }), animated: true)
             }
         }
-        
+    }
+    
+    @IBAction func signInTapped(_ sender: CustomButton) {
+        signIn()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
         let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC.rawValue ) as! SignupVC
-        navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true, completion: nil)
         
     }
     
@@ -103,7 +115,7 @@ class LoginVC: UIViewController {
 extension LoginVC : UITextFieldDelegate{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -112,7 +124,7 @@ extension LoginVC : UITextFieldDelegate{
             passwordTF.becomeFirstResponder()
         default:
             self.view.endEditing(true)
-            //TODO 執行登入
+            signIn()
         }
         return true
     }
@@ -120,9 +132,9 @@ extension LoginVC : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case accountTF :
-            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail格式錯誤"
+            accountErrorLabel.text = accountTF.text!.isValidEMail ? "" : "E-Mail's format wrong "
         default:
-            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式為8-12位數字與至少一個英文字母"
+            passwordErrorLabel.text = passwordTF.text!.isValidPassword ? "" : "密碼格式錯誤,必須8-12字,包含數字與至少一個英文字母"
         }
     }
     

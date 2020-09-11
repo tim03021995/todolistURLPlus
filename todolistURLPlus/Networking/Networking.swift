@@ -13,26 +13,44 @@ struct HTTPRequest {
     
     let baseURL = "http://35.185.131.56:8002/api/"
     let endpoint:Endpoint
-    var urlString:String { baseURL + endpoint.rawValue }
+    var urlString:String {
+        if let id = id {
+            return baseURL + endpoint.rawValue + "/{\(id)}"
+        } else {
+            return baseURL + endpoint.rawValue
+        }
+    }
+
     let method: HTTPMethod
-    let parameters: [String : Any]
-    let contentType:ContentType
-    var headers : [String:String]?
+    
+    var parameters: [String : Any]? //body要放的東西
+    
+    var headers : [String:String]? //headers要放的東西
+    
+    var id : Int? //如果有要帶 ID 的話
     
     ///包裝request
     func send()-> URLRequest{
         
         let url = URL(string: self.urlString)!
+        
         var request = URLRequest(url: url)
+        
         request.httpMethod = method.rawValue
         
-        request.addValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+        request.addValue(ContentType.json.rawValue, forHTTPHeaderField: "Content-Type")
         
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
+        if let parameters = parameters{
+            request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
+        }
+        
+        if let headers = headers{
+            request.allHTTPHeaderFields = headers
+        }
         
         return request
     }
-    
+     
 }
 
 
@@ -52,8 +70,8 @@ struct NetworkManager {
                 switch response.statusCode {
                 case 200 ... 299:
                     print("Successs" , "Status Code:\(response.statusCode)")
-//                case 400:
-//                    completion(.failure(.errorResponse))
+                case 400:
+                    completion(.failure(.errorResponse))
                 default:
                     completion(.failure(.errorResponse))
                 }
@@ -62,18 +80,18 @@ struct NetworkManager {
                     completion(.failure(.invalidData))
                     return
                 }
+                
                 do{
                     let decorder = JSONDecoder()
                     let decotedData = try decorder.decode(T.self, from: data)
                     completion(.success(decotedData))
-                    print("\(response.statusCode)")
                 }catch{
+                    print(error)
                     completion(.failure(.decodeError))
                 }
                 
             }
         }
         task.resume()
-        
     }
 }
