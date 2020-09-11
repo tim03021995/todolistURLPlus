@@ -181,7 +181,7 @@ extension CardEditView:UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.layer.cornerRadius = cell.frame.size.height * 0.5
+        cell.layer.cornerRadius = cell.frame.size.height * 0.5 
         let colorType = ColorsButtonType.allCases[indexPath.row]
         let color = colorType.color
         cell.backgroundColor = color
