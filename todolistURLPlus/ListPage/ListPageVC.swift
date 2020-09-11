@@ -9,6 +9,8 @@
 import UIKit
 
 class ListPageVC: UIViewController {
+    let testData = ["a","b","c","d","e"]
+    
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
@@ -111,7 +113,8 @@ extension ListPageVC: UITableViewDataSource{
         cell.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
         cell.layer.cornerRadius = 15
         cell.clipsToBounds = true
-        cell.cellTitleLabel.text = "\(listBaseView.cellTitle[indexPath.section])"
+//        cell.cellTitleLabel.text = "\(listBaseView.cellTitle[indexPath.section])"
+        cell.cellTitleLabel.text = testData[indexPath.section]
         return cell
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
