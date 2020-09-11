@@ -9,6 +9,7 @@
 import Foundation
 
 //MARK:- 登入註冊的資料結構
+
 struct LoginInReaponse:Codable{
     let status:Bool
     var error:String?
@@ -73,7 +74,6 @@ struct CardResponse: Codable {
     }
 }
 
-// MARK: - CardData
 struct CardData: Codable {
     let id: Int
     let username, email: String
@@ -89,7 +89,6 @@ struct CardData: Codable {
     }
 }
 
-// MARK: - ShowCard
 struct ShowCard: Codable {
     let id: Int
     let cardName, createUser, createdAt, updatedAt: String
@@ -107,7 +106,6 @@ struct ShowCard: Codable {
     }
 }
 
-// MARK: - Pivot
 struct Pivot: Codable {
     let usersID, cardID: Int
 
@@ -117,7 +115,6 @@ struct Pivot: Codable {
     }
 }
 
-// MARK: - ShowTask
 struct ShowTask: Codable {
     let id: Int
     let item: String
