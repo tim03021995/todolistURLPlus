@@ -20,25 +20,19 @@ struct HTTPRequest {
             return baseURL + endpoint.rawValue
         }
     }
-    //    let contentType:ContentType
 
     let method: HTTPMethod
     
-    ///body要放的東西
-    var parameters: [String : Any]?
+    var parameters: [String : Any]? //body要放的東西
     
-    ///headers要放的東西
-    var headers : [String:String]?
+    var headers : [String:String]? //headers要放的東西
     
-    ///如果有要帶 ID 的話
-    var id : Int?
+    var id : Int? //如果有要帶 ID 的話
     
     ///包裝request
     func send()-> URLRequest{
         
-        
         let url = URL(string: self.urlString)!
-        print(url.absoluteString)
         
         var request = URLRequest(url: url)
         
@@ -56,23 +50,7 @@ struct HTTPRequest {
         
         return request
     }
-    
-    func taskRequest ()-> URLRequest{
-        let url = URL(string: self.urlString)!
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
-        request.addValue(ContentType.json.rawValue, forHTTPHeaderField: "Content-Type")
-        
-        if let headers = headers{
-            request.allHTTPHeaderFields = headers
-        }
-        
-        
-        return request
-    }
-    
-    
-    
+     
 }
 
 
@@ -102,18 +80,18 @@ struct NetworkManager {
                     completion(.failure(.invalidData))
                     return
                 }
+                
                 do{
                     let decorder = JSONDecoder()
                     let decotedData = try decorder.decode(T.self, from: data)
                     completion(.success(decotedData))
-                    print("\(response.statusCode)")
                 }catch{
+                    print(error)
                     completion(.failure(.decodeError))
                 }
                 
             }
         }
         task.resume()
-        
     }
 }

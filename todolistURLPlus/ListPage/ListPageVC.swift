@@ -116,6 +116,10 @@ extension ListPageVC: UITableViewDataSource{
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             print(indexPath)
+            let vc = CardEditVC()
+        #warning("我要card的id 感謝")
+        vc.setTask(card: 0, task: indexPath.section)
+        present(vc, animated: true, completion: nil)
         }
 
 }

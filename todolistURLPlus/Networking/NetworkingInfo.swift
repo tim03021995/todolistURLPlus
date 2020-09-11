@@ -21,9 +21,6 @@ enum Endpoint:String {
     case register
     case task
     case card
-    
-
-    
 }
 
 enum ContentType:String{
@@ -53,6 +50,7 @@ enum NetworkError:Error{
     }
     
 }
+
 //MARK:- Token
 struct UserToken {
     private(set) var userToken = ""
