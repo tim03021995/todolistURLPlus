@@ -116,10 +116,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
             button.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
-            button.tintColor = .black
             button.setTitle("Personal", for: .normal)
+            button.tintColor = .black
             button.titleLabel?.adjustsFontSizeToFitWidth = true
-           button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
 //            button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13)
             button.setTitleColor(.black, for: .normal)
             button.frame = CGRect(x: ScreenSize.width.value * 0.2,
@@ -130,32 +130,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                                   left: 0,
                                                   bottom: -button.frame.height * 1.2, //0.85
                                                   right: 0)
-
-//            button.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
-            button.setImage(UIImage(systemName: "person"), for: .normal)
-//           
-            button.tintColor = .white
-            button.backgroundColor = .lightGray
-            button.setTitle("Personal", for: .normal)
-//            button.titleLabel?.contentMode = .bottom
-            
-//
-            button.titleLabel?.adjustsFontSizeToFitWidth = true
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 60)
-            button.setTitleColor(.red, for: .normal)
-            button.frame = CGRect(x: ScreenSize.width.value * 0.2,
-                                  y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
-                                  width: ScreenSize.width.value * 0.2,
-                                  height: ScreenSize.width.value * 0.2)
-//            button.titleEdgeInsets = UIEdgeInsets(top: 0,
-//                                                  left: 0,
-//                                                  bottom: -button.frame.height * 0.85,
-//                                                  right: 0)
             
             button.imageEdgeInsets = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
 //
-            button.layer.cornerRadius = ScreenSize.width.value * 0.05
-            button.clipsToBounds = true
+   
 
             return button
     }()
