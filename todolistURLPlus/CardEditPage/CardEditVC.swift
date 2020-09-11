@@ -56,7 +56,8 @@ class CardEditVC: UIViewController {
         NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
             switch result {
             case .success(let a):
-                print(a)
+                print("a")
+            print(a)
             case .failure(let err):
                 print(err)
             }
