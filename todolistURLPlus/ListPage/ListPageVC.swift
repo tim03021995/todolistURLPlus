@@ -117,7 +117,8 @@ extension ListPageVC: UITableViewDataSource{
         print("swction:\(indexPath.section) ,row:\(indexPath.row)")
             let vc = CardEditVC()
         #warning("我要card的id 感謝")
-        vc.setTask(card: 0, task: indexPath.section)
+        let taskModel = TaskModel(funtionType: .edit, cardID: 1, taskID: 1, title: "123", description: "123", image: nil, tag: .darkBlue)
+        vc.refreshView(data: taskModel)
   //      let vc = ForgotPasswordVC()
         present(vc, animated: true, completion: nil)
         }
