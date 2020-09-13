@@ -14,7 +14,7 @@ class CardCell: UICollectionViewCell {
     {
         let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
             y: self.frame.height * 0.7,
-            width: self.frame.width * 0.8,
+            width: self.frame.width * 0.9,
             height: self.frame.height * 0.2))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
         label.clipsToBounds = true
