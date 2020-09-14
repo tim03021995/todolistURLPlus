@@ -426,16 +426,34 @@ enum CollectionViewCellIdentifier: String
 
 #warning("這邊GET Card")
 func getCard(){
-    let a = ["userToken":UserToken.shared.userToken]
-    let request = HTTPRequest(endpoint: .card, method: .GET, headers: a)
-    NetworkManager().sendRequest(with: request.send()) { (result:Result<GetAllCardResponse,NetworkError>) in
+    let header = ["userToken":UserToken.shared.userToken]
+    let request = HTTPRequest(endpoint: .card, method: .GET, headers: header).send()
+    NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
         switch result {
             
         case .success(let data):
-            print(data)//這裡是成功解包的東西 直接拿data裡的東西
+            print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
             // data.cardData........
         case .failure(let err):
             print(err)
+        }
+    }
+    
+    func addCard(){ //新增card的API方法
+        let header = ["userToken":UserToken.shared.userToken]
+        //TODO 新增的card name
+        let parameter = ["card_name":"新增的card name"]
+        
+        let request = HTTPRequest(endpoint: .card, method: .POST, parameters: parameter, headers: header).send()
+        
+        NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
+            switch result{
+                
+            case .success(let data):
+                print(data.cardData)
+            case .failure(let err):
+                print(err)
+            }
         }
     }
 }
