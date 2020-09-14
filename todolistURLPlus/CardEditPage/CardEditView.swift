@@ -110,7 +110,8 @@ class CardEditView: UIView {
             width: ScreenSize.width.value * 0.7,
             height: ScreenSize.height.value * 0.2)
         )
-        button.setTitle("Delete", for: .focused)
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(.red, for: .normal)
         button.addTarget(self, action: #selector(CardEditVC.deleteTask), for: .touchDown)
         button.layer.cornerRadius = button.frame.width * 0.05
         button.backgroundColor = .lightGray
@@ -178,7 +179,7 @@ class CardEditView: UIView {
     }
     func setUserData(funtionType:TaskModel.FuntionType,image:UIImage,title:String,script:String,color:ColorsButtonType){
         if funtionType == .edit{
-            
+            addDeleteButton()
         }
         imageView.image = image
         titleTextField.text = title
