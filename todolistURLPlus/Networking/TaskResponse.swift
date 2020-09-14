@@ -48,8 +48,8 @@ struct GetTaskResponse: Codable {
 
 //MARK:- POST Task (新增task)
 struct PostTaskResponse: Codable {
-    let status: String
-    let taskData: TaskData
+    let status: Bool
+    let taskData: TaskData?
     let error: String?
     
     enum CodingKeys: String, CodingKey {
