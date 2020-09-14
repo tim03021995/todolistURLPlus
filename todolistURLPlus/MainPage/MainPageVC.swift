@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-
+    var cardDatas = [MainModel]()
     
     ///設置背景
     let userName = ""
@@ -194,25 +194,15 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
 
 
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+
     //MARK: collectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView.tag {
-        case 0:
-            return 5
+        switch collectionView {
+        case singleCardCollectionView :
+            return cardDatas.count
         default:
-            
-            return 10
+            return 2
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -220,31 +210,29 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         switch collectionView {
         case singleCardCollectionView:
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
-            singleCell.setUp()
-            singleCell.title.text = "123"
-            singleCell.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
+            singleCell.setUpSingle(cardDatas: cardDatas, indexPath: indexPath)
+            
             
             return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
-            mutipleCell.setUp()
-            mutipleCell.backgroundView = UIImageView(image: UIImage(named:"redCard"))
+//            mutipleCell.setUpMutiple(cardDatas: cardDatas, indexPath: indexPath)
             
             return mutipleCell
         }
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let vc = CardEditVC()
-//        let taskData = TaskData( title:"This is Joey",
-//                                 script: "I am Jimmy ,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after the Angles, one of,English is a West Germanic language first spoken in early medieval England and eventually became a global lingua franca. It is named after ",
-//                                 image: UIImage(named: "joey"),
-//                                 color: .blue)
-//        vc.setTaskData(data: taskData)
-        let vc = ListPageVC()
-        present(vc, animated: true, completion: nil)
+        toListPageVC(indexPath: indexPath)
     }
-    ///設定卡片CollectionView
+    fileprivate func toListPageVC(indexPath: IndexPath) {
+        let lPVC = ListPageVC()
+        let nVC = UINavigationController(rootViewController: lPVC)
+        lPVC.cardData = cardDatas[indexPath.row]
+        present(nVC, animated: true, completion: nil)
+    }
     
     //blueconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動
     func setSingleBtnConstraints(){
@@ -286,7 +274,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
           mutipleCardCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0 ).isActive = true
       }
     
-   
+   ///設定卡片CollectionView
     func setUpSingleCardCollectionView()
     {
 
@@ -410,7 +398,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     @objc func creatNewCard()
     {
-        print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行")
+      
+            self.cardDatas.append(MainModel(cardID: cardDatas.count))
+        singleCardCollectionView.reloadData()
+            print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行")
+
+        
     }
 }
 
