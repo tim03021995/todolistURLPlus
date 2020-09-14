@@ -10,7 +10,7 @@ import UIKit
 
 class ListPageVC: UIViewController {
     var cardData: MainModel!
-    let testData = ["a","b","c","d","e"]
+    
     var test = ""
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
@@ -32,26 +32,26 @@ class ListPageVC: UIViewController {
     }()
     
     lazy var listBaseView: ListBaseView =
-    {
-        let view = ListBaseView()
-        view.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-        return view
+        {
+            let view = ListBaseView()
+            view.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+            return view
     }()
     lazy var bottomOfNaviBar = navigationController?.navigationBar.frame.maxY ?? 0
     lazy var creatTaskBtn: UIButton =
-    {
-        let y = (ScreenSize.height.value - self.listBaseView.frame.maxY) * 0.1 +  self.listBaseView.frame.maxY
-        let height = (ScreenSize.height.value - self.listBaseView.frame.maxY) * 0.8
-        let btn = UIButton()
-        btn.frame = CGRect(x: ScreenSize.width.value * 0.25, y: ScreenSize.height.value * 0.85, width: ScreenSize.width.value * 0.5, height: ScreenSize.height.value * 0.08)
-        btn.setTitle("Add a new task", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        btn.contentHorizontalAlignment = .center
-        btn.contentVerticalAlignment = .center
-        btn.titleLabel?.adjustsFontSizeToFitWidth = true
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
-        btn.addTarget(self, action: #selector(self.tapCreatTaskBtn), for: .touchDown)
-        return btn
+        {
+            let y = (ScreenSize.height.value - self.listBaseView.frame.maxY) * 0.1 +  self.listBaseView.frame.maxY
+            let height = (ScreenSize.height.value - self.listBaseView.frame.maxY) * 0.8
+            let btn = UIButton()
+            btn.frame = CGRect(x: ScreenSize.width.value * 0.25, y: ScreenSize.height.value * 0.85, width: ScreenSize.width.value * 0.5, height: ScreenSize.height.value * 0.08)
+            btn.setTitle("Add a new task", for: .normal)
+            btn.setTitleColor(.black, for: .normal)
+            btn.contentHorizontalAlignment = .center
+            btn.contentVerticalAlignment = .center
+            btn.titleLabel?.adjustsFontSizeToFitWidth = true
+            btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+            btn.addTarget(self, action: #selector(self.tapCreatTaskBtn), for: .touchDown)
+            return btn
     }()
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
@@ -65,21 +65,39 @@ class ListPageVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-func addSubview()
-{
-    self.view.addSubview(backgroundImage)
-    self.view.addSubview(cardTitleLabel)
-    self.view.addSubview(listBaseView)
-    self.view.addSubview(creatTaskBtn)
-    
+    func addSubview()
+    {
+        self.view.addSubview(backgroundImage)
+        self.view.addSubview(cardTitleLabel)
+        self.view.addSubview(listBaseView)
+        self.view.addSubview(creatTaskBtn)
+        
     }
-
+    
     @objc func tapCreatTaskBtn()
     {
+        toCardVC(data: nil, indexPath: nil)
         print("點此新增任務，但是還沒寫內部實作，我在\(#file)第\(#line)行等你唷～")
     }
     
-    
+    func toCardVC(data: MainModel?, indexPath: IndexPath?)
+    {
+        let vc = CardEditVC()
+        if let indexPath = indexPath, let data = data?.taskModel?[indexPath.section]
+       {
+        //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
+        let editData = TaskModel(funtionType: .edit, cardID: data.cardID, taskID: data.taskID, title: data.title, description: data.description, image: data.image, tag: data.tag)
+        
+        vc.setData(data: editData)
+        navigationController?.pushViewController(vc, animated: true)
+
+        }else
+       {
+          let createData = TaskModel(funtionType: .create)
+             vc.setData(data: createData)
+             navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
 
@@ -104,33 +122,21 @@ extension ListPageVC: UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return listBaseView.cellTitle.count
+        guard let taskCount = cardData.taskModel?.count else {return 0}
+        return taskCount
     }
     
-   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
-        cell.backgroundColor = .clear
-        cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
-        cell.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
-        cell.layer.cornerRadius = 15
-        cell.clipsToBounds = true
-        cell.cellTitleLabel.text = "\(listBaseView.cellTitle[indexPath.section])"
+       
         return cell
     }
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       //     print(indexPath)
-        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
-            let vc = CardEditVC()
-        #warning("我要card的id 感謝")
-        let taskModel = TaskModel(funtionType: .create, cardID: 1, taskID: 1, title: "123", description: "123", image: nil, tag: .darkBlue)
-        vc.setData(data: taskModel)
-        //TEST
-  
-//        show(vc, sender: nil)
-        navigationController?.pushViewController(vc, animated: true)
-//        present(vc, animated: true, completion: nil)
-        }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //     print(indexPath)
+        
+        toCardVC(data: cardData, indexPath: indexPath)
+        
+    }
+    
 }

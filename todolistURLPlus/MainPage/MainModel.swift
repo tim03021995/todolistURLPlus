@@ -15,11 +15,7 @@ struct MainModel
     var workStatus: WorkStatus?
     var cardID:Int?
     var cardTitle: String?
-    var taskID:Int?
-    var title:String?
-    var description:String?
-    var image:UIImage?
-    var tag:ColorsButtonType?
+    var taskModel: [TaskModel]?
 }
 
 enum WorkStatus
