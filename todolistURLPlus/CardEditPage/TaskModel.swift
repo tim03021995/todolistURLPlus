@@ -7,9 +7,16 @@
 //
 
 import UIKit
-struct TaskDetail{
+struct TaskModel{
+    var funtionType:FuntionType? //編輯還是新增，如果是新增
+    var cardID:Int?
+    var taskID:Int?
     var title:String?
-    var script:String?
+    var description:String?
     var image:UIImage?
-    var color:ColorsButtonType?
+    var tag:ColorsButtonType?
+    enum FuntionType {
+        case create,edit
+    }
 }
+
