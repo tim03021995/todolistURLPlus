@@ -56,34 +56,44 @@ class CardEditVC: UIViewController {
     }
     #warning("標記一下")
     private func saveTask(){
-//        let headers = ["userToken":UserToken.shared.userToken]
-//        let parameters = [
-//            "item" : taskData.title,
-//            "card_id" : taskData.cardID,
-//            "tag" : taskData.tag,
-//            "description" : taskData.description,
-//            ]
-//        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: parameters, headers: headers, id: taskData.taskID)
-//        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
-//            switch result {
-//            case .success(let a):
-//                print(a)
-//            case .failure(let err):
-//                print(err)
-//            }
-//        }
+        guard let cardID = taskData.cardID else {return}
+        let headers = ["userToken":UserToken.shared.userToken]
+        let parameters = [
+            "title" : taskData.title ?? "",
+            "card_id" : cardID,
+            "tag" : taskData.tag ?? ColorsButtonType.red,
+            "description" : taskData.description ?? "",
+            ] as [String : Any]
+        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: parameters, headers: headers, id: taskData.taskID)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
+            switch result {
+            case .success(let a):
+                print("edit success")
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
     private func createTask(){
-        //        let headers = ["userToken":UserToken.shared.userToken]
-        //        let request = HTTPRequest(endpoint: .task, method: .GET, headers: headers)
-        //        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
-        //            switch result {
-        //            case .success(let a):
-        //                print(a)
-        //            case .failure(let err):
-        //                print(err)
-        //            }
-        //        }
+        guard let cardID = taskData.cardID else {return}
+        let headers = ["userToken":UserToken.shared.userToken]
+        let parameters = [
+            "title" : taskData.title ?? "",
+            "card_id" : cardID,
+            "tag" : taskData.tag ?? ColorsButtonType.red,
+            "description" : taskData.description ?? "",
+            ] as [String : Any]
+        let request = HTTPRequest(endpoint: .task, method: .POST, parameters: parameters , headers: headers)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
+            switch result {
+            case .success(let a):
+                print("create success")
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
     @objc func takeImage() {
         let photoController = UIImagePickerController()
@@ -92,7 +102,7 @@ class CardEditVC: UIViewController {
         present(photoController, animated: true, completion: nil)
     }
     @objc func deleteTask(){
-        
+        dismiss(animated: true, completion: nil)
     }
     
 }
