@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+
 class LoginVC: UIViewController {
     //MARK:- Properties
     @IBOutlet weak var naviItem: UINavigationItem!
@@ -99,6 +100,8 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func signInTapped(_ sender: CustomButton) {
+        #warning("連點ＢＵＧ  點一次之後要擋")
+
         signIn()
     }
     

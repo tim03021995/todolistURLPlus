@@ -11,7 +11,7 @@ import UIKit
 
 class ListBaseView: UIView {
     
-    var cellTitle = ["title", "title", "title", "title", "title"]
+    
     var tableView = UITableView()
     var baseView = UIView()
     var fullScreenMaxY = UIScreen.main.bounds.maxY
