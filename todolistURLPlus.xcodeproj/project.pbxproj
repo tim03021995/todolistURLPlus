@@ -33,13 +33,15 @@
 		D2B0644E2500B4C600000444 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2B0644D2500B4C600000444 /* SnapKit */; };
 		D2B064532500E71500000444 /* UserImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* UserImageFactory.swift */; };
 		FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C0D4C25075D9500C68391 /* StringExtension.swift */; };
-		FB34E1192509E05E000F5EAD /* DecodeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB34E1182509E05E000F5EAD /* DecodeStruct.swift */; };
+		FB34E1192509E05E000F5EAD /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB34E1182509E05E000F5EAD /* TaskResponse.swift */; };
 		FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D62500F52F00E9289C /* Alert.swift */; };
 		FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Networking.swift */; };
 		FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */; };
 		FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC901952500E02400F6FA40 /* MainPageVC.swift */; };
 		FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */; };
 		FBCF1EA52500BE2500E5F686 /* others.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA42500BE2500E5F686 /* others.swift */; };
+		FBEAB4D3250F1CC9005041F3 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEAB4D2250F1CC9005041F3 /* LoginResponse.swift */; };
+		FBEAB4D5250F1CE9005041F3 /* GetAllCardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEAB4D4250F1CE9005041F3 /* GetAllCardResponse.swift */; };
 		FBEF303724FF5579003F5945 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF303624FF5579003F5945 /* LoginVC.swift */; };
 		FBEF303924FF6D1B003F5945 /* CustomBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF303824FF6D1B003F5945 /* CustomBtn.swift */; };
 		FBEF303D24FF8550003F5945 /* CustomTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF303C24FF8550003F5945 /* CustomTF.swift */; };
@@ -72,13 +74,15 @@
 		D2B0644A25009FEB00000444 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		D2B064522500E71500000444 /* UserImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageFactory.swift; sourceTree = "<group>"; };
 		FB2C0D4C25075D9500C68391 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		FB34E1182509E05E000F5EAD /* DecodeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeStruct.swift; sourceTree = "<group>"; };
+		FB34E1182509E05E000F5EAD /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		FB7AF8D62500F52F00E9289C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		FB7AF8D82500FA3F00E9289C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInfo.swift; sourceTree = "<group>"; };
 		FBC901952500E02400F6FA40 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		FBCF1EA42500BE2500E5F686 /* others.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = others.swift; sourceTree = "<group>"; };
+		FBEAB4D2250F1CC9005041F3 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		FBEAB4D4250F1CE9005041F3 /* GetAllCardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllCardResponse.swift; sourceTree = "<group>"; };
 		FBEF303624FF5579003F5945 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		FBEF303824FF6D1B003F5945 /* CustomBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBtn.swift; sourceTree = "<group>"; };
 		FBEF303C24FF8550003F5945 /* CustomTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTF.swift; sourceTree = "<group>"; };
@@ -238,7 +242,9 @@
 			children = (
 				FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */,
 				FB7AF8D82500FA3F00E9289C /* Networking.swift */,
-				FB34E1182509E05E000F5EAD /* DecodeStruct.swift */,
+				FBEAB4D2250F1CC9005041F3 /* LoginResponse.swift */,
+				FBEAB4D4250F1CE9005041F3 /* GetAllCardResponse.swift */,
+				FB34E1182509E05E000F5EAD /* TaskResponse.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 				FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
 				53C16106250910E700C91D16 /* ListPageVC.swift in Sources */,
+				FBEAB4D5250F1CE9005041F3 /* GetAllCardResponse.swift in Sources */,
 				D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */,
 				FBEF303D24FF8550003F5945 /* CustomTF.swift in Sources */,
 				FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */,
@@ -345,9 +352,10 @@
 				D2B0644725008AC700000444 /* UserInfoView.swift in Sources */,
 				D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */,
 				5332F8AD250679F900192A5F /* CardCell.swift in Sources */,
+				FBEAB4D3250F1CC9005041F3 /* LoginResponse.swift in Sources */,
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,
 				FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */,
-				FB34E1192509E05E000F5EAD /* DecodeStruct.swift in Sources */,
+				FB34E1192509E05E000F5EAD /* TaskResponse.swift in Sources */,
 				FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */,
 				9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */,
 				FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */,
