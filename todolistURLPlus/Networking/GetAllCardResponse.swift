@@ -92,7 +92,7 @@ struct GetAllCardResponse: Codable {
 //MARK:- POST  (新增card)
 
 
-struct PostCardResponse {
+struct PostCardResponse: Codable {
     let status: Bool
     let cardData: CardData?
     let error: String?
@@ -186,7 +186,7 @@ struct GetCardWithIDResponse: Codable {
 
 //MARK:- PUT Card (更新card)
 
-struct PutCardResponse {
+struct PutCardResponse: Codable {
     let status: Bool
     let cardData: CardData?
     let error: String?
@@ -249,7 +249,7 @@ struct PutCardResponse {
 
 //MARK:- DELETE card
 
-struct DeleteCardResponse {
+struct DeleteCardResponse: Codable {
     let status: Bool
     let error: String?
     

@@ -47,7 +47,7 @@ struct GetTaskResponse: Codable {
 }
 
 //MARK:- POST Task (新增task)
-struct PostTaskResponse {
+struct PostTaskResponse: Codable {
     let status: String
     let taskData: TaskData
     
@@ -83,7 +83,7 @@ struct PostTaskResponse {
 
 //MARK:- PUT Task （更新Task）
 
-struct PutTaskResponse {
+struct PutTaskResponse: Codable {
     let status: Bool
     let taskData: TaskData?
     let error:String?
@@ -119,7 +119,7 @@ struct TaskData: Codable {
 }
 
 //MARK:- DELETE
-struct DeleteTaskResponse {
+struct DeleteTaskResponse: Codable {
     let status: Bool
     let error:String?
 }
