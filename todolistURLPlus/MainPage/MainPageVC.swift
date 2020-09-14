@@ -435,7 +435,7 @@ enum CollectionViewCellIdentifier: String
 func getCard(){
     let a = ["userToken":UserToken.shared.userToken]
     let request = HTTPRequest(endpoint: .card, method: .GET, headers: a)
-    NetworkManager().sendRequest(with: request.send()) { (result:Result<CardResponse,NetworkError>) in
+    NetworkManager().sendRequest(with: request.send()) { (result:Result<GetAllCardResponse,NetworkError>) in
         switch result {
             
         case .success(let data):
