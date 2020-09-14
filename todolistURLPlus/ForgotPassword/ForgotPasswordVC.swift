@@ -10,9 +10,14 @@ import UIKit
 
 class ForgotPasswordVC: UIViewController {
 
+    override func loadView() {
+        super .loadView()
+        let vc = ForgotPasswordView()
+        self.view = vc
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
 
