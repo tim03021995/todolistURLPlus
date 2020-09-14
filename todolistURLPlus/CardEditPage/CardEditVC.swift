@@ -9,6 +9,7 @@
 import UIKit
 
 class CardEditVC: UIViewController {
+     let headers = ["userToken":UserToken.shared.userToken]
     private var taskData = TaskModel(){
         didSet{
             refreshView(data: taskData)
@@ -60,11 +61,11 @@ class CardEditVC: UIViewController {
     #warning("標記一下")
     private func saveTask(){
         guard let cardID = taskData.cardID else {return}
-        let headers = ["userToken":UserToken.shared.userToken]
+        print(taskData)
         let parameters = [
             "title" : taskData.title ?? "",
             "card_id" : cardID,
-            "tag" : taskData.tag ?? ColorsButtonType.red,
+            "tag" : taskData.tag?.rawValue ?? ColorsButtonType.red.rawValue,
             "description" : taskData.description ?? "",
             ] as [String : Any]
         let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: parameters, headers: headers, id: taskData.taskID)
@@ -72,7 +73,7 @@ class CardEditVC: UIViewController {
             switch result {
             case .success(let a):
                 print("edit success")
-                print(a)
+                print(a.taskData)
             case .failure(let err):
                 print(err)
             }
@@ -82,11 +83,12 @@ class CardEditVC: UIViewController {
         guard let cardID = taskData.cardID else {return}
         let headers = ["userToken":UserToken.shared.userToken]
         let parameters = [
-            "title" : taskData.title ?? "",
-            "card_id" : cardID,
-            "tag" : taskData.tag ?? ColorsButtonType.red,
+            "title" : "test123",
+            "card_id" : "\(cardID)",
+            "tag" : "red",
             "description" : taskData.description ?? "",
-            ] as [String : Any]
+            ] 
+        print(parameters)
         let request = HTTPRequest(endpoint: .task, method: .POST, parameters: parameters , headers: headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
