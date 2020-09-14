@@ -19,6 +19,9 @@ class CardEditVC: UIViewController {
         super.loadView()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class CardCell: UICollectionViewCell {
     
-    lazy var title: UILabel =
+    lazy var cardTitle: UILabel =
     {
         let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
             y: self.frame.height * 0.7,
@@ -23,14 +23,33 @@ class CardCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    func setUp()
-       {
-        self.backgroundColor = .clear
-        self.layer.cornerRadius = self.frame.width * 0.05
-        self.clipsToBounds = true
-        self.title.text = "Are you crying Are you crying Are you crying, Because very crying, so say three times."
-        self.title.textColor = .white
-        self.addSubview(title)
-       }
+    func setUpSingle(cardDatas: [MainModel]?, indexPath: IndexPath?)
+    {
+        if let cardDatas = cardDatas, let indexPath = indexPath
+        {
+            let data = cardDatas[indexPath.row]
+            self.backgroundColor = .clear
+            self.layer.cornerRadius = self.frame.width * 0.05
+            self.clipsToBounds = true
+            self.cardTitle.text = data.cardTitle
+            self.cardTitle.textColor = .white
+            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
+            self.addSubview(cardTitle)
+        }
+    }
     
+    func setUpMutiple(cardDatas: [MainModel]?, indexPath: IndexPath?)
+       {
+           if let cardDatas = cardDatas, let indexPath = indexPath
+           {
+               let data = cardDatas[indexPath.row]
+               self.backgroundColor = .clear
+               self.layer.cornerRadius = self.frame.width * 0.05
+               self.clipsToBounds = true
+               self.cardTitle.text = data.cardTitle
+               self.cardTitle.textColor = .white
+               self.backgroundView = UIImageView(image: UIImage(named:"redCard"))
+               self.addSubview(cardTitle)
+           }
+       }
 }

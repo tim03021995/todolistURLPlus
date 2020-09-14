@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		530D261D250F445F00AEBCC8 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530D261C250F445F00AEBCC8 /* MainModel.swift */; };
 		5332F8AD250679F900192A5F /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5332F8AC250679F900192A5F /* CardCell.swift */; };
 		53C16106250910E700C91D16 /* ListPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C16105250910E700C91D16 /* ListPageVC.swift */; };
 		9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8C2509BE14002C8E71 /* ListBaseView.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		530D261C250F445F00AEBCC8 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		5332F8AC250679F900192A5F /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		53C16105250910E700C91D16 /* ListPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageVC.swift; sourceTree = "<group>"; };
 		9718BB8C2509BE14002C8E71 /* ListBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBaseView.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				FBC901952500E02400F6FA40 /* MainPageVC.swift */,
 				5332F8AC250679F900192A5F /* CardCell.swift */,
+				530D261C250F445F00AEBCC8 /* MainModel.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */,
 				D2B0644725008AC700000444 /* UserInfoView.swift in Sources */,
 				D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */,
+				530D261D250F445F00AEBCC8 /* MainModel.swift in Sources */,
 				5332F8AD250679F900192A5F /* CardCell.swift in Sources */,
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,
 				FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */,
