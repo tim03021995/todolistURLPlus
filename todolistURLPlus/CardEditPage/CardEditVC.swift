@@ -34,8 +34,9 @@ class CardEditVC: UIViewController {
     }
     func refreshView(data:TaskModel){
         self.cardEditView.setUserData(
+            funtionType: taskData.funtionType ?? TaskModel.FuntionType.create,
             image: data.image ?? UIImage(systemName: "photo")!,
-            title: data.title ?? "Unknow",
+            title: data.title ?? "Please input Title",
             script: data.description ?? "Unknow",
             color: data.tag ?? ColorsButtonType.red)
         self.cardEditView.colorsCollectionView.delegate = self
@@ -55,18 +56,22 @@ class CardEditVC: UIViewController {
     }
     #warning("標記一下")
     func saveTask(){
-        //        let headers = ["userToken":UserToken.shared.userToken]
-        //        let parameters = ["id":]
-        //        //let request = HTTPRequest(endpoint: .task, method: .PUT, headers: headers)
-        //        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: <#T##[String : Any]?#>, headers: <#T##[String : String]?#>, id: <#T##Int?#>)
-        //        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
-        //            switch result {
-        //            case .success(let a):
-        //                print(a)
-        //            case .failure(let err):
-        //                print(err)
-        //            }
-        //        }
+//        let headers = ["userToken":UserToken.shared.userToken]
+//        let parameters = [
+//            "item" : taskData.title,
+//            "card_id" : taskData.cardID,
+//            "tag" : taskData.tag,
+//            "description" : taskData.description,
+//            ]
+//        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: parameters, headers: headers, id: taskData.taskID)
+//        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
+//            switch result {
+//            case .success(let a):
+//                print(a)
+//            case .failure(let err):
+//                print(err)
+//            }
+//        }
     }
     func createTask(){
         //        let headers = ["userToken":UserToken.shared.userToken]
@@ -85,6 +90,9 @@ class CardEditVC: UIViewController {
         photoController.delegate = self
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
+    }
+    @objc func deleteTask(){
+        
     }
     
 }
