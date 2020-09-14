@@ -11,7 +11,6 @@ import UIKit
 class ListPageVC: UIViewController {
     var cardData: MainModel!
     
-    var test = ""
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
@@ -22,7 +21,11 @@ class ListPageVC: UIViewController {
                                  y: self.bottomOfNaviBar * 1.25,
                                  width: ScreenSize.width.value * 0.9,
                                  height: ScreenSize.height.value * 0.1)
-            label.text = "How to get a Joey"
+            
+            if let cardTitle = self.cardData.cardTitle
+            {
+                label.text = cardTitle
+            }
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
             
@@ -61,7 +64,7 @@ class ListPageVC: UIViewController {
         addSubview()
         listBaseView.tableView.delegate = self
         listBaseView.tableView.dataSource = self
-        print("test = \(test)")
+        
         // Do any additional setup after loading the view.
     }
     
