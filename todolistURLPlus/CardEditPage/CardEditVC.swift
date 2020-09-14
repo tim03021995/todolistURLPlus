@@ -9,7 +9,7 @@
 import UIKit
 
 class CardEditVC: UIViewController {
-    var taskData = TaskModel(){
+    private var taskData = TaskModel(){
         didSet{
             refreshView(data: taskData)
         }
@@ -32,7 +32,7 @@ class CardEditVC: UIViewController {
             break
         }
     }
-    func refreshView(data:TaskModel){
+    private func refreshView(data:TaskModel){
         self.cardEditView.setUserData(
             funtionType: taskData.funtionType ?? TaskModel.FuntionType.create,
             image: data.image ?? UIImage(systemName: "photo")!,
@@ -55,7 +55,7 @@ class CardEditVC: UIViewController {
         self.taskData.funtionType = data.funtionType
     }
     #warning("標記一下")
-    func saveTask(){
+    private func saveTask(){
 //        let headers = ["userToken":UserToken.shared.userToken]
 //        let parameters = [
 //            "item" : taskData.title,
@@ -73,7 +73,7 @@ class CardEditVC: UIViewController {
 //            }
 //        }
     }
-    func createTask(){
+    private func createTask(){
         //        let headers = ["userToken":UserToken.shared.userToken]
         //        let request = HTTPRequest(endpoint: .task, method: .GET, headers: headers)
         //        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
