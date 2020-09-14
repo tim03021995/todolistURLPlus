@@ -11,7 +11,7 @@ import UIKit
 class CardEditVC: UIViewController {
     private var taskData = TaskModel(){
         didSet{
-            refreshView(data: taskData)
+            refreshColor(data: taskData)
         }
     }
     private let cardEditView = CardEditView()
@@ -36,12 +36,15 @@ class CardEditVC: UIViewController {
         }
     }
     private func refreshView(data:TaskModel){
-        self.cardEditView.setUserData(
-            funtionType: taskData.funtionType ?? TaskModel.FuntionType.create,
-            image: data.image ?? UIImage(systemName: "photo")!,
-            title: data.title ?? "Please input Title",
-            script: data.description ?? "Unknow",
-            color: data.tag ?? ColorsButtonType.red)
+        self.cardEditView.setUserData(data: data)
+        self.cardEditView.colorsCollectionView.delegate = self
+        self.cardEditView.scrollView.delegate = self
+        self.cardEditView.textView.delegate = self
+        self.cardEditView.colorsCollectionView.reloadData()
+        self.view = cardEditView
+    }
+    private func refreshColor(data:TaskModel){
+        self.cardEditView.refreshColor(color: data.tag!)
         self.cardEditView.colorsCollectionView.delegate = self
         self.cardEditView.scrollView.delegate = self
         self.cardEditView.textView.delegate = self
@@ -49,13 +52,32 @@ class CardEditVC: UIViewController {
         self.view = cardEditView
     }
     func setData(data:TaskModel){
-        self.taskData.cardID = data.cardID
-        self.taskData.taskID = data.taskID
-        self.taskData.description = data.description
-        self.taskData.image = data.image
-        self.taskData.tag = data.tag
-        self.taskData.title = data.title
-        self.taskData.funtionType = data.funtionType
+        switch data.funtionType {
+        case .create:
+            self.taskData.cardID = data.cardID
+            self.taskData.taskID = data.taskID
+            self.taskData.description = "Please input"
+            self.taskData.image = UIImage(systemName: "photo")!
+            self.taskData.tag = ColorsButtonType.red
+            self.taskData.title = "Please input Title"
+            self.taskData.funtionType = .create
+        case .edit:
+            self.taskData.cardID = data.cardID
+            self.taskData.taskID = data.taskID
+            self.taskData.description = data.description
+            self.taskData.image = data.image
+            self.taskData.tag = data.tag
+            self.taskData.title = data.title
+            self.taskData.funtionType = data.funtionType
+        case .none:
+            break
+        }
+        self.cardEditView.colorsCollectionView.delegate = self
+        self.cardEditView.scrollView.delegate = self
+        self.cardEditView.textView.delegate = self
+        self.cardEditView.colorsCollectionView.reloadData()
+        cardEditView.setUserData(data: self.taskData)
+        self.view = cardEditView
     }
     #warning("標記一下")
     private func saveTask(){
@@ -83,7 +105,7 @@ class CardEditVC: UIViewController {
         let headers = ["userToken":UserToken.shared.userToken]
         let parameters = [
             "title" : taskData.title ?? "",
-            "card_id" : cardID,
+            "card_id" : "\(cardID)",
             "tag" : taskData.tag ?? ColorsButtonType.red,
             "description" : taskData.description ?? "",
             ] as [String : Any]
