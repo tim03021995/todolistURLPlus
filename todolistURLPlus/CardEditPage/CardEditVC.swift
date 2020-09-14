@@ -83,11 +83,11 @@ class CardEditVC: UIViewController {
         guard let cardID = taskData.cardID else {return}
         let headers = ["userToken":UserToken.shared.userToken]
         let parameters = [
-            "title" : taskData.title ?? "",
+            "title" : "test123",
             "card_id" : "\(cardID)",
-            "tag" : taskData.tag?.rawValue ?? ColorsButtonType.red.rawValue,
+            "tag" : "red",
             "description" : taskData.description ?? "",
-            ] as [String : Any]
+            ] 
         print(parameters)
         let request = HTTPRequest(endpoint: .task, method: .POST, parameters: parameters , headers: headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
