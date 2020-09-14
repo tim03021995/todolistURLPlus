@@ -9,7 +9,7 @@
 import UIKit
 
 class CardEditVC: UIViewController {
-    var taskData = TaskModel(){
+    private var taskData = TaskModel(){
         didSet{
             refreshView(data: taskData)
         }
@@ -35,10 +35,11 @@ class CardEditVC: UIViewController {
             break
         }
     }
-    func refreshView(data:TaskModel){
+    private func refreshView(data:TaskModel){
         self.cardEditView.setUserData(
+            funtionType: taskData.funtionType ?? TaskModel.FuntionType.create,
             image: data.image ?? UIImage(systemName: "photo")!,
-            title: data.title ?? "Unknow",
+            title: data.title ?? "Please input Title",
             script: data.description ?? "Unknow",
             color: data.tag ?? ColorsButtonType.red)
         self.cardEditView.colorsCollectionView.delegate = self
@@ -57,37 +58,54 @@ class CardEditVC: UIViewController {
         self.taskData.funtionType = data.funtionType
     }
     #warning("標記一下")
-    func saveTask(){
-        //        let headers = ["userToken":UserToken.shared.userToken]
-        //        let parameters = ["id":]
-        //        //let request = HTTPRequest(endpoint: .task, method: .PUT, headers: headers)
-        //        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: <#T##[String : Any]?#>, headers: <#T##[String : String]?#>, id: <#T##Int?#>)
-        //        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
-        //            switch result {
-        //            case .success(let a):
-        //                print(a)
-        //            case .failure(let err):
-        //                print(err)
-        //            }
-        //        }
+    private func saveTask(){
+        guard let cardID = taskData.cardID else {return}
+        let headers = ["userToken":UserToken.shared.userToken]
+        let parameters = [
+            "title" : taskData.title ?? "",
+            "card_id" : cardID,
+            "tag" : taskData.tag ?? ColorsButtonType.red,
+            "description" : taskData.description ?? "",
+            ] as [String : Any]
+        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: parameters, headers: headers, id: taskData.taskID)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
+            switch result {
+            case .success(let a):
+                print("edit success")
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
-    func createTask(){
-        //        let headers = ["userToken":UserToken.shared.userToken]
-        //        let request = HTTPRequest(endpoint: .task, method: .GET, headers: headers)
-        //        NetworkManager().sendRequest(with: request.send()) { (result:Result<TaskReaponse,NetworkError>) in
-        //            switch result {
-        //            case .success(let a):
-        //                print(a)
-        //            case .failure(let err):
-        //                print(err)
-        //            }
-        //        }
+    private func createTask(){
+        guard let cardID = taskData.cardID else {return}
+        let headers = ["userToken":UserToken.shared.userToken]
+        let parameters = [
+            "title" : taskData.title ?? "",
+            "card_id" : cardID,
+            "tag" : taskData.tag ?? ColorsButtonType.red,
+            "description" : taskData.description ?? "",
+            ] as [String : Any]
+        let request = HTTPRequest(endpoint: .task, method: .POST, parameters: parameters , headers: headers)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
+            switch result {
+            case .success(let a):
+                print("create success")
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
     @objc func takeImage() {
         let photoController = UIImagePickerController()
         photoController.delegate = self
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
+    }
+    @objc func deleteTask(){
+        dismiss(animated: true, completion: nil)
     }
     
 }

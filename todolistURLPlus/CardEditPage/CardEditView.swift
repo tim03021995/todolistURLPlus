@@ -103,6 +103,19 @@ class CardEditView: UIView {
     view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     return view
 }()
+    var deleteButton:UIButton = {
+        let button = UIButton(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: ScreenSize.width.value * 0.7,
+            height: ScreenSize.height.value * 0.2)
+        )
+        button.setTitle("Delete", for: .focused)
+        button.addTarget(self, action: #selector(CardEditVC.deleteTask), for: .touchDown)
+        button.layer.cornerRadius = button.frame.width * 0.05
+        button.backgroundColor = .lightGray
+        return button
+    }()
     override init(frame: CGRect) {
         super .init(frame: frame)
         colorsCollectionView.dataSource = self
@@ -163,14 +176,26 @@ class CardEditView: UIView {
         
 
     }
-    func setUserData(image:UIImage,title:String,script:String,color:ColorsButtonType){
+    func setUserData(funtionType:TaskModel.FuntionType,image:UIImage,title:String,script:String,color:ColorsButtonType){
+        if funtionType == .edit{
+            
+        }
         imageView.image = image
         titleTextField.text = title
         textView.text = script
         textView.resetHight(textView)
         self.selectColor = color
     }
-    
+    func addDeleteButton(){
+        let space = ScreenSize.spaceY.value
+        addSubview(deleteButton)
+        deleteButton.snp.makeConstraints { (make) in
+            make.top.equalTo(colorsCollectionView.snp.bottom).offset(space)
+            make.centerX.equalTo(textView)
+            make.width.equalTo(imageView)
+            make.height.equalTo(deleteButton.snp.width).multipliedBy(0.2)
+        }
+    }
 }
 
 
@@ -199,21 +224,21 @@ extension CardEditView:UICollectionViewDataSource{
         return cell
         
     }
-    func showBlurEffect() {
-    //创建一个模糊效果
-    let blurEffect = UIBlurEffect(style: .light)
-    //创建一个承载模糊效果的视图
-    let blurView = UIVisualEffectView(effect: blurEffect)
-    blurView.frame = CGRect(x: 0, y: 64, width: 100 , height:100)
-    let label = UILabel(frame: CGRect(x: 10, y: 100, width: 100, height: 100))
-    label.text = "bfjnecsjdkcmslc,samosacmsacdfvneaui"
-    label.font = UIFont.boldSystemFont(ofSize: 30)
-    label.numberOfLines = 0
-    label.textAlignment = .center
-    label.textColor = UIColor.white
-    blurView.contentView.addSubview(label)
-    addSubview(blurView)
-    }
+//    func showBlurEffect() {
+//    //创建一个模糊效果
+//    let blurEffect = UIBlurEffect(style: .light)
+//    //创建一个承载模糊效果的视图
+//    let blurView = UIVisualEffectView(effect: blurEffect)
+//    blurView.frame = CGRect(x: 0, y: 64, width: 100 , height:100)
+//    let label = UILabel(frame: CGRect(x: 10, y: 100, width: 100, height: 100))
+//    label.text = "bfjnecsjdkcmslc,samosacmsacdfvneaui"
+//    label.font = UIFont.boldSystemFont(ofSize: 30)
+//    label.numberOfLines = 0
+//    label.textAlignment = .center
+//    label.textColor = UIColor.white
+//    blurView.contentView.addSubview(label)
+//    addSubview(blurView)
+//    }
 }
 
 
