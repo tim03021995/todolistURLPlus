@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-    var cardDatas = [MainModel]()
+    var cardDatas = [CardModel]()
     
     ///設置背景
     let userName = ""
@@ -399,7 +399,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @objc func creatNewCard()
     {
       
-            self.cardDatas.append(MainModel(cardID: cardDatas.count))
+            self.cardDatas.append(CardModel(cardID: cardDatas.count))
         singleCardCollectionView.reloadData()
             print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行")
 
@@ -428,6 +428,7 @@ enum CollectionViewCellIdentifier: String
 func getCard(){
     let header = ["userToken":UserToken.shared.userToken]
     let request = HTTPRequest(endpoint: .card, method: .GET, headers: header).send()
+    
     NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
         switch result {
             
