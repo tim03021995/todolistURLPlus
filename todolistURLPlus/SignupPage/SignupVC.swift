@@ -88,15 +88,16 @@ class SignupVC: UIViewController {
             return
         }
         
-        let rgisterRequest = HTTPRequest(endpoint: .register, method: .POST, parameters: parameters)
+        let rgisterRequest = HTTPRequest(endpoint: .register, contentType: .json, method: .POST, parameters: parameters)
         
         NetworkManager().sendRequest(with: rgisterRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             switch result{
                 
-            case .success(let message):
-                print(message)
-                if let errorMessage = message.error {
-                    print(errorMessage)
+            case .success(let decodedData):
+                if let errorMessage = decodedData.error {
+                    self.present(.makeAlert(title: "Error", message: errorMessage, handler: {
+                        #warning("跳到錯誤的地方") 
+                    }), animated: true)
                 }else {
                     self.navigationController?.popToRootViewController(animated: true)
                 }
