@@ -22,7 +22,10 @@ class UserInfoVC: UIViewController {
     }
     @objc func logoutOut(){
         UserToken.shared.clearToken()
-        self.dismiss(animated: true) 
+        self.dismiss(animated: true)
+        let vc = LoginVC()
+        show(vc , sender: nil)
+        
     }
 
 }
