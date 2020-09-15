@@ -16,6 +16,7 @@ struct HTTPRequest {
     var urlString:String {
         if let id = id {
             return baseURL + endpoint.rawValue + "/{\(id)}"
+            print(urlString)
         } else {
             return baseURL + endpoint.rawValue
         }
@@ -32,9 +33,9 @@ struct HTTPRequest {
     ///包裝request
     func send()-> URLRequest{
         
-        let url = URL(string: self.urlString)!
+        let url = URL(string: self.urlString)
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: url!)
         
         request.httpMethod = method.rawValue
         
