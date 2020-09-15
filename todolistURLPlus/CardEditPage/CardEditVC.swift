@@ -13,7 +13,7 @@ class CardEditVC: UIViewController {
     //private var taskData = TaskModel()
     private var funtionType:TaskModel.FuntionType?
     private var cardID:Int = 0
-    private var taskID:Int = 0
+    private var taskID:Int?
     private var color:ColorsButtonType = .red {
         didSet{
             refreshColor(color: color)
@@ -75,7 +75,7 @@ class CardEditVC: UIViewController {
                 break
             }
             self.cardID = data.cardID!
-            self.cardID = data.taskID!
+            self.taskID = data.taskID
             viewData.funtionType = data.funtionType
             return viewData
         }()
