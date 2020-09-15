@@ -74,7 +74,7 @@ class LoginVC: UIViewController {
         guard let parameters = validateAccount() else{ return }
         
         //包裝需要的參數
-        let getTokenRequest = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)
+        let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters)
         
         NetworkManager().sendRequest(with: getTokenRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             
@@ -83,18 +83,16 @@ class LoginVC: UIViewController {
             case .success(let decodedData):
                 
                 if let err = decodedData.error{
-                    print(err)
+                    self.present(.makeAlert(title: "Error", message: err, handler: {
+                        self.dismiss(animated: true, completion: nil)
+                    }), animated: true)
                 }else{
                     //存token
                     guard let token = decodedData.loginData?.userToken else { return }
                     UserToken.shared.updateToken(by: token)
                     self.navigationController?.pushViewController(MainPageVC(), animated: true)                }
                 
-                
-            case .failure(let err):
-                self.present(.makeAlert(title: "Error", message: err.description, handler: {
-                    self.dismiss(animated: true, completion: nil)
-                }), animated: true)
+            case .failure(let err): print(err.description)
             }
         }
     }

@@ -134,11 +134,18 @@ extension ListPageVC: UITableViewDataSource{
        
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //     print(indexPath)
-        
-        toCardVC(data: cardData, indexPath: indexPath)
-        
-    }
-    
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       //     print(indexPath)
+        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
+            let vc = CardEditVC()
+        #warning("我要card的id 感謝")
+        let taskModel = TaskModel(funtionType: .edit, cardID: 1, taskID: 1, title: "123", description: "123", image: nil, tag: .darkBlue)
+        vc.setData(data: taskModel)
+        //TEST
+  
+//        show(vc, sender: nil)
+        navigationController?.pushViewController(vc, animated: true)
+//        present(vc, animated: true, completion: nil)
+        }
+
 }

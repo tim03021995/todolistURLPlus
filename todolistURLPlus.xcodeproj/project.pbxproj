@@ -35,8 +35,10 @@
 		D2B064532500E71500000444 /* UserImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* UserImageFactory.swift */; };
 		FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C0D4C25075D9500C68391 /* StringExtension.swift */; };
 		FB34E1192509E05E000F5EAD /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB34E1182509E05E000F5EAD /* TaskResponse.swift */; };
+		FB43E2C6251054E900687CFF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43E2C5251054E900687CFF /* NetworkError.swift */; };
+		FB43E2C825106C3E00687CFF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43E2C725106C3E00687CFF /* NetworkManager.swift */; };
 		FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D62500F52F00E9289C /* Alert.swift */; };
-		FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Networking.swift */; };
+		FB7AF8D92500FA3F00E9289C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Request.swift */; };
 		FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */; };
 		FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC901952500E02400F6FA40 /* MainPageVC.swift */; };
 		FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */; };
@@ -77,8 +79,10 @@
 		D2B064522500E71500000444 /* UserImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageFactory.swift; sourceTree = "<group>"; };
 		FB2C0D4C25075D9500C68391 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		FB34E1182509E05E000F5EAD /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
+		FB43E2C5251054E900687CFF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		FB43E2C725106C3E00687CFF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FB7AF8D62500F52F00E9289C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		FB7AF8D82500FA3F00E9289C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		FB7AF8D82500FA3F00E9289C /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInfo.swift; sourceTree = "<group>"; };
 		FBC901952500E02400F6FA40 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		FBCF1EA22500BBBE00E5F686 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -243,11 +247,13 @@
 		FBEF303B24FF8531003F5945 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */,
-				FB7AF8D82500FA3F00E9289C /* Networking.swift */,
+				FB7AF8D82500FA3F00E9289C /* Request.swift */,
+				FB43E2C725106C3E00687CFF /* NetworkManager.swift */,
 				FBEAB4D2250F1CC9005041F3 /* LoginResponse.swift */,
 				FBEAB4D4250F1CE9005041F3 /* CardResponse.swift */,
 				FB34E1182509E05E000F5EAD /* TaskResponse.swift */,
+				FB43E2C5251054E900687CFF /* NetworkError.swift */,
+				FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 				D249010C2508EBB2003E9497 /* GlassFactory.swift in Sources */,
 				D2B064532500E71500000444 /* UserImageFactory.swift in Sources */,
 				D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */,
+				FB43E2C825106C3E00687CFF /* NetworkManager.swift in Sources */,
 				D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */,
 				9718BB8F2509BE14002C8E71 /* ListTableViewCell.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
@@ -361,10 +368,11 @@
 				FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */,
 				FB34E1192509E05E000F5EAD /* TaskResponse.swift in Sources */,
 				FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */,
+				FB43E2C6251054E900687CFF /* NetworkError.swift in Sources */,
 				9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */,
 				FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */,
 				FBEF303724FF5579003F5945 /* LoginVC.swift in Sources */,
-				FB7AF8D92500FA3F00E9289C /* Networking.swift in Sources */,
+				FB7AF8D92500FA3F00E9289C /* Request.swift in Sources */,
 				D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
