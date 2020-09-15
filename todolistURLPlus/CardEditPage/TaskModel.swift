@@ -54,7 +54,7 @@ class TaskModelManerger{
     }
     static func create(_ parameters:[String:Any]){
         let headers = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .task, method: .POST, parameters: parameters , headers:  headers)
+        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .POST, parameters: parameters , headers:  headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
@@ -66,7 +66,7 @@ class TaskModelManerger{
     }
     static func edit(_ parameters:[String:Any],_ taskID:Int){
         let headers = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: parameters, headers: headers, id: taskID)
+        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: taskID)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
@@ -79,7 +79,7 @@ class TaskModelManerger{
     }
     static func delete(_ taskID:Int){
         let headers = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint:.task, method:.DELETE, headers: headers, id:taskID).send()
+        let request = HTTPRequest(endpoint:.task, contentType: .json, method:.DELETE, headers: headers, id:taskID).send()
         NetworkManager().sendRequest(with: request) { (result:Result<DeleteTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
