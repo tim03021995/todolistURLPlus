@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		530D261D250F445F00AEBCC8 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530D261C250F445F00AEBCC8 /* MainModel.swift */; };
+		530D261D250F445F00AEBCC8 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530D261C250F445F00AEBCC8 /* CardModel.swift */; };
 		5332F8AD250679F900192A5F /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5332F8AC250679F900192A5F /* CardCell.swift */; };
 		53C16106250910E700C91D16 /* ListPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C16105250910E700C91D16 /* ListPageVC.swift */; };
 		9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8C2509BE14002C8E71 /* ListBaseView.swift */; };
@@ -21,6 +21,7 @@
 		D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D249010E25090551003E9497 /* IQKeyboardManagerSwift */; };
 		D249011225090A40003E9497 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011125090A40003E9497 /* ForgotPasswordVC.swift */; };
 		D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011325090A63003E9497 /* ForgotPasswordView.swift */; };
+		D24901162510A41C003E9497 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24901152510A41C003E9497 /* MainVC.swift */; };
 		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
@@ -51,7 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		530D261C250F445F00AEBCC8 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		530D261C250F445F00AEBCC8 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		5332F8AC250679F900192A5F /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		53C16105250910E700C91D16 /* ListPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageVC.swift; sourceTree = "<group>"; };
 		9718BB8C2509BE14002C8E71 /* ListBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBaseView.swift; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		D249010B2508EBB2003E9497 /* GlassFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassFactory.swift; sourceTree = "<group>"; };
 		D249011125090A40003E9497 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		D249011325090A63003E9497 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		D24901152510A41C003E9497 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		D24D01D225074D4F00016630 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D291DEAA2500FAB3001FE33E /* SetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoView.swift; sourceTree = "<group>"; };
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
@@ -210,7 +212,7 @@
 			children = (
 				FBC901952500E02400F6FA40 /* MainPageVC.swift */,
 				5332F8AC250679F900192A5F /* CardCell.swift */,
-				530D261C250F445F00AEBCC8 /* MainModel.swift */,
+				530D261C250F445F00AEBCC8 /* CardModel.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				FBEF303624FF5579003F5945 /* LoginVC.swift */,
+				D24901152510A41C003E9497 /* MainVC.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -359,9 +362,10 @@
 				FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */,
 				FBEF303924FF6D1B003F5945 /* CustomBtn.swift in Sources */,
 				D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */,
+				D24901162510A41C003E9497 /* MainVC.swift in Sources */,
 				D2B0644725008AC700000444 /* UserInfoView.swift in Sources */,
 				D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */,
-				530D261D250F445F00AEBCC8 /* MainModel.swift in Sources */,
+				530D261D250F445F00AEBCC8 /* CardModel.swift in Sources */,
 				5332F8AD250679F900192A5F /* CardCell.swift in Sources */,
 				FBEAB4D3250F1CC9005041F3 /* LoginResponse.swift in Sources */,
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,

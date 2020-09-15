@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-    var cardDatas = [MainModel]()
+    var cardDatas = [CardModel]()
     
     ///設置背景
     let userName = ""
@@ -155,7 +155,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                   y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
                                   width: ScreenSize.width.value * 0.25,
                                   height: ScreenSize.width.value * 0.2)
-//            print(button.frame.height * 0.25)
+            
             
             button.titleEdgeInsets = UIEdgeInsets(top: 0,
                                                   left: 0,
@@ -190,8 +190,16 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if UserToken.shared.userToken == "" {
+////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
+//            let vc = LoginVC.instantiate()
+//
+//            present(vc, animated: true , completion: nil)
+//        }
         setUI()
     }
+    
+
 
 
 
@@ -399,8 +407,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @objc func creatNewCard()
     {
       
-            self.cardDatas.append(MainModel(cardID: cardDatas.count))
+            self.cardDatas.append(CardModel(cardID: cardDatas.count))
         singleCardCollectionView.reloadData()
+        
             print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行")
 
         

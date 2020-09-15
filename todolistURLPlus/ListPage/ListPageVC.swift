@@ -9,7 +9,7 @@
 import UIKit
 
 class ListPageVC: UIViewController {
-    var cardData: MainModel!
+    var cardData: CardModel!
     
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
@@ -79,11 +79,10 @@ class ListPageVC: UIViewController {
     
     @objc func tapCreatTaskBtn()
     {
-        toCardVC(data: nil, indexPath: nil)
-        print("點此新增任務，但是還沒寫內部實作，我在\(#file)第\(#line)行等你唷～")
+        toCardVC(data: cardData, indexPath: nil)
     }
     
-    func toCardVC(data: MainModel?, indexPath: IndexPath?)
+    func toCardVC(data: CardModel?, indexPath: IndexPath?)
     {
         let vc = CardEditVC()
         if let indexPath = indexPath, let data = data?.taskModel?[indexPath.section]
@@ -94,9 +93,10 @@ class ListPageVC: UIViewController {
         vc.setData(data: editData)
         navigationController?.pushViewController(vc, animated: true)
 
-        }else
+        }else if let cardID = data?.cardID
        {
-          let createData = TaskModel(funtionType: .create)
+        print("cardID = \(cardID)")
+        let createData = TaskModel(funtionType: .create, cardID: cardID)
              vc.setData(data: createData)
              navigationController?.pushViewController(vc, animated: true)
         }

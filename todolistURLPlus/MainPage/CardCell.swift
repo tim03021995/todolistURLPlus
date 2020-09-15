@@ -23,7 +23,7 @@ class CardCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    func setUpSingle(cardDatas: [MainModel]?, indexPath: IndexPath?)
+    func setUpSingle(cardDatas: [CardModel]?, indexPath: IndexPath?)
     {
         if let cardDatas = cardDatas, let indexPath = indexPath
         {
@@ -38,7 +38,7 @@ class CardCell: UICollectionViewCell {
         }
     }
     
-    func setUpMutiple(cardDatas: [MainModel]?, indexPath: IndexPath?)
+    func setUpMutiple(cardDatas: [CardModel]?, indexPath: IndexPath?)
        {
            if let cardDatas = cardDatas, let indexPath = indexPath
            {

@@ -48,7 +48,6 @@ class TaskModelManerger{
 //            parameters["image"] = image
 //        }
         parameters["card_id"] = cardID
-       // parameters["task_id"] = taskID
         parameters["tag"] = color.rawValue
         return parameters
     }
