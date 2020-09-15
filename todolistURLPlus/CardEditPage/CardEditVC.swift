@@ -68,7 +68,7 @@ class CardEditVC: UIViewController {
             "tag" : taskData.tag?.rawValue ?? ColorsButtonType.red.rawValue,
             "description" : taskData.description ?? "",
             ] as [String : Any]
-        let request = HTTPRequest(endpoint: .task, method: .PUT, parameters: parameters, headers: headers, id: taskData.taskID)
+        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: taskData.taskID)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
@@ -89,7 +89,7 @@ class CardEditVC: UIViewController {
             "description" : taskData.description ?? "",
             ] 
         print(parameters)
-        let request = HTTPRequest(endpoint: .task, method: .POST, parameters: parameters , headers: headers)
+        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .POST, parameters: parameters , headers: headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):

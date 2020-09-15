@@ -427,7 +427,7 @@ enum CollectionViewCellIdentifier: String
 #warning("這邊GET Card")
 func getCard(){
     let header = ["userToken":UserToken.shared.userToken]
-    let request = HTTPRequest(endpoint: .card, method: .GET, headers: header).send()
+    let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
     NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
         switch result {
             
@@ -444,7 +444,7 @@ func getCard(){
         //TODO 新增的card name
         let parameter = ["card_name":"新增的card name"]
         
-        let request = HTTPRequest(endpoint: .card, method: .POST, parameters: parameter, headers: header).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
         
         NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
             switch result{
