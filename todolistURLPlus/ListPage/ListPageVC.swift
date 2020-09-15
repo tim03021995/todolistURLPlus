@@ -79,7 +79,7 @@ class ListPageVC: UIViewController {
     
     @objc func tapCreatTaskBtn()
     {
-        toCardVC(data: nil, indexPath: nil)
+        toCardVC(data: cardData, indexPath: nil)
     }
     
     func toCardVC(data: CardModel?, indexPath: IndexPath?)
@@ -95,6 +95,7 @@ class ListPageVC: UIViewController {
 
         }else if let cardID = data?.cardID
        {
+        print("cardID = \(cardID)")
         let createData = TaskModel(funtionType: .create, cardID: cardID)
              vc.setData(data: createData)
              navigationController?.pushViewController(vc, animated: true)
