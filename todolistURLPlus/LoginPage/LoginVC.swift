@@ -17,13 +17,13 @@ extension Storyboarded where Self: UIViewController {
     static func instantiate() -> Self {
         // this pulls out "MyApp.MyViewController"
         let fullName = NSStringFromClass(self)
-
+        
         // this splits by the dot and uses everything after, giving "MyViewController"
         let className = fullName.components(separatedBy: ".")[1]
-
+        
         // load our storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-
+        
         // instantiate a view controller with that identifier, and force cast as the type that was requested
         return storyboard.instantiateViewController(withIdentifier: className) as! Self
     }
@@ -58,7 +58,9 @@ class LoginVC: UIViewController, Storyboarded {
         passwordTF.text = "test12345"
     }
     //MARK:- Functions
-    
+    deinit {
+        print("123")
+    }
     
     
     fileprivate func propertiesSetting() {
@@ -109,7 +111,10 @@ class LoginVC: UIViewController, Storyboarded {
                     //存token
                     guard let token = decodedData.loginData?.userToken else { return }
                     UserToken.shared.updateToken(by: token)
-                    self.navigationController?.pushViewController(MainPageVC(), animated: true)                }
+                    let vc = MainPageVC()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true)
+                }
                 
             case .failure(let err): print(err.description)
             }
@@ -118,7 +123,7 @@ class LoginVC: UIViewController, Storyboarded {
     
     @IBAction func signInTapped(_ sender: CustomButton) {
         #warning("連點ＢＵＧ  點一次之後要擋")
-
+        
         signIn()
     }
     
