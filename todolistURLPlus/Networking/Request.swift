@@ -16,7 +16,6 @@ struct HTTPRequest {
     var urlString:String {
         if let id = id {
             return baseURL + endpoint.rawValue + "/{\(id)}"
-            print(urlString)
         } else {
             return baseURL + endpoint.rawValue
         }

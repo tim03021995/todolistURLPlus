@@ -27,7 +27,8 @@ struct NetworkManager {
         task.resume()
     }
     
-    private func responseHandler<T:Codable>(data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
+    private func responseHandler<T:Codable>
+        (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
         
         switch response.statusCode {
         case 200 ... 299:

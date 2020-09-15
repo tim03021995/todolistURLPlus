@@ -9,7 +9,8 @@
 import UIKit
 
 class CardEditVC: UIViewController {
-     let headers = ["userToken":UserToken.shared.userToken]
+    
+    let headers = ["userToken":UserToken.shared.userToken]
     //private var taskData = TaskModel()
     private var funtionType:TaskModel.FuntionType?
     private var cardID:Int = 0
