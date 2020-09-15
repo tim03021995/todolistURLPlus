@@ -190,7 +190,23 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if UserToken.shared.userToken == "" {
+////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
+//            let vc = LoginVC.instantiate()
+//
+//            present(vc, animated: true , completion: nil)
+//        }
         setUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if UserToken.shared.userToken == "" {
+        //            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
+            let vc = LoginVC.instantiate()
+            vc.modalPresentationStyle = .fullScreen
+                    present(vc, animated: false , completion: nil)
+                }
     }
 
 
