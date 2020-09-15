@@ -99,7 +99,7 @@ class SignupVC: UIViewController {
                         #warning("跳到錯誤的地方") 
                     }), animated: true)
                 }else {
-                    self.navigationController?.popToRootViewController(animated: true)
+                    self.dismiss(animated: true, completion: nil)
                 }
             case .failure(let err):
                 print(err.description)

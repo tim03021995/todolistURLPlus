@@ -155,7 +155,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                   y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,
                                   width: ScreenSize.width.value * 0.25,
                                   height: ScreenSize.width.value * 0.2)
-            print(button.frame.height * 0.25)
+//            print(button.frame.height * 0.25)
             
             button.titleEdgeInsets = UIEdgeInsets(top: 0,
                                                   left: 0,
