@@ -52,4 +52,3 @@ struct HTTPRequest {
 }
 
 
-//TODO  處理response
