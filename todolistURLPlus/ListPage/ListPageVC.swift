@@ -93,9 +93,9 @@ class ListPageVC: UIViewController {
         vc.setData(data: editData)
         navigationController?.pushViewController(vc, animated: true)
 
-        }else
+        }else if let cardID = data?.cardID
        {
-          let createData = TaskModel(funtionType: .create)
+        let createData = TaskModel(funtionType: .create, cardID: cardID)
              vc.setData(data: createData)
              navigationController?.pushViewController(vc, animated: true)
         }
