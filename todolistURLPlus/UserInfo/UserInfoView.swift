@@ -41,6 +41,7 @@ class UserInfoView: UIView {
     }()
     private var logoutButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .cancel, text: "logout out")
+        button.addTarget(self , action: #selector(UserInfoVC.logoutOut), for: .touchUpInside)
         return button
     }()
     
