@@ -16,7 +16,7 @@ class MainVC: UIViewController{
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if UserToken.shared.getToken() == "" {
+        if UserToken.shared.userToken == "" {
             let vc = LoginVC.instantiate()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: false , completion: nil)
