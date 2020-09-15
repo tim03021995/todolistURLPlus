@@ -13,7 +13,7 @@ class CardEditVC: UIViewController {
     //private var taskData = TaskModel()
     private var funtionType:TaskModel.FuntionType?
     private var cardID:Int = 0
-    private var taskID:Int = 0
+    private var taskID:Int?
     private var color:ColorsButtonType = .red {
         didSet{
             refreshColor(color: color)
@@ -75,7 +75,7 @@ class CardEditVC: UIViewController {
                 break
             }
             self.cardID = data.cardID!
-            self.cardID = data.taskID!
+            self.taskID = data.taskID
             viewData.funtionType = data.funtionType
             return viewData
         }()
@@ -92,7 +92,7 @@ class CardEditVC: UIViewController {
     #warning("標記一下")
     private func saveTask(){
         let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
-        TaskModelManerger.edit(parameters,taskID)
+        TaskModelManerger.edit(parameters,taskID!)
     }
     private func createTask(){
         let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
@@ -100,7 +100,7 @@ class CardEditVC: UIViewController {
     }
     @objc func deleteTask(){
         self.funtionType = .delete
-        TaskModelManerger.delete(taskID)
+        TaskModelManerger.delete(taskID!)
         dismiss(animated: true, completion: nil)
     }
     @objc func takeImage() {
