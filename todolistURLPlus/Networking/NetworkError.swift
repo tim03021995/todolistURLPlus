@@ -12,22 +12,38 @@ import Foundation
 enum NetworkError:Error{
     case systemError
     case noResponse
-    case responseError(statusCode: Int)
+    case responseError(error: Errormessage, statusCode: Int)
     case noData
     case decodeError
+    
+    
     
     var description:String{
         switch self{
             
-        case .systemError: return "Something's Wrong"
+        case .systemError: return self.localizedDescription
         case .noResponse: return "No Response"
-        case .responseError(let statusCode): return "Response Error Status Code:\(statusCode) "
+        case .responseError(error: let error, statusCode: let statusCode): return "Response Error , Status Code:\(statusCode) "
         case .noData: return "No Data"
         case .decodeError: return "Decode Error"
             
         }
     }
     
+    var errMessage:String {
+        switch self {
+
+        case .responseError(error: let error, statusCode: let statusCode):
+            return error.error
+        default:
+            return self.localizedDescription
+        }
+    }
     
+}
+
+struct Errormessage:Codable{
+    let status : Bool
+    let error : String
     
 }
