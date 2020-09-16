@@ -321,8 +321,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
         @objc func tap(){
-            let vc = TestVC()
-            navigationController?.pushViewController(vc, animated: true)
+            let vc = UserAuthority()
+//            navigationController?.pushViewController(vc, animated: true)
+            present(vc, animated: true, completion: nil)
             print(123)
         }
     

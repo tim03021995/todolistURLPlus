@@ -9,9 +9,7 @@
 import UIKit
 
 class UserAuthority: UIViewController {
-    var ppp = UINavigationController()
-    var ooo = UINavigationBar()
-    var iii = UINavigationItem()
+   
     
     var editor = ["Alvin","Ray","Jimmy","Joey"]
     var myTableView = UITableView()
