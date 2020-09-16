@@ -22,6 +22,7 @@
 		D249011225090A40003E9497 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011125090A40003E9497 /* ForgotPasswordVC.swift */; };
 		D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011325090A63003E9497 /* ForgotPasswordView.swift */; };
 		D24901162510A41C003E9497 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24901152510A41C003E9497 /* MainVC.swift */; };
+		D24901182511FD2D003E9497 /* SetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24901172511FD2C003E9497 /* SetInfoModel.swift */; };
 		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
@@ -68,6 +69,7 @@
 		D249011125090A40003E9497 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		D249011325090A63003E9497 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		D24901152510A41C003E9497 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		D24901172511FD2C003E9497 /* SetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoModel.swift; sourceTree = "<group>"; };
 		D24D01D225074D4F00016630 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D291DEAA2500FAB3001FE33E /* SetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoView.swift; sourceTree = "<group>"; };
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				D291DEAA2500FAB3001FE33E /* SetInfoView.swift */,
 				D291DEAC2500FACF001FE33E /* SetInfoVC.swift */,
+				D24901172511FD2C003E9497 /* SetInfoModel.swift */,
 			);
 			path = SetInfo;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				FBEAB4D5250F1CE9005041F3 /* CardResponse.swift in Sources */,
 				D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */,
 				FBEF303D24FF8550003F5945 /* CustomTF.swift in Sources */,
+				D24901182511FD2D003E9497 /* SetInfoModel.swift in Sources */,
 				FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */,
 				FBEF303924FF6D1B003F5945 /* CustomBtn.swift in Sources */,
 				D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */,
