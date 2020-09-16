@@ -29,8 +29,6 @@ enum ContentType:String{
 }
 
 
-
-
 //MARK:- Token
 struct UserToken {
     private(set) var userToken = ""

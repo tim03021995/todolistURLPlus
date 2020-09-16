@@ -93,8 +93,8 @@ class SignupVC: UIViewController {
         NetworkManager().sendRequest(with: rgisterRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             switch result{
                 
-            case .success(let decodedData):
-                self.present(.makeAlert(title: "Success", message: "註冊成功！", handler: {
+            case .success:
+                self.present(.makeAlert(title: "Success", message: "註冊成功！",  handler: {
                     self.dismiss(animated: true, completion: nil)
                 }), animated: true)
                 

@@ -40,10 +40,8 @@ struct NetworkManager {
             }catch{
                 completion(.failure(.decodeError))
             }
-//        case 400:
-//            completion(.failure(.responseError(statusCode: response.statusCode)))
         case 401:
-            //refresh token
+            #warning("refresh token")
             break
         default:
             do{
@@ -52,12 +50,8 @@ struct NetworkManager {
             }catch{
                 completion(.failure(.decodeError))
             }
-            
         }
-        
-
     }
-
     
 }
 

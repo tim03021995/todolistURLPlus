@@ -102,15 +102,12 @@ class LoginVC: UIViewController, Storyboarded {
             switch result{
                 
             case .success(let decodedData):
-                
-
-                    //存token
-                    let token = decodedData.loginData.userToken
-                    UserToken.shared.updateToken(by: token)
-                    let vc = MainPageVC()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
-                
+                //存token
+                guard let token = decodedData.loginData?.userToken else {return}
+                UserToken.shared.updateToken(by: token)
+                let vc = MainPageVC()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
                 
             case .failure(let err):
                 self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {

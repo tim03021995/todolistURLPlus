@@ -12,7 +12,7 @@ import Foundation
 
 struct LoginInReaponse:Codable{
     let status: Bool
-    var loginData: LoginData
+    var loginData: LoginData?
     
     enum CodingKeys: String, CodingKey {
         case status

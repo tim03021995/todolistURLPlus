@@ -14,8 +14,6 @@ struct GetAllCardResponse: Codable {
     let status: Bool
     let cardData: CardData
     
-    
-    
     enum CodingKeys: String, CodingKey {
         case status
         case cardData = "card_data"
@@ -60,7 +58,9 @@ struct GetAllCardResponse: Codable {
     
     
     struct ShowTask: Codable {
+        
         let id: Int
+        let tag: String?
         let title: String
         let status: Bool
         let createUser, updateUser: String
@@ -69,7 +69,7 @@ struct GetAllCardResponse: Codable {
         let createdAt, updatedAt: String
         
         enum CodingKeys: String, CodingKey {
-            case id, title, status
+            case id, title, status, tag
             case createUser = "create_user"
             case updateUser = "update_user"
             case description = "description"
@@ -94,16 +94,16 @@ struct GetAllCardResponse: Codable {
 
 struct PostCardResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
+    let cardData: CardData
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case cardData = "card_data"
     }
     
     
     struct CardData: Codable {
+        
         let cardName: String
         let createUser: String
         let updatedAt: String
@@ -125,15 +125,15 @@ struct PostCardResponse: Codable {
 
 struct GetCardWithIDResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
+    let cardData: CardData
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case cardData = "card_data"
     }
     
     struct CardData: Codable {
+        
         let id: Int
         let cardName: String
         let createUser: String
@@ -188,11 +188,10 @@ struct GetCardWithIDResponse: Codable {
 
 struct PutCardResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
+    let cardData: CardData
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case cardData = "card_data"
     }
     
