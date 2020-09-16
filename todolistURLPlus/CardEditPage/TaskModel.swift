@@ -44,16 +44,16 @@ class TaskModelManerger{
         if let description = data.description {
             parameters["description"] = description
         }
-//        if let image = data.image {
-//            parameters["image"] = image
-//        }
+        if let image = data.image {
+            parameters["image"] = data
+        }
         parameters["card_id"] = cardID
         parameters["tag"] = color.rawValue
         return parameters
     }
     static func create(_ parameters:[String:Any]){
         let headers = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .POST, parameters: parameters , headers:  headers)
+        let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, parameters: parameters , headers:  headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
