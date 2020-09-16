@@ -29,21 +29,34 @@ enum ContentType:String{
 }
 
 
-
-
 //MARK:- Token
 struct UserToken {
     private(set) var userToken = ""
     private init(){}
     static var shared = UserToken()
     
+    func getToken() -> String?{
+        guard let token = UserDefaults.standard.string(forKey: "token") else {return nil}
+            if token == "" {
+                return nil
+            }else {
+                return token
+            }
+    }
+    
     mutating func updateToken(by token: String){
         userToken = token
         print(userToken)
+        updateTokenToUserdefault(with: token)
     }
     mutating func clearToken(){
         userToken = ""
         print("Token cleared")
+        updateTokenToUserdefault(with: "")
+    }
+    
+    private func updateTokenToUserdefault(with token:String){
+        UserDefaults.standard.set(token, forKey: "token")
     }
     
 }

@@ -59,7 +59,7 @@ class LoginVC: UIViewController, Storyboarded {
     }
     //MARK:- Functions
     deinit {
-        print("123")
+        print("LoginPage deinit")
     }
     
     
@@ -102,21 +102,17 @@ class LoginVC: UIViewController, Storyboarded {
             switch result{
                 
             case .success(let decodedData):
+                //存token
+                guard let token = decodedData.loginData?.userToken else {return}
+                UserToken.shared.updateToken(by: token)
+                let vc = MainPageVC()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
                 
-                if let err = decodedData.error{
-                    self.present(.makeAlert(title: "Error", message: err, handler: {
-                        self.dismiss(animated: true, completion: nil)
-                    }), animated: true)
-                }else{
-                    //存token
-                    guard let token = decodedData.loginData?.userToken else { return }
-                    UserToken.shared.updateToken(by: token)
-                    let vc = MainPageVC()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
-                }
-                
-            case .failure(let err): print(err.description)
+            case .failure(let err):
+                self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
+                }), animated: true)
+                print(err.description)
             }
         }
     }
