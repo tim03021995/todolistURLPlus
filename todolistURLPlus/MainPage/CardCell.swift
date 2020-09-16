@@ -23,15 +23,15 @@ class CardCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    func setUpSingle(cardDatas: [CardModel]?, indexPath: IndexPath?)
+    func setUpSingle(showCards: [GetAllCardResponse.ShowCard], indexPath: IndexPath?)
     {
-        if let cardDatas = cardDatas, let indexPath = indexPath
+        if let indexPath = indexPath
         {
-            let data = cardDatas[indexPath.row]
+            let data = showCards[indexPath.row]
             self.backgroundColor = .clear
             self.layer.cornerRadius = self.frame.width * 0.05
             self.clipsToBounds = true
-            self.cardTitle.text = data.cardTitle
+            self.cardTitle.text = data.cardName
             self.cardTitle.textColor = .white
             self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
             self.addSubview(cardTitle)

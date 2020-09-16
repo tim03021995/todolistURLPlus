@@ -187,8 +187,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         return btn
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         getCard()
+        singleCardCollectionView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -221,7 +222,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         switch collectionView {
         case singleCardCollectionView:
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
-            singleCell.setUpSingle(cardDatas: cardDatas, indexPath: indexPath)
+            
+            singleCell.setUpSingle(showCards: showCards, indexPath: indexPath)
             
             
             return singleCell
@@ -241,8 +243,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     fileprivate func toListPageVC(indexPath: IndexPath) {
         let lPVC = ListPageVC()
         let nVC = UINavigationController(rootViewController: lPVC)
-        lPVC.cardData = cardDatas[indexPath.row]
+//        lPVC.cardData = cardDatas[indexPath.row]
         lPVC.showCard = showCards[indexPath.row]
+        lPVC.cardIndexPath = indexPath
         present(nVC, animated: true, completion: nil)
     }
     
@@ -411,8 +414,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @objc func creatNewCard()
     {
       
-            self.cardDatas.append(CardModel(cardID: cardDatas.count))
-
+        self.cardDatas.append(CardModel(cardID: cardDatas.count))
+        addCard()
+        getCard()
         singleCardCollectionView.reloadData()
         
         print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行，目前假資料有\(cardDatas.count)筆")
@@ -427,12 +431,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             switch result {
                 
             case .success(let data):
-                print("data.cardData?.showCards = \(data.cardData?.showCards.count)")
-                if let showCards = data.cardData?.showCards
-                {
-                    self.showCards = showCards
-                }
+                print("data.cardData?.showCards = \(data.cardData.showCards.count)")
+                let showCards = data.cardData.showCards
                 
+                    self.showCards = showCards
+                print("讀取資料成功，目前資料有\(showCards.count)筆")
+                self.singleCardCollectionView.reloadData()
+
                 print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
                 // data.cardData........
             case .failure(let err):
@@ -440,7 +445,26 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    
+    func addCard(){ //新增card的API方法
+        let header = ["userToken":UserToken.shared.userToken]
+        //TODO 新增的card name
+        let parameter = ["card_name":"新增的卡片"]
+        
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
+        
+        NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
+            switch result{
+                
+            case .success(let data):
+                print(data.cardData)
+                
+                
+            case .failure(let err):
+                print("err.description = \(err.description)")
+                print("err.errormessage = \(err.errMessage)")
+            }
+        }
+    }
 }
 
 
@@ -461,41 +485,7 @@ enum CollectionViewCellIdentifier: String
 
 
 #warning("這邊GET Card")
-
-
-func getCard(){
-    let header = ["userToken":UserToken.shared.userToken]
-    let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-    NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
-        switch result {
-            
-        case .success(let decodedData):
-            print(decodedData.cardData)//這裡是成功解析的東西 直接拿data.cardData.....
-        case .failure(let err):
-            print(err.description)
-            //print 給你自己看的 statusCode
-            print(err.errMessage)
-            //解析過的response的錯誤訊息內容
-        }
-    }
     
-    func addCard(){ //新增card的API方法
-        let header = ["userToken":UserToken.shared.userToken]
-        //TODO 新增的card name
-        let parameter = ["card_name":"新增的card name"]
-        
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
-        
-        NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
-            switch result{
-                
-            case .success(let data):
-                print(data.cardData)
-                
-            case .failure(let err):
-                print(err)
-            }
-        }
-    }
+    
 
 
