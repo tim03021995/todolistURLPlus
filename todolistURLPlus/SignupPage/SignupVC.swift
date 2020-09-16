@@ -94,15 +94,16 @@ class SignupVC: UIViewController {
             switch result{
                 
             case .success(let decodedData):
-                if let errorMessage = decodedData.error {
-                    self.present(.makeAlert(title: "Error", message: errorMessage, handler: {
-                        #warning("跳到錯誤的地方") 
-                    }), animated: true)
-                }else {
+                self.present(.makeAlert(title: "Success", message: "註冊成功！", handler: {
                     self.dismiss(animated: true, completion: nil)
-                }
+                }), animated: true)
+                
             case .failure(let err):
+                self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
+                    #warning("跳到錯誤的地方")
+                }), animated: true)
                 print(err.description)
+                
             }
         }
         

@@ -32,22 +32,30 @@ struct NetworkManager {
         
         switch response.statusCode {
         case 200 ... 299:
-            print("Successs" , "Status Code:\(response.statusCode)")
-        case 400:
-            completion(.failure(.responseError(statusCode: response.statusCode)))
+            do{
+                let decotedData = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decotedData))
+                print("Successs" , "Status Code:\(response.statusCode)")
+
+            }catch{
+                completion(.failure(.decodeError))
+            }
+//        case 400:
+//            completion(.failure(.responseError(statusCode: response.statusCode)))
         case 401:
             //refresh token
             break
         default:
-            break
+            do{
+                let decodedError = try JSONDecoder().decode(Errormessage.self, from: data)
+                completion(.failure(.responseError(error: decodedError, statusCode: response.statusCode)))
+            }catch{
+                completion(.failure(.decodeError))
+            }
+            
         }
         
-        do{
-            let decotedData = try JSONDecoder().decode(T.self, from: data)
-            completion(.success(decotedData))
-        }catch{
-            completion(.failure(.decodeError))
-        }
+
     }
 
     

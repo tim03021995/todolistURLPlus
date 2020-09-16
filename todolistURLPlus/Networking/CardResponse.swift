@@ -12,12 +12,12 @@ import Foundation
 
 struct GetAllCardResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
+    let cardData: CardData
+    
     
     
     enum CodingKeys: String, CodingKey {
-        case status, error
+        case status
         case cardData = "card_data"
     }
     

@@ -86,11 +86,11 @@ struct PostTaskResponse: Codable {
 
 struct PutTaskResponse: Codable {
     let status: Bool
-    let taskData: TaskData?
-    let error:String?
+    let taskData: TaskData
+    
     
     enum CodingKeys: String, CodingKey {
-        case status, error
+        case status
         case taskData = "task_data"
     }
 }
