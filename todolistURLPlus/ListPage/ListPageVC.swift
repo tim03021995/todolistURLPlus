@@ -9,8 +9,10 @@
 import UIKit
 
 class ListPageVC: UIViewController {
-    var cardData: CardModel!
     
+    var showCard: GetAllCardResponse.ShowCard!
+    lazy var showTasks = self.showCard.showTasks
+    var cardIndexPath = IndexPath()
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
@@ -22,10 +24,10 @@ class ListPageVC: UIViewController {
                                  width: ScreenSize.width.value * 0.9,
                                  height: ScreenSize.height.value * 0.1)
             
-            if let cardTitle = self.cardData.cardTitle
-            {
-                label.text = cardTitle
-            }
+            
+            label.text = self.showCard.cardName
+            
+            
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
             
@@ -67,6 +69,9 @@ class ListPageVC: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+     getTask()
+    }
     
     func addSubview()
     {
@@ -79,28 +84,49 @@ class ListPageVC: UIViewController {
     
     @objc func tapCreatTaskBtn()
     {
-        toCardVC(data: cardData, indexPath: nil)
+        toCardEditVC(data: showCard, indexPath: nil)
     }
     
-    func toCardVC(data: CardModel?, indexPath: IndexPath?)
+    func toCardEditVC(data: GetAllCardResponse.ShowCard, indexPath: IndexPath?)
     {
         let vc = CardEditVC()
-        if let indexPath = indexPath, let data = data?.taskModel?[indexPath.section]
+        if let indexPath = indexPath
        {
+        let taskData = data.showTasks[indexPath.section]
         //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
-        let editData = TaskModel(funtionType: .edit, cardID: data.cardID, taskID: data.taskID, title: data.title, description: data.description, image: data.image, tag: data.tag)
+        let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
         
         vc.setData(data: editData)
         navigationController?.pushViewController(vc, animated: true)
 
-        }else if let cardID = data?.cardID
+        }else
        {
+        let cardID = showCard.id
         print("cardID = \(cardID)")
         let createData = TaskModel(funtionType: .create, cardID: cardID)
              vc.setData(data: createData)
              navigationController?.pushViewController(vc, animated: true)
         }
     }
+    func getTask(){
+        let header = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .GET, headers: header).send()
+        NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
+            switch result {
+                
+            case .success(let data):
+                print("data.cardData?.showCards = \(data.cardData.showCards.count)")
+                let showTasks = data.cardData.showCards[self.cardIndexPath.row].showTasks
+                self.showTasks = showTasks
+                self.listBaseView.tableView.reloadData()
+                print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
+                // data.cardData........
+            case .failure(let err):
+                print("Get失敗\(err.description)")
+            }
+        }
+    }
+
 }
 
 
@@ -125,14 +151,14 @@ extension ListPageVC: UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let taskCount = cardData.taskModel?.count else {return 0}
+        let taskCount = showCard.showTasks.count
         return taskCount
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
-       
+        cell.cellTitleLabel.text = showTasks[indexPath.section].description ?? ""
         return cell
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
