@@ -11,7 +11,7 @@ import SnapKit
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     var cardDatas = [CardModel]()
-    
+    var showCards = [GetAllCardResponse.ShowCard]()
     ///設置背景
     let userName = ""
     let backgroundImage:UIImageView = {
@@ -187,15 +187,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         return btn
     }()
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        getCard()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if UserToken.shared.userToken == "" {
-////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
-//            let vc = LoginVC.instantiate()
-//
-//            present(vc, animated: true , completion: nil)
-//        }
         setUI()
     }
     
@@ -208,7 +204,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case singleCardCollectionView :
-            return cardDatas.count
+            return showCards.count
         default:
             return 2
         }
@@ -239,6 +235,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         let lPVC = ListPageVC()
         let nVC = UINavigationController(rootViewController: lPVC)
         lPVC.cardData = cardDatas[indexPath.row]
+        lPVC.showCard = showCards[indexPath.row]
         present(nVC, animated: true, completion: nil)
     }
     
@@ -408,12 +405,35 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     {
       
             self.cardDatas.append(CardModel(cardID: cardDatas.count))
+
         singleCardCollectionView.reloadData()
         
-            print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行")
+        print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行，目前假資料有\(cardDatas.count)筆")
 
         
     }
+    
+    func getCard(){
+        let header = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
+        NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
+            switch result {
+                
+            case .success(let data):
+                print("data.cardData?.showCards = \(data.cardData?.showCards.count)")
+                if let showCards = data.cardData?.showCards
+                {
+                    self.showCards = showCards
+                }
+                
+                print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
+                // data.cardData........
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
 }
 
 
@@ -434,20 +454,8 @@ enum CollectionViewCellIdentifier: String
 
 
 #warning("這邊GET Card")
-func getCard(){
-    let header = ["userToken":UserToken.shared.userToken]
-    let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-    NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
-        switch result {
-            
-        case .success(let data):
-            print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
-            // data.cardData........
-        case .failure(let err):
-            print(err)
-        }
-    }
-    
+
+
     func addCard(){ //新增card的API方法
         let header = ["userToken":UserToken.shared.userToken]
         //TODO 新增的card name
@@ -460,10 +468,11 @@ func getCard(){
                 
             case .success(let data):
                 print(data.cardData)
+                
             case .failure(let err):
                 print(err)
             }
         }
     }
-}
+
 

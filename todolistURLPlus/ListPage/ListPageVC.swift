@@ -10,7 +10,8 @@ import UIKit
 
 class ListPageVC: UIViewController {
     var cardData: CardModel!
-    
+    var showCard: GetAllCardResponse.ShowCard!
+    lazy var showTasks = self.showCard.showTasks
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
@@ -79,22 +80,24 @@ class ListPageVC: UIViewController {
     
     @objc func tapCreatTaskBtn()
     {
-        toCardVC(data: cardData, indexPath: nil)
+        toCardVC(data: showCard, indexPath: nil)
     }
     
-    func toCardVC(data: CardModel?, indexPath: IndexPath?)
+    func toCardVC(data: GetAllCardResponse.ShowCard, indexPath: IndexPath?)
     {
         let vc = CardEditVC()
-        if let indexPath = indexPath, let data = data?.taskModel?[indexPath.section]
+        if let indexPath = indexPath
        {
+        let taskData = data.showTasks[indexPath.section]
         //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
-        let editData = TaskModel(funtionType: .edit, cardID: data.cardID, taskID: data.taskID, title: data.title, description: data.description, image: data.image, tag: data.tag)
+        let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
         
         vc.setData(data: editData)
         navigationController?.pushViewController(vc, animated: true)
 
-        }else if let cardID = data?.cardID
+        }else
        {
+        let cardID = showCard.id
         print("cardID = \(cardID)")
         let createData = TaskModel(funtionType: .create, cardID: cardID)
              vc.setData(data: createData)
@@ -132,7 +135,7 @@ extension ListPageVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
-       
+        
         return cell
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
