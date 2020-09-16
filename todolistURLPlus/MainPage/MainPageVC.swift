@@ -190,6 +190,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getCard()
 //        if UserToken.shared.userToken == "" {
 ////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
 //            let vc = LoginVC.instantiate()
@@ -440,11 +441,13 @@ func getCard(){
     NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
         switch result {
             
-        case .success(let data):
-            print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
-            // data.cardData........
+        case .success(let decodedData):
+            print(decodedData.cardData)//這裡是成功解析的東西 直接拿data.cardData.....
         case .failure(let err):
-            print(err)
+            print(err.description)
+            //print 給你自己看的 statusCode
+            print(err.errMessage)
+            //解析過的response的錯誤訊息內容
         }
     }
     

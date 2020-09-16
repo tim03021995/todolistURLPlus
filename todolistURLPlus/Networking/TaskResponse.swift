@@ -14,10 +14,9 @@ import Foundation
 struct GetTaskResponse: Codable {
     let status: Bool
     let taskData: [TaskData?]
-    let error: String?
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case taskData = "task_data"
     }
     
@@ -49,11 +48,10 @@ struct GetTaskResponse: Codable {
 //MARK:- POST Task (新增task)
 struct PostTaskResponse: Codable {
     let status: Bool
-    let taskData: TaskData?
-    let error: String?
+    let taskData: TaskData
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case taskData = "task_data"
     }
     
@@ -88,7 +86,6 @@ struct PutTaskResponse: Codable {
     let status: Bool
     let taskData: TaskData
     
-    
     enum CodingKeys: String, CodingKey {
         case status
         case taskData = "task_data"
@@ -122,5 +119,4 @@ struct TaskData: Codable {
 //MARK:- DELETE
 struct DeleteTaskResponse: Codable {
     let status: Bool
-    let error:String?
 }
