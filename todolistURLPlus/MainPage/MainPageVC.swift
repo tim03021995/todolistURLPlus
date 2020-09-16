@@ -131,7 +131,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                                   bottom: -button.frame.height * 1.2, //0.85
                                                   right: 0)
             
-            button.imageEdgeInsets = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
+//            button.imageEdgeInsets = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
 //
    
 
@@ -254,10 +254,19 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         singleBtn.translatesAutoresizingMaskIntoConstraints = false
         singleBtn.centerXAnchor.constraint(equalTo: singleBtnView.centerXAnchor).isActive = true
         singleBtn.bottomAnchor.constraint(equalTo: singleBtnView.bottomAnchor,constant: -17).isActive = true
-        singleBtn.heightAnchor.constraint(equalTo: singleBtnView.heightAnchor, multiplier: 0.67).isActive = true
-        singleBtn.leadingAnchor.constraint(equalTo: singleBtnView.leadingAnchor, constant: 0).isActive = true
-        singleBtn.trailingAnchor.constraint(equalTo: singleBtnView.trailingAnchor, constant: 0 ).isActive = true
+        singleBtn.heightAnchor.constraint(equalTo: singleBtnView.heightAnchor, multiplier: 0.67).isActive = true //0.67
+        singleBtn.leadingAnchor.constraint(equalTo: singleBtnView.leadingAnchor, constant: 10).isActive = true
+        singleBtn.trailingAnchor.constraint(equalTo: singleBtnView.trailingAnchor, constant: -10 ).isActive = true
+        
+        
+//        singleBtn.translatesAutoresizingMaskIntoConstraints = false
+//        singleBtn.centerXAnchor.constraint(equalTo: singleBtnView.centerXAnchor).isActive = true
+//        singleBtn.bottomAnchor.constraint(equalTo: singleBtnView.bottomAnchor,constant: -17).isActive = true
+//        singleBtn.heightAnchor.constraint(equalTo: singleBtnView.heightAnchor, multiplier: 0.67).isActive = true
+//        singleBtn.leadingAnchor.constraint(equalTo: singleBtnView.leadingAnchor, constant: 0).isActive = true
+//        singleBtn.trailingAnchor.constraint(equalTo: singleBtnView.trailingAnchor, constant: 0 ).isActive = true
     }
+    
     
     //redconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動
     func setMutipleBtnConstraints(){
@@ -288,6 +297,34 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
           mutipleCardCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
           mutipleCardCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0 ).isActive = true
       }
+    
+    //editor constraints
+    func setAddEditorBtnConstrants(){
+        addEditorBtn.translatesAutoresizingMaskIntoConstraints = false
+        addEditorBtn.centerYAnchor.constraint(equalTo:view.centerYAnchor).isActive = true
+        addEditorBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        addEditorBtn.trailingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        addEditorBtn.widthAnchor.constraint(equalTo: singleBtnView.widthAnchor,multiplier: 0.3).isActive = true
+        addEditorBtn.heightAnchor.constraint(equalTo: singleBtnView.widthAnchor,multiplier: 0.3).isActive = true
+    }
+    
+    //addeditor
+     lazy var addEditorBtn: UIButton = {
+            var addEditorBtn = UIButton(frame: CGRect(x:headImage.bounds.maxX * 4 , y: headImage.bounds.maxY, width: 70, height: 70))
+            addEditorBtn.backgroundColor = .clear
+            addEditorBtn.setTitle("editor", for: .normal)
+            addEditorBtn.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+            addEditorBtn.addTarget(self, action: #selector(tap), for: .touchUpInside)
+    //        addEditorBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            return addEditorBtn
+        }()
+    
+    
+        @objc func tap(){
+            let vc = UserAuthority()
+            navigationController?.pushViewController(vc, animated: true)
+            print(123)
+        }
     
    ///設定卡片CollectionView
     func setUpSingleCardCollectionView()
@@ -376,11 +413,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(singleCheckMark)
         self.view.addSubview(mutipleCheckMark)
         self.view.addSubview(creatBtn)
+        self.view.addSubview(addEditorBtn)
+        
         setSingleBtnConstraints()
         setMutipleBtnConstraints()
         
         SetSingleCardCollectionView()
         SetMultipleCardCollectionView()
+//        setAddEditorBtnConstrants()
         
     }
     //增加點擊手勢觸發跳轉個人資料設定
