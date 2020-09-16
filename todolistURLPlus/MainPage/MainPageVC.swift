@@ -15,7 +15,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     ///設置背景
     let userName = ""
     let backgroundImage:UIImageView = {
-        return BackGroundFactory.makeImage(type: .background2)
+        return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
     ///設置頭貼
     lazy var headImage: UIImageView =

@@ -24,8 +24,8 @@ class UserInfoVC: UIViewController {
         UserToken.shared.clearToken()
 
         let presentingVC = self.presentingViewController
-        dismiss(animated: false) {
-            presentingVC?.dismiss(animated: false, completion: nil)
+        dismiss(animated: true) {
+            presentingVC?.dismiss(animated: true, completion: nil)
         }
     }
 
