@@ -115,8 +115,8 @@ class ListPageVC: UIViewController {
             switch result {
                 
             case .success(let data):
-                print("data.cardData?.showCards = \(data.cardData.showCards.count)")
-                let showTasks = data.cardData.showCards[self.cardIndexPath.row].showTasks
+                print("data.cardData?.showCards = \(data.userData.showCards.count)")
+                let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
                 self.showTasks = showTasks
                 self.listBaseView.tableView.reloadData()
                 print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包

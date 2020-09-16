@@ -431,8 +431,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             switch result {
                 
             case .success(let data):
-                print("data.cardData?.showCards = \(data.cardData.showCards.count)")
-                let showCards = data.cardData.showCards
+                print("data.cardData?.showCards = \(data.userData.showCards.count)")
+                let showCards = data.userData.showCards
                 
                     self.showCards = showCards
                 print("讀取資料成功，目前資料有\(showCards.count)筆")
