@@ -96,8 +96,9 @@ class CardEditVC: UIViewController {
         TaskModelManerger.edit(parameters,taskID!)
     }
     private func createTask(){
-        let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
-        TaskModelManerger.create(parameters)
+//        let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
+//        TaskModelManerger.create(parameters)
+        TaskModelManerger.create2(cardID, color, cardEditView)
     }
     @objc func deleteTask(){
         self.funtionType = .delete
