@@ -11,14 +11,14 @@ import UIKit
 class ListPageVC: UIViewController {
     
     var showCard: GetAllCardResponse.ShowCard!
-    lazy var showTasks = self.showCard.showTasks
-//    var showTasks:[GetAllCardResponse.ShowTask] = []
-//    {
-//        didSet
-//        {
-//            print("資料變更")
-//        }
-//    }
+//    lazy var showTasks = self.showCard.showTasks
+    var showTasks:[GetAllCardResponse.ShowTask] = []
+    {
+        didSet
+        {
+            print("資料變更")
+        }
+    }
     var cardIndexPath = IndexPath()
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)

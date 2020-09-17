@@ -51,6 +51,7 @@ class TaskModelManerger{
             case .failure(let err):
                 print(" create error")
                 print(err.description)
+                print("錯誤訊息：\(err.errMessage)")
             }
         }
     }
