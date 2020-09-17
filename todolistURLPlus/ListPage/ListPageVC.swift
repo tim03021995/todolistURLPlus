@@ -110,7 +110,7 @@ class ListPageVC: UIViewController {
     }
     func getTask(){
         let header = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .GET, headers: header).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
             switch result {
                 

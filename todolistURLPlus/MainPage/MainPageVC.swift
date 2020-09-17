@@ -438,10 +438,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("讀取資料成功，目前資料有\(showCards.count)筆")
                 self.singleCardCollectionView.reloadData()
 
-                print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
-                // data.cardData........
             case .failure(let err):
-                print(err)
+                print(err.description)
             }
         }
     }
