@@ -238,6 +238,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         toListPageVC(indexPath: indexPath)
+        print(showCards[indexPath.row].id)
     }
     fileprivate func toListPageVC(indexPath: IndexPath) {
         let lPVC = ListPageVC()

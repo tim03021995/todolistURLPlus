@@ -31,7 +31,6 @@ struct HTTPRequest {
     func send()-> URLRequest{
         
         let url = URL(string: self.urlString)
-        print(url)
         var request = URLRequest(url: url!)
         
         request.httpMethod = method.rawValue

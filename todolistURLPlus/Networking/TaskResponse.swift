@@ -66,7 +66,7 @@ struct PostTaskResponse: Codable {
         let description: String?
         let tag: String
         let image: String?
-        let cardID: String
+        let cardID: Int?
         let updatedAt: String
         let createdAt: String
         let id: Int
