@@ -36,6 +36,38 @@ class TaskModelManerger{
         }
         return data
     }
+    static func create2(_ cardID:Int,_ color:ColorsButtonType, _ view:CardEditView){
+        let boundary = "Boundary+\(arc4random())\(arc4random())"
+        let parameters = makeParameters(cardID, color,view)
+        let dataPath = makeDataPath(view)
+        let body = makeBody(parameters, dataPath, boundary)
+        let request = makeRequest(body: body, boundary: boundary)
+        
+        NetworkManager().sendRequest(with: request) { (result:Result<PostTaskResponse,NetworkError>) in
+            switch result {
+            case .success(let a):
+                print("create success")
+                print(a)
+            case .failure(let err):
+                print(" create error")
+                print(err.description)
+            }
+        }
+    }
+    private static func makeRequest(body:Data,boundary:String)->URLRequest{
+        let baseURL = "http://35.185.131.56:8002/api/"
+        let endpoint = Endpoint.task.rawValue
+        let url = URL(string: baseURL + endpoint)
+        var request = URLRequest(url: url!)
+        let userToken = ["userToken":UserToken.shared.userToken]
+        
+        request.httpMethod = HTTPMethod.POST.rawValue
+        request.allHTTPHeaderFields = userToken
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBody = body
+
+        return request
+    }
     static func makeParameters(_ cardID:Int,_ color:ColorsButtonType, _ view:CardEditView)->[String:Any]{
         var parameters:[String:Any] = [:]
         let data = getViewData(view: view)
@@ -45,17 +77,42 @@ class TaskModelManerger{
         if let description = data.description {
             parameters["description"] = description
         }
-//        if let image = data.image {
-//            parameters["image"] = image
-//        }
         parameters["card_id"] = cardID
         parameters["tag"] = color.rawValue
         print(parameters)
         return parameters
     }
+        static func makeDataPath(_ view:CardEditView)->[String:Data]{
+            var dataPath:[String:Data] = [:]
+            let data = getViewData(view: view)
+            if let image = data.image {
+                dataPath["image"] = image.pngData()
+            }
+            return dataPath
+        }
+    private static func makeBody(_ parameters:[String:Any],_ dataPath:[String:Data],_ boundary:String)->Data{
+        var body = Data()
+        
+        for (key, value) in parameters {
+            body.appendString(string: "--\(boundary)\r\n")
+            body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+            body.appendString(string: "\(value)\r\n")
+        }
+        for (key, value) in dataPath {
+            body.appendString(string: "--\(boundary)\r\n")
+            body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(arc4random())\"\r\n") //此處放入file name，以隨機數代替，可自行放入
+            body.appendString(string: "Content-Type: image/png\r\n\r\n") //image/png 可改為其他檔案類型 ex:jpeg
+            body.append(value)
+            body.appendString(string: "\r\n")
+        }
+        
+        body.appendString(string: "--\(boundary)--\r\n")
+         return body
+     }
+    
     static func create(_ parameters:[String:Any]){
         let headers = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .POST, parameters: parameters , headers:  headers)
+        let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, parameters: parameters , headers:  headers)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):

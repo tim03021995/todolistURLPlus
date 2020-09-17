@@ -11,13 +11,13 @@ class SetInfoView:UIView{
     private var backgroundImage : UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
-    private var peopleView:UIImageView = {
+    var peopleView:UIImageView = {
         var imageView = UserImageFactory.makeImageView(size: .large, image: nil)
         imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    private var nameTextField:UITextField = {
+    var nameTextField:UITextField = {
         var textField = UITextField(frame: CGRect(
             x: 0,
             y: 0,

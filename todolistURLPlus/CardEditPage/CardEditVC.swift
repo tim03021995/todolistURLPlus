@@ -91,14 +91,14 @@ class CardEditVC: UIViewController {
     }
     
 
-    #warning("標記一下")
     private func saveTask(){
         let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
         TaskModelManerger.edit(parameters,taskID!)
     }
     private func createTask(){
-        let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
-        TaskModelManerger.create(parameters)
+//        let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
+//        TaskModelManerger.create(parameters)
+        TaskModelManerger.create2(cardID, color, cardEditView)
     }
     @objc func deleteTask(){
         self.funtionType = .delete

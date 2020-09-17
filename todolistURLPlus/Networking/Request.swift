@@ -14,8 +14,9 @@ struct HTTPRequest {
     let baseURL = "http://35.185.131.56:8002/api/"
     let endpoint:Endpoint
     var urlString:String {
+       // "http://35.185.131.56:8000/api/task/\(listElement.id)"
         if let id = id {
-            return baseURL + endpoint.rawValue + "/{\(id)}"
+            return baseURL + endpoint.rawValue + "/" + "\(id)"
         } else {
             return baseURL + endpoint.rawValue
         }
@@ -30,7 +31,7 @@ struct HTTPRequest {
     func send()-> URLRequest{
         
         let url = URL(string: self.urlString)
-        
+        print(url)
         var request = URLRequest(url: url!)
         
         request.httpMethod = method.rawValue
@@ -44,11 +45,9 @@ struct HTTPRequest {
         if let headers = headers{
             request.allHTTPHeaderFields = headers
         }
-        
         return request
     }
     
-     
 }
 
 
