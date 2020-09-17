@@ -8,10 +8,9 @@
 
 import UIKit
 
-enum StoryboardID:String{
-    case signUpVC
-    case signInVC
-    case mainPageVC
+struct StoryboardID{
+    static let signUpVC = "signUpVC"
+    static let signInVC = "signInVC"
     
 }
 let fullScreenSize = UIScreen.main.bounds.size

@@ -16,7 +16,7 @@ struct HTTPRequest {
     var urlString:String {
        // "http://35.185.131.56:8000/api/task/\(listElement.id)"
         if let id = id {
-            return baseURL + endpoint.rawValue + "/\(id)"
+            return baseURL + endpoint.rawValue + "/" + "\(id)"
         } else {
             return baseURL + endpoint.rawValue
         }
@@ -45,11 +45,9 @@ struct HTTPRequest {
         if let headers = headers{
             request.allHTTPHeaderFields = headers
         }
-        
         return request
     }
     
-     
 }
 
 

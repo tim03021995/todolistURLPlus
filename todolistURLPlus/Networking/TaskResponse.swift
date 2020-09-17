@@ -11,6 +11,7 @@ import Foundation
 
 //MARK:- GET Task
 
+///GET TASK
 struct GetTaskResponse: Codable {
     let status: Bool
     let taskData: [TaskData?]
@@ -46,6 +47,8 @@ struct GetTaskResponse: Codable {
 }
 
 //MARK:- POST Task (新增task)
+
+///POST TASK
 struct PostTaskResponse: Codable {
     let status: Bool
     let taskData: TaskData
@@ -82,6 +85,7 @@ struct PostTaskResponse: Codable {
 
 //MARK:- PUT Task （更新Task）
 
+///PUT TASK
 struct PutTaskResponse: Codable {
     let status: Bool
     let taskData: TaskData
@@ -116,7 +120,10 @@ struct TaskData: Codable {
     
 }
 
-//MARK:- DELETE
+//MARK:- DELETE Task
+
+
+///DELETE TASK
 struct DeleteTaskResponse: Codable {
     let status: Bool
 }

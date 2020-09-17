@@ -38,7 +38,7 @@ struct NetworkManager {
                 print("Successs" , "Status Code:\(response.statusCode)")
 
             }catch{
-                completion(.failure(.decodeError))
+                completion(.failure(.decodeError(struct: "\(T.self)")))
             }
         case 401:
             #warning("refresh token")
@@ -48,7 +48,7 @@ struct NetworkManager {
                 let decodedError = try JSONDecoder().decode(Errormessage.self, from: data)
                 completion(.failure(.responseError(error: decodedError, statusCode: response.statusCode)))
             }catch{
-                completion(.failure(.decodeError))
+                completion(.failure(.decodeError(struct: "\(Errormessage.self)")))
             }
         }
     }
