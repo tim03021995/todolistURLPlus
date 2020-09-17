@@ -10,6 +10,7 @@ import Foundation
 
 //MARK:- GET Card 所有資料
 
+///GET CARD
 struct GetAllCardResponse: Codable {
     let status: Bool
     let userData: UserData
@@ -91,7 +92,7 @@ struct GetAllCardResponse: Codable {
 }
 //MARK:- POST  (新增card)
 
-
+///POST CARD
 struct PostCardResponse: Codable {
     let status: Bool
     let cardData: CardData
@@ -123,6 +124,7 @@ struct PostCardResponse: Codable {
 
 //MARK:- GET Card with ID (用ID查詢Card)
 
+///GET CARD with ID
 struct GetCardWithIDResponse: Codable {
     let status: Bool
     let cardData: CardData
@@ -186,6 +188,7 @@ struct GetCardWithIDResponse: Codable {
 
 //MARK:- PUT Card (更新card)
 
+///PUT CARD
 struct PutCardResponse: Codable {
     let status: Bool
     let cardData: CardData
@@ -248,6 +251,7 @@ struct PutCardResponse: Codable {
 
 //MARK:- DELETE card
 
+///DELETE CARD
 struct DeleteCardResponse: Codable {
     let status: Bool
     let error: String?

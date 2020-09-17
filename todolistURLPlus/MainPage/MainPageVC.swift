@@ -523,7 +523,6 @@ enum CollectionViewCellIdentifier: String
 }
 
 
-#warning("這邊GET Card")
     
     
 

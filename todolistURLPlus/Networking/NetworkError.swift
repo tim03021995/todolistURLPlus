@@ -42,9 +42,6 @@ enum NetworkError:Error{
     }
     
 }
-
-
-
 struct Errormessage:Codable{
     let status : Bool
     let error : String

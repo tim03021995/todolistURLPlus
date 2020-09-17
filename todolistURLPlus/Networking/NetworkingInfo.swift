@@ -35,7 +35,8 @@ struct UserToken {
     private init(){}
     static var shared = UserToken()
     
-    func getToken() -> String?{
+    ///拿token 如果沒有的話 回傳nil
+    static func getToken() -> String?{
         guard let token = UserDefaults.standard.string(forKey: "token") else {return nil}
             if token == "" {
                 return nil
@@ -47,12 +48,12 @@ struct UserToken {
     mutating func updateToken(by token: String){
         userToken = token
         print(userToken)
-        updateTokenToUserdefault(with: token)
+//        updateTokenToUserdefault(with: token)
     }
     mutating func clearToken(){
         userToken = ""
         print("Token cleared")
-        updateTokenToUserdefault(with: "")
+//        updateTokenToUserdefault(with: "")
     }
     
     private func updateTokenToUserdefault(with token:String){

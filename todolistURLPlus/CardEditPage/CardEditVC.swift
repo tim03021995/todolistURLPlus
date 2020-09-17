@@ -90,7 +90,6 @@ class CardEditVC: UIViewController {
     }
     
 
-    #warning("標記一下")
     private func saveTask(){
         let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
         TaskModelManerger.edit(parameters,taskID!)

@@ -32,16 +32,6 @@ struct HTTPRequest {
         let url = URL(string: self.urlString)
         
         var request = URLRequest(url: url!)
-        //
-        //        if let id = id {
-        //            var components = URLComponents(
-        //                url: url!, resolvingAgainstBaseURL: false)!
-        //            components.queryItems =
-        //
-        //            request.url = components.url
-        //        }
-        
-        
         
         request.httpMethod = method.rawValue
         
@@ -54,10 +44,8 @@ struct HTTPRequest {
         if let headers = headers{
             request.allHTTPHeaderFields = headers
         }
-        
         return request
     }
-    
     
 }
 

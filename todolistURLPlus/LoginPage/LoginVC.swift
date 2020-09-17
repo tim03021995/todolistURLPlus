@@ -102,6 +102,7 @@ class LoginVC: UIViewController, Storyboarded {
             switch result{
                 
             case .success(let decodedData):
+                self.signInBtn.isEnabled = true
                 //存token
                 guard let token = decodedData.loginData?.userToken else {return}
                 UserToken.shared.updateToken(by: token)
@@ -110,6 +111,7 @@ class LoginVC: UIViewController, Storyboarded {
                 self.present(vc, animated: true)
                 
             case .failure(let err):
+                self.signInBtn.isEnabled = true
                 self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
                 }), animated: true)
                 print(err.description)
@@ -118,13 +120,12 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     @IBAction func signInTapped(_ sender: CustomButton) {
-        #warning("連點ＢＵＧ  點一次之後要擋")
-        
+        signInBtn.isEnabled = false
         signIn()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
-        let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC.rawValue ) as! SignupVC
+        let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC ) as! SignupVC
         present(vc, animated: true, completion: nil)
         
     }
