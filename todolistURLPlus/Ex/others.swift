@@ -8,10 +8,9 @@
 
 import UIKit
 
-enum StoryboardID:String{
-    case signUpVC
-    case signInVC
-    case mainPageVC
+struct StoryboardID{
+    static let signUpVC = "signUpVC"
+    static let signInVC = "signInVC"
     
 }
 let fullScreenSize = UIScreen.main.bounds.size
@@ -71,5 +70,12 @@ extension UITextView{
             textView.isScrollEnabled=false
         }
         textView.frame.size.height=size.height
+    }
+}
+extension Data{
+    
+    mutating func appendString(string: String) {
+        let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
+        append(data!)
     }
 }

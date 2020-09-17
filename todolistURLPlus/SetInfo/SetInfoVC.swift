@@ -34,6 +34,11 @@ class SetInfoVC:UIViewController{
         print("updata")
         self.dismiss(animated: true, completion: nil)        
     }
+//    func getViewData()->SetInfoModel{
+//        var data = SetInfoModel(
+//            UserName: self.setInfoView.nameTextField.text ?? "Unknow",
+//            UserImage: self.setInfoView.peopleView.image ?? UIImage(systemName: "photo")!)
+//    }
 
 }
 extension SetInfoVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{

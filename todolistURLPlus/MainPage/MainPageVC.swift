@@ -15,7 +15,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     ///設置背景
     let userName = ""
     let backgroundImage:UIImageView = {
-        return BackGroundFactory.makeImage(type: .background2)
+        return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
     ///設置頭貼
     lazy var headImage: UIImageView =
@@ -193,7 +193,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCard()
 //        if UserToken.shared.userToken == "" {
 ////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
 //            let vc = LoginVC.instantiate()
@@ -476,13 +475,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 let showCards = data.userData.showCards
                 
                     self.showCards = showCards
-                print("讀取資料成功，目前資料有\(showCards.count)筆")
+                print("讀取資料成功，目前資料有\(showCards.count)張卡片")
                 self.singleCardCollectionView.reloadData()
 
-                print(data)//這裡是成功解包的東西 直接拿data裡的東西 要解包
+                //這裡是成功解包的東西 直接拿data裡的東西 要解包
                 // data.cardData........
             case .failure(let err):
-                print(err)
+                print(err.description)
             }
         }
     }
@@ -497,7 +496,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             switch result{
                 
             case .success(let data):
-                print(data.cardData)
+                print("目前新增的卡片ID = \(data.cardData.id)")
                 
                 
             case .failure(let err):
@@ -525,7 +524,6 @@ enum CollectionViewCellIdentifier: String
 }
 
 
-#warning("這邊GET Card")
     
     
 
