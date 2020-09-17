@@ -17,7 +17,7 @@ class CardEditVC: UIViewController {
     private var taskID:Int?
     private var color:ColorsButtonType = .red {
         didSet{
-            refreshColor(color: color)
+           // refreshColor(color: color)
         }
     }
     private let cardEditView = CardEditView()
@@ -30,7 +30,8 @@ class CardEditVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    override func viewDidDisappear(_ animated: Bool) {
+    
+    override func viewWillDisappear(_ animated: Bool) {
         print(#function)
         switch funtionType {
         case .create:
@@ -116,6 +117,8 @@ class CardEditVC: UIViewController {
 extension CardEditVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let colorType = ColorsButtonType.allCases[indexPath.row]
+        cardEditView.refreshColor(color: colorType)
+        cardEditView.colorsCollectionView.reloadData()
         self.color = colorType
     }
 }

@@ -68,6 +68,11 @@ class ListBaseView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    func reloadTableView()
+    {
+        self.tableView.reloadData()
+        print("我有reloadData喔")
+    }
 }
 
 

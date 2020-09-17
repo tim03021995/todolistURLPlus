@@ -28,6 +28,7 @@ class TaskModelManerger{
         var data = TaskModel()
         data.title = view.titleTextField.text
         data.description = view.textView.text
+        data.tag = view.selectColor
         if view.imageView.image != UIImage(systemName: "photo"){
             data.image = view.imageView.image
         }else{
@@ -49,6 +50,7 @@ class TaskModelManerger{
 //        }
         parameters["card_id"] = cardID
         parameters["tag"] = color.rawValue
+        print(parameters)
         return parameters
     }
     static func create(_ parameters:[String:Any]){
