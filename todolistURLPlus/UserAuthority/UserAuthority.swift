@@ -59,13 +59,13 @@ class UserAuthority: UIViewController {
     lazy var inviteBtn: UIButton = {
         let inviteBtn = UIButton()
         inviteBtn.backgroundColor = .clear
-        inviteBtn.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill.badge.plus"), for: .normal)
+        inviteBtn.setBackgroundImage(UIImage(systemName: "person.badge.plus"), for: .normal)
         inviteBtn.addTarget(self, action: #selector(inviteSomeone), for: .touchUpInside)
         inviteBtn.setTitle("Invite", for: .normal)
         inviteBtn.tintColor = .black
         inviteBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         inviteBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        inviteBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15)
+        inviteBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         inviteBtn.setTitleColor(.black, for: .normal)
         inviteBtn.frame = CGRect(x: 20, y: 20, width:fullScreen.width * 0.5 , height: fullScreen.width * 0.25)
         inviteBtn.titleEdgeInsets = UIEdgeInsets(top: 0,
@@ -81,13 +81,13 @@ class UserAuthority: UIViewController {
         let removeBtn = UIButton()
         removeBtn.backgroundColor = .clear
         //                inviteBtn.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
-        removeBtn.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill.badge.xmark"), for: .normal)
+        removeBtn.setBackgroundImage(UIImage(systemName: "person.badge.minus"), for: .normal)
         removeBtn.addTarget(self, action: #selector(removeSomeone), for: .touchUpInside)
         removeBtn.setTitle("Remove", for: .normal)
         removeBtn.tintColor = .black
         removeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         removeBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        removeBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 15)
+        removeBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         removeBtn.setTitleColor(.black, for: .normal)
         removeBtn.frame = CGRect(x: 20, y: 20, width:fullScreen.width * 0.5 , height: fullScreen.width * 0.25)
         removeBtn.titleEdgeInsets = UIEdgeInsets(top: 0,
