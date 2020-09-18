@@ -98,19 +98,21 @@ class CardEditVC: UIViewController {
     
     
     private func saveTask(){
-        TaskModelManerger.edit(cardID, taskID!, cardEditView)
+        pushGlass()
+        TaskModelManerger.edit(cardID, taskID!, cardEditView) {
+            self.popView()
+        }
     }
     private func createTask(){
-        let glass = GlassFactory.makeGlass()
-        self.view.addSubview(glass)
+        pushGlass()
         TaskModelManerger.create(cardID,cardEditView) {
-            self.navigationController?.popToRootViewController(animated: true)
+            self.popView()
         }
     }
     @objc func deleteTask(){
         self.funtionType = .delete
         TaskModelManerger.delete(taskID!)
-        dismiss(animated: true, completion: nil)
+        self.popView()
     }
     @objc func takeImage() {
         DispatchQueue.main.async{
@@ -120,7 +122,9 @@ class CardEditVC: UIViewController {
             self.present(photoController, animated: true, completion: nil)
         }
     }
-    
+    func popView(){
+                    self.navigationController?.popToRootViewController(animated: true)
+    }
     
 }
 extension CardEditVC:UICollectionViewDelegate{

@@ -56,7 +56,7 @@ class TaskModelManerger{
             compeletion()
         }
     }
-    static func edit(_ cardID:Int,_ taskID:Int, _ view:CardEditView){
+    static func edit(_ cardID:Int,_ taskID:Int, _ view:CardEditView,_ compeletion:@escaping ()->Void){
            let boundary = "Boundary+\(arc4random())\(arc4random())"
            let parameters = makeParameters(cardID,view,.PUT)
            let dataPath = makeDataPath(view)
@@ -74,6 +74,7 @@ class TaskModelManerger{
                    print(err.description)
                    print("錯誤訊息：\(err.errMessage)")
                }
+            compeletion()
            }
        }
     private static func makeRequest(body:Data,boundary:String,endpoint:Endpoint,id:Int?,httpMethod:HTTPMethod)->URLRequest{
