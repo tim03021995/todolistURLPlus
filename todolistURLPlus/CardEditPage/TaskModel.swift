@@ -42,7 +42,7 @@ class TaskModelManerger{
         let parameters = makeParameters(cardID,view,.POST)
         let dataPath = makeDataPath(view)
         let body = makeBody(parameters, dataPath, boundary)
-        let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, parameters: parameters, headers: header)
+        let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, headers: header)
         print(#function)
         NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
