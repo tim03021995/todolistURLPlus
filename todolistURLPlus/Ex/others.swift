@@ -56,7 +56,16 @@ extension UIViewController
         }
         animate.startAnimation()
     }
-    
+    func pushGlass(){
+        let glass = GlassFactory.makeGlass()
+        glass.alpha = 0
+        self.view.addSubview(glass)
+        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+            glass.alpha = 1
+        }
+        animate.startAnimation()
+        
+    }
 }
 extension UITextView{
         func resetHight(_ textView:UITextView){
