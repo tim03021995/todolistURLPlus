@@ -57,9 +57,10 @@ extension UIViewController
         animate.startAnimation()
     }
     func pushGlass(){
+        let glass = GlassFactory.makeGlass()
+        glass.alpha = 0
         let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
-            let glass = GlassFactory.makeGlass()
-            self.view.addSubview(glass)
+            glass.alpha = 1
         }
         animate.startAnimation()
         
