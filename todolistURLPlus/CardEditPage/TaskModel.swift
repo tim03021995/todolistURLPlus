@@ -37,13 +37,14 @@ class TaskModelManerger{
         return data
     }
     static func create(_ cardID:Int, _ view:CardEditView){
+        let header = ["userToken":UserToken.shared.userToken]
         let boundary = "Boundary+\(arc4random())\(arc4random())"
         let parameters = makeParameters(cardID,view,.POST)
         let dataPath = makeDataPath(view)
         let body = makeBody(parameters, dataPath, boundary)
-        let request = makeRequest(body: body, boundary: boundary, endpoint: .task, id: nil, httpMethod: .POST)
+        let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, parameters: parameters, headers: header)
         print(#function)
-        NetworkManager().sendRequest(with: request) { (result:Result<PostTaskResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
                 print("create success")
