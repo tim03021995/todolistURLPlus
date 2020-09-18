@@ -8,10 +8,13 @@
 
 import UIKit
 import SnapKit
+//點擊震動
+let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     var cardDatas = [CardModel]()
     var showCards = [GetAllCardResponse.ShowCard]()
+    
     ///設置背景
     let userName = ""
     let backgroundImage:UIImageView = {
@@ -169,7 +172,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     var mutipleCardCollectionView: UICollectionView!
     
     lazy var creatBtn: UIButton =
-    {
+        {
         let btn = UIButton()
         let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.8
         btn.frame = CGRect(x: ScreenSize.width.value * 0.25,
@@ -237,6 +240,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         toListPageVC(indexPath: indexPath)
     }
     fileprivate func toListPageVC(indexPath: IndexPath) {
@@ -245,6 +249,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 //        lPVC.cardData = cardDatas[indexPath.row]
         lPVC.showCard = showCards[indexPath.row]
         lPVC.cardIndexPath = indexPath
+        feedbackGenerator.impactOccurred()
+        print("這張卡片的id = ",showCards[indexPath.row].id)
         present(nVC, animated: true, completion: nil)
     }
     
@@ -458,10 +464,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         addCard()
         getCard()
         singleCardCollectionView.reloadData()
+        //點擊觸發震動
         
-        print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行，目前假資料有\(cardDatas.count)筆")
-
-        
+        feedbackGenerator.impactOccurred()
     }
     
     func getCard(){
@@ -471,7 +476,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             switch result {
                 
             case .success(let data):
-                print("data.cardData?.showCards = \(data.userData.showCards.count)")
                 let showCards = data.userData.showCards
                 
                     self.showCards = showCards

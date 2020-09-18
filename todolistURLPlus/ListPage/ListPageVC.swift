@@ -99,6 +99,7 @@ class ListPageVC: UIViewController {
     
     func toCardEditVC(data: GetAllCardResponse.ShowCard, indexPath: IndexPath?)
     {
+        feedbackGenerator.impactOccurred()
         let vc = CardEditVC()
         if let indexPath = indexPath
        {
