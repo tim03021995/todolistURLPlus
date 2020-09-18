@@ -11,22 +11,24 @@ import Foundation
 struct NetworkManager {
     
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async{
-                if error != nil { completion(.failure(.systemError)) }
-                
-                 guard let response = response as? HTTPURLResponse else { completion(.failure(.noResponse))
-                    return
+        DispatchQueue.main.async {
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                DispatchQueue.main.async{
+                    if error != nil { completion(.failure(.systemError)) }
+                    
+                    guard let response = response as? HTTPURLResponse else { completion(.failure(.noResponse))
+                        return
+                    }
+                    guard let data = data else { completion(.failure(.noData))
+                        return
+                    }
+                    self.responseHandler(data: data, response: response, completion: completion)
                 }
-                guard let data = data else { completion(.failure(.noData))
-                    return
-                }
-                self.responseHandler(data: data, response: response, completion: completion)
             }
+            task.resume()
         }
-        task.resume()
     }
-    
     private func responseHandler<T:Codable>
         (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
         
@@ -36,12 +38,10 @@ struct NetworkManager {
                 let decotedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decotedData))
                 print("Successs" , "Status Code:\(response.statusCode)")
-
+                
             }catch{
                 print("======================== Decode Error ========================")
-                print(String.init(data: data, encoding: .utf8) ?? "")
-                print("======================== Decode Error ========================")
-                print(error.localizedDescription)
+                print(error,"statuscode:\(response.statusCode)")
                 completion(.failure(.decodeError(struct: "\(T.self)")))
             }
         case 401:

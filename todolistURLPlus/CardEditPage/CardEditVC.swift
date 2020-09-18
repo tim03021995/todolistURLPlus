@@ -52,7 +52,6 @@ class CardEditVC: UIViewController {
         case .none:
             break
         }
-        navigationController?.popToRootViewController(animated: true)
     }
     private func refreshColor(color:ColorsButtonType){
         self.cardEditView.refreshColor(color: color)
@@ -99,23 +98,35 @@ class CardEditVC: UIViewController {
     
     
     private func saveTask(){
-        TaskModelManerger.edit(cardID, taskID!, cardEditView)
+        pushGlass()
+        TaskModelManerger.edit(cardID, taskID!, cardEditView) {
+            self.popView()
+        }
     }
     private func createTask(){
-        TaskModelManerger.create(cardID, cardEditView)
+        pushGlass()
+        TaskModelManerger.create(cardID,cardEditView) {
+            self.popView()
+        }
     }
     @objc func deleteTask(){
-        self.funtionType = .delete
-        TaskModelManerger.delete(taskID!)
-        dismiss(animated: true, completion: nil)
+        pushGlass()
+        TaskModelManerger.delete(taskID!) {
+             self.popView()
+        }
+       
     }
     @objc func takeImage() {
-        let photoController = UIImagePickerController()
-        photoController.delegate = self
-        photoController.sourceType = .photoLibrary
-        present(photoController, animated: true, completion: nil)
+        DispatchQueue.main.async{
+            let photoController = UIImagePickerController()
+            photoController.delegate = self
+            photoController.sourceType = .photoLibrary
+            self.present(photoController, animated: true, completion: nil)
+        }
     }
-    
+    func popView(){
+                    self.navigationController?.popToRootViewController(animated: true)
+    }
     
 }
 extension CardEditVC:UICollectionViewDelegate{
