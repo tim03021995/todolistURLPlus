@@ -36,7 +36,7 @@ class TaskModelManerger{
         }
         return data
     }
-    static func create(_ cardID:Int, _ view:CardEditView){
+    static func create(_ cardID:Int, _ view:CardEditView,_ compeletion:@escaping ()->Void){
         let header = ["userToken":UserToken.shared.userToken]
         let boundary = "Boundary+\(arc4random())\(arc4random())"
         let parameters = makeParameters(cardID,view,.POST)
@@ -48,12 +48,12 @@ class TaskModelManerger{
             switch result {
             case .success(let a):
                 print("create success")
-                print(a)
             case .failure(let err):
                 print(" create error")
                 print(err.description)
                 print("錯誤訊息：\(err.errMessage)")
             }
+            compeletion()
         }
     }
     static func edit(_ cardID:Int,_ taskID:Int, _ view:CardEditView){

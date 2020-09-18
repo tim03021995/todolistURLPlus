@@ -52,7 +52,6 @@ class CardEditVC: UIViewController {
         case .none:
             break
         }
-        navigationController?.popToRootViewController(animated: true)
     }
     private func refreshColor(color:ColorsButtonType){
         self.cardEditView.refreshColor(color: color)
@@ -102,7 +101,11 @@ class CardEditVC: UIViewController {
         TaskModelManerger.edit(cardID, taskID!, cardEditView)
     }
     private func createTask(){
-        TaskModelManerger.create(cardID, cardEditView)
+        let glass = GlassFactory.makeGlass()
+        self.view.addSubview(glass)
+        TaskModelManerger.create(cardID,cardEditView) {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     @objc func deleteTask(){
         self.funtionType = .delete
