@@ -23,6 +23,43 @@ class CardCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
+    
+    lazy var longPress: UILongPressGestureRecognizer =
+    {
+        let press = UILongPressGestureRecognizer(target: self, action: #selector(self.deleteCard))
+        press.minimumPressDuration = 1.0
+        return press
+    }()
+    lazy var deleteIndicator: UIButton =
+        {
+            let button = UIButton()
+            button.center = CGPoint(x: 0, y: 0)
+            
+            button.frame.size = CGSize(width: self.frame.width * 0.2,
+                                       height: self.frame.width * 0.2)
+            button.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
+            button.tintColor = .red
+            
+            button.isHidden = true
+            return button
+    }()
+   
+    @objc func deleteCard()
+    {
+        if longPress.state == .began
+        {
+            print("Cell的Frame = ",self.frame)
+            print("press began")
+            print("Delete Card")
+            deleteIndicator.isHidden = false
+
+
+        }else if longPress.state == .ended
+        {
+            print("long press end")
+
+        }
+    }
     func setUpSingle(showCards: [GetAllCardResponse.ShowCard], indexPath: IndexPath?)
     {
         if let indexPath = indexPath
@@ -35,11 +72,15 @@ class CardCell: UICollectionViewCell {
             self.cardTitle.textColor = .white
             self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
             self.addSubview(cardTitle)
+            self.addGestureRecognizer(longPress)
+            self.addSubview(deleteIndicator)
         }
     }
     
     func setUpMutiple(cardDatas: [CardModel]?, indexPath: IndexPath?)
        {
+        
+        
            if let cardDatas = cardDatas, let indexPath = indexPath
            {
                let data = cardDatas[indexPath.row]

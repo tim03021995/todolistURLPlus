@@ -13,12 +13,6 @@ class ListPageVC: UIViewController {
     var showCard: GetAllCardResponse.ShowCard!
 //    lazy var showTasks = self.showCard.showTasks
     var showTasks:[GetAllCardResponse.ShowTask] = []
-    {
-        didSet
-        {
-            print("資料變更")
-        }
-    }
     var cardIndexPath = IndexPath()
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
@@ -78,8 +72,7 @@ class ListPageVC: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
      getTask()
-//        reloadListTableView()
-//        print("showTasks筆數 ＝ \(showTasks.count)")
+
 
     }
     
@@ -104,7 +97,7 @@ class ListPageVC: UIViewController {
         if let indexPath = indexPath
        {
         let taskData = data.showTasks[indexPath.section]
-        //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
+        
         let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
         
         vc.setData(data: editData)
@@ -126,7 +119,6 @@ class ListPageVC: UIViewController {
             switch result {
                 
             case .success(let data):
-                print("data.cardData?.showCards = \(data.userData.showCards.count)")
                 let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
                 self.showTasks = showTasks
                 print("showTasks筆數 = \(showTasks.count)")

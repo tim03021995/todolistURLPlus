@@ -242,7 +242,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         toListPageVC(indexPath: indexPath)
-        print(showCards[indexPath.row].id)
+        
     }
     fileprivate func toListPageVC(indexPath: IndexPath) {
         let lPVC = ListPageVC()
@@ -328,9 +328,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
         @objc func tap(){
             let vc = UserAuthority()
-//            navigationController?.pushViewController(vc, animated: true)
             present(vc, animated: true, completion: nil)
-            print(123)
+            
         }
     
    ///設定卡片CollectionView
@@ -350,7 +349,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
 
         // cell與邊界的間距 沒影響
-        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+//        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
 
         // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal

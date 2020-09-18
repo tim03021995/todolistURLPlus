@@ -58,9 +58,7 @@ class LoginVC: UIViewController, Storyboarded {
         passwordTF.text = "test12345"
     }
     //MARK:- Functions
-    deinit {
-        print("LoginPage deinit")
-    }
+  
     
     
     fileprivate func propertiesSetting() {
