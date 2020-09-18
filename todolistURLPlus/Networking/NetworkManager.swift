@@ -38,7 +38,7 @@ struct NetworkManager {
                 print("Successs" , "Status Code:\(response.statusCode)")
 
             }catch{
-                print(error)
+                print(error,"statuscode:\(response.statusCode)")
                 completion(.failure(.decodeError(struct: "\(T.self)")))
             }
         case 401:

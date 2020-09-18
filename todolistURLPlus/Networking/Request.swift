@@ -36,7 +36,7 @@ struct HTTPRequest {
         request.httpMethod = method.rawValue
         
         request.addValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
-        
+        //switch content type
         if let parameters = parameters{
             request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
         }
