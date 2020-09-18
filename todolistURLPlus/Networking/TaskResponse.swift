@@ -50,7 +50,7 @@ struct GetTaskResponse: Codable {
 
 ///POST TASK
 struct PostTaskResponse: Codable {
-    let status: Int
+    let status: Bool
     let taskData: TaskData
     
     enum CodingKeys: String, CodingKey {
@@ -60,7 +60,7 @@ struct PostTaskResponse: Codable {
     
     struct TaskData: Codable {
         let title: String
-        let status: Int
+        let status: Bool
         let createUser:String
         let updateUser: String
         let description: String?
