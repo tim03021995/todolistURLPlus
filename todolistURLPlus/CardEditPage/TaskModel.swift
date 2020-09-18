@@ -43,7 +43,6 @@ class TaskModelManerger{
         let body = makeBody(parameters, dataPath, boundary)
         let request = makeRequest(body: body, boundary: boundary, endpoint: .task, id: nil, httpMethod: .POST)
         print(#function)
-        print(parameters)
         NetworkManager().sendRequest(with: request) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):

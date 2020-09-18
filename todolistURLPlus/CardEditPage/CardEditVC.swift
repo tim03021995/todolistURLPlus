@@ -52,6 +52,7 @@ class CardEditVC: UIViewController {
         case .none:
             break
         }
+        navigationController?.popToRootViewController(animated: true)
     }
     private func refreshColor(color:ColorsButtonType){
         self.cardEditView.refreshColor(color: color)
@@ -59,7 +60,7 @@ class CardEditVC: UIViewController {
         self.cardEditView.scrollView.delegate = self
         self.cardEditView.textView.delegate = self
         self.cardEditView.colorsCollectionView.reloadData()
-//        self.view = cardEditView
+        //        self.view = cardEditView
     }
     func setData(data:TaskModel){
         let viewData:TaskModel = {
@@ -93,7 +94,7 @@ class CardEditVC: UIViewController {
         self.cardEditView.textView.delegate = self
         self.cardEditView.colorsCollectionView.reloadData()
         self.cardEditView.setUserData(data: viewData)
-//        self.view = cardEditView
+        //        self.view = cardEditView
     }
     
     
