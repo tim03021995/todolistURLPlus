@@ -110,9 +110,11 @@ class CardEditVC: UIViewController {
         }
     }
     @objc func deleteTask(){
-        self.funtionType = .delete
-        TaskModelManerger.delete(taskID!)
-        self.popView()
+        pushGlass()
+        TaskModelManerger.delete(taskID!) {
+             self.popView()
+        }
+       
     }
     @objc func takeImage() {
         DispatchQueue.main.async{
