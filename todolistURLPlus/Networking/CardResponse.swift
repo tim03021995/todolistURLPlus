@@ -230,7 +230,7 @@ struct PutCardResponse: Codable {
     struct ShowTask: Codable {
         let id: Int
         let title: String
-        let status: Bool
+        let status: Int
         let createUser, updateUser: String
         let description:String?
         let cardID: Int

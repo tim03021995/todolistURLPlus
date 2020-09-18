@@ -190,7 +190,7 @@ extension ListPageVC: UITableViewDataSource{
         print("現在點擊的Task ID = \(task.id)")
         let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
         vc.setData(data: taskModel)
-      
+
         navigationController?.pushViewController(vc, animated: true)
 
         }

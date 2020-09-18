@@ -9,30 +9,36 @@
 import UIKit
 
 class CardEditVC: UIViewController {
-    
     let headers = ["userToken":UserToken.shared.userToken]
-    //private var taskData = TaskModel()
     private var funtionType:TaskModel.FuntionType?
     private var cardID:Int = 0
     private var taskID:Int?
-    private var color:ColorsButtonType = .red {
-        didSet{
-           // refreshColor(color: color)
-        }
-    }
     private let cardEditView = CardEditView()
+    
     override func loadView() {
         super.loadView()
+        view = cardEditView
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNC()
+        print("isLoaded")
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    func setNC(){
         print(#function)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Save",
+            style: .done,
+            target: self,
+            action: #selector(save))
+        self.navigationItem.title = "test"
+    }
+    @objc func save(){
         switch funtionType {
         case .create:
             print("create")
@@ -46,6 +52,7 @@ class CardEditVC: UIViewController {
         case .none:
             break
         }
+        navigationController?.popToRootViewController(animated: true)
     }
     private func refreshColor(color:ColorsButtonType){
         self.cardEditView.refreshColor(color: color)
@@ -53,23 +60,23 @@ class CardEditVC: UIViewController {
         self.cardEditView.scrollView.delegate = self
         self.cardEditView.textView.delegate = self
         self.cardEditView.colorsCollectionView.reloadData()
-        self.view = cardEditView
+        //        self.view = cardEditView
     }
     func setData(data:TaskModel){
         let viewData:TaskModel = {
             var viewData = TaskModel()
             switch data.funtionType {
             case .create:
-                self.color = .red
+                viewData.tag = .red
                 self.funtionType = .create
                 viewData.description = "Please input"
                 viewData.image = UIImage(systemName: "photo")!
                 viewData.title = "Please input Title"
             case .edit:
-                self.color = data.tag!
+                viewData.tag = data.tag!
                 self.funtionType = .edit
                 viewData.description = data.description
-                viewData.image = data.image
+                viewData.image = data.image ?? UIImage(systemName: "photo")!
                 viewData.title = data.title
             case .none:
                 break
@@ -87,18 +94,15 @@ class CardEditVC: UIViewController {
         self.cardEditView.textView.delegate = self
         self.cardEditView.colorsCollectionView.reloadData()
         self.cardEditView.setUserData(data: viewData)
-        self.view = cardEditView
+        //        self.view = cardEditView
     }
     
-
+    
     private func saveTask(){
-        let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
-        TaskModelManerger.edit(parameters,taskID!)
+        TaskModelManerger.edit(cardID, taskID!, cardEditView)
     }
     private func createTask(){
-//        let parameters = TaskModelManerger.makeParameters(cardID,self.color,self.cardEditView)
-//        TaskModelManerger.create(parameters)
-        TaskModelManerger.create2(cardID, color, cardEditView)
+        TaskModelManerger.create(cardID, cardEditView)
     }
     @objc func deleteTask(){
         self.funtionType = .delete
@@ -111,7 +115,7 @@ class CardEditVC: UIViewController {
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
-
+    
     
 }
 extension CardEditVC:UICollectionViewDelegate{
@@ -119,7 +123,6 @@ extension CardEditVC:UICollectionViewDelegate{
         let colorType = ColorsButtonType.allCases[indexPath.row]
         cardEditView.refreshColor(color: colorType)
         cardEditView.colorsCollectionView.reloadData()
-        self.color = colorType
     }
 }
 extension CardEditVC:UIScrollViewDelegate{
@@ -150,7 +153,10 @@ extension CardEditVC:UITextViewDelegate{
 extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage{
-            cardEditView.imageView.image = image
+            let _image = UIImage(data: image.jpegData(compressionQuality: 0.0)!)
+            print("origin", image.pngData())
+            print("resize", _image?.pngData())
+            cardEditView.imageView.image = _image
         }
         dismiss(animated: true, completion: nil)
     }
