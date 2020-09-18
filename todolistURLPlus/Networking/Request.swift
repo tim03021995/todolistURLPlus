@@ -53,8 +53,7 @@ struct HTTPRequest {
         request.addValue(contentType.rawValue + "; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         if let parameters = parameters{
-            let a  = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
-            request.httpBody = data + a!
+            request.httpBody  = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
         }else {
             request.httpBody = data
         }
