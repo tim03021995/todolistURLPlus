@@ -51,7 +51,18 @@ struct HTTPRequest {
         var request = URLRequest(url: url!)
         request.httpMethod = method.rawValue
         request.addValue(contentType.rawValue + "; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.httpBody = data
+        
+        if let parameters = parameters{
+            let a  = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
+            request.httpBody = data + a!
+        }else {
+            request.httpBody = data
+        }
+        
+        if let headers = headers{
+            request.allHTTPHeaderFields = headers
+        }
+
         
         return request
     }
