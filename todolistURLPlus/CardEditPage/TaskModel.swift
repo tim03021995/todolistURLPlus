@@ -38,7 +38,7 @@ class TaskModelManerger{
     }
     static func create(_ cardID:Int, _ view:CardEditView){
         let boundary = "Boundary+\(arc4random())\(arc4random())"
-        let parameters = makeParameters(cardID,view)
+        let parameters = makeParameters(cardID,view,.POST)
         let dataPath = makeDataPath(view)
         let body = makeBody(parameters, dataPath, boundary)
         let request = makeRequest(body: body, boundary: boundary, endpoint: .task, id: nil, httpMethod: .POST)
@@ -57,11 +57,11 @@ class TaskModelManerger{
     }
     static func edit(_ cardID:Int,_ taskID:Int, _ view:CardEditView){
            let boundary = "Boundary+\(arc4random())\(arc4random())"
-           let parameters = makeParameters(cardID,view)
+           let parameters = makeParameters(cardID,view,.PUT)
            let dataPath = makeDataPath(view)
            let body = makeBody(parameters, dataPath, boundary)
            print(parameters)
-        let request = makeRequest(body: body, boundary: boundary, endpoint: .task, id: taskID, httpMethod: .PUT)
+        let request = makeRequest(body: body, boundary: boundary, endpoint: .task, id: taskID, httpMethod: .POST)
         print(#function)
            NetworkManager().sendRequest(with: request) { (result:Result<PutTaskResponse,NetworkError>) in
                switch result {
@@ -87,8 +87,7 @@ class TaskModelManerger{
         let url = URL(string:urlString)
         var request = URLRequest(url: url!)
         let userToken = ["userToken":UserToken.shared.userToken]
-        
-        request.httpMethod = httpMethod.rawValue
+        request.httpMethod = HTTPMethod.POST.rawValue
         request.allHTTPHeaderFields = userToken
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.httpBody = body
@@ -96,7 +95,7 @@ class TaskModelManerger{
         return request
     }
     
-    static func makeParameters(_ cardID:Int,_ view:CardEditView)->[String:Any]{
+    static func makeParameters(_ cardID:Int,_ view:CardEditView,_ method:HTTPMethod)->[String:Any]{
         var parameters:[String:Any] = [:]
         let data = getViewData(view: view)
         if let title = data.title {
@@ -104,6 +103,9 @@ class TaskModelManerger{
         }
         if let description = data.description {
             parameters["description"] = description
+        }
+        if method == .PUT {
+        parameters["_method"] = "PUT"
         }
         parameters["card_id"] = cardID
         parameters["tag"] = data.tag
@@ -138,32 +140,6 @@ class TaskModelManerger{
         body.appendString(string: "--\(boundary)--\r\n")
          return body
      }
-    
-//    static func create(_ parameters:[String:Any]){
-//        let headers = ["userToken":UserToken.shared.userToken]
-//        let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, parameters: parameters , headers:  headers)
-//        NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
-//            switch result {
-//            case .success(let a):
-//                print("create success")
-//            case .failure(let err):
-//                print(err)
-//            }
-//        }
-//    }
-//    static func edit(_ parameters:[String:Any],_ taskID:Int){
-//        let headers = ["userToken":UserToken.shared.userToken]
-//        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: taskID)
-//        NetworkManager().sendRequest(with: request.send()) { (result:Result<PostTaskResponse,NetworkError>) in
-//            switch result {
-//            case .success(let a):
-//                print("edit success")
-//                print(a.taskData)
-//            case .failure(let err):
-//                print(err)
-//            }
-//        }
-//    }
     static func delete(_ taskID:Int){
         let headers = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint:.task, contentType: .json, method:.DELETE, headers: headers, id:taskID).send()

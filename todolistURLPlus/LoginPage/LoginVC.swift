@@ -50,7 +50,7 @@ class LoginVC: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
-        IQKeyboardManager.shared.enable = true
+        //IQKeyboardManager.shared.enable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
