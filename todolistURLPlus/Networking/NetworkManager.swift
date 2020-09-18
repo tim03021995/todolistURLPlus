@@ -38,11 +38,8 @@ struct NetworkManager {
                 print("Successs" , "Status Code:\(response.statusCode)")
 
             }catch{
+                print("======================== Decode Error ========================")
                 print(error,"statuscode:\(response.statusCode)")
-                print("======================== Decode Error ========================")
-                print(String.init(data: data, encoding: .utf8) ?? "")
-                print("======================== Decode Error ========================")
-                print(error.localizedDescription)
                 completion(.failure(.decodeError(struct: "\(T.self)")))
             }
         case 401:
