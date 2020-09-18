@@ -110,10 +110,12 @@ class CardEditVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @objc func takeImage() {
-        let photoController = UIImagePickerController()
-        photoController.delegate = self
-        photoController.sourceType = .photoLibrary
-        present(photoController, animated: true, completion: nil)
+        DispatchQueue.main.async{
+            let photoController = UIImagePickerController()
+            photoController.delegate = self
+            photoController.sourceType = .photoLibrary
+            self.present(photoController, animated: true, completion: nil)
+        }
     }
     
     
