@@ -27,6 +27,7 @@ class CardEditView: UIView {
             width: ScreenSize.width.value * 0.8,
             height: ScreenSize.height.value * 0.1 ))
         textField.textAlignment = .center
+        textField.placeholder = "Please input title"
         let font = textField.font!
         let newFont = font.withSize(30)
         textField.font = newFont

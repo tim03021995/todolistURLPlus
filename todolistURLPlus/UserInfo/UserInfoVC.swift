@@ -1,10 +1,15 @@
 import UIKit
 
-class UserInfoVC: UIViewController {
+class UserInfoVC: CanLoadViewController {
     let userInformationView = UserInfoView()
     override func loadView() {
-        #warning("get")
         super .loadView()
+        var  urlString = "https://i.pinimg.com/originals/df/80/f3/df80f367ffb8669baeabcd5564f1b638.jpg"
+        //var  urlString ="http://35.185.131.56:8002/images/task/2020-09-18%2017:32:45%20task141.jpeg"
+
+        getImage(type: .other, imageURL: urlString) { (image) in
+            self.userInformationView.peopleView.image = image
+        }
         self.view = userInformationView
     }
     override func viewDidLoad() {
@@ -28,5 +33,7 @@ class UserInfoVC: UIViewController {
             presentingVC?.dismiss(animated: true, completion: nil)
         }
     }
+    func getUserData(){
 
+    }
 }
