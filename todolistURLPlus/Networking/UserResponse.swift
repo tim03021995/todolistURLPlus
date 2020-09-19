@@ -21,7 +21,8 @@ struct GetUserResponse: Codable {
 }
 
 struct UserData: Codable {
-    let id: String
+ //   let id: String
+    let id :Int
     let username:String
     let email:String
     let image:String?

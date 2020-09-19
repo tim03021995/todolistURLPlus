@@ -23,6 +23,8 @@ class CardEditVC: CanLoadViewController {
     }
     
     override func viewDidLoad() {
+        let api = Api()
+        api.getUser()
         super.viewDidLoad()
         //pushGlass()
         setNC()
@@ -69,7 +71,7 @@ class CardEditVC: CanLoadViewController {
                        self.funtionType = .create
                        viewData.description = "Please input"
                        viewData.image = UIImage(systemName: "photo")!
-                       viewData.title = "Please input Title"
+                       viewData.title = ""
 
                    self.cardID = cardID
                    return viewData
@@ -104,41 +106,6 @@ class CardEditVC: CanLoadViewController {
               self.cardEditView.colorsCollectionView.reloadData()
               self.cardEditView.setUserData(data: viewData)
     }
-//    func setData(data:TaskModel){
-//        let viewData:TaskModel = {
-//            var viewData = TaskModel()
-//            switch data.funtionType {
-//            case .create:
-//                viewData.tag = .red
-//                self.funtionType = .create
-//                viewData.description = "Please input"
-//                viewData.image = UIImage(systemName: "photo")!
-//                viewData.title = "Please input Title"
-//            case .edit:
-//                viewData.tag = data.tag!
-//                self.funtionType = .edit
-//                viewData.description = data.description
-//                viewData.image = data.image ?? UIImage(systemName: "photo")!
-//                viewData.title = data.title
-//            case .none:
-//                break
-//            case .delete:
-//                break
-//            }
-//            self.cardID = data.cardID!
-//            self.taskID = data.taskID
-//            viewData.funtionType = data.funtionType
-//            return viewData
-//        }()
-//
-//        self.cardEditView.colorsCollectionView.delegate = self
-//        self.cardEditView.scrollView.delegate = self
-//        self.cardEditView.textView.delegate = self
-//        self.cardEditView.colorsCollectionView.reloadData()
-//        self.cardEditView.setUserData(data: viewData)
-//        //        self.view = cardEditView
-//    }
-    
     
     private func saveTask(){
         loading()
