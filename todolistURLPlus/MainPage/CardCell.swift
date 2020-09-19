@@ -34,9 +34,10 @@ class CardCell: UICollectionViewCell {
         {
             let button = UIButton()
             button.center = CGPoint(x: 0, y: 0)
+            print(self)
             
-            button.frame.size = CGSize(width: self.frame.width * 0.2,
-                                       height: self.frame.width * 0.2)
+            button.frame.size = CGSize(width: self.frame.width * 0.1,
+                                       height: self.frame.width * 0.1)
             button.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
             button.tintColor = .red
             
