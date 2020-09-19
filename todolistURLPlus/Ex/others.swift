@@ -129,21 +129,9 @@ class CanLoadViewController:UIViewController{
         let url = URL(string: urlStr)!
         let tempDirectory = FileManager.default.temporaryDirectory
         let imageFileUrl = tempDirectory.appendingPathComponent(url.lastPathComponent)
-        if FileManager.default.fileExists(atPath: imageFileUrl.path) {
-            let image = UIImage(contentsOfFile: imageFileUrl.path)
-            completion(image!)
-        } else {
-            completion(nil)
-            DispatchQueue.main.async {
-                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    if let data = data, let image = UIImage(data: data) {
-                        try? data.write(to: imageFileUrl)
-                        completion(image)
-                    }
-                }
-            task.resume()
-            }
-        }
+        let data = try! Data(contentsOf: url)
+        let image = UIImage(data: data)
+        completion(image)
     }
     enum ImageURLType{
         case gill,other
