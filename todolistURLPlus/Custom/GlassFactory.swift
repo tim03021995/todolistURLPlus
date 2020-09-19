@@ -13,7 +13,7 @@ class  GlassFactory{
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
         let glassView = UIVisualEffectView(effect: blurEffect)
         glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-        glassView.layer.cornerRadius = ScreenSize.height.value * 0.1
+        glassView.layer.cornerRadius = ScreenSize.height.value * 0.01
         glassView.clipsToBounds = true
         return glassView
     }

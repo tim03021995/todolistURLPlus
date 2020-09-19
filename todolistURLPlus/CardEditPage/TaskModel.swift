@@ -94,7 +94,6 @@ class TaskModelManerger{
         }
         parameters["card_id"] = cardID
         parameters["tag"] = data.tag
-        print(parameters)
         return parameters
     }
         static func makeDataPath(_ view:CardEditView)->[String:Data]{
