@@ -86,6 +86,7 @@ class CardEditVC: CanLoadViewController {
             viewData.taskID = taskID
             viewData.title = title ?? ""
             viewData.description = description ?? ""
+            viewData.funtionType = .edit
             if let image = image{
                 getImage(type: .gill, imageURL: image, completion: { (image) in
                 viewData.image = image
@@ -96,13 +97,12 @@ class CardEditVC: CanLoadViewController {
             viewData.tag = tag ?? ColorsButtonType.red
             return viewData
         }()
-              
+             self.taskID = taskID
               self.cardEditView.colorsCollectionView.delegate = self
               self.cardEditView.scrollView.delegate = self
               self.cardEditView.textView.delegate = self
               self.cardEditView.colorsCollectionView.reloadData()
               self.cardEditView.setUserData(data: viewData)
-              //        self.view = cardEditView
     }
 //    func setData(data:TaskModel){
 //        let viewData:TaskModel = {

@@ -132,6 +132,7 @@ class TaskModelManerger{
             switch result {
             case .success(let a):
                 print("delete success")
+                compeletion()
             case .failure(let err):
                 print(err)
             }

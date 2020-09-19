@@ -56,10 +56,10 @@ extension UIViewController
         }
         animate.startAnimation()
     }
-
+    
 }
 extension UITextView{
-        func resetHight(_ textView:UITextView){
+    func resetHight(_ textView:UITextView){
         let maxHeight:CGFloat = ScreenSize.height.value * 0.4
         let frame = textView.frame
         let constrainSize=CGSize(width:frame.size.width,height:CGFloat(MAXFLOAT))
@@ -82,13 +82,13 @@ extension Data{
 }
 class CanLoadViewController:UIViewController{
     let loadIndicatorView:UIActivityIndicatorView = {
-         var loading = UIActivityIndicatorView()
-         loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
-         loading.color = .black
-         loading.style = .large
-
-         return loading
-     }()
+        var loading = UIActivityIndicatorView()
+        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
+        loading.color = .black
+        loading.style = .large
+        
+        return loading
+    }()
     let glass:UIView = {
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let glassView = UIVisualEffectView(effect: blurEffect)
@@ -118,7 +118,6 @@ class CanLoadViewController:UIViewController{
         animate.startAnimation()
     }
     func getImage(type:ImageURLType,imageURL:String,completion:@escaping(UIImage?)->Void){
-        loading()
         var urlStr:String
         switch type {
         case .gill:
@@ -131,21 +130,20 @@ class CanLoadViewController:UIViewController{
         let tempDirectory = FileManager.default.temporaryDirectory
         let imageFileUrl = tempDirectory.appendingPathComponent(url.lastPathComponent)
         if FileManager.default.fileExists(atPath: imageFileUrl.path) {
-           let image = UIImage(contentsOfFile: imageFileUrl.path)
-           completion(image!)
+            let image = UIImage(contentsOfFile: imageFileUrl.path)
+            completion(image!)
         } else {
-          completion(nil)
-           let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-              if let data = data, let image = UIImage(data: data) {
-                 try? data.write(to: imageFileUrl)
-                 DispatchQueue.main.async {
-                    completion(image)
-                 }
-              }
-           }
-           task.resume()
+            completion(nil)
+            DispatchQueue.main.async {
+                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = data, let image = UIImage(data: data) {
+                        try? data.write(to: imageFileUrl)
+                        completion(image)
+                    }
+                }
+            task.resume()
+            }
         }
-        stopLoading()
     }
     enum ImageURLType{
         case gill,other

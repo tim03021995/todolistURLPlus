@@ -35,6 +35,16 @@ class UserInfoVC: CanLoadViewController {
         }
     }
     func getUserData(){
-
+        let headers = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers)
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
+            switch result {
+            case .success(let a):
+                print("get user Data success")
+                print(a)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
 }
