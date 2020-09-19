@@ -14,6 +14,7 @@ class UserInfoVC: CanLoadViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     @objc func information (){
         let vc = SetInfoVC()
