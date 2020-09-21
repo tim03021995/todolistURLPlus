@@ -23,8 +23,6 @@ class CardEditVC: CanLoadViewController {
     }
     
     override func viewDidLoad() {
-        let api = Api()
-        api.getUser()
         super.viewDidLoad()
         //pushGlass()
         setNC()
