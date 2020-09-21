@@ -63,16 +63,14 @@ class TaskModelManerger{
            let dataPath = makeDataPath(view)
            let body = makeBody(parameters, dataPath, boundary)
            print(parameters)
-//        let request = makeRequest(body: body, boundary: boundary, endpoint: .task, id: taskID, httpMethod: .POST)
         let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, headers: header, id: taskID)
-        print(#function)
         NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PutTaskResponse,NetworkError>) in
                switch result {
                case .success(let a):
-                   print("create success")
+                   print("edit success")
                    print(a)
                case .failure(let err):
-                   print(" create error")
+                   print("edit error")
                    print(err.description)
                    print("錯誤訊息：\(err.errMessage)")
                }
@@ -94,6 +92,7 @@ class TaskModelManerger{
         }
         parameters["card_id"] = cardID
         parameters["tag"] = data.tag
+        print(parameters)
         return parameters
     }
         static func makeDataPath(_ view:CardEditView)->[String:Data]{

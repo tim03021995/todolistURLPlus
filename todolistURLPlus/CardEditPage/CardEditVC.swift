@@ -43,7 +43,7 @@ class CardEditVC: CanLoadViewController {
             createTask()
         case .edit:
             print("save")
-            saveTask()
+            editTask()
         case .delete:
             print("delete")
             break
@@ -81,7 +81,7 @@ class CardEditVC: CanLoadViewController {
         self.navigationItem.title = "Create"
         funtionType = .create
     }
-    func editPage (taskID:Int,title:String?,description:String?,image:String?,tag:ColorsButtonType?){
+    func editPage (cardID:Int,taskID:Int,title:String?,description:String?,image:String?,tag:ColorsButtonType?){
         let viewData:TaskModel = {
             var viewData = TaskModel()
             viewData.taskID = taskID
@@ -106,10 +106,11 @@ class CardEditVC: CanLoadViewController {
               self.cardEditView.colorsCollectionView.reloadData()
               self.cardEditView.setUserData(data: viewData)
         self.navigationItem.title = "Edit"
+        self.cardID = cardID
         funtionType = .edit
     }
     
-    private func saveTask(){
+    private func editTask(){
         loading()
         TaskModelManerger.edit(cardID, taskID!, cardEditView) {
             self.popView()
