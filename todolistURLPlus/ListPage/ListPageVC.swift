@@ -131,8 +131,6 @@ class ListPageVC: UIViewController {
                 print("showTasks筆數 = \(showTasks.count)")
                 self.listBaseView.tableView.reloadData()
                 print("Get成功")
-                //這裡是成功解包的東西 直接拿data裡的東西 要解包
-                // data.cardData........
             case .failure(let err):
                 print("Get失敗\(err.description)")
             }
@@ -178,7 +176,7 @@ extension ListPageVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
-        cell.cellTitleLabel.text = showTasks[indexPath.section].description ?? ""
+        cell.cellTitleLabel.text = showTasks[indexPath.section].title 
         return cell
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
