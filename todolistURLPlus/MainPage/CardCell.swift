@@ -70,7 +70,7 @@ class CardCell: UICollectionViewCell {
         
       }
     
-    func setUpSingle(showCards: [GetAllCardResponse.ShowCard], indexPath: IndexPath?)
+    func setUpSingle(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?)
     {
         
         if let indexPath = indexPath

@@ -17,7 +17,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 //    var cardDatas = [CardModel]()
     var state = true
     var cell: CardCell! = nil
-    var showCards = [GetAllCardResponse.ShowCard]()
+    var showCards = [GetCardResponse.ShowCard]()
     {
         didSet
         {
@@ -270,9 +270,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         if !state
         {
             deleteCard(indexPath: indexPath)
+            
+        }else
+        {
+            toListPageVC(indexPath: indexPath)
         }
-//        toListPageVC(indexPath: indexPath)
-//        deleteCard()
+        
+        
         
         
     }
@@ -568,7 +572,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
            let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: showCards[indexPath.row].id).send()
         
-           NetworkManager().sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
                switch result{
                    
                case .success(let data):

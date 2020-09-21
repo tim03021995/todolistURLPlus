@@ -12,7 +12,7 @@ class ListPageVC: UIViewController {
     
     var showCard: GetCardResponse.ShowCard!
 //    lazy var showTasks = self.showCard.showTasks
-    var showTasks:[GetAllCardResponse.ShowTask] = []
+    var showTasks:[GetCardResponse.ShowTask] = []
     var cardIndexPath = IndexPath()
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
