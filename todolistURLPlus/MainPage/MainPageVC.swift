@@ -57,6 +57,15 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             label.textColor = .white
             return label
     }()
+    ///設置垃圾桶
+    let trashBtn: UIButton =
+    {
+        let btn = UIButton(frame: CGRect(x: ScreenSize.width.value * 0.75, y: ScreenSize.height.value * 0.05, width: ScreenSize.width.value * 0.15, height: ScreenSize.width.value * 0.15))
+        btn.setBackgroundImage(UIImage(systemName: "trash.fill"), for: .normal)
+        btn.tintColor = .red
+        btn.addTarget(self, action: #selector(MainPageVC.editMode), for: .touchUpInside)
+        return btn
+    }()
     //按下按鈕的標籤值
     var btnTag = 0
     //點擊單人按鈕附加打勾圖案
@@ -258,9 +267,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        deleteCard(indexPath: indexPath)
-        print("點到的卡片是 ＝", indexPath.row)
-        print(self.cell.deleteButton.tag)
+        if !state
+        {
+            deleteCard(indexPath: indexPath)
+        }
 //        toListPageVC(indexPath: indexPath)
 //        deleteCard()
         
@@ -351,13 +361,17 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
         @objc func tap(){
-//            let vc = UserAuthority()
-//            present(vc, animated: true, completion: nil)
-            state = !state
-            singleCardCollectionView.reloadData()
+            let vc = UserAuthority()
+            present(vc, animated: true, completion: nil)
+           
             
         }
     
+    @objc func editMode()
+    {
+        state = !state
+                   singleCardCollectionView.reloadData()
+    }
    ///設定卡片CollectionView
     func setUpSingleCardCollectionView()
     {
@@ -446,7 +460,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(mutipleCheckMark)
         self.view.addSubview(creatBtn)
         self.view.addSubview(addEditorBtn)
-        
+        self.view.addSubview(trashBtn)
         setSingleBtnConstraints()
         setMutipleBtnConstraints()
         

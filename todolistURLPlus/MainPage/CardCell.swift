@@ -30,22 +30,22 @@ class CardCell: UICollectionViewCell {
         press.minimumPressDuration = 1.0
         return press
     }()
-    var deleteButton: UIButton =
+    var deleteButton: UIImageView =
         {
-            let button = UIButton()
-            button.center = CGPoint(x: 10, y: 10)
-            button.frame.size = CGSize(width: ScreenSize.width.value * 0.15,
+            let imageView = UIImageView()
+            imageView.center = CGPoint(x: 10, y: 10)
+            imageView.frame.size = CGSize(width: ScreenSize.width.value * 0.15,
                                        height: ScreenSize.width.value * 0.15)
-            button.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
-            button.tintColor = .red
-            button.isHidden = true
-            
-//            button.addTarget(self, action: #selector(CardCell.test), for: .touchUpInside)
-            return button
+
+            imageView.image = UIImage(systemName: "xmark.circle")
+            imageView.isHidden = true
+            imageView.tintColor = .red
+
+            return imageView
     }()
     var buttonTag = 0
 
-   
+    
    var deleteButtonIsHidden = true
     @objc func longPressAction()
     {
