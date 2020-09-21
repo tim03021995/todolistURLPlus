@@ -8,6 +8,8 @@ class UserInfoVC: CanLoadViewController {
         self.view = userInformationView
     }
     override func viewDidLoad() {
+        let api = Api()
+        api.getUser()
         super.viewDidLoad()
         
     }

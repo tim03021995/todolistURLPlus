@@ -23,24 +23,20 @@ class CardEditVC: CanLoadViewController {
     }
     
     override func viewDidLoad() {
-        let api = Api()
-        api.getUser()
         super.viewDidLoad()
-        //pushGlass()
         setNC()
-        print("isLoaded")
     }
     
     func setNC(){
-        print(#function)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Save",
             style: .done,
             target: self,
             action: #selector(save))
-        self.navigationItem.title = "test"
+        
     }
     @objc func save(){
+       self.view.endEditing(true)
         switch funtionType {
         case .create:
             print("create")
@@ -52,6 +48,7 @@ class CardEditVC: CanLoadViewController {
             print("delete")
             break
         case .none:
+            print("none")
             break
         }
     }
@@ -81,6 +78,8 @@ class CardEditVC: CanLoadViewController {
                self.cardEditView.textView.delegate = self
                self.cardEditView.colorsCollectionView.reloadData()
                self.cardEditView.setUserData(data: viewData)
+        self.navigationItem.title = "Create"
+        funtionType = .create
     }
     func editPage (taskID:Int,title:String?,description:String?,image:String?,tag:ColorsButtonType?){
         let viewData:TaskModel = {
@@ -90,6 +89,7 @@ class CardEditVC: CanLoadViewController {
             viewData.description = description ?? ""
             viewData.funtionType = .edit
             if let image = image{
+                print(image)
                 getImage(type: .gill, imageURL: image, completion: { (image) in
                 viewData.image = image
             })
@@ -105,6 +105,8 @@ class CardEditVC: CanLoadViewController {
               self.cardEditView.textView.delegate = self
               self.cardEditView.colorsCollectionView.reloadData()
               self.cardEditView.setUserData(data: viewData)
+        self.navigationItem.title = "Edit"
+        funtionType = .edit
     }
     
     private func saveTask(){
@@ -176,8 +178,8 @@ extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDel
         loading()
         if let image = info[.originalImage] as? UIImage{
             let _image = UIImage(data: image.jpegData(compressionQuality: 0.05)!)
-            print("origin", image.pngData())
-            print("resize", _image?.pngData())
+//            print("origin", image.pngData())
+//            print("resize", _image?.pngData())
             cardEditView.imageView.image = _image
         }
         stopLoading()
