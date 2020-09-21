@@ -11,7 +11,7 @@ import Foundation
 //MARK:- GET Card 所有資料
 
 ///GET CARD
-struct GetAllCardResponse: Codable {
+struct GetCardResponse: Codable {
     let status: Bool
     let userData: UserData
     

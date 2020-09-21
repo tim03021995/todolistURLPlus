@@ -22,7 +22,7 @@ struct TaskModel{
         case create,edit,delete
     }
 }
-class TaskModelManerger{
+class TaskModelManager{
     
     private static func getViewData(view:CardEditView)->TaskModel{
         var data = TaskModel()
@@ -44,7 +44,7 @@ class TaskModelManerger{
         let body = makeBody(parameters, dataPath, boundary)
         let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, headers: header)
         print(#function)
-        NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostTaskResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
                 print("create success")
@@ -64,7 +64,7 @@ class TaskModelManerger{
            let body = makeBody(parameters, dataPath, boundary)
            print(parameters)
         let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, headers: header, id: taskID)
-        NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PutTaskResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PutTaskResponse,NetworkError>) in
                switch result {
                case .success(let a):
                    print("edit success")
@@ -126,7 +126,7 @@ class TaskModelManerger{
     static func delete(_ taskID:Int,_ compeletion:@escaping ()->Void){
         let headers = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint:.task, contentType: .json, method:.DELETE, headers: headers, id:taskID).send()
-        NetworkManager().sendRequest(with: request) { (result:Result<DeleteTaskResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<DeleteTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
                 print("delete success")

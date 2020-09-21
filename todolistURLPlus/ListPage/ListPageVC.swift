@@ -10,9 +10,9 @@ import UIKit
 
 class ListPageVC: UIViewController {
     
-    var showCard: GetAllCardResponse.ShowCard!
+    var showCard: GetCardResponse.ShowCard!
 //    lazy var showTasks = self.showCard.showTasks
-    var showTasks:[GetAllCardResponse.ShowTask] = []
+    var showTasks:[GetCardResponse.ShowTask] = []
     {
         didSet
         {
@@ -97,7 +97,7 @@ class ListPageVC: UIViewController {
         toCardEditVC(data: showCard, indexPath: nil)
     }
     
-    func toCardEditVC(data: GetAllCardResponse.ShowCard, indexPath: IndexPath?)
+    func toCardEditVC(data: GetCardResponse.ShowCard, indexPath: IndexPath?)
     {
         let vc = CardEditVC()
         if let indexPath = indexPath
@@ -121,7 +121,7 @@ class ListPageVC: UIViewController {
     func getTask(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-        NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):

@@ -23,7 +23,7 @@ class CardCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    func setUpSingle(showCards: [GetAllCardResponse.ShowCard], indexPath: IndexPath?)
+    func setUpSingle(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?)
     {
         if let indexPath = indexPath
         {

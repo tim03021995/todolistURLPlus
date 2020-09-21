@@ -14,7 +14,6 @@ struct HTTPRequest {
     let baseURL = "http://35.185.131.56:8002/api/"
     let endpoint:Endpoint
     var urlString:String {
-        // "http://35.185.131.56:8000/api/task/\(listElement.id)"
         if let id = id {
             return baseURL + endpoint.rawValue + "/" + "\(id)"
         } else {
@@ -46,7 +45,7 @@ struct HTTPRequest {
         return request
     }
     
-    func imageRequest(boundary: String, data: Data) ->URLRequest {
+    func imageRequest(boundary: String, data: Data) -> URLRequest {
         let url = URL(string: self.urlString)
         var request = URLRequest(url: url!)
         request.httpMethod = method.rawValue

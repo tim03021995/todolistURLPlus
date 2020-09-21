@@ -8,8 +8,7 @@ class UserInfoVC: CanLoadViewController {
         self.view = userInformationView
     }
     override func viewDidLoad() {
-        let api = Api()
-        api.getUser()
+        Api().getUser()
         super.viewDidLoad()
         
     }
@@ -34,7 +33,7 @@ class UserInfoVC: CanLoadViewController {
     func getUserData(){
         let headers = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
             switch result {
             case .success(let data):
                 print("get user Data success")
