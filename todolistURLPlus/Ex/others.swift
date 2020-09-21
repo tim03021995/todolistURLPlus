@@ -84,7 +84,7 @@ class CanLoadViewController:UIViewController{
     let loadIndicatorView:UIActivityIndicatorView = {
         var loading = UIActivityIndicatorView()
         loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
-        loading.color = .black
+        loading.color = .white
         loading.style = .large
         
         return loading
