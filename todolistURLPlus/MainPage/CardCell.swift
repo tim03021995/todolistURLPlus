@@ -9,7 +9,6 @@
 import UIKit
 
 class CardCell: UICollectionViewCell {
-    
     lazy var cardTitle: UILabel =
     {
         let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
@@ -17,6 +16,7 @@ class CardCell: UICollectionViewCell {
             width: self.frame.width * 0.9,
             height: self.frame.height * 0.2))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
+        label.font = UIFont.systemFont(ofSize: 30)
         label.clipsToBounds = true
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -26,34 +26,37 @@ class CardCell: UICollectionViewCell {
     
     lazy var longPress: UILongPressGestureRecognizer =
     {
-        let press = UILongPressGestureRecognizer(target: self, action: #selector(self.deleteCard))
+        let press = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressAction))
         press.minimumPressDuration = 1.0
         return press
     }()
-    lazy var deleteIndicator: UIButton =
+    var deleteButton: UIButton =
         {
             let button = UIButton()
-            button.center = CGPoint(x: 0, y: 0)
-            print(self)
-            
-            button.frame.size = CGSize(width: self.frame.width * 0.1,
-                                       height: self.frame.width * 0.1)
+            button.center = CGPoint(x: 10, y: 10)
+            button.frame.size = CGSize(width: ScreenSize.width.value * 0.15,
+                                       height: ScreenSize.width.value * 0.15)
             button.setBackgroundImage(UIImage(systemName: "xmark.circle"), for: .normal)
             button.tintColor = .red
-            
             button.isHidden = true
+            
+//            button.addTarget(self, action: #selector(CardCell.test), for: .touchUpInside)
             return button
     }()
+    var buttonTag = 0
+
    
-    @objc func deleteCard()
+   var deleteButtonIsHidden = true
+    @objc func longPressAction()
     {
+        
         if longPress.state == .began
         {
-            print("Cell的Frame = ",self.frame)
-            print("press began")
-            print("Delete Card")
-            deleteIndicator.isHidden = false
+            
+            feedbackGenerator.impactOccurred()
 
+            deleteButtonIsHidden = false
+            deleteButton.isHidden = deleteButtonIsHidden
 
         }else if longPress.state == .ended
         {
@@ -61,20 +64,30 @@ class CardCell: UICollectionViewCell {
 
         }
     }
+   @objc func btnTag()
+      {
+        print(self.deleteButton.tag,"||",self.buttonTag)
+        
+      }
+    
     func setUpSingle(showCards: [GetAllCardResponse.ShowCard], indexPath: IndexPath?)
     {
+        
         if let indexPath = indexPath
         {
+            
             let data = showCards[indexPath.row]
             self.backgroundColor = .clear
             self.layer.cornerRadius = self.frame.width * 0.05
             self.clipsToBounds = true
-            self.cardTitle.text = data.cardName
-            self.cardTitle.textColor = .white
-            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
+            self.cardTitle.text = String(data.id)
+            self.cardTitle.textColor = .red
+//            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
+            self.backgroundColor = .lightGray
             self.addSubview(cardTitle)
             self.addGestureRecognizer(longPress)
-            self.addSubview(deleteIndicator)
+            
+            self.addSubview(deleteButton)
         }
     }
     
@@ -90,6 +103,7 @@ class CardCell: UICollectionViewCell {
                self.clipsToBounds = true
                self.cardTitle.text = data.cardTitle
                self.cardTitle.textColor = .white
+            self.deleteButton.isHidden = false
                self.backgroundView = UIImageView(image: UIImage(named:"redCard"))
                self.addSubview(cardTitle)
            }
