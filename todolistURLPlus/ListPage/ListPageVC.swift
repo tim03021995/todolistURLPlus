@@ -105,7 +105,7 @@ class ListPageVC: UIViewController {
         let taskData = data.showTasks[indexPath.section]
         //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
       //  let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
-        vc.editPage(taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
+        vc.editPage(cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
         navigationController?.pushViewController(vc, animated: true)
 
         }else
@@ -189,7 +189,7 @@ extension ListPageVC: UITableViewDataSource{
         print("現在點擊的Task ID = \(task.id)")
 //        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
        // vc.setData(data: taskModel)
-        vc.editPage(taskID: task.id, title: task.title, description: task.description, image: task.image, tag: ColorsButtonType(rawValue: task.tag!))
+        vc.editPage(cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: task.image, tag: ColorsButtonType(rawValue: task.tag!))
 
         navigationController?.pushViewController(vc, animated: true)
 
