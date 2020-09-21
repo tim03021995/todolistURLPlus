@@ -8,8 +8,7 @@
 
 import UIKit
 
-class CardEditVC: UIViewController {
-    let headers = ["userToken":UserToken.shared.userToken]
+class CardEditVC: CanLoadViewController {
     private var funtionType:TaskModel.FuntionType?
     private var cardID:Int = 0
     private var taskID:Int?
@@ -20,36 +19,36 @@ class CardEditVC: UIViewController {
         view = cardEditView
     }
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = false
+       navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNC()
-        print("isLoaded")
     }
     
     func setNC(){
-        print(#function)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Save",
             style: .done,
             target: self,
             action: #selector(save))
-        self.navigationItem.title = "test"
+        
     }
     @objc func save(){
+       self.view.endEditing(true)
         switch funtionType {
         case .create:
             print("create")
             createTask()
         case .edit:
             print("save")
-            saveTask()
+            editTask()
         case .delete:
             print("delete")
             break
         case .none:
+            print("none")
             break
         }
     }
@@ -61,57 +60,71 @@ class CardEditVC: UIViewController {
         self.cardEditView.colorsCollectionView.reloadData()
         //        self.view = cardEditView
     }
-    func setData(data:TaskModel){
+    func createPage(cardID:Int){
+        let viewData:TaskModel = {
+                   var viewData = TaskModel()
+
+                       viewData.tag = .red
+                       self.funtionType = .create
+                       viewData.description = "Please input"
+                       viewData.image = UIImage(systemName: "photo")!
+                       viewData.title = ""
+
+                   self.cardID = cardID
+                   return viewData
+               }()
+               self.cardEditView.colorsCollectionView.delegate = self
+               self.cardEditView.scrollView.delegate = self
+               self.cardEditView.textView.delegate = self
+               self.cardEditView.colorsCollectionView.reloadData()
+               self.cardEditView.setUserData(data: viewData)
+        self.navigationItem.title = "Create"
+        funtionType = .create
+    }
+    func editPage (cardID:Int,taskID:Int,title:String?,description:String?,image:String?,tag:ColorsButtonType?){
         let viewData:TaskModel = {
             var viewData = TaskModel()
-            switch data.funtionType {
-            case .create:
-                viewData.tag = .red
-                self.funtionType = .create
-                viewData.description = "Please input"
-                viewData.image = UIImage(systemName: "photo")!
-                viewData.title = "Please input Title"
-            case .edit:
-                viewData.tag = data.tag!
-                self.funtionType = .edit
-                viewData.description = data.description
-                viewData.image = data.image ?? UIImage(systemName: "photo")!
-                viewData.title = data.title
-            case .none:
-                break
-            case .delete:
-                break
+            viewData.taskID = taskID
+            viewData.title = title ?? ""
+            viewData.description = description ?? ""
+            viewData.funtionType = .edit
+            if let image = image{
+                print(image)
+                getImage(type: .gill, imageURL: image, completion: { (image) in
+                viewData.image = image
+            })
+            }else{
+                viewData.image = UIImage(systemName: "photo")
             }
-            self.cardID = data.cardID!
-            self.taskID = data.taskID
-            viewData.funtionType = data.funtionType
+            viewData.tag = tag ?? ColorsButtonType.red
             return viewData
         }()
-        
-        self.cardEditView.colorsCollectionView.delegate = self
-        self.cardEditView.scrollView.delegate = self
-        self.cardEditView.textView.delegate = self
-        self.cardEditView.colorsCollectionView.reloadData()
-        self.cardEditView.setUserData(data: viewData)
-        //        self.view = cardEditView
+             self.taskID = taskID
+              self.cardEditView.colorsCollectionView.delegate = self
+              self.cardEditView.scrollView.delegate = self
+              self.cardEditView.textView.delegate = self
+              self.cardEditView.colorsCollectionView.reloadData()
+              self.cardEditView.setUserData(data: viewData)
+        self.navigationItem.title = "Edit"
+        self.cardID = cardID
+        funtionType = .edit
     }
     
-    
-    private func saveTask(){
-        pushGlass()
-        TaskModelManerger.edit(cardID, taskID!, cardEditView) {
+    private func editTask(){
+        loading()
+        TaskModelManager.edit(cardID, taskID!, cardEditView) {
             self.popView()
         }
     }
     private func createTask(){
-        pushGlass()
-        TaskModelManerger.create(cardID,cardEditView) {
+        loading()
+        TaskModelManager.create(cardID,cardEditView) {
             self.popView()
         }
     }
     @objc func deleteTask(){
-        pushGlass()
-        TaskModelManerger.delete(taskID!) {
+        loading()
+        TaskModelManager.delete(taskID!) {
              self.popView()
         }
        
@@ -125,7 +138,7 @@ class CardEditVC: UIViewController {
         }
     }
     func popView(){
-                    self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
 }
@@ -163,12 +176,14 @@ extension CardEditVC:UITextViewDelegate{
 }
 extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        loading()
         if let image = info[.originalImage] as? UIImage{
-            let _image = UIImage(data: image.jpegData(compressionQuality: 0.0)!)
-            print("origin", image.pngData())
-            print("resize", _image?.pngData())
+            let _image = UIImage(data: image.jpegData(compressionQuality: 0.05)!)
+//            print("origin", image.pngData())
+//            print("resize", _image?.pngData())
             cardEditView.imageView.image = _image
         }
+        stopLoading()
         dismiss(animated: true, completion: nil)
     }
 }

@@ -21,6 +21,7 @@ enum Endpoint:String {
     case register
     case task
     case card
+    case user
 }
 
 enum ContentType:String{
@@ -37,13 +38,15 @@ struct UserToken {
     
     ///拿token 如果沒有的話 回傳nil
     static func getToken() -> String?{
-        guard let token = UserDefaults.standard.string(forKey: "token") else {return nil}
-            if token == "" {
-                return nil
-            }else {
-                return token
-            }
+        guard let tokenFromUserDefault = UserDefaults.standard.string(forKey: "token") else {return nil}
+        let token = tokenFromUserDefault.isEmpty ? nil : tokenFromUserDefault
+        return token
     }
+    
+    private static func updateTokenToUserdefault(with token:String){
+        UserDefaults.standard.set(token, forKey: "token")
+    }
+
     
     mutating func updateToken(by token: String){
         userToken = token
@@ -56,8 +59,5 @@ struct UserToken {
 //        updateTokenToUserdefault(with: "")
     }
     
-    private func updateTokenToUserdefault(with token:String){
-        UserDefaults.standard.set(token, forKey: "token")
-    }
     
 }

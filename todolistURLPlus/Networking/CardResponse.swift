@@ -11,7 +11,7 @@ import Foundation
 //MARK:- GET Card 所有資料
 
 ///GET CARD
-struct GetAllCardResponse: Codable {
+struct GetCardResponse: Codable {
     let status: Bool
     let userData: UserData
     
@@ -68,9 +68,10 @@ struct GetAllCardResponse: Codable {
         let description:String?
         let cardID: Int
         let createdAt, updatedAt: String
+        let image : String?
         
         enum CodingKeys: String, CodingKey {
-            case id, title, status, tag
+            case id, title, status, tag, image
             case createUser = "create_user"
             case updateUser = "update_user"
             case description = "description"

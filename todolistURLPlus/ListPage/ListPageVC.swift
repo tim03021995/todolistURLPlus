@@ -10,7 +10,7 @@ import UIKit
 
 class ListPageVC: UIViewController {
     
-    var showCard: GetAllCardResponse.ShowCard!
+    var showCard: GetCardResponse.ShowCard!
 //    lazy var showTasks = self.showCard.showTasks
     var showTasks:[GetAllCardResponse.ShowTask] = []
     var cardIndexPath = IndexPath()
@@ -90,32 +90,32 @@ class ListPageVC: UIViewController {
         toCardEditVC(data: showCard, indexPath: nil)
     }
     
-    func toCardEditVC(data: GetAllCardResponse.ShowCard, indexPath: IndexPath?)
+    func toCardEditVC(data: GetCardResponse.ShowCard, indexPath: IndexPath?)
     {
         feedbackGenerator.impactOccurred()
         let vc = CardEditVC()
         if let indexPath = indexPath
        {
         let taskData = data.showTasks[indexPath.section]
-        
-        let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
-        
-        vc.setData(data: editData)
+        //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
+      //  let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
+        vc.editPage(cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
         navigationController?.pushViewController(vc, animated: true)
 
         }else
        {
         let cardID = showCard.id
         
-        let createData = TaskModel(funtionType: .create, cardID: cardID)
-             vc.setData(data: createData)
+     //   let createData = TaskModel(funtionType: .create, cardID: cardID)
+        vc.createPage(cardID: cardID)
+  //           vc.setData(data: createData)
              navigationController?.pushViewController(vc, animated: true)
         }
     }
     func getTask(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-        NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):
@@ -124,8 +124,6 @@ class ListPageVC: UIViewController {
                 print("showTasks筆數 = \(showTasks.count)")
                 self.listBaseView.tableView.reloadData()
                 print("Get成功")
-                //這裡是成功解包的東西 直接拿data裡的東西 要解包
-                // data.cardData........
             case .failure(let err):
                 print("Get失敗\(err.description)")
             }
@@ -171,7 +169,7 @@ extension ListPageVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
-        cell.cellTitleLabel.text = showTasks[indexPath.section].description ?? ""
+        cell.cellTitleLabel.text = showTasks[indexPath.section].title 
         return cell
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -180,8 +178,9 @@ extension ListPageVC: UITableViewDataSource{
             let vc = CardEditVC()
         let task = showTasks[indexPath.section]
         print("現在點擊的Task ID = \(task.id)")
-        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
-        vc.setData(data: taskModel)
+//        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
+       // vc.setData(data: taskModel)
+        vc.editPage(cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: task.image, tag: ColorsButtonType(rawValue: task.tag!))
 
         navigationController?.pushViewController(vc, animated: true)
 

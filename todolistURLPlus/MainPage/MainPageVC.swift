@@ -522,7 +522,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func getCard(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-        NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):
@@ -546,7 +546,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
         
-        NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
             switch result{
                 
             case .success(let data):

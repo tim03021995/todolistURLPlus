@@ -1,14 +1,16 @@
 import UIKit
 
-class UserInfoVC: UIViewController {
+class UserInfoVC: CanLoadViewController {
     let userInformationView = UserInfoView()
     override func loadView() {
-        #warning("get")
+        getUserData()
         super .loadView()
         self.view = userInformationView
     }
     override func viewDidLoad() {
+        Api().getUser()
         super.viewDidLoad()
+        
     }
     @objc func information (){
         let vc = SetInfoVC()
@@ -28,5 +30,23 @@ class UserInfoVC: UIViewController {
             presentingVC?.dismiss(animated: true, completion: nil)
         }
     }
-
+    func getUserData(){
+        let headers = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers)
+        NetworkManager.sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
+            switch result {
+            case .success(let data):
+                print("get user Data success")
+                let userData = data.userData
+                if let image = userData.image{
+                    self.getImage(type: .other, imageURL: image ) { (image) in
+                        self.userInformationView.peopleView.image = image
+                    }
+                }
+                self.userInformationView.userNameLabel.text = userData.username
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
 }

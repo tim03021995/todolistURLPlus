@@ -14,7 +14,7 @@ enum NetworkError:Error{
     case noResponse
     case noData
     case decodeError(struct: String)
-    case responseError(error: Errormessage, statusCode: Int)
+    case responseError(error: ErrorData, statusCode: Int)
 
     
     ///開發者用錯誤訊息 status code 或自定義錯誤訊息
@@ -42,7 +42,7 @@ enum NetworkError:Error{
     }
     
 }
-struct Errormessage:Codable{
+struct ErrorData:Codable{
     let status : Bool
     let error : String
 }

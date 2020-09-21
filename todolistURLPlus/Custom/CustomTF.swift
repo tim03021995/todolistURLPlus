@@ -20,9 +20,10 @@ class CustomLogINTF:UITextField{
     }
     
     func setTF(){
-        textColor = .white
-        backgroundColor = UIColor(white: 0, alpha: 0.1)
-        borderStyle = .none
+        textColor = .black
+        backgroundColor = .white
+        borderStyle = .roundedRect
+        layer.cornerRadius = 10
         
         //改placeholder 顏色
         attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray ])

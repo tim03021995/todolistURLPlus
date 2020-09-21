@@ -93,9 +93,9 @@ class LoginVC: UIViewController, Storyboarded {
         guard let parameters = validateAccount() else{ return }
         
         //包裝需要的參數
-        let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters)
+        let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
         
-        NetworkManager().sendRequest(with: getTokenRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
+        NetworkManager.sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
                 

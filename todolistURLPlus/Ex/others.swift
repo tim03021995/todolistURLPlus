@@ -56,19 +56,10 @@ extension UIViewController
         }
         animate.startAnimation()
     }
-    func pushGlass(){
-        let glass = GlassFactory.makeGlass()
-        glass.alpha = 0
-        self.view.addSubview(glass)
-        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
-            glass.alpha = 1
-        }
-        animate.startAnimation()
-        
-    }
+    
 }
 extension UITextView{
-        func resetHight(_ textView:UITextView){
+    func resetHight(_ textView:UITextView){
         let maxHeight:CGFloat = ScreenSize.height.value * 0.4
         let frame = textView.frame
         let constrainSize=CGSize(width:frame.size.width,height:CGFloat(MAXFLOAT))
@@ -87,5 +78,62 @@ extension Data{
     mutating func appendString(string: String) {
         let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
         append(data!)
+    }
+}
+class CanLoadViewController:UIViewController{
+    let loadIndicatorView:UIActivityIndicatorView = {
+        var loading = UIActivityIndicatorView()
+        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
+        loading.color = .white
+        loading.style = .large
+        
+        return loading
+    }()
+    let glass:UIView = {
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+        let glassView = UIVisualEffectView(effect: blurEffect)
+        glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+        glassView.layer.cornerRadius = 15
+        glassView.clipsToBounds = true
+        return glassView
+    }()
+    func loading(){
+        glass.alpha = 0
+        self.view.addSubview(glass)
+        self.view.addSubview(loadIndicatorView)
+        loadIndicatorView.startAnimating()
+        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+            self.navigationController?.navigationBar.isHidden = true
+            self.glass.alpha = 1
+        }
+        animate.startAnimation()
+    }
+    func stopLoading(){
+        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+            self.glass.alpha = 0
+            self.navigationController?.navigationBar.isHidden = false
+            self.glass.removeFromSuperview()
+            self.loadIndicatorView.removeFromSuperview()
+        }
+        animate.startAnimation()
+    }
+    func getImage(type:ImageURLType,imageURL:String,completion:@escaping(UIImage?)->Void){
+        var urlStr:String
+        switch type {
+        case .gill:
+            urlStr = "http://35.185.131.56:8002/" + imageURL
+        case .other:
+            urlStr = imageURL
+        }
+        print(urlStr)
+        let url = URL(string: urlStr)!
+        let tempDirectory = FileManager.default.temporaryDirectory
+        let imageFileUrl = tempDirectory.appendingPathComponent(url.lastPathComponent)
+        let data = try! Data(contentsOf: url)
+        let image = UIImage(data: data)
+        completion(image)
+    }
+    enum ImageURLType{
+        case gill,other
     }
 }
