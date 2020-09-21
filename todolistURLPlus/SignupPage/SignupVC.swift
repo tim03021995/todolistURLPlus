@@ -21,6 +21,8 @@ class SignupVC: UIViewController {
     @IBOutlet weak var passwordTF: CustomLogINTF!
     
     @IBOutlet weak var checkPasswordTF: CustomLogINTF!
+    
+    @IBOutlet weak var tfBackgroundView: UIView!
     //
     @IBOutlet weak var nameErrorLabel: UILabel!
     
@@ -32,11 +34,15 @@ class SignupVC: UIViewController {
     
     @IBOutlet weak var registerBtn: CustomButton!
     
+    let backgroundImage:UIImageView = {
+        return BackGroundFactory.makeImage(type: .background2)
+    }()
     
     //MARK:- ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .mainColor
         settingTF()
         //TODO 鍵盤上移事件
     }
