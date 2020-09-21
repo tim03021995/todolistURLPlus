@@ -19,7 +19,7 @@ class UserImageFactory{
         var  radius = ScreenSize.width.value
         switch size {
         case .large:
-            radius = radius * 0.8
+            radius = radius * 0.7
         case .medium:
             radius = radius * 0.3
         case .small:

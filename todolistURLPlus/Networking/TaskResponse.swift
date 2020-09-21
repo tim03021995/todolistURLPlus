@@ -11,13 +11,13 @@ import Foundation
 
 //MARK:- GET Task
 
+///GET TASK
 struct GetTaskResponse: Codable {
     let status: Bool
     let taskData: [TaskData?]
-    let error: String?
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case taskData = "task_data"
     }
     
@@ -47,8 +47,10 @@ struct GetTaskResponse: Codable {
 }
 
 //MARK:- POST Task (新增task)
+
+///POST TASK
 struct PostTaskResponse: Codable {
-    let status: String
+    let status: Bool
     let taskData: TaskData
     
     enum CodingKeys: String, CodingKey {
@@ -64,7 +66,7 @@ struct PostTaskResponse: Codable {
         let description: String?
         let tag: String
         let image: String?
-        let cardID: String
+        let cardID: Int
         let updatedAt: String
         let createdAt: String
         let id: Int
@@ -83,13 +85,13 @@ struct PostTaskResponse: Codable {
 
 //MARK:- PUT Task （更新Task）
 
+///PUT TASK
 struct PutTaskResponse: Codable {
     let status: Bool
-    let taskData: TaskData?
-    let error:String?
+    let taskData: TaskData
     
     enum CodingKeys: String, CodingKey {
-        case status, error
+        case status
         case taskData = "task_data"
     }
 }
@@ -103,7 +105,7 @@ struct TaskData: Codable {
     let updateUser:String
     let description: String
     let tag: String
-    let cardID:String
+    let cardID:Int
     let createdAt: String
     let updatedAt: String
     
@@ -118,8 +120,10 @@ struct TaskData: Codable {
     
 }
 
-//MARK:- DELETE
+//MARK:- DELETE Task
+
+
+///DELETE TASK
 struct DeleteTaskResponse: Codable {
     let status: Bool
-    let error:String?
 }

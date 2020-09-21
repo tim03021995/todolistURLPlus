@@ -20,11 +20,13 @@ class UserInfoVC: UIViewController {
     @objc func modifyPassword(){
         
     }
-//    func setUserData(userImage:UIImage?, userName: String?){
-//        userInformationView.setUserData(
-//            userImage: userImage ?? UIImage(systemName: "photo")!,
-//            userName: userName ?? "Unknow")
-//        self.view = userInformationView
-//    }
+    @objc func logoutOut(){
+        UserToken.shared.clearToken()
+
+        let presentingVC = self.presentingViewController
+        dismiss(animated: true) {
+            presentingVC?.dismiss(animated: true, completion: nil)
+        }
+    }
 
 }

@@ -55,7 +55,7 @@ class ListTableViewCell: UITableViewCell {
         littleBall.heightAnchor.constraint(equalToConstant: fullScreenMaxY * 0.03 ).isActive = true
         littleBall.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
     }
-    func setUpCell(data: MainModel, indexPath: IndexPath)
+    func setUpCell(data: CardModel, indexPath: IndexPath)
     {
         if let task = data.taskModel?[indexPath.section]
         {

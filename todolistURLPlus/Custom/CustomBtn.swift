@@ -58,7 +58,7 @@ class ColorButtonFactory{
         case red,orange,yellow,green,blue,darkBlue,purple
     }
 }
-enum  ColorsButtonType:CaseIterable{
+enum  ColorsButtonType:String,CaseIterable{
     case red,orange,yellow,green,blue,darkBlue,purple
     
     var color:UIColor{

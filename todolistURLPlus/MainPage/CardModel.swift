@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct MainModel
+struct CardModel
 {
     var headImage: UIImage?
     var userName: String?

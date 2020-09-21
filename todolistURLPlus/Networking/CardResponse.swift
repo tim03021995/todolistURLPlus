@@ -10,18 +10,17 @@ import Foundation
 
 //MARK:- GET Card 所有資料
 
+///GET CARD
 struct GetAllCardResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
-    
+    let userData: UserData
     
     enum CodingKeys: String, CodingKey {
-        case status, error
-        case cardData = "card_data"
+        case status
+        case userData = "user_data"
     }
     
-    struct CardData: Codable {
+    struct UserData: Codable {
         let id: Int
         let username:String
         let email: String
@@ -60,7 +59,9 @@ struct GetAllCardResponse: Codable {
     
     
     struct ShowTask: Codable {
+        
         let id: Int
+        let tag: String?
         let title: String
         let status: Bool
         let createUser, updateUser: String
@@ -69,7 +70,7 @@ struct GetAllCardResponse: Codable {
         let createdAt, updatedAt: String
         
         enum CodingKeys: String, CodingKey {
-            case id, title, status
+            case id, title, status, tag
             case createUser = "create_user"
             case updateUser = "update_user"
             case description = "description"
@@ -91,19 +92,19 @@ struct GetAllCardResponse: Codable {
 }
 //MARK:- POST  (新增card)
 
-
+///POST CARD
 struct PostCardResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
+    let cardData: CardData
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case cardData = "card_data"
     }
     
     
     struct CardData: Codable {
+        
         let cardName: String
         let createUser: String
         let updatedAt: String
@@ -123,17 +124,18 @@ struct PostCardResponse: Codable {
 
 //MARK:- GET Card with ID (用ID查詢Card)
 
+///GET CARD with ID
 struct GetCardWithIDResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
+    let cardData: CardData
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case cardData = "card_data"
     }
     
     struct CardData: Codable {
+        
         let id: Int
         let cardName: String
         let createUser: String
@@ -186,13 +188,13 @@ struct GetCardWithIDResponse: Codable {
 
 //MARK:- PUT Card (更新card)
 
+///PUT CARD
 struct PutCardResponse: Codable {
     let status: Bool
-    let cardData: CardData?
-    let error: String?
+    let cardData: CardData
     
     enum CodingKeys: String, CodingKey {
-        case status,error
+        case status
         case cardData = "card_data"
     }
     
@@ -228,7 +230,7 @@ struct PutCardResponse: Codable {
     struct ShowTask: Codable {
         let id: Int
         let title: String
-        let status: Bool
+        let status: Int
         let createUser, updateUser: String
         let description:String?
         let cardID: Int
@@ -249,6 +251,7 @@ struct PutCardResponse: Codable {
 
 //MARK:- DELETE card
 
+///DELETE CARD
 struct DeleteCardResponse: Codable {
     let status: Bool
     let error: String?

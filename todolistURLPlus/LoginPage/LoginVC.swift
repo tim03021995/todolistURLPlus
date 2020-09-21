@@ -9,8 +9,28 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+protocol Storyboarded {
+    static func instantiate() -> Self
+}
 
-class LoginVC: UIViewController {
+extension Storyboarded where Self: UIViewController {
+    static func instantiate() -> Self {
+        // this pulls out "MyApp.MyViewController"
+        let fullName = NSStringFromClass(self)
+        
+        // this splits by the dot and uses everything after, giving "MyViewController"
+        let className = fullName.components(separatedBy: ".")[1]
+        
+        // load our storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        // instantiate a view controller with that identifier, and force cast as the type that was requested
+        return storyboard.instantiateViewController(withIdentifier: className) as! Self
+    }
+}
+
+
+class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
     @IBOutlet weak var naviItem: UINavigationItem!
     
@@ -30,8 +50,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
-        
-        IQKeyboardManager.shared.enable = true
+        //IQKeyboardManager.shared.enable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +58,7 @@ class LoginVC: UIViewController {
         passwordTF.text = "test12345"
     }
     //MARK:- Functions
-    
+  
     
     
     fileprivate func propertiesSetting() {
@@ -74,39 +93,37 @@ class LoginVC: UIViewController {
         guard let parameters = validateAccount() else{ return }
         
         //包裝需要的參數
-        let getTokenRequest = HTTPRequest(endpoint: .userToken, method: .POST, parameters: parameters)
+        let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters)
         
         NetworkManager().sendRequest(with: getTokenRequest.send()) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
                 
             case .success(let decodedData):
-                
-                if let err = decodedData.error{
-                    print(err)
-                }else{
-                    //存token
-                    guard let token = decodedData.loginData?.userToken else { return }
-                    UserToken.shared.updateToken(by: token)
-                    self.navigationController?.pushViewController(MainPageVC(), animated: true)                }
-                
+                self.signInBtn.isEnabled = true
+                //存token
+                guard let token = decodedData.loginData?.userToken else {return}
+                UserToken.shared.updateToken(by: token)
+                let vc = MainPageVC()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
                 
             case .failure(let err):
-                self.present(.makeAlert(title: "Error", message: err.description, handler: {
-                    self.dismiss(animated: true, completion: nil)
+                self.signInBtn.isEnabled = true
+                self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
                 }), animated: true)
+                print(err.description)
             }
         }
     }
     
     @IBAction func signInTapped(_ sender: CustomButton) {
-        #warning("連點ＢＵＧ  點一次之後要擋")
-
+        signInBtn.isEnabled = false
         signIn()
     }
     
     @IBAction func signUpTapped(_ sender: CustomButton) {
-        let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC.rawValue ) as! SignupVC
+        let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC ) as! SignupVC
         present(vc, animated: true, completion: nil)
         
     }

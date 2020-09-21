@@ -8,10 +8,9 @@
 
 import UIKit
 
-enum StoryboardID:String{
-    case signUpVC
-    case signInVC
-    case mainPageVC
+struct StoryboardID{
+    static let signUpVC = "signUpVC"
+    static let signInVC = "signInVC"
     
 }
 let fullScreenSize = UIScreen.main.bounds.size
@@ -57,6 +56,16 @@ extension UIViewController
         }
         animate.startAnimation()
     }
+    func pushGlass(){
+        let glass = GlassFactory.makeGlass()
+        glass.alpha = 0
+        self.view.addSubview(glass)
+        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+            glass.alpha = 1
+        }
+        animate.startAnimation()
+        
+    }
 }
 extension UITextView{
         func resetHight(_ textView:UITextView){
@@ -71,5 +80,12 @@ extension UITextView{
             textView.isScrollEnabled=false
         }
         textView.frame.size.height=size.height
+    }
+}
+extension Data{
+    
+    mutating func appendString(string: String) {
+        let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
+        append(data!)
     }
 }

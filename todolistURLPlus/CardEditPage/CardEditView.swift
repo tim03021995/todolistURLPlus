@@ -110,7 +110,8 @@ class CardEditView: UIView {
             width: ScreenSize.width.value * 0.7,
             height: ScreenSize.height.value * 0.2)
         )
-        button.setTitle("Delete", for: .focused)
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(.red, for: .normal)
         button.addTarget(self, action: #selector(CardEditVC.deleteTask), for: .touchDown)
         button.layer.cornerRadius = button.frame.width * 0.05
         button.backgroundColor = .lightGray
@@ -176,14 +177,17 @@ class CardEditView: UIView {
         
 
     }
-    func setUserData(funtionType:TaskModel.FuntionType,image:UIImage,title:String,script:String,color:ColorsButtonType){
-        if funtionType == .edit{
-            
+    func setUserData(data:TaskModel){
+        if data.funtionType == .edit{
+            addDeleteButton()
         }
-        imageView.image = image
-        titleTextField.text = title
-        textView.text = script
+        imageView.image = data.image
+        titleTextField.text = data.title
+        textView.text = data.description
         textView.resetHight(textView)
+        self.selectColor = data.tag
+    }
+    func refreshColor(color:ColorsButtonType){
         self.selectColor = color
     }
     func addDeleteButton(){
@@ -224,21 +228,6 @@ extension CardEditView:UICollectionViewDataSource{
         return cell
         
     }
-//    func showBlurEffect() {
-//    //创建一个模糊效果
-//    let blurEffect = UIBlurEffect(style: .light)
-//    //创建一个承载模糊效果的视图
-//    let blurView = UIVisualEffectView(effect: blurEffect)
-//    blurView.frame = CGRect(x: 0, y: 64, width: 100 , height:100)
-//    let label = UILabel(frame: CGRect(x: 10, y: 100, width: 100, height: 100))
-//    label.text = "bfjnecsjdkcmslc,samosacmsacdfvneaui"
-//    label.font = UIFont.boldSystemFont(ofSize: 30)
-//    label.numberOfLines = 0
-//    label.textAlignment = .center
-//    label.textColor = UIColor.white
-//    blurView.contentView.addSubview(label)
-//    addSubview(blurView)
-//    }
 }
 
 
