@@ -11,6 +11,7 @@ import UIKit
 class UserAuthorityVC: UIViewController {
     //MARK:- Properties
     
+    var users : [GroupGetResponse.UserData] = []
     var editor = ["Alvin","Ray","Jimmy","Joey"]
     var myTableView = UITableView()
     var baseView = UIView()
@@ -24,19 +25,18 @@ class UserAuthorityVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO GET
         setView()
     }
     override func viewWillAppear(_ animated: Bool) {
-        print(cardID)
+        //TODO GET
     }
     
     //MARK:- Func
     
-//    convenience init(id:Int){
-//        self.init(nibName: nil, bundle: nil)
-//        self.cardID = id
-//    }
+    convenience init(id:Int){
+        self.init(nibName: nil, bundle: nil)
+        self.cardID = id
+    }
     
     //進入搜尋模式
     @objc func inviteSomeone(){
@@ -54,6 +54,9 @@ class UserAuthorityVC: UIViewController {
             myTableView.setEditing(true, animated: true)
         }
     }
+    private func updateView(name:String, image:String){
+        
+    }
     
     //MARK:- API
     //GET
@@ -63,12 +66,11 @@ class UserAuthorityVC: UIViewController {
         NetworkManager.sendRequest(with: request) { (result:Result<GroupGetResponse,NetworkError>) in
             switch result {
             case .success(let data):
-                print(data.usersData)
+                self.users = data.usersData
             case .failure(let err):
                 print(err)
             }
         }
-        
     }
     
     //MARK:- UISetting
