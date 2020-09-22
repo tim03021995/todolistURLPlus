@@ -109,12 +109,14 @@ class TaskModelManerger{
         
         for (key, value) in parameters {
             body.appendString(string: "--\(boundary)\r\n")
+            print(boundary)
             body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
             body.appendString(string: "\(value)\r\n")
         }
         for (key, value) in dataPath {
             body.appendString(string: "--\(boundary)\r\n")
             body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(arc4random())\"\r\n") //此處放入file name，以隨機數代替，可自行放入
+             print(boundary)
             body.appendString(string: "Content-Type: image/png\r\n\r\n") //image/png 可改為其他檔案類型 ex:jpeg
             body.append(value)
             body.appendString(string: "\r\n")

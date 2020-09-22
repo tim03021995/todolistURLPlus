@@ -127,8 +127,6 @@ class CanLoadViewController:UIViewController{
         }
         print(urlStr)
         let url = URL(string: urlStr)!
-        let tempDirectory = FileManager.default.temporaryDirectory
-        let imageFileUrl = tempDirectory.appendingPathComponent(url.lastPathComponent)
         let data = try! Data(contentsOf: url)
         let image = UIImage(data: data)
         completion(image)

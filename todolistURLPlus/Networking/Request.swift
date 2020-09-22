@@ -51,7 +51,7 @@ struct HTTPRequest {
         var request = URLRequest(url: url!)
         request.httpMethod = method.rawValue
         request.addValue(contentType.rawValue + "; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
+        //邏輯問題
         if let parameters = parameters{
             request.httpBody  = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
         }else {

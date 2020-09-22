@@ -38,11 +38,11 @@ class CardEditView: UIView {
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.height.value * 0.4))
-        textView.layer.cornerRadius=5
+            height: ScreenSize.height.value * 0.2))
         textView.font = UIFont(name: "Helvetica-Light", size: 20)
-        textView.backgroundColor = .backgroundColor
+        textView.backgroundColor = .lightGray
         textView.textAlignment = .center
+        textView.layer.cornerRadius = textView.frame.width * 0.05
         return textView
     }()
     var imageView:UIImageView = {
@@ -76,34 +76,34 @@ class CardEditView: UIView {
             height: ScreenSize.width.value * 0.1))
         button.setImage(UIImage(systemName: "camera"), for: .normal)
         button.layer.cornerRadius = button.frame.height * 0.5
-        button.addTarget(self, action: #selector(CardEditVC.takeImage), for: .touchDown)
+        button.addTarget(self, action: #selector(CardEditVC.takeImage), for: .touchUpInside)
         button.backgroundColor = .clear
         button.tintColor = .textColor
         return button
     }()
     var colorsCollectionView:UICollectionView = {
-    let viewWidth = ScreenSize.width.value * 0.8
-    let cellWidth = ScreenSize.height.value * 0.045
-    let allItemWidth = cellWidth * 7
-    let space = (viewWidth - allItemWidth) / 8
-    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    layout.itemSize = CGSize(width: cellWidth,
-                                height: cellWidth)
-    layout.sectionInset = UIEdgeInsets(top: 0, left: space, bottom: 0, right: 0);
-    layout.minimumLineSpacing = space
-    layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
-    let view = UICollectionView(frame: CGRect(
-        x: 0,
-        y: 0,
-        width: ScreenSize.width.value * 0.7,
-        height: ScreenSize.height.value * 0.2),
-                                collectionViewLayout: layout
-    )
-    view.layer.cornerRadius = view.frame.width * 0.05
-    view.backgroundColor = .lightGray
-    view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-    return view
-}()
+        let viewWidth = ScreenSize.width.value * 0.8
+        let cellWidth = ScreenSize.height.value * 0.045
+        let allItemWidth = cellWidth * 7
+        let space = (viewWidth - allItemWidth) / 8
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: cellWidth,
+                                 height: cellWidth)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: space, bottom: 0, right: 0);
+        layout.minimumLineSpacing = space
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+        let view = UICollectionView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: ScreenSize.width.value * 0.7,
+            height: ScreenSize.height.value * 0.2),
+                                    collectionViewLayout: layout
+        )
+        view.layer.cornerRadius = view.frame.width * 0.05
+        view.backgroundColor = .lightGray
+        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        return view
+    }()
     var deleteButton:UIButton = {
         let button = UIButton(frame: CGRect(
             x: 0,
@@ -113,7 +113,7 @@ class CardEditView: UIView {
         )
         button.setTitle("Delete", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.addTarget(self, action: #selector(CardEditVC.deleteTask), for: .touchDown)
+        button.addTarget(self, action: #selector(CardEditVC.deleteTask), for: .touchUpInside)
         button.layer.cornerRadius = button.frame.width * 0.05
         button.backgroundColor = .lightGray
         return button
@@ -121,6 +121,7 @@ class CardEditView: UIView {
     override init(frame: CGRect) {
         super .init(frame: frame)
         colorsCollectionView.dataSource = self
+        
         self.backgroundColor = .backgroundColor
         setSubView()
         setConstraints()
@@ -135,8 +136,8 @@ class CardEditView: UIView {
         scrollView.addSubview(textView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(colorsCollectionView)
-       scrollView.addSubview(albumButtonBackground)
-       scrollView.addSubview(albumButton)
+        scrollView.addSubview(albumButtonBackground)
+        scrollView.addSubview(albumButton)
     }
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
@@ -176,17 +177,57 @@ class CardEditView: UIView {
             make.height.left.right.bottom.equalTo(albumButtonBackground)
         }
         
-
+        
     }
     func setUserData(data:TaskModel){
         if data.funtionType == .edit{
             addDeleteButton()
         }
-        imageView.image = data.image
+        setImageView(image: data.image)
+        // imageView.image = data.image
         titleTextField.text = data.title
         textView.text = data.description
         textView.resetHight(textView)
         self.selectColor = data.tag
+    }
+    func setImageView(image:UIImage?){
+        let space = ScreenSize.spaceY.value
+        func setUpNilImageView(){
+            self.imageView.image = nil
+            imageView.snp.remakeConstraints{ (make) in
+                make.top.equalTo(textView.snp.bottom).offset(space)
+                make.width.equalTo(textView.snp.width)
+                make.height.equalTo(imageView.snp.width).multipliedBy(0.2)
+                make.centerX.equalTo(textView.snp.centerX)
+                make.height.equalTo(30)
+            }
+            albumButtonBackground.snp.remakeConstraints { (make) in
+                make.top.bottom.left.right.equalTo(imageView)
+            }
+            albumButtonBackground.alpha = 0
+        }
+        
+        func setUpImageView(){
+            self.imageView.image = image
+            imageView.snp.remakeConstraints{ (make) in
+                make.top.equalTo(textView.snp.bottom).offset(space)
+                make.width.equalTo(textView.snp.width)
+                make.height.equalTo(imageView.snp.width)
+                make.centerX.equalTo(textView.snp.centerX)
+            }
+            albumButtonBackground.snp.remakeConstraints { (make) in
+                make.right.equalTo(imageView).offset(-10)
+                make.bottom.equalTo(imageView).offset(-10)
+                make.height.equalTo(imageView).multipliedBy(0.1)
+                make.width.equalTo(imageView).multipliedBy(0.1)
+            }
+            albumButtonBackground.alpha = 1
+        }
+            if image != nil{
+                setUpImageView()
+            }else{
+                setUpNilImageView()
+            }
     }
     func refreshColor(color:ColorsButtonType){
         self.selectColor = color
@@ -230,6 +271,5 @@ extension CardEditView:UICollectionViewDataSource{
         
     }
 }
-
 
 

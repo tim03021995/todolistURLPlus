@@ -66,8 +66,8 @@ class CardEditVC: CanLoadViewController {
 
                        viewData.tag = .red
                        self.funtionType = .create
-                       viewData.description = "Please input"
-                       viewData.image = UIImage(systemName: "photo")!
+                       viewData.description = "Please input text"
+                       //viewData.image = UIImage(systemName: "photo")!
                        viewData.title = ""
 
                    self.cardID = cardID
@@ -78,6 +78,8 @@ class CardEditVC: CanLoadViewController {
                self.cardEditView.textView.delegate = self
                self.cardEditView.colorsCollectionView.reloadData()
                self.cardEditView.setUserData(data: viewData)
+        self.cardEditView.textView.textColor = .white
+        self.resetHight(self.cardEditView.textView)
         self.navigationItem.title = "Create"
         funtionType = .create
     }
@@ -93,9 +95,10 @@ class CardEditVC: CanLoadViewController {
                 getImage(type: .gill, imageURL: image, completion: { (image) in
                 viewData.image = image
             })
-            }else{
-                viewData.image = UIImage(systemName: "photo")
             }
+//            }else{
+//                viewData.image = UIImage(systemName: "photo")
+//            }
             viewData.tag = tag ?? ColorsButtonType.red
             return viewData
         }()
@@ -105,6 +108,7 @@ class CardEditVC: CanLoadViewController {
               self.cardEditView.textView.delegate = self
               self.cardEditView.colorsCollectionView.reloadData()
               self.cardEditView.setUserData(data: viewData)
+        self.resetHight(self.cardEditView.textView)
         self.navigationItem.title = "Edit"
         self.cardID = cardID
         funtionType = .edit
@@ -155,20 +159,36 @@ extension CardEditVC:UIScrollViewDelegate{
     }
 }
 extension CardEditVC:UITextViewDelegate{
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.white {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Please input text"
+            textView.textColor = UIColor.white
+        }
+    }
     func textViewDidChange(_ textView:UITextView) {
         
-        resetHight(textView)
+         resetHight(textView)
         
     }
     func resetHight(_ textView:UITextView){
-        let maxHeight:CGFloat = ScreenSize.height.value * 0.4
+        let maxHeight:CGFloat = ScreenSize.height.value * 0.35
+        let minHeight:CGFloat = ScreenSize.height.value * 0.2
         let frame = textView.frame
         let constrainSize=CGSize(width:frame.size.width,height:CGFloat(MAXFLOAT))
         var size = textView.sizeThatFits(constrainSize)
         if size.height >= maxHeight{
             size.height = maxHeight
             textView.isScrollEnabled=true
+        }else if size.height < maxHeight && size.height >= minHeight{
+            textView.isScrollEnabled=false
         }else{
+            size.height = minHeight
             textView.isScrollEnabled=false
         }
         textView.frame.size.height=size.height
@@ -181,7 +201,8 @@ extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDel
             let _image = UIImage(data: image.jpegData(compressionQuality: 0.05)!)
 //            print("origin", image.pngData())
 //            print("resize", _image?.pngData())
-            cardEditView.imageView.image = _image
+//            cardEditView.imageView.image = _image
+            cardEditView.setImageView(image: _image)
         }
         stopLoading()
         dismiss(animated: true, completion: nil)
