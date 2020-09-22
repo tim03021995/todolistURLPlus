@@ -8,7 +8,7 @@
 
 import UIKit
 
-//TODO 鍵盤位置 正則
+//TODO 鍵盤位置 
 
 
 class SignupVC: UIViewController {
@@ -34,9 +34,6 @@ class SignupVC: UIViewController {
     
     @IBOutlet weak var registerBtn: CustomButton!
     
-    let backgroundImage:UIImageView = {
-        return BackGroundFactory.makeImage(type: .background2)
-    }()
     
     //MARK:- ViewDidLoad
     
@@ -64,7 +61,7 @@ class SignupVC: UIViewController {
         case checkPasswordTF:
             
             let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
-                self.registerBtn.backgroundColor = self.checkPasswordTF.text == self.passwordTF.text ? .mainColor : .glassColor
+                self.registerBtn.backgroundColor = self.checkPasswordTF.text == self.passwordTF.text ? .mainColor2 : .glassColor
             }
             animate.startAnimation()
             
@@ -106,7 +103,6 @@ class SignupVC: UIViewController {
                 
             case .failure(let err):
                 self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
-                    #warning("跳到錯誤的地方")
                 }), animated: true)
                 print(err.description)
                 
@@ -136,7 +132,7 @@ class SignupVC: UIViewController {
 extension SignupVC:UITextFieldDelegate{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -148,7 +144,7 @@ extension SignupVC:UITextFieldDelegate{
         case passwordTF:
             checkPasswordTF.becomeFirstResponder()
         default:
-            self.view.endEditing(true)
+            view.endEditing(true)
         }
         return true
     }

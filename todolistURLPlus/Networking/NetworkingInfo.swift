@@ -22,6 +22,7 @@ enum Endpoint:String {
     case task
     case card
     case user
+    case groups
 }
 
 enum ContentType:String{
