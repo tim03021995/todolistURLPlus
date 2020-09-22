@@ -9,7 +9,7 @@
 import Foundation
 //MARK:- GET USER
 
-///GET USER
+///GET user (列出 user data)
 struct GetUserResponse: Codable {
     let status: Bool
     let userData: UserData
@@ -21,7 +21,6 @@ struct GetUserResponse: Codable {
 }
 
 struct UserData: Codable {
- //   let id: String
     let id :Int
     let username:String
     let email:String
@@ -38,8 +37,22 @@ struct UserData: Codable {
 
 
 //MARK:- PUT USER
-///PUT USER or DELETE USER
-struct PutOrDeleteUserResponse: Codable{
+///PUT user (更新 user name、password)
+struct PutUserResponse: Codable{
+    let status: Bool
+}
+
+
+//MARK:- POST USER Image
+///POST user/image (新增 user 頭像)
+struct PostUserImageResponse {
+    let status: Bool
+}
+
+
+//MARK:- DELETE USER
+///DELETE user/image (刪除 user 頭像)
+struct DeleteUserResponse{
     let status: Bool
 }
 

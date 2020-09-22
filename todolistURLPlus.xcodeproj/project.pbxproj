@@ -42,6 +42,7 @@
 		FB34E1192509E05E000F5EAD /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB34E1182509E05E000F5EAD /* TaskResponse.swift */; };
 		FB43E2C6251054E900687CFF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43E2C5251054E900687CFF /* NetworkError.swift */; };
 		FB43E2C825106C3E00687CFF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43E2C725106C3E00687CFF /* NetworkManager.swift */; };
+		FB67FA7E2519AAD000EFF76A /* GroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB67FA7D2519AAD000EFF76A /* GroupResponse.swift */; };
 		FB7AF8D72500F52F00E9289C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D62500F52F00E9289C /* Alert.swift */; };
 		FB7AF8D92500FA3F00E9289C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8D82500FA3F00E9289C /* Request.swift */; };
 		FB7AF8DB2500FAD200E9289C /* NetworkingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */; };
@@ -92,6 +93,7 @@
 		FB34E1182509E05E000F5EAD /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		FB43E2C5251054E900687CFF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		FB43E2C725106C3E00687CFF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FB67FA7D2519AAD000EFF76A /* GroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResponse.swift; sourceTree = "<group>"; };
 		FB7AF8D62500F52F00E9289C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		FB7AF8D82500FA3F00E9289C /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingInfo.swift; sourceTree = "<group>"; };
@@ -159,8 +161,8 @@
 		D23505DD24FCCAAF00F4CC6E /* todolistURLPlus */ = {
 			isa = PBXGroup;
 			children = (
-				97077B852512189E000139E6 /* UserAuthority */,
 				FBEF303B24FF8531003F5945 /* Networking */,
+				97077B852512189E000139E6 /* UserAuthority */,
 				FBEF303524FF5204003F5945 /* LoginPage */,
 				FBCF1EA12500BB5B00E5F686 /* SignupPage */,
 				D291DEAE2505CE45001FE33E /* CardEditPage */,
@@ -229,6 +231,18 @@
 			path = UserInfo;
 			sourceTree = "<group>";
 		};
+		FB67FA7C2519AA7700EFF76A /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				FBEAB4D2250F1CC9005041F3 /* LoginResponse.swift */,
+				FBEAB4D4250F1CE9005041F3 /* CardResponse.swift */,
+				FB34E1182509E05E000F5EAD /* TaskResponse.swift */,
+				FBE0EAEC2514B695007083BC /* UserResponse.swift */,
+				FB67FA7D2519AAD000EFF76A /* GroupResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		FBC901942500DFFA00F6FA40 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,12 +288,9 @@
 			children = (
 				FB7AF8D82500FA3F00E9289C /* Request.swift */,
 				FB43E2C725106C3E00687CFF /* NetworkManager.swift */,
-				FBEAB4D2250F1CC9005041F3 /* LoginResponse.swift */,
-				FBEAB4D4250F1CE9005041F3 /* CardResponse.swift */,
-				FB34E1182509E05E000F5EAD /* TaskResponse.swift */,
 				FB43E2C5251054E900687CFF /* NetworkError.swift */,
 				FB7AF8DA2500FAD200E9289C /* NetworkingInfo.swift */,
-				FBE0EAEC2514B695007083BC /* UserResponse.swift */,
+				FB67FA7C2519AA7700EFF76A /* Response */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -395,6 +406,7 @@
 				97077B902512189E000139E6 /* UserAuthority.swift in Sources */,
 				530D261D250F445F00AEBCC8 /* CardModel.swift in Sources */,
 				5332F8AD250679F900192A5F /* CardCell.swift in Sources */,
+				FB67FA7E2519AAD000EFF76A /* GroupResponse.swift in Sources */,
 				FBEAB4D3250F1CC9005041F3 /* LoginResponse.swift in Sources */,
 				D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */,
 				FBCF1EA32500BBBE00E5F686 /* SignupVC.swift in Sources */,
