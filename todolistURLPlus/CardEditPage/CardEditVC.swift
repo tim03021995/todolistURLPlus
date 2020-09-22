@@ -157,6 +157,7 @@ extension CardEditVC:UIScrollViewDelegate{
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
+    
 }
 extension CardEditVC:UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -174,7 +175,8 @@ extension CardEditVC:UITextViewDelegate{
     func textViewDidChange(_ textView:UITextView) {
         
          resetHight(textView)
-        
+    //     cardEditView.resetHight(cardEditView.scrollView)
+
     }
     func resetHight(_ textView:UITextView){
         let maxHeight:CGFloat = ScreenSize.height.value * 0.35
@@ -192,6 +194,7 @@ extension CardEditVC:UITextViewDelegate{
             textView.isScrollEnabled=false
         }
         textView.frame.size.height=size.height
+        
     }
 }
 extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{

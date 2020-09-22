@@ -125,11 +125,16 @@ class CanLoadViewController:UIViewController{
         case .other:
             urlStr = imageURL
         }
-        print(urlStr)
         let url = URL(string: urlStr)!
-        let data = try! Data(contentsOf: url)
-        let image = UIImage(data: data)
-        completion(image)
+        do
+        {
+        let data = try Data(contentsOf: url)
+            let image = UIImage(data: data)
+            completion(image)
+        }catch
+        {
+            print("image is error")
+        }
     }
     enum ImageURLType{
         case gill,other

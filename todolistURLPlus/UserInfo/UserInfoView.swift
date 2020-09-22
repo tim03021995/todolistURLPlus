@@ -21,8 +21,8 @@ class UserInfoView: UIView {
         return imageView
     }()
     var userNameLabel:UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.3 , height: ScreenSize.height.value * 0.1))
-        label.contentMode = .center
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.4 , height: ScreenSize.height.value * 0.1))
+        label.textAlignment = .center
         label.text = "Name"
         label.font = .systemFont(ofSize: 40)
         label.adjustsFontSizeToFitWidth = true
