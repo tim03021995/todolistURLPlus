@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 class CardEditView: UIView {
+    let space = ScreenSize.spaceY.value
     var selectColor:ColorsButtonType?
     var scrollView:UIScrollView = {
         var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value))
@@ -142,7 +143,7 @@ class CardEditView: UIView {
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
         //let centerY = ScreenSize.centerY.value
-        let space = ScreenSize.spaceY.value
+        
         //       let colorViewCenterY = colorView.frame.height * 0.5
         //      let colorViewSpaceX = colorView.frame.width * 0.075
         titleTextField.center = CGPoint(
@@ -155,12 +156,12 @@ class CardEditView: UIView {
         colorsCollectionView.center = CGPoint(
             x: centerX,
             y: imageView.frame.maxY + space + colorsCollectionView.frame.height * 0.5)
-        imageView.snp.makeConstraints { (make) in
-            make.top.equalTo(textView.snp.bottom).offset(space)
-            make.width.equalTo(textView.snp.width)
-            make.height.equalTo(imageView.snp.width)
-            make.centerX.equalTo(textView.snp.centerX)
-        }
+//        imageView.snp.makeConstraints { (make) in
+//            make.top.equalTo(textView.snp.bottom).offset(space)
+//            make.width.equalTo(textView.snp.width)
+//            make.height.equalTo(imageView.snp.width)
+//            make.centerX.equalTo(textView.snp.centerX)
+//        }
         colorsCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.bottom).offset(space)
             make.centerX.equalTo(textView)
@@ -176,8 +177,6 @@ class CardEditView: UIView {
         albumButton.snp.makeConstraints { (make) in
             make.height.left.right.bottom.equalTo(albumButtonBackground)
         }
-        
-        
     }
     func setUserData(data:TaskModel){
         if data.funtionType == .edit{
@@ -191,7 +190,6 @@ class CardEditView: UIView {
         self.selectColor = data.tag
     }
     func setImageView(image:UIImage?){
-        let space = ScreenSize.spaceY.value
         func setUpNilImageView(){
             self.imageView.image = nil
             imageView.snp.remakeConstraints{ (make) in
@@ -223,11 +221,14 @@ class CardEditView: UIView {
             }
             albumButtonBackground.alpha = 1
         }
-            if image != nil{
-                setUpImageView()
-            }else{
-                setUpNilImageView()
-            }
+        if image != nil{
+            setUpImageView()
+            //resetHight(scrollView)
+        }else{
+            setUpNilImageView()
+            //resetHight(scrollView)
+        }
+        
     }
     func refreshColor(color:ColorsButtonType){
         self.selectColor = color
@@ -241,6 +242,35 @@ class CardEditView: UIView {
             make.width.equalTo(imageView)
             make.height.equalTo(deleteButton.snp.width).multipliedBy(0.2)
         }
+    }
+    func resetHight(_ scrollView:UIScrollView){
+        let maxHeight:CGFloat = ScreenSize.height.value * 1.5
+        let minHeight:CGFloat = ScreenSize.height.value * 1.1
+        let itemsHeight =
+        titleTextField.frame.height +
+        textView.frame.height +
+        imageView.frame.height +
+        colorsCollectionView.frame.height * 2 +
+        space * 6
+        var height:CGFloat
+        if itemsHeight >= maxHeight{
+            height = maxHeight
+            scrollView.isScrollEnabled = true
+             print(0)
+        }else if itemsHeight < maxHeight && itemsHeight >= minHeight{
+            height = itemsHeight
+            scrollView.isScrollEnabled = true
+             print(1)
+        }else{
+            height = minHeight
+            scrollView.isScrollEnabled = false
+             print(2)
+        }
+
+        scrollView.contentSize.height = height
+        print(itemsHeight)
+        print(scrollView.contentSize.height)
+        print(minHeight)
     }
 }
 
