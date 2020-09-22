@@ -116,19 +116,19 @@ class CardEditVC: CanLoadViewController {
     
     private func editTask(){
         loading()
-        TaskModelManerger.edit(cardID, taskID!, cardEditView) {
+        TaskModelManager.edit(cardID, taskID!, cardEditView) {
             self.popView()
         }
     }
     private func createTask(){
         loading()
-        TaskModelManerger.create(cardID,cardEditView) {
+        TaskModelManager.create(cardID,cardEditView) {
             self.popView()
         }
     }
     @objc func deleteTask(){
         loading()
-        TaskModelManerger.delete(taskID!) {
+        TaskModelManager.delete(taskID!) {
              self.popView()
         }
        

@@ -48,9 +48,9 @@ class Api {
     func getUser(){
         let header = ["userToken":UserToken.shared.userToken]
         
-        var request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: header)
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: header)
         
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
             
             switch result {
                 

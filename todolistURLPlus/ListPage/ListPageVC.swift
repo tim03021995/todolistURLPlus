@@ -10,15 +10,9 @@ import UIKit
 
 class ListPageVC: UIViewController {
     
-    var showCard: GetAllCardResponse.ShowCard!
+    var showCard: GetCardResponse.ShowCard!
 //    lazy var showTasks = self.showCard.showTasks
-    var showTasks:[GetAllCardResponse.ShowTask] = []
-    {
-        didSet
-        {
-            print("資料變更")
-        }
-    }
+    var showTasks:[GetCardResponse.ShowTask] = []
     var cardIndexPath = IndexPath()
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
@@ -78,8 +72,7 @@ class ListPageVC: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
      getTask()
-//        reloadListTableView()
-//        print("showTasks筆數 ＝ \(showTasks.count)")
+
 
     }
     
@@ -97,8 +90,9 @@ class ListPageVC: UIViewController {
         toCardEditVC(data: showCard, indexPath: nil)
     }
     
-    func toCardEditVC(data: GetAllCardResponse.ShowCard, indexPath: IndexPath?)
+    func toCardEditVC(data: GetCardResponse.ShowCard, indexPath: IndexPath?)
     {
+        feedbackGenerator.impactOccurred()
         let vc = CardEditVC()
         if let indexPath = indexPath
        {
@@ -121,18 +115,15 @@ class ListPageVC: UIViewController {
     func getTask(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-        NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):
-                print("data.cardData?.showCards = \(data.userData.showCards.count)")
                 let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
                 self.showTasks = showTasks
                 print("showTasks筆數 = \(showTasks.count)")
                 self.listBaseView.tableView.reloadData()
                 print("Get成功")
-                //這裡是成功解包的東西 直接拿data裡的東西 要解包
-                // data.cardData........
             case .failure(let err):
                 print("Get失敗\(err.description)")
             }
@@ -178,7 +169,7 @@ extension ListPageVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
-        cell.cellTitleLabel.text = showTasks[indexPath.section].description ?? ""
+        cell.cellTitleLabel.text = showTasks[indexPath.section].title 
         return cell
     }
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

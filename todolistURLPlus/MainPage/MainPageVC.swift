@@ -9,9 +9,22 @@
 import UIKit
 import SnapKit
 
+//點擊震動
+let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-    var cardDatas = [CardModel]()
-    var showCards = [GetAllCardResponse.ShowCard]()
+
+//    var cardDatas = [CardModel]()
+    var state = true
+    var cell: CardCell! = nil
+    var showCards = [GetCardResponse.ShowCard]()
+    {
+        didSet
+        {
+            singleCardCollectionView.reloadData()
+        }
+    }
+//    var indexPath: IndexPath!
     ///設置背景
     let userName = ""
     let backgroundImage:UIImageView = {
@@ -43,6 +56,15 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             label.font = UIFont.boldSystemFont(ofSize: 30)
             label.textColor = .white
             return label
+    }()
+    ///設置垃圾桶
+    let trashBtn: UIButton =
+    {
+        let btn = UIButton(frame: CGRect(x: ScreenSize.width.value * 0.75, y: ScreenSize.height.value * 0.05, width: ScreenSize.width.value * 0.15, height: ScreenSize.width.value * 0.15))
+        btn.setBackgroundImage(UIImage(systemName: "trash.fill"), for: .normal)
+        btn.tintColor = .red
+        btn.addTarget(self, action: #selector(MainPageVC.editMode), for: .touchUpInside)
+        return btn
     }()
     //按下按鈕的標籤值
     var btnTag = 0
@@ -169,7 +191,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     var mutipleCardCollectionView: UICollectionView!
     
     lazy var creatBtn: UIButton =
-    {
+        {
         let btn = UIButton()
         let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.8
         btn.frame = CGRect(x: ScreenSize.width.value * 0.25,
@@ -220,10 +242,19 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         switch collectionView {
         case singleCardCollectionView:
+//            self.indexPath = indexPath
+            
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
             
+            self.cell = singleCell
             singleCell.setUpSingle(showCards: showCards, indexPath: indexPath)
-            
+
+           
+            singleCell.deleteButton.isHidden = state
+            singleCell.deleteButton.tag = indexPath.row
+            singleCell.buttonTag = indexPath.row
+//            singleCell.deleteButton.addTarget(self, action: #selector(self.deleteCard), for: .touchUpInside)
+            print("現在的indexPath.row ＝",indexPath.row,"||CardID =",showCards[indexPath.row].id,"ButtonTag =",singleCell.deleteButton.tag)
             
             return singleCell
         default:
@@ -233,20 +264,33 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             return mutipleCell
         }
     }
-    
-    
+
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        toListPageVC(indexPath: indexPath)
-        print(showCards[indexPath.row].id)
+        if !state
+        {
+            deleteCard(indexPath: indexPath)
+            
+        }else
+        {
+            toListPageVC(indexPath: indexPath)
+        }
+        
+        
+        
+        
     }
+    
     fileprivate func toListPageVC(indexPath: IndexPath) {
         let lPVC = ListPageVC()
         let nVC = UINavigationController(rootViewController: lPVC)
 //        lPVC.cardData = cardDatas[indexPath.row]
         lPVC.showCard = showCards[indexPath.row]
         lPVC.cardIndexPath = indexPath
+        feedbackGenerator.impactOccurred()
+        print("這張卡片的id = ",showCards[indexPath.row].id)
         present(nVC, animated: true, completion: nil)
+        
     }
     
     //blueconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動
@@ -322,11 +366,16 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
         @objc func tap(){
             let vc = UserAuthority()
-//            navigationController?.pushViewController(vc, animated: true)
             present(vc, animated: true, completion: nil)
-            print(123)
+           
+            
         }
     
+    @objc func editMode()
+    {
+        state = !state
+                   singleCardCollectionView.reloadData()
+    }
    ///設定卡片CollectionView
     func setUpSingleCardCollectionView()
     {
@@ -344,7 +393,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
 
         // cell與邊界的間距 沒影響
-        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+//        layout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
 
         // 滑動方向預設為垂直。注意若設為垂直，則cell的加入方式為由左至右，滿了才會換行；若是水平則由上往下，滿了才會換列
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
@@ -415,7 +464,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(mutipleCheckMark)
         self.view.addSubview(creatBtn)
         self.view.addSubview(addEditorBtn)
-        
+        self.view.addSubview(trashBtn)
         setSingleBtnConstraints()
         setMutipleBtnConstraints()
         
@@ -424,6 +473,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 //        setAddEditorBtnConstrants()
         
     }
+    
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
     {
@@ -451,28 +501,35 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         mutipleCardCollectionView.isHidden = false
         
     }
+    @objc func showDeleteButton()
+    {
+        state = !state
+    }
     
     @objc func creatNewCard()
     {
-      
-        self.cardDatas.append(CardModel(cardID: cardDatas.count))
-        addCard()
-        getCard()
+//        let dis = DispatchQueue.
+        addCard {
+            self.getCard()
+        }
+            
+        
+//        DispatchQueue.sync(dis)
+//        self.cardDatas.append(CardModel(cardID: cardDatas.count))
+        
         singleCardCollectionView.reloadData()
+        //點擊觸發震動
         
-        print("點擊按鈕新增卡片的方法，還沒寫，在\(#line)行，目前假資料有\(cardDatas.count)筆")
-
-        
+        feedbackGenerator.impactOccurred()
     }
     
     func getCard(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-        NetworkManager().sendRequest(with: request) { (result:Result<GetAllCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):
-                print("data.cardData?.showCards = \(data.userData.showCards.count)")
                 let showCards = data.userData.showCards
                 
                     self.showCards = showCards
@@ -486,19 +543,19 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    func addCard(){ //新增card的API方法
+    func addCard(complection:@escaping()->Void){ //新增card的API方法
         let header = ["userToken":UserToken.shared.userToken]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
         
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
         
-        NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
             switch result{
                 
             case .success(let data):
                 print("目前新增的卡片ID = \(data.cardData.id)")
-                
+                complection()
                 
             case .failure(let err):
                 print("err.description = \(err.description)")
@@ -506,6 +563,31 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
+    @objc func buttonTag()
+    {
+        print(self.cell.deleteButton.tag)
+    }
+    func deleteCard(indexPath: IndexPath){
+//        showDeleteButton()
+           let header = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: showCards[indexPath.row].id).send()
+        
+        NetworkManager.sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
+               switch result{
+                   
+               case .success(let data):
+//                self.showCards.remove(at: self.indexPath.row)
+                
+                self.getCard()
+                print("刪除成功，第",self.btnTag,"張卡片")
+                   
+                   
+               case .failure(let err):
+                   print("err.description = \(err.description)")
+                   print("err.errormessage = \(err.errMessage)")
+               }
+           }
+       }
 }
 
 
