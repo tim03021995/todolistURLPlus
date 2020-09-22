@@ -80,6 +80,6 @@ struct PostGroupResponse: Codable {
 //MARK:- DELETE Group
 
 ///DELETE user form card (將user踢出card)
-struct DeleteGroupResponse {
+struct DeleteGroupResponse: Codable {
     let status: Bool
 }

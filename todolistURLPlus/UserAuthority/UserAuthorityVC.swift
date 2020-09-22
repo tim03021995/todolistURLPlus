@@ -8,8 +8,8 @@
 
 import UIKit
 
-class UserAuthority: UIViewController {
-   
+class UserAuthorityVC: UIViewController {
+    //MARK:- Properties
     
     var editor = ["Alvin","Ray","Jimmy","Joey"]
     var myTableView = UITableView()
@@ -17,16 +17,78 @@ class UserAuthority: UIViewController {
     var memberLabel = UILabel()
     var fullScreenMaxY = UIScreen.main.bounds.maxY
     var fullScreen = UIScreen.main.bounds.size
-    let backgroundImage:UIImageView = {
-        return BackGroundFactory.makeImage(type: .background2)
-    }()
+    var cardID: Int = 0
     
+
+    //MARK:- LifeCycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //TODO GET
+        setView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print(cardID)
+    }
+    
+    //MARK:- Func
+    
+//    convenience init(id:Int){
+//        self.init(nibName: nil, bundle: nil)
+//        self.cardID = id
+//    }
+    
+    //進入搜尋模式
+    @objc func inviteSomeone(){
+        myTableView.isEditing = false
+        let rootVC = SearchMemberVC()
+        let navVC = UINavigationController(rootViewController: rootVC)
+        present(navVC,animated: true)
+    }
+    
+    //切換編輯模式
+    @objc func removeSomeone(){
+        if myTableView.isEditing == true {
+            myTableView.setEditing(false, animated: true)
+        }else if myTableView.isEditing == false{
+            myTableView.setEditing(true, animated: true)
+        }
+    }
+    
+    //MARK:- API
+    //GET
+    func getUser(id:Int){
+        let header = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: header, id: cardID).send()
+        NetworkManager.sendRequest(with: request) { (result:Result<GroupGetResponse,NetworkError>) in
+            switch result {
+            case .success(let data):
+                print(data.usersData)
+            case .failure(let err):
+                print(err)
+            }
+        }
+        
+    }
+    
+    //MARK:- UISetting
+    
+    fileprivate func setView() {
+        view.addSubview(backgroundImage)
+        setBaseView()
+        setTableView()
+        setTableViewConstriants()
+        setBaseViewConstriants()
+        setInviteBtnViewConstraints()
+        setRemoveBtnViewConstrants()
+        setInviteBtnConstraints()
+        setRemoveBtnConstrants()
+        setMemberLabel()
+        setMemberLabelConstriants()
+    }
+
     func setMemberLabel(){
-        memberLabel.frame = CGRect(x: 50,
-                                   y: 50,
-                                   width: 100,
-                                   height:100)
+        memberLabel.frame = CGRect()
         memberLabel.text = "Members"
         memberLabel.adjustsFontSizeToFitWidth = true
         memberLabel.textAlignment = .center
@@ -45,99 +107,6 @@ class UserAuthority: UIViewController {
         self.view.addSubview(myTableView)
     }
     
-    
-    //invite buttom
-    lazy var inviteBtnView: UIView = {
-        let inviteBtnView = UIView()
-        inviteBtnView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
-        inviteBtnView.layer.cornerRadius = 10
-        self.view.addSubview(inviteBtnView)
-        return inviteBtnView
-    }()
-    
-    
-    lazy var inviteBtn: UIButton = {
-        let inviteBtn = UIButton()
-        inviteBtn.backgroundColor = .clear
-        inviteBtn.setBackgroundImage(UIImage(systemName: "person.badge.plus"), for: .normal)
-        inviteBtn.addTarget(self, action: #selector(inviteSomeone), for: .touchUpInside)
-        inviteBtn.setTitle("Invite", for: .normal)
-        inviteBtn.tintColor = .black
-        inviteBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        inviteBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        inviteBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
-        inviteBtn.setTitleColor(.black, for: .normal)
-        inviteBtn.frame = CGRect(x: 20, y: 20, width:fullScreen.width * 0.5 , height: fullScreen.width * 0.25)
-        inviteBtn.titleEdgeInsets = UIEdgeInsets(top: 0,
-                                                 left: 0,
-                                                 bottom: -inviteBtn.frame.height * 0.75,
-                                                 right: 0)
-        
-        self.view.addSubview(inviteBtn)
-        return inviteBtn
-    }()
-    
-    lazy var removeBtn: UIButton = {
-        let removeBtn = UIButton()
-        removeBtn.backgroundColor = .clear
-        //                inviteBtn.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
-        removeBtn.setBackgroundImage(UIImage(systemName: "person.badge.minus"), for: .normal)
-        removeBtn.addTarget(self, action: #selector(removeSomeone), for: .touchUpInside)
-        removeBtn.setTitle("Remove", for: .normal)
-        removeBtn.tintColor = .black
-        removeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        removeBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        removeBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
-        removeBtn.setTitleColor(.black, for: .normal)
-        removeBtn.frame = CGRect(x: 20, y: 20, width:fullScreen.width * 0.5 , height: fullScreen.width * 0.25)
-        removeBtn.titleEdgeInsets = UIEdgeInsets(top: 0,
-                                                 left: 0,
-                                                 bottom: -removeBtn.frame.height * 0.75,
-                                                 right: 0)
-        
-        self.view.addSubview(removeBtn)
-        return removeBtn
-    }()
-    
-    
-    //進入搜尋模式
-    @objc func inviteSomeone(){
-        myTableView.isEditing = false
-        let rootVC = SearchMemberVC()
-        let navVC = UINavigationController(rootViewController: rootVC)
-        present(navVC,animated: true)
-    }
-
-    
-    //切換編輯模式
-    @objc func removeSomeone(){
-        if myTableView.isEditing == true {
-            myTableView.setEditing(false, animated: true)
-        }else if myTableView.isEditing == false{
-            myTableView.setEditing(true, animated: true)
-        }
-    }
-    
-    
-    
-    //remove buttom view
-    lazy var removeBtnView: UIView =
-        {
-            let removeBtnView = UIView()
-            removeBtnView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
-            removeBtnView.layer.cornerRadius = 10
-            self.view.addSubview(removeBtnView)
-            return removeBtnView
-    }()
-    
-    lazy var testCube:UIView = {
-        var testCube = UIView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        testCube.backgroundColor = .black
-        self.view.addSubview(testCube)
-        return testCube
-    }()
-    
-    
     func setTestCube(){
         testCube.translatesAutoresizingMaskIntoConstraints = false
         testCube.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
@@ -155,7 +124,6 @@ class UserAuthority: UIViewController {
         testCube.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
         testCube.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10 ).isActive = true
     }
-    
     
     func setBaseView(){
         baseView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -179,7 +147,6 @@ class UserAuthority: UIViewController {
         myTableView.bottomAnchor.constraint(equalTo: baseView.bottomAnchor,constant: -10).isActive = true
         myTableView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 20).isActive = true
         myTableView.trailingAnchor.constraint(equalTo:baseView.trailingAnchor, constant: -20 ).isActive = true
-        
     }
     
     func setBaseViewConstriants(){
@@ -226,33 +193,87 @@ class UserAuthority: UIViewController {
         removeBtn.heightAnchor.constraint(equalTo: removeBtnView.heightAnchor,multiplier: 0.75).isActive = true
     }
     
-    
-    
-    
-    func setView() {
-        view.addSubview(backgroundImage)
-        setBaseView()
-        setTableView()
-        setTableViewConstriants()
-        setBaseViewConstriants()
-        setInviteBtnViewConstraints()
-        setRemoveBtnViewConstrants()
-        setInviteBtnConstraints()
-        setRemoveBtnConstrants()
-        setMemberLabel()
-        setMemberLabelConstriants()
+
+    //MARK:- UI
+
+
+    let backgroundImage:UIImageView = {
+        return BackGroundFactory.makeImage(type: .background2)
+    }()
+
+    //invite buttom
+     lazy var inviteBtnView: UIView = {
+         let inviteBtnView = UIView()
+         inviteBtnView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+         inviteBtnView.layer.cornerRadius = 10
+         self.view.addSubview(inviteBtnView)
+         return inviteBtnView
+     }()
+    lazy var inviteBtn: UIButton = {
+        let inviteBtn = UIButton()
+        inviteBtn.backgroundColor = .clear
+        inviteBtn.setBackgroundImage(UIImage(systemName: "person.badge.plus"), for: .normal)
+        inviteBtn.addTarget(self, action: #selector(inviteSomeone), for: .touchUpInside)
+        inviteBtn.setTitle("Invite", for: .normal)
+        inviteBtn.tintColor = .black
+        inviteBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        inviteBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        inviteBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        inviteBtn.setTitleColor(.black, for: .normal)
+        inviteBtn.frame = CGRect(x: 20, y: 20, width:fullScreen.width * 0.5 , height: fullScreen.width * 0.25)
+        inviteBtn.titleEdgeInsets = UIEdgeInsets(top: 0,
+                                                 left: 0,
+                                                 bottom: -inviteBtn.frame.height * 0.75,
+                                                 right: 0)
         
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setView()
-        
-    }
+        self.view.addSubview(inviteBtn)
+        return inviteBtn
+    }()
+
+     lazy var removeBtn: UIButton = {
+         let removeBtn = UIButton()
+         removeBtn.backgroundColor = .clear
+         //                inviteBtn.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
+         removeBtn.setBackgroundImage(UIImage(systemName: "person.badge.minus"), for: .normal)
+         removeBtn.addTarget(self, action: #selector(removeSomeone), for: .touchUpInside)
+         removeBtn.setTitle("Remove", for: .normal)
+         removeBtn.tintColor = .black
+         removeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+         removeBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+         removeBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+         removeBtn.setTitleColor(.black, for: .normal)
+         removeBtn.frame = CGRect(x: 20, y: 20, width:fullScreen.width * 0.5 , height: fullScreen.width * 0.25)
+         removeBtn.titleEdgeInsets = UIEdgeInsets(top: 0,
+                                                  left: 0,
+                                                  bottom: -removeBtn.frame.height * 0.75,
+                                                  right: 0)
+         
+         self.view.addSubview(removeBtn)
+         return removeBtn
+     }()
+
+    //remove buttom view
+    lazy var removeBtnView: UIView =
+        {
+            let removeBtnView = UIView()
+            removeBtnView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+            removeBtnView.layer.cornerRadius = 10
+            self.view.addSubview(removeBtnView)
+            return removeBtnView
+    }()
+
+    lazy var testCube:UIView = {
+        var testCube = UIView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        testCube.backgroundColor = .black
+        self.view.addSubview(testCube)
+        return testCube
+    }()
+
     
 }
+//MARK:- UITableViewDelegate
 
-extension UserAuthority: UITableViewDelegate{
+extension UserAuthorityVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
@@ -266,7 +287,8 @@ extension UserAuthority: UITableViewDelegate{
     }
 }
 
-extension UserAuthority: UITableViewDataSource{
+//MARK:- UITableViewDataSource
+extension UserAuthorityVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) ->Int {
         return editor.count
@@ -276,7 +298,6 @@ extension UserAuthority: UITableViewDataSource{
         //刪掉時更新 section數量
         return 1
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UserAuthorityCell
@@ -301,3 +322,7 @@ extension UserAuthority: UITableViewDataSource{
     //    }
     
 }
+
+
+
+

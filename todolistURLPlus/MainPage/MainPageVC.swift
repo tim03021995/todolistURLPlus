@@ -365,7 +365,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
         @objc func tap(){
-            let vc = UserAuthority()
+            let vc = UserAuthorityVC()
             present(vc, animated: true, completion: nil)
            
             
