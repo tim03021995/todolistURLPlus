@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardEditVC: CanLoadViewController {
+class CardEditVC: CanGetImageViewController {
     private var funtionType:TaskModel.FuntionType?
     private var cardID:Int = 0
     private var taskID:Int?

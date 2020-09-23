@@ -1,10 +1,14 @@
 import UIKit
 
-class UserInfoVC: CanLoadViewController {
+class UserInfoVC: CanGetImageViewController {
     let userInformationView = UserInfoView()
     override func loadView() {
-        getUserData()
         super .loadView()
+        getUserData()
+        self.view = userInformationView
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        getUserData()
         self.view = userInformationView
     }
     override func viewDidLoad() {
@@ -17,17 +21,18 @@ class UserInfoVC: CanLoadViewController {
         vc.setUserData(
             userImage: userInformationView.peopleView.image,
             userName: userInformationView.userNameLabel.text)
-        show(vc, sender: nil)
+       // vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     @objc func modifyPassword(){
         
     }
-    @objc func logoutOut(){
+    @objc func logout(){
         UserToken.shared.clearToken()
 
         let presentingVC = self.presentingViewController
-        dismiss(animated: true) {
-            presentingVC?.dismiss(animated: true, completion: nil)
+        dismiss(animated: false) {
+            presentingVC?.dismiss(animated: false, completion: nil)
         }
     }
     func getUserData(){
@@ -39,7 +44,7 @@ class UserInfoVC: CanLoadViewController {
                 print("get user Data success")
                 let userData = data.userData
                 if let image = userData.image{
-                    self.getImage(type: .other, imageURL: image ) { (image) in
+                    self.getImage(type: .gill, imageURL: image ) { (image) in
                         self.userInformationView.peopleView.image = image
                     }
                 }

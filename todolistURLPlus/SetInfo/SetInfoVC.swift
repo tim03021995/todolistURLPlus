@@ -31,14 +31,22 @@ class SetInfoVC:UIViewController{
         self.view = setInfoView
     }
     @objc func save(){
-        print("updata")
-        self.dismiss(animated: true, completion: nil)        
+        if let image = setInfoView.peopleView.image {
+            SetInfoModelManerger.updateUserImage(image) {
+            print("updata Image")
+            }
+        }else{
+            print("not image")
+        }
+        if let userName = setInfoView.nameTextField.text {
+            SetInfoModelManerger.updateUserName(userName) {
+                print("updata name")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }else{
+            print("not name")
+        }
     }
-//    func getViewData()->SetInfoModel{
-//        var data = SetInfoModel(
-//            UserName: self.setInfoView.nameTextField.text ?? "Unknow",
-//            UserImage: self.setInfoView.peopleView.image ?? UIImage(systemName: "photo")!)
-//    }
 
 }
 extension SetInfoVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
