@@ -89,7 +89,12 @@ class ListPageVC: UIViewController {
     {
         toCardEditVC(data: showCard, indexPath: nil)
     }
-    
+    @objc func tapToUserAuthority(){
+        let vc = UserAuthority()
+        
+        present(vc, animated: true, completion: nil)
+        
+    }
     func toCardEditVC(data: GetCardResponse.ShowCard, indexPath: IndexPath?)
     {
         feedbackGenerator.impactOccurred()
