@@ -15,6 +15,28 @@ class ListBaseView: UIView {
     var tableView = UITableView()
     var baseView = UIView()
     var fullScreenMaxY = UIScreen.main.bounds.maxY
+    //addeditor
+    var addEditorBtn: UIButton = {
+        var addEditorBtn = UIButton(frame: CGRect(x: ScreenSize.width.value * 0.7, y: ScreenSize.height.value * 0.02, width: ScreenSize.width.value * 0.25, height: ScreenSize.width.value * 0.075))
+        addEditorBtn.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        addEditorBtn.setTitle("Editor", for: .normal)
+        addEditorBtn.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        addEditorBtn.layer.cornerRadius = ScreenSize.width.value * 0.0375
+        addEditorBtn.clipsToBounds = true
+        addEditorBtn.addTarget(self, action: #selector(ListPageVC.tapToUserAuthority), for: .touchUpInside)
+        addEditorBtn.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+        addEditorBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        //        addEditorBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        return addEditorBtn
+    }()
+    
+//    func touchAddEditButton(_ sender: UIButton) {
+//        //        editAction?()
+//        //        let view = ListBaseView()
+//        //        view.editAction = {
+//        //            disms
+//        //        }
+//    }
     
     
     func setTableView(){
@@ -22,8 +44,8 @@ class ListBaseView: UIView {
         tableView.separatorStyle = .none
         tableView.rowHeight = fullScreenMaxY * 0.105
         tableView.register(ListTableViewCell.self, forCellReuseIdentifier: "Cell")
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        //        tableView.delegate = self
+        //        tableView.dataSource = self
         self.addSubview(tableView)
     }
     
@@ -41,8 +63,8 @@ class ListBaseView: UIView {
         tableView.bottomAnchor.constraint(equalTo: baseView.bottomAnchor,constant: -10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 20).isActive = true
         tableView.trailingAnchor.constraint(equalTo:baseView.trailingAnchor, constant: -20 ).isActive = true
-
-            }
+        
+    }
     
     func setBaseViewConstriants(){
         baseView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +80,7 @@ class ListBaseView: UIView {
         setTableView()
         setTableViewConstriants()
         setBaseViewConstriants()
+        self.addSubview(addEditorBtn)
     }
     
     override init(frame: CGRect) {

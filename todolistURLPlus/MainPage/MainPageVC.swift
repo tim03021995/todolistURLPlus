@@ -31,15 +31,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
     ///設置頭貼
-    lazy var headImage: UIImageView =
+    var headImage: UIImageView =
         {
             let head = UserImageFactory.makeImageView(size: .small, image: nil)
             head.backgroundColor = .gray
-            let bottomOfNaviBar = navigationController?.navigationBar.frame.maxY ?? 0
-            head.frame = CGRect(x: 0, y: bottomOfNaviBar, width: head.frame.width, height: head.frame.height)
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
-            head.addGestureRecognizer(tap)
             head.isUserInteractionEnabled = true
+            head.isHidden = true
             return head
     }()
     ///設置歡迎標籤
@@ -61,12 +58,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     let trashBtn: UIButton =
     {
         let btn = UIButton(frame: CGRect(x: ScreenSize.width.value * 0.75, y: ScreenSize.height.value * 0.05, width: ScreenSize.width.value * 0.15, height: ScreenSize.width.value * 0.15))
+        btn.tintColor = .white
         btn.setBackgroundImage(UIImage(systemName: "trash.fill"), for: .normal)
-        btn.tintColor = .red
         btn.addTarget(self, action: #selector(MainPageVC.editMode), for: .touchUpInside)
         return btn
     }()
-    //按下按鈕的標籤值
+    //切換作業模式按鈕的標籤值
     var btnTag = 0
     //點擊單人按鈕附加打勾圖案
     lazy var singleCheckMark: UIImageView =
@@ -208,13 +205,17 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchDown)
         return btn
     }()
-    
+    override func viewWillAppear(_ animated: Bool) {
+    }
     override func viewDidAppear(_ animated: Bool) {
         getCard()
         singleCardCollectionView.reloadData()
+        setupHeadImage()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+
 //        if UserToken.shared.userToken == "" {
 ////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
 //            let vc = LoginVC.instantiate()
@@ -252,14 +253,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
            
             singleCell.deleteButton.isHidden = state
             singleCell.deleteButton.tag = indexPath.row
-            singleCell.buttonTag = indexPath.row
-//            singleCell.deleteButton.addTarget(self, action: #selector(self.deleteCard), for: .touchUpInside)
-            print("現在的indexPath.row ＝",indexPath.row,"||CardID =",showCards[indexPath.row].id,"ButtonTag =",singleCell.deleteButton.tag)
-            
+
+           
             return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
-//            mutipleCell.setUpMutiple(cardDatas: cardDatas, indexPath: indexPath)
+
             
             return mutipleCell
         }
@@ -288,9 +287,17 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         lPVC.showCard = showCards[indexPath.row]
         lPVC.cardIndexPath = indexPath
         feedbackGenerator.impactOccurred()
-        print("這張卡片的id = ",showCards[indexPath.row].id)
+        
         present(nVC, animated: true, completion: nil)
         
+    }
+    func setupHeadImage()
+    {
+        let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        headImage.frame = CGRect(x: 0, y: statusBarHeight * 1.5, width: headImage.frame.width, height: headImage.frame.height)
+        headImage.isHidden = false
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
+                   headImage.addGestureRecognizer(tap)
     }
     
     //blueconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動
@@ -342,39 +349,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
           mutipleCardCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0 ).isActive = true
       }
     
-    //editor constraints
-    func setAddEditorBtnConstrants(){
-        addEditorBtn.translatesAutoresizingMaskIntoConstraints = false
-        addEditorBtn.centerYAnchor.constraint(equalTo:view.centerYAnchor).isActive = true
-        addEditorBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        addEditorBtn.trailingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        addEditorBtn.widthAnchor.constraint(equalTo: singleBtnView.widthAnchor,multiplier: 0.3).isActive = true
-        addEditorBtn.heightAnchor.constraint(equalTo: singleBtnView.widthAnchor,multiplier: 0.3).isActive = true
-    }
-    
-    //addeditor
-     lazy var addEditorBtn: UIButton = {
-            var addEditorBtn = UIButton(frame: CGRect(x:headImage.bounds.maxX * 4 , y: headImage.bounds.maxY, width: 70, height: 70))
-            addEditorBtn.backgroundColor = .clear
-            addEditorBtn.setTitle("editor", for: .normal)
-            addEditorBtn.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-            addEditorBtn.addTarget(self, action: #selector(tap), for: .touchUpInside)
-    //        addEditorBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-            return addEditorBtn
-        }()
-    
-    
-        @objc func tap(){
-            let vc = UserAuthority()
-            present(vc, animated: true, completion: nil)
-           
-            
-        }
-    
     @objc func editMode()
     {
         state = !state
                    singleCardCollectionView.reloadData()
+        trashBtn.tintColor = !state ? .red : .white
+
     }
    ///設定卡片CollectionView
     func setUpSingleCardCollectionView()
@@ -463,7 +443,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(singleCheckMark)
         self.view.addSubview(mutipleCheckMark)
         self.view.addSubview(creatBtn)
-        self.view.addSubview(addEditorBtn)
         self.view.addSubview(trashBtn)
         setSingleBtnConstraints()
         setMutipleBtnConstraints()
@@ -536,9 +515,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                     self.showCards = showCards
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
                 self.singleCardCollectionView.reloadData()
-
-                //這裡是成功解包的東西 直接拿data裡的東西 要解包
-                // data.cardData........
             case .failure(let err):
                 print(err.description)
             }

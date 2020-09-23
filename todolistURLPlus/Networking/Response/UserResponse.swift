@@ -52,7 +52,7 @@ struct PostUserImageResponse: Codable {
 
 //MARK:- DELETE USER
 ///DELETE user/image (刪除 user 頭像)
-struct DeleteUserResponse{
+struct DeleteUserResponse: Codable {
     let status: Bool
 }
 

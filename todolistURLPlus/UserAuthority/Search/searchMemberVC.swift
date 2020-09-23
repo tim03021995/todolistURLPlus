@@ -9,24 +9,26 @@
 import UIKit
 
 class SearchMemberVC: UIViewController {
+    //MARK:- Properties
+    
     var name = ["aa","bb","cc"]
     var mySearchBar = UISearchBar()
     
-    func setSearchBar(){
-        mySearchBar.delegate = self
-        mySearchBar.becomeFirstResponder()
-        mySearchBar.placeholder = "Search"
-        
-    }
 
-    
+    //MARK:- Lifecycle
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setSearchBar()
         navigationItem.titleView = mySearchBar
-        super.viewDidLoad()
-        
     }
+    //MARK:- Func
+    fileprivate func setSearchBar(){
+        mySearchBar.delegate = self
+        mySearchBar.becomeFirstResponder()
+        mySearchBar.placeholder = "Search"
+    }
+
 }
 
 extension SearchMemberVC:UISearchBarDelegate {

@@ -22,8 +22,9 @@ enum Endpoint:String {
     case task
     case card
     case user
-    case groups
     case userImage = "user/image"
+    case groups
+    case groupsCard = "groups/card/users"
 }
 
 enum ContentType:String{

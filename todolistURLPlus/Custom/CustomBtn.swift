@@ -21,6 +21,11 @@ class CustomButton: UIButton {
         setUpBtn()
     }
     
+    convenience init(title:String){
+        self.init(frame:.zero)
+        self.setTitle(title, for: .normal)
+    }
+    
     private func setUpBtn(){
         //TODO 設置按鈕
         
