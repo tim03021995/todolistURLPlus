@@ -45,14 +45,14 @@ struct PutUserResponse: Codable{
 
 //MARK:- POST USER Image
 ///POST user/image (新增 user 頭像)
-struct PostUserImageResponse {
+struct PostUserImageResponse: Codable {
     let status: Bool
 }
 
 
 //MARK:- DELETE USER
 ///DELETE user/image (刪除 user 頭像)
-struct DeleteUserResponse{
+struct DeleteUserResponse: Codable {
     let status: Bool
 }
 

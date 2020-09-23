@@ -11,7 +11,7 @@
 		5332F8AD250679F900192A5F /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5332F8AC250679F900192A5F /* CardCell.swift */; };
 		53C16106250910E700C91D16 /* ListPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C16105250910E700C91D16 /* ListPageVC.swift */; };
 		97077B8D2512189E000139E6 /* searchMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B862512189E000139E6 /* searchMemberVC.swift */; };
-		97077B902512189E000139E6 /* UserAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B892512189E000139E6 /* UserAuthority.swift */; };
+		97077B902512189E000139E6 /* UserAuthorityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B892512189E000139E6 /* UserAuthorityVC.swift */; };
 		97077B932512189E000139E6 /* UserAuthorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B8C2512189E000139E6 /* UserAuthorityCell.swift */; };
 		9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8C2509BE14002C8E71 /* ListBaseView.swift */; };
 		9718BB8F2509BE14002C8E71 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8D2509BE14002C8E71 /* ListTableViewCell.swift */; };
@@ -62,7 +62,7 @@
 		5332F8AC250679F900192A5F /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		53C16105250910E700C91D16 /* ListPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageVC.swift; sourceTree = "<group>"; };
 		97077B862512189E000139E6 /* searchMemberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchMemberVC.swift; sourceTree = "<group>"; };
-		97077B892512189E000139E6 /* UserAuthority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthority.swift; sourceTree = "<group>"; };
+		97077B892512189E000139E6 /* UserAuthorityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityVC.swift; sourceTree = "<group>"; };
 		97077B8C2512189E000139E6 /* UserAuthorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityCell.swift; sourceTree = "<group>"; };
 		9718BB8C2509BE14002C8E71 /* ListBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBaseView.swift; sourceTree = "<group>"; };
 		9718BB8D2509BE14002C8E71 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -134,8 +134,8 @@
 		97077B852512189E000139E6 /* UserAuthority */ = {
 			isa = PBXGroup;
 			children = (
-				97077B892512189E000139E6 /* UserAuthority.swift */,
-				97077B862512189E000139E6 /* searchMemberVC.swift */,
+				FB67FA812519D92500EFF76A /* Search */,
+				97077B892512189E000139E6 /* UserAuthorityVC.swift */,
 				97077B8C2512189E000139E6 /* UserAuthorityCell.swift */,
 			);
 			path = UserAuthority;
@@ -241,6 +241,14 @@
 				FB67FA7D2519AAD000EFF76A /* GroupResponse.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		FB67FA812519D92500EFF76A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				97077B862512189E000139E6 /* searchMemberVC.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		FBC901942500DFFA00F6FA40 /* MainPage */ = {
@@ -403,7 +411,7 @@
 				D24901162510A41C003E9497 /* MainVC.swift in Sources */,
 				D2B0644725008AC700000444 /* UserInfoView.swift in Sources */,
 				D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */,
-				97077B902512189E000139E6 /* UserAuthority.swift in Sources */,
+				97077B902512189E000139E6 /* UserAuthorityVC.swift in Sources */,
 				530D261D250F445F00AEBCC8 /* CardModel.swift in Sources */,
 				5332F8AD250679F900192A5F /* CardCell.swift in Sources */,
 				FB67FA7E2519AAD000EFF76A /* GroupResponse.swift in Sources */,
@@ -563,7 +571,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KA6B4A6D5D;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -584,7 +592,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X5J69Q9BS;
+				DEVELOPMENT_TEAM = KA6B4A6D5D;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
