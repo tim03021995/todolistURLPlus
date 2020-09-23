@@ -349,15 +349,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
           mutipleCardCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0 ).isActive = true
       }
     
-  
-    
-        @objc func tap(){
-            let vc = UserAuthorityVC(id: 421)
-            present(vc, animated: true, completion: nil)
-           
-            
-        }
-    
     @objc func editMode()
     {
         state = !state
