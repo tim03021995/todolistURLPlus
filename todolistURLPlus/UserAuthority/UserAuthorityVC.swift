@@ -13,6 +13,7 @@ class UserAuthorityVC: UIViewController {
     
     var users : [GroupGetResponse.UserData] = []{
         didSet{
+            myTableView.reloadData()
             print(users)
         }
     }
@@ -22,7 +23,7 @@ class UserAuthorityVC: UIViewController {
     var memberLabel = UILabel()
     var fullScreenMaxY = UIScreen.main.bounds.maxY
     var fullScreen = UIScreen.main.bounds.size
-//    var cardID: Int = 0
+    var cardID: Int = 0
     
 
     //MARK:- LifeCycle
@@ -33,15 +34,15 @@ class UserAuthorityVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         //TODO GET
-//        getUser(id: cardID)
+        getUser(cardID: cardID)
+        print(cardID)
     }
     
     //MARK:- Func
     
     convenience init(id:Int){
         self.init(nibName: nil, bundle: nil)
-//        self.cardID = id
-        getUser(cardID: id)
+        self.cardID = id
     }
     
     //GET
@@ -68,14 +69,14 @@ class UserAuthorityVC: UIViewController {
     
     //切換編輯模式
     @objc func removeSomeone(){
-        if myTableView.isEditing == true {
-            myTableView.setEditing(false, animated: true)
-        }else if myTableView.isEditing == false{
-            myTableView.setEditing(true, animated: true)
-        }
-    }
-    private func updateView(name:String, image:String){
         
+        myTableView.setEditing(!myTableView.isEditing, animated: true)
+        
+//        if myTableView.isEditing == true {
+//            myTableView.setEditing(false, animated: true)
+//        }else if myTableView.isEditing == false{
+//            myTableView.setEditing(true, animated: true)
+//        }
     }
         
     //MARK:- UISetting
@@ -94,7 +95,7 @@ class UserAuthorityVC: UIViewController {
         setMemberLabelConstriants()
     }
 
-    func setMemberLabel(){
+    private func setMemberLabel(){
         memberLabel.frame = CGRect()
         memberLabel.text = "Members"
         memberLabel.adjustsFontSizeToFitWidth = true
@@ -104,7 +105,7 @@ class UserAuthorityVC: UIViewController {
         self.view.addSubview(memberLabel)
     }
     
-    func setTableView(){
+    private func setTableView(){
         myTableView.backgroundColor = .clear
         myTableView.separatorStyle = .none
         myTableView.rowHeight = fullScreenMaxY * 0.13
@@ -114,7 +115,7 @@ class UserAuthorityVC: UIViewController {
         self.view.addSubview(myTableView)
     }
     
-    func setTestCube(){
+    private func setTestCube(){
         testCube.translatesAutoresizingMaskIntoConstraints = false
         testCube.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         testCube.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant:0).isActive = true
@@ -123,7 +124,7 @@ class UserAuthorityVC: UIViewController {
         testCube.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10 ).isActive = true
     }
     
-    func setTestCube1(){
+    private func setTestCube1(){
         testCube.translatesAutoresizingMaskIntoConstraints = false
         testCube.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         testCube.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant:-50).isActive = true
@@ -132,7 +133,7 @@ class UserAuthorityVC: UIViewController {
         testCube.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10 ).isActive = true
     }
     
-    func setBaseView(){
+    private func setBaseView(){
         baseView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         baseView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         baseView.layer.cornerRadius = 15
@@ -140,7 +141,7 @@ class UserAuthorityVC: UIViewController {
         self.view.addSubview(baseView)
     }
     
-    func setMemberLabelConstriants(){
+    private func setMemberLabelConstriants(){
         memberLabel.translatesAutoresizingMaskIntoConstraints = false
         memberLabel.bottomAnchor.constraint(equalTo:baseView.topAnchor,constant: -50 ).isActive = true
         memberLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
@@ -148,7 +149,7 @@ class UserAuthorityVC: UIViewController {
         memberLabel.heightAnchor.constraint(equalTo: baseView.heightAnchor, multiplier: 0.3).isActive = true
     }
     
-    func setTableViewConstriants(){
+    private func setTableViewConstriants(){
         myTableView.translatesAutoresizingMaskIntoConstraints = false
         myTableView.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 10).isActive = true
         myTableView.bottomAnchor.constraint(equalTo: baseView.bottomAnchor,constant: -10).isActive = true
@@ -156,7 +157,7 @@ class UserAuthorityVC: UIViewController {
         myTableView.trailingAnchor.constraint(equalTo:baseView.trailingAnchor, constant: -20 ).isActive = true
     }
     
-    func setBaseViewConstriants(){
+    private func setBaseViewConstriants(){
         baseView.translatesAutoresizingMaskIntoConstraints = false
         baseView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         baseView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: -30).isActive = true
@@ -165,7 +166,7 @@ class UserAuthorityVC: UIViewController {
         baseView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10 ).isActive = true
     }
     
-    func setInviteBtnViewConstraints(){
+    private func setInviteBtnViewConstraints(){
         inviteBtnView.translatesAutoresizingMaskIntoConstraints = false
         
         inviteBtnView.leadingAnchor.constraint(equalTo: removeBtnView.trailingAnchor,constant: 20).isActive = true
@@ -174,7 +175,7 @@ class UserAuthorityVC: UIViewController {
         inviteBtnView.heightAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.2).isActive = true
     }
     
-    func setRemoveBtnViewConstrants(){
+    private func setRemoveBtnViewConstrants(){
         removeBtnView.translatesAutoresizingMaskIntoConstraints = false
         removeBtnView.leadingAnchor.constraint(equalTo:view.leadingAnchor ,constant: 20).isActive = true
         removeBtnView.bottomAnchor.constraint(equalTo: baseView.topAnchor,constant: -10).isActive = true
@@ -182,7 +183,7 @@ class UserAuthorityVC: UIViewController {
         removeBtnView.heightAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.2).isActive = true
     }
     
-    func setInviteBtnConstraints(){
+    private func setInviteBtnConstraints(){
         inviteBtn.translatesAutoresizingMaskIntoConstraints = false
         inviteBtn.topAnchor.constraint(equalTo: inviteBtnView.topAnchor,constant:5).isActive = true
         inviteBtn.leadingAnchor.constraint(equalTo: inviteBtnView.leadingAnchor,constant: 5).isActive = true
@@ -191,8 +192,7 @@ class UserAuthorityVC: UIViewController {
         
     }
     
-    func setRemoveBtnConstrants(){
-        
+    private func setRemoveBtnConstrants(){
         removeBtn.translatesAutoresizingMaskIntoConstraints = false
         removeBtn.topAnchor.constraint(equalTo: removeBtnView.topAnchor,constant:5).isActive = true
         removeBtn.leadingAnchor.constraint(equalTo: removeBtnView.leadingAnchor,constant: 5).isActive = true
@@ -298,7 +298,7 @@ extension UserAuthorityVC: UITableViewDelegate{
 extension UserAuthorityVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) ->Int {
-        return editor.count
+        return users.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -308,16 +308,18 @@ extension UserAuthorityVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UserAuthorityCell
-        cell.setCell(indexPath:indexPath, data: editor)
-//        cell.updateCell(indexPath: indexPath, data: users)
+        cell.updateCell(indexPath:indexPath, data: users)
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        #warning("TODO: DELETE")
         if editingStyle == .delete {
             myTableView.beginUpdates()
             myTableView.deleteRows(at: [indexPath], with: .fade)
-            editor.remove(at: indexPath.row)
+//            editor.remove(at: indexPath.row)
+            users.remove(at: indexPath.row)
+
             myTableView.endUpdates()
         }
         
