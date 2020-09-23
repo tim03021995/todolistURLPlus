@@ -14,6 +14,12 @@ class SetInfoVC:UIViewController{
         super .loadView()
         self.view = setInfoView
     }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+        let image = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         autoPushView()
@@ -41,7 +47,7 @@ class SetInfoVC:UIViewController{
         if let userName = setInfoView.nameTextField.text {
             SetInfoModelManerger.updateUserName(userName) {
                 print("updata name")
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }
         }else{
             print("not name")

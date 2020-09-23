@@ -457,8 +457,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @objc func tapToProfileSetting()
     {
         let vc = UserInfoVC()
+        let nc = UINavigationController(rootViewController: vc)
  //       vc.modalPresentationStyle = .overCurrentContext
-        present(vc, animated: true, completion: nil)
+        present(nc, animated: true, completion: nil)
     }
     
 
