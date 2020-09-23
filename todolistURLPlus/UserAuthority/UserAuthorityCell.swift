@@ -24,19 +24,30 @@ class UserAuthorityCell: UITableViewCell {
         setHeadShotConstriants()
         setTitleLabelConstraints()
     }
-    
+    func updateCell(indexPath:IndexPath, data:[GroupGetResponse.UserData]){
+        backgroundColor = .clear
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        layer.cornerRadius = fullScreenMaxX * 0.06
+        contentView.layer.borderWidth = 5
+        contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
+        contentView.layer.cornerRadius = fullScreenMaxX * 0.06
+        clipsToBounds = true
+        cellTitleLabel.text = data[indexPath.row].username
+    }
     
     func setCell(indexPath:IndexPath, data: [String]){
-        self.backgroundColor = .clear
-        self.layer.borderWidth = 5
-        self.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        self.layer.cornerRadius = fullScreenMaxX * 0.06
-        self.contentView.layer.borderWidth = 5
-        self.contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        self.contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
-        self.contentView.layer.cornerRadius = fullScreenMaxX * 0.06
-        self.clipsToBounds = true
-        self.cellTitleLabel.text = data[indexPath.row]
+        backgroundColor = .clear
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        layer.cornerRadius = fullScreenMaxX * 0.06
+        contentView.layer.borderWidth = 5
+        contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
+        contentView.layer.cornerRadius = fullScreenMaxX * 0.06
+        clipsToBounds = true
+        cellTitleLabel.text = data[indexPath.row]
     }
     
     required init?(coder: NSCoder) {

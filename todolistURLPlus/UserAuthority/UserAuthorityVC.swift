@@ -22,7 +22,7 @@ class UserAuthorityVC: UIViewController {
     var memberLabel = UILabel()
     var fullScreenMaxY = UIScreen.main.bounds.maxY
     var fullScreen = UIScreen.main.bounds.size
-    var cardID: Int = 0 
+//    var cardID: Int = 0
     
 
     //MARK:- LifeCycle
@@ -33,14 +33,29 @@ class UserAuthorityVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         //TODO GET
-        getUser(id: cardID)
+//        getUser(id: cardID)
     }
     
     //MARK:- Func
     
     convenience init(id:Int){
         self.init(nibName: nil, bundle: nil)
-        self.cardID = id
+//        self.cardID = id
+        getUser(cardID: id)
+    }
+    
+    //GET
+    func getUser(cardID:Int){
+        let header = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: header, id: cardID).send()
+        NetworkManager.sendRequest(with: request) { (result:Result<GroupGetResponse,NetworkError>) in
+            switch result {
+            case .success(let data):
+                self.users = data.usersData
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
     
     //進入搜尋模式
@@ -62,22 +77,7 @@ class UserAuthorityVC: UIViewController {
     private func updateView(name:String, image:String){
         
     }
-    
-    //MARK:- API
-    //GET
-    func getUser(id:Int){
-        let header = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: header, id: cardID).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<GroupGetResponse,NetworkError>) in
-            switch result {
-            case .success(let data):
-                self.users = data.usersData
-            case .failure(let err):
-                print(err)
-            }
-        }
-    }
-    
+        
     //MARK:- UISetting
     
     fileprivate func setView() {
@@ -309,7 +309,7 @@ extension UserAuthorityVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UserAuthorityCell
         cell.setCell(indexPath:indexPath, data: editor)
-        //        cell.cellTitleLabel.text = "\(editor[indexPath.row])"
+//        cell.updateCell(indexPath: indexPath, data: users)
         return cell
     }
     
@@ -322,11 +322,6 @@ extension UserAuthorityVC: UITableViewDataSource{
         }
         
     }
-    //
-    //    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-    //
-    //        return .delete
-    //    }
     
 }
 
