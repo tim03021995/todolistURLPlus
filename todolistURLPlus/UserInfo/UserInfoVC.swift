@@ -2,14 +2,16 @@ import UIKit
 
 class UserInfoVC: CanGetImageViewController {
     let userInformationView = UserInfoView()
-    override func loadView() {
-        super .loadView()
-        getUserData()
-        self.view = userInformationView
-    }
+//    override func loadView() {
+//        super .loadView()
+//        getUserData()
+//        self.view = userInformationView
+//    }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         getUserData()
         self.view = userInformationView
+        self.navigationController?.navigationBar.isHidden = true
     }
     override func viewDidLoad() {
         Api().getUser()
@@ -22,7 +24,8 @@ class UserInfoVC: CanGetImageViewController {
             userImage: userInformationView.peopleView.image,
             userName: userInformationView.userNameLabel.text)
        // vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.navigationItem.backBarButtonItem?.title = "返回"
     }
     @objc func modifyPassword(){
         

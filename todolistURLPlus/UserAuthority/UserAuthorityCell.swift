@@ -41,7 +41,7 @@ class UserAuthorityCell: UITableViewCell {
         clipsToBounds = true
         cellTitleLabel.text = data[indexPath.row].username
         if let imageUrl = data[indexPath.row].image {
-            CanLoadViewController().getImage(type: .gill, imageURL: imageUrl) { (image) in
+            CanGetImageViewController().getImage(type: .gill, imageURL: imageUrl) { (image) in
                 self.headShot.image = image
             }
         }else {
