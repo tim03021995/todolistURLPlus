@@ -91,7 +91,6 @@ class ListPageVC: UIViewController {
     }
     @objc func tapToUserAuthority(){
         let vc = UserAuthorityVC(id: showCard.id)
-        
         present(vc, animated: true, completion: nil)
         
     }

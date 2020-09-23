@@ -14,7 +14,7 @@ class UserAuthorityVC: UIViewController {
     var users : [GroupGetResponse.UserData] = []{
         didSet{
             myTableView.reloadData()
-            print(users)
+//            print(users)
         }
     }
     var editor = ["Alvin","Ray","Jimmy","Joey"]
@@ -35,7 +35,7 @@ class UserAuthorityVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //TODO GET
         getUser(cardID: cardID)
-        print(cardID)
+//        print(cardID)
     }
     
     //MARK:- Func
@@ -43,25 +43,37 @@ class UserAuthorityVC: UIViewController {
     convenience init(id:Int){
         self.init(nibName: nil, bundle: nil)
         self.cardID = id
+//        getUser(cardID: id)
+
     }
     
     //GET
-    func getUser(cardID:Int){
+    private func getUser(cardID:Int){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: header, id: cardID).send()
         NetworkManager.sendRequest(with: request) { (result:Result<GroupGetResponse,NetworkError>) in
             switch result {
-            case .success(let data):
-                self.users = data.usersData
-            case .failure(let err):
-                print(err)
+            case .success(let data): self.users = data.usersData
+            case .failure(let err):  print(err.description)
+                self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
+                    self.dismiss(animated: true, completion: nil)
+                }), animated: true)
             }
         }
+    }
+    #warning("DELETE")
+    private func deleteUser(userID:Int){ // ID應該改成email
+        
     }
     
     //進入搜尋模式
     @objc func inviteSomeone(){
         myTableView.isEditing = false
+        
+//        let vc = SearchVC()
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: true)
+        
         let rootVC = SearchMemberVC()
         let navVC = UINavigationController(rootViewController: rootVC)
         present(navVC,animated: true)
@@ -317,9 +329,7 @@ extension UserAuthorityVC: UITableViewDataSource{
         if editingStyle == .delete {
             myTableView.beginUpdates()
             myTableView.deleteRows(at: [indexPath], with: .fade)
-//            editor.remove(at: indexPath.row)
             users.remove(at: indexPath.row)
-
             myTableView.endUpdates()
         }
         
