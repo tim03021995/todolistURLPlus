@@ -11,14 +11,18 @@ import UIKit
 class UserAuthorityVC: UIViewController {
     //MARK:- Properties
     
-    var users : [GroupGetResponse.UserData] = []
+    var users : [GroupGetResponse.UserData] = []{
+        didSet{
+            print(users)
+        }
+    }
     var editor = ["Alvin","Ray","Jimmy","Joey"]
     var myTableView = UITableView()
     var baseView = UIView()
     var memberLabel = UILabel()
     var fullScreenMaxY = UIScreen.main.bounds.maxY
     var fullScreen = UIScreen.main.bounds.size
-    var cardID: Int = 0
+    var cardID: Int = 0 
     
 
     //MARK:- LifeCycle
@@ -29,6 +33,7 @@ class UserAuthorityVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         //TODO GET
+        getUser(id: cardID)
     }
     
     //MARK:- Func
