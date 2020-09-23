@@ -45,7 +45,7 @@ struct PutUserResponse: Codable{
 
 //MARK:- POST USER Image
 ///POST user/image (新增 user 頭像)
-struct PostUserImageResponse {
+struct PostUserImageResponse: Codable {
     let status: Bool
 }
 

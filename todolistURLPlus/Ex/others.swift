@@ -40,6 +40,7 @@ extension UIViewController
     func autoPushView(){
         let observer = NotificationCenter.default
         
+        //NotificationCenter.default.addObserver(觀察者, selector: #selector(觀察者用來處理通知的方法), name: 通知的名稱, object: 要觀察的對象物件)
         observer.addObserver(self, selector: #selector(pushView), name: UIResponder.keyboardWillShowNotification, object: nil)
         observer.addObserver(self, selector: #selector(closeView), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -80,7 +81,7 @@ extension Data{
         append(data!)
     }
 }
-class CanLoadViewController:UIViewController{
+class CanGetImageViewController:UIViewController{
     let loadIndicatorView:UIActivityIndicatorView = {
         var loading = UIActivityIndicatorView()
         loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
@@ -122,6 +123,7 @@ class CanLoadViewController:UIViewController{
         switch type {
         case .gill:
             urlStr = "http://35.185.131.56:8002/" + imageURL
+            print(imageURL)
         case .other:
             urlStr = imageURL
         }

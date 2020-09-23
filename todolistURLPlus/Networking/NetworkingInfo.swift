@@ -23,6 +23,7 @@ enum Endpoint:String {
     case card
     case user
     case groups
+    case userImage = "user/image"
 }
 
 enum ContentType:String{
