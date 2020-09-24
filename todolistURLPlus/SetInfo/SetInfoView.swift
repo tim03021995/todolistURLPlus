@@ -31,6 +31,7 @@ class SetInfoView:UIView{
         let font = textField.font!
         let newFont = font.withSize(30)
         textField.font = newFont
+        textField.keyboardType = .asciiCapable
         return textField
     }()
     private var albumButton:UIButton = {

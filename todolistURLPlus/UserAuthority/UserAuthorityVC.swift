@@ -18,25 +18,9 @@ class UserAuthorityVC: UIViewController {
         }
     }
     var editor = ["Alvin","Ray","Jimmy","Joey"]
-    var myTableView : UITableView = {
-        var tableView = UITableView()
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        tableView.rowHeight = ScreenSize.height.value * 0.13
-        tableView.register(UserAuthorityCell.self, forCellReuseIdentifier: "Cell")
-        return tableView
-    }()
+    var myTableView = UITableView()
     var baseView = UIView()
-    var memberLabel:UILabel = {
-        var label = UILabel()
-        label.frame = CGRect()
-        label.text = "Members"
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        label.textColor = .white
-        return label
-    }()
+    var memberLabel = UILabel()
     var fullScreenMaxY = UIScreen.main.bounds.maxY
     var fullScreen = UIScreen.main.bounds.size
     var cardID: Int = 0
@@ -111,34 +95,36 @@ class UserAuthorityVC: UIViewController {
     
     fileprivate func setView() {
         view.addSubview(backgroundImage)
-        setSubView()
         setBaseView()
-        //setTableView()
+        setTableView()
         setTableViewConstriants()
         setBaseViewConstriants()
         setInviteBtnViewConstraints()
         setRemoveBtnViewConstrants()
         setInviteBtnConstraints()
         setRemoveBtnConstrants()
+        setMemberLabel()
         setMemberLabelConstriants()
-        
-        
     }
 
-    private func setSubView(){
+    private func setMemberLabel(){
+        memberLabel.frame = CGRect()
+        memberLabel.text = "Members"
+        memberLabel.adjustsFontSizeToFitWidth = true
+        memberLabel.textAlignment = .center
+        memberLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        memberLabel.textColor = .white
         self.view.addSubview(memberLabel)
-        self.view.addSubview(myTableView)
-        self.view.addSubview(baseView)
-
     }
+    
     private func setTableView(){
-//        myTableView.backgroundColor = .clear
-//        myTableView.separatorStyle = .none
-//        myTableView.rowHeight = fullScreenMaxY * 0.13
-//        myTableView.register(UserAuthorityCell.self, forCellReuseIdentifier: "Cell")
+        myTableView.backgroundColor = .clear
+        myTableView.separatorStyle = .none
+        myTableView.rowHeight = fullScreenMaxY * 0.13
+        myTableView.register(UserAuthorityCell.self, forCellReuseIdentifier: "Cell")
         myTableView.delegate = self
         myTableView.dataSource = self
-
+        self.view.addSubview(myTableView)
     }
     
     private func setTestCube(){
@@ -164,6 +150,7 @@ class UserAuthorityVC: UIViewController {
         baseView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         baseView.layer.cornerRadius = 15
         baseView.layer.borderWidth = 3
+        self.view.addSubview(baseView)
     }
     
     private func setMemberLabelConstriants(){
@@ -172,9 +159,6 @@ class UserAuthorityVC: UIViewController {
         memberLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
         memberLabel.widthAnchor.constraint(equalTo: baseView.widthAnchor,multiplier: 0.3).isActive = true
         memberLabel.heightAnchor.constraint(equalTo: baseView.heightAnchor, multiplier: 0.3).isActive = true
-//        memberLabel.snp.makeConstraints { (make) in
-//            make.top.left.equalTo(view)
-//        }
     }
     
     private func setTableViewConstriants(){
@@ -352,7 +336,6 @@ extension UserAuthorityVC: UITableViewDataSource{
     }
     
 }
-
 
 
 
