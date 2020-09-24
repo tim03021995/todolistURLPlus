@@ -11,6 +11,7 @@ class UserInfoModelManager{
     static func getUserData(email:String,complection:@escaping (UserData)->Void){
         let headers = ["userToken":UserToken.shared.userToken]
         let parameters = makeParameters(email)
+        print(parameters)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, parameters: parameters, headers: headers)
         NetworkManager.sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
             switch result {
