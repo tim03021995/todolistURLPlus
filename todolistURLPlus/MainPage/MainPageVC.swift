@@ -275,7 +275,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             toListPageVC(indexPath: indexPath)
         }
         
-        
+        singleBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.top).priority(.medium)
+        }
         
         
     }
@@ -297,7 +299,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         headImage.frame = CGRect(x: 0, y: statusBarHeight * 1.5, width: headImage.frame.width, height: headImage.frame.height)
         headImage.isHidden = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
-                   headImage.addGestureRecognizer(tap)
+        headImage.addGestureRecognizer(tap)
     }
     
     //blueconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動

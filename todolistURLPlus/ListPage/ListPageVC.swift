@@ -56,12 +56,13 @@ class ListPageVC: UIViewController {
             btn.contentVerticalAlignment = .center
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
-            btn.isEnabled = true
             btn.addTarget(self, action: #selector(self.tapCreatTaskBtn), for: .touchDown)
+            
             return btn
     }()
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        creatTaskBtn.isEnabled = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +113,7 @@ class ListPageVC: UIViewController {
         }else
         {
             let cardID = showCard.id
+            vc.createPage(cardID: cardID)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
