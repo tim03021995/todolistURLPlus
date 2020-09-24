@@ -21,8 +21,8 @@ class SetInfoVC:UIViewController{
 
     }
     override func viewDidAppear(_ animated: Bool) {
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage))
-//            setInfoView.peopleView.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage))
+            setInfoView.peopleView.addGestureRecognizer(tap)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

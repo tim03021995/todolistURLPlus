@@ -42,7 +42,7 @@ class SetInfoView:UIView{
             height: ScreenSize.width.value * 0.1))
         button.setImage(UIImage(systemName: "camera"), for: .normal)
         button.layer.cornerRadius = button.frame.height * 0.5
-        button.addTarget(self, action: #selector(SetInfoVC.takeImage), for: .touchDown)
+        button.addTarget(self, action: #selector(SetInfoVC.takeImage), for: .touchUpInside)
         button.backgroundColor = .gray
         return button
     }()

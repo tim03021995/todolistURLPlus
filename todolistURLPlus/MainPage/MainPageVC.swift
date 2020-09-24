@@ -456,7 +456,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
     {
-        let vc = UserInfoVC()
+        #warning("需要輸入 email")
+        let vc = UserInfoVC(email: "test@test.com")
         let nc = UINavigationController(rootViewController: vc)
  //       vc.modalPresentationStyle = .overCurrentContext
         present(nc, animated: true, completion: nil)

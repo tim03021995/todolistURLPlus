@@ -31,7 +31,7 @@ class UserInfoView: UIView {
     }()
     private var informationButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "information")
-        button.addTarget(self, action: #selector(UserInfoVC.information), for: .touchDown)
+        button.addTarget(self, action: #selector(UserInfoVC.information), for: .touchUpInside)
         return button
     }()
     private var modifyPasswordButton:UIButton = {
