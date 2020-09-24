@@ -17,19 +17,46 @@ class SetInfoModelManerger{
         let boundary = "Boundary+\(arc4random())\(arc4random())"
         let dataPath = makeDataPath(image)
         let body = makeBody(dataPath, boundary)
-        let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, headers: header)
+        let request = HTTPRequest(endpoint: .userImage, contentType: .formData, method: .POST, headers: header)
         print(#function)
-        NetworkManager.sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostTaskResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostUserImageResponse,NetworkError>) in
             switch result {
-            case .success(let a):
-                print("create success")
+            case .success( _):
+                print("update success")
             case .failure(let err):
-                print(" create error")
+                print("update error")
                 print(err.description)
                 print("錯誤訊息：\(err.errMessage)")
             }
             compeletion()
         }
+    }
+    static func updateUserName(_ userName:String?,_ compeletion:@escaping ()->Void){
+        let header = ["userToken":UserToken.shared.userToken]
+        let parameters = makeParameters(userName, nil)
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
+        NetworkManager.sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in
+            switch result {
+            case .success( _):
+                print("update success")
+            case .failure(let err):
+                print("update error")
+                print(err.description)
+                print("錯誤訊息：\(err.errMessage)")
+            }
+            compeletion()
+        }
+    }
+    static func makeParameters(_ userName:String?,_ passWord:String?)->[String:Any]{
+        var parameters:[String:Any] = [:]
+        if let title = userName {
+            parameters["username"] = title
+        }
+        if let description = passWord {
+            parameters["password"] = description
+        }
+        print(parameters)
+        return parameters
     }
     static func makeDataPath(_ image:UIImage)->[String:Data]{
         var dataPath:[String:Data] = [:]

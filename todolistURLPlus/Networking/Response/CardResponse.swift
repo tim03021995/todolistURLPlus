@@ -43,6 +43,7 @@ struct GetCardResponse: Codable {
         let createUser:String
         let createdAt:String
         let updatedAt: String
+        let cardPrivate: Bool
         let pivot: Pivot
         let showTasks: [ShowTask]
         
@@ -54,6 +55,7 @@ struct GetCardResponse: Codable {
             case updatedAt = "updated_at"
             case pivot
             case showTasks = "show_tasks"
+            case cardPrivate = "private"
         }
     }
     
