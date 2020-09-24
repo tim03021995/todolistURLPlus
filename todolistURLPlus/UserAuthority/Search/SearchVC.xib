@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchVC" customModule="todolistURLPlus" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="X96-am-8wN" id="XWd-9A-56e"/>
+                <outlet property="searchTableView" destination="Wsh-1O-xqz" id="rLr-PW-0uP"/>
+                <outlet property="searchView" destination="hvT-rb-wr4" id="y7e-II-wy6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvT-rb-wr4">
+                    <rect key="frame" x="20.5" y="134.5" width="373" height="627"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="X96-am-8wN">
+                            <rect key="frame" x="0.0" y="0.0" width="373" height="61.5"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wsh-1O-xqz">
+                            <rect key="frame" x="0.0" y="61.5" width="373" height="502"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="top" secondItem="X96-am-8wN" secondAttribute="bottom" id="59q-Uw-e5q"/>
+                        <constraint firstItem="X96-am-8wN" firstAttribute="height" secondItem="hvT-rb-wr4" secondAttribute="height" multiplier="0.0982143" id="DEq-zc-cbp"/>
+                        <constraint firstItem="X96-am-8wN" firstAttribute="top" secondItem="hvT-rb-wr4" secondAttribute="top" id="Hj0-hy-rJe"/>
+                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="leading" secondItem="hvT-rb-wr4" secondAttribute="leading" id="Nat-ll-S5U"/>
+                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="height" secondItem="hvT-rb-wr4" secondAttribute="height" multiplier="0.8" id="YQ7-Ob-2hK"/>
+                        <constraint firstItem="X96-am-8wN" firstAttribute="centerX" secondItem="hvT-rb-wr4" secondAttribute="centerX" id="Ysw-em-6n6"/>
+                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="width" secondItem="hvT-rb-wr4" secondAttribute="width" id="Zef-0R-3t2"/>
+                        <constraint firstItem="X96-am-8wN" firstAttribute="width" secondItem="hvT-rb-wr4" secondAttribute="width" id="jIk-Gr-Qxz"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="hvT-rb-wr4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6zm-4f-7XQ"/>
+                <constraint firstItem="hvT-rb-wr4" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="Se9-og-VQM"/>
+                <constraint firstItem="hvT-rb-wr4" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.9" id="V9P-AG-n4M"/>
+                <constraint firstItem="hvT-rb-wr4" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="pmN-Sa-1nP"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="142" y="143"/>
+        </view>
+    </objects>
+</document>
