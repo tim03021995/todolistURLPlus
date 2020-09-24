@@ -9,7 +9,7 @@
 import UIKit
 class SetInfoVC:UIViewController{
     let setInfoView = SetInfoView()
-    
+
     override func loadView() {
         super .loadView()
         self.view = setInfoView
@@ -18,7 +18,11 @@ class SetInfoVC:UIViewController{
         navigationController?.navigationBar.isHidden = false
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        
+
+    }
+    override func viewDidAppear(_ animated: Bool) {
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage))
+//            setInfoView.peopleView.addGestureRecognizer(tap)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

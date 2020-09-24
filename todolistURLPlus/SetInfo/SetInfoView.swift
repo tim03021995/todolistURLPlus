@@ -11,12 +11,16 @@ class SetInfoView:UIView{
     private var backgroundImage : UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
-    var peopleView:UIImageView = {
+    lazy var peopleView:UIImageView = {
         var imageView = UserImageFactory.makeImageView(size: .large, image: nil)
         imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
+        #warning("問")
         return imageView
     }()
+    
+
     var nameTextField:UITextField = {
         var textField = UITextField(frame: CGRect(
             x: 0,
@@ -52,6 +56,7 @@ class SetInfoView:UIView{
         super .init(frame: frame)
         setSubView()
         setConstraints()
+
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
