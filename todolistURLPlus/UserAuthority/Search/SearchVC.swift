@@ -18,6 +18,7 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchTableView.register(UserAuthorityCell.self, forCellReuseIdentifier: "Cell")
 
     }
 
@@ -31,8 +32,7 @@ extension SearchVC:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchTableView.dequeueReusableCell(withIdentifier: "Cell") as! UserAuthorityCell
-        var a : String?
-        cell.updateSearchTBCell(name: "123", image: a)
+        cell.textLabel?.text = "123"
         return cell
     }
     

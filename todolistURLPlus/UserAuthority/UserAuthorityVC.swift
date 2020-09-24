@@ -11,7 +11,7 @@ import UIKit
 class UserAuthorityVC: UIViewController {
     //MARK:- Properties
     
-    var users : [GroupGetResponse.UserData] = []{
+    var users : [GetGroupResponse.UserData] = []{
         didSet{
             myTableView.reloadData()
 //            print(users)
@@ -51,7 +51,7 @@ class UserAuthorityVC: UIViewController {
     private func getUser(cardID:Int){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: header, id: cardID).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<GroupGetResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (result:Result<GetGroupResponse,NetworkError>) in
             switch result {
             case .success(let data): self.users = data.usersData
             case .failure(let err):  print(err.description)
@@ -70,13 +70,14 @@ class UserAuthorityVC: UIViewController {
     @objc func inviteSomeone(){
         myTableView.isEditing = false
         
-//        let vc = SearchVC()
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: true)
+        let vc = SearchVC()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
         
-        let rootVC = SearchMemberVC()
-        let navVC = UINavigationController(rootViewController: rootVC)
-        present(navVC,animated: true)
+//        let rootVC = SearchMemberVC()
+//        let navVC = UINavigationController(rootViewController: rootVC)
+//        present(navVC,animated: true)
     }
     
     //切換編輯模式
