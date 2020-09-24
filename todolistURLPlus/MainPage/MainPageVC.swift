@@ -17,6 +17,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
 //    var cardDatas = [CardModel]()
     var state = true
     var cell: CardCell! = nil
+    var userData: GetCardResponse.UserData!
     var showCards = [GetCardResponse.ShowCard]()
     {
         didSet
@@ -26,7 +27,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
 //    var indexPath: IndexPath!
     ///設置背景
-    let userName = ""
+    
+    var userName: GetUserResponse!
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
     }()
@@ -42,12 +44,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     ///設置歡迎標籤
     lazy var welcomeLabel: UILabel =
         {
+
             let label = UILabel()
             label.frame = CGRect(x: 0,
                                  y: self.headImage.frame.maxY,
                                  width: ScreenSize.width.value,
                                  height: self.headImage.frame.height * 0.4)
-            label.text = "Welcome back \(self.userName)"
+            
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
             label.font = UIFont.boldSystemFont(ofSize: 30)
@@ -206,11 +209,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         return btn
     }()
     override func viewWillAppear(_ animated: Bool) {
+        getCard()
+
     }
     override func viewDidAppear(_ animated: Bool) {
-        getCard()
         singleCardCollectionView.reloadData()
         setupHeadImage()
+        welcomeLabel.text = "Welcome back \(self.userData.username)"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -514,7 +519,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 
             case .success(let data):
                 let showCards = data.userData.showCards
-                
+                let userData = data.userData
+                self.userData = userData
                     self.showCards = showCards
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
                 self.singleCardCollectionView.reloadData()
@@ -548,7 +554,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         print(self.cell.deleteButton.tag)
     }
     func deleteCard(indexPath: IndexPath){
-//        showDeleteButton()
            let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: showCards[indexPath.row].id).send()
         
