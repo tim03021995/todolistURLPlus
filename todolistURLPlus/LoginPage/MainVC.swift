@@ -23,13 +23,8 @@ class MainVC: UIViewController{
         }
         else{
             let vc = MainPageVC()
-            let nc = UINavigationController(rootViewController: vc)
-            
-//            vc.modalPresentationStyle = .fullScreen
-//            nc.modalPresentationStyle = .fullScreen
-            nc.modalTransitionStyle = .crossDissolve
-            vc.modalTransitionStyle = .crossDissolve
-            present(nc, animated: false, completion: nil )
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: false, completion: nil )
         }
     }
 }
