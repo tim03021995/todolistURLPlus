@@ -11,7 +11,7 @@ import UIKit
 class ListPageVC: UIViewController {
     
     var showCard: GetCardResponse.ShowCard!
-//    lazy var showTasks = self.showCard.showTasks
+    //    lazy var showTasks = self.showCard.showTasks
     var showTasks:[GetCardResponse.ShowTask] = []
     var cardIndexPath = IndexPath()
     let backgroundImage:UIImageView = {
@@ -57,10 +57,12 @@ class ListPageVC: UIViewController {
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
             btn.addTarget(self, action: #selector(self.tapCreatTaskBtn), for: .touchDown)
+            
             return btn
     }()
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        creatTaskBtn.isEnabled = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +73,9 @@ class ListPageVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-     getTask()
-
-
+        getTask()
+        
+        
     }
     
     func addSubview()
@@ -87,6 +89,7 @@ class ListPageVC: UIViewController {
     
     @objc func tapCreatTaskBtn()
     {
+        creatTaskBtn.isEnabled = false
         toCardEditVC(data: showCard, indexPath: nil)
     }
     @objc func tapToUserAuthority(){
@@ -99,21 +102,18 @@ class ListPageVC: UIViewController {
         feedbackGenerator.impactOccurred()
         let vc = CardEditVC()
         if let indexPath = indexPath
-       {
-        let taskData = data.showTasks[indexPath.section]
-        //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
-      //  let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
-        vc.editPage(cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
-        navigationController?.pushViewController(vc, animated: true)
-
+        {
+            let taskData = data.showTasks[indexPath.section]
+            //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
+            //  let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
+            vc.editPage(cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
+            navigationController?.pushViewController(vc, animated: true)
+            
         }else
-       {
-        let cardID = showCard.id
-        
-     //   let createData = TaskModel(funtionType: .create, cardID: cardID)
-        vc.createPage(cardID: cardID)
-  //           vc.setData(data: createData)
-             navigationController?.pushViewController(vc, animated: true)
+        {
+            let cardID = showCard.id
+            vc.createPage(cardID: cardID)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     func getTask(){
@@ -138,9 +138,9 @@ class ListPageVC: UIViewController {
         reloadView.tableView.delegate = self
         reloadView.tableView.dataSource = self
         reloadView.reloadTableView()
-//           self.listBaseView = reloadView
-       }
-
+        //           self.listBaseView = reloadView
+    }
+    
 }
 
 
@@ -176,18 +176,18 @@ extension ListPageVC: UITableViewDataSource{
         cell.cellTitleLabel.text = showTasks[indexPath.section].title 
         return cell
     }
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-            let vc = CardEditVC()
+        
+        let vc = CardEditVC()
         let task = showTasks[indexPath.section]
         print("現在點擊的Task ID = \(task.id)")
-//        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
-       // vc.setData(data: taskModel)
+        //        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
+        // vc.setData(data: taskModel)
         vc.editPage(cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: task.image, tag: ColorsButtonType(rawValue: task.tag!))
-
+        
         navigationController?.pushViewController(vc, animated: true)
-
-        }
-
+        
+    }
+    
 }
