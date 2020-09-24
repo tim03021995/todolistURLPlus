@@ -11,7 +11,7 @@ import Foundation
 //MARK:- GET card users
 
 ///GET card users (查詢該card的所有使用者)
-struct GroupGetResponse: Codable {
+struct GetGroupResponse: Codable {
     let status: Bool
     let usersData: [UserData]
     

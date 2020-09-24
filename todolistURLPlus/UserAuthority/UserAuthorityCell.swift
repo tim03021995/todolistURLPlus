@@ -29,7 +29,7 @@ class UserAuthorityCell: UITableViewCell {
         fatalError("init(coder:) has not been imp;emented")
     }
     
-    func updateCell(indexPath:IndexPath, data: [GroupGetResponse.UserData]){
+    func updateCell(indexPath:IndexPath, data: [GetGroupResponse.UserData]){
         backgroundColor = .clear
         layer.borderWidth = 5
         layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
