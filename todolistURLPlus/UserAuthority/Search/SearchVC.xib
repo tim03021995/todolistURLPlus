@@ -21,39 +21,47 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvT-rb-wr4">
-                    <rect key="frame" x="20.5" y="134.5" width="373" height="627"/>
+                    <rect key="frame" x="10.5" y="224" width="393" height="448"/>
                     <subviews>
                         <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="X96-am-8wN">
-                            <rect key="frame" x="0.0" y="0.0" width="373" height="61.5"/>
+                            <rect key="frame" x="19.5" y="10" width="354" height="44"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wsh-1O-xqz">
-                            <rect key="frame" x="0.0" y="61.5" width="373" height="502"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="50" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wsh-1O-xqz">
+                            <rect key="frame" x="19.5" y="74" width="354" height="358.5"/>
                             <color key="backgroundColor" red="0.0075056753120000003" green="0.20107370620000001" blue="0.31373909119999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="top" secondItem="X96-am-8wN" secondAttribute="bottom" id="59q-Uw-e5q"/>
+                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="top" secondItem="X96-am-8wN" secondAttribute="bottom" constant="20" id="59q-Uw-e5q"/>
                         <constraint firstItem="X96-am-8wN" firstAttribute="height" secondItem="hvT-rb-wr4" secondAttribute="height" multiplier="0.0982143" id="DEq-zc-cbp"/>
-                        <constraint firstItem="X96-am-8wN" firstAttribute="top" secondItem="hvT-rb-wr4" secondAttribute="top" id="Hj0-hy-rJe"/>
-                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="leading" secondItem="hvT-rb-wr4" secondAttribute="leading" id="Nat-ll-S5U"/>
+                        <constraint firstItem="X96-am-8wN" firstAttribute="top" secondItem="hvT-rb-wr4" secondAttribute="top" constant="10" id="Hj0-hy-rJe"/>
                         <constraint firstItem="Wsh-1O-xqz" firstAttribute="height" secondItem="hvT-rb-wr4" secondAttribute="height" multiplier="0.8" id="YQ7-Ob-2hK"/>
                         <constraint firstItem="X96-am-8wN" firstAttribute="centerX" secondItem="hvT-rb-wr4" secondAttribute="centerX" id="Ysw-em-6n6"/>
-                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="width" secondItem="hvT-rb-wr4" secondAttribute="width" id="Zef-0R-3t2"/>
-                        <constraint firstItem="X96-am-8wN" firstAttribute="width" secondItem="hvT-rb-wr4" secondAttribute="width" id="jIk-Gr-Qxz"/>
+                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="width" secondItem="hvT-rb-wr4" secondAttribute="width" multiplier="0.9" id="Zef-0R-3t2"/>
+                        <constraint firstItem="Wsh-1O-xqz" firstAttribute="centerX" secondItem="hvT-rb-wr4" secondAttribute="centerX" id="ciR-Pi-gZF"/>
+                        <constraint firstItem="X96-am-8wN" firstAttribute="width" secondItem="hvT-rb-wr4" secondAttribute="width" multiplier="0.9" id="jIk-Gr-Qxz"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76t-9u-3aX">
+                    <rect key="frame" x="354" y="162" width="60" height="54"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="dismissBtn:" destination="-1" eventType="touchUpInside" id="qek-Ws-xO0"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="hvT-rb-wr4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6zm-4f-7XQ"/>
-                <constraint firstItem="hvT-rb-wr4" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="Se9-og-VQM"/>
-                <constraint firstItem="hvT-rb-wr4" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.9" id="V9P-AG-n4M"/>
+                <constraint firstItem="hvT-rb-wr4" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="Se9-og-VQM"/>
+                <constraint firstItem="hvT-rb-wr4" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.95" id="V9P-AG-n4M"/>
                 <constraint firstItem="hvT-rb-wr4" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="pmN-Sa-1nP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="142" y="143"/>
+            <point key="canvasLocation" x="140.57971014492756" y="141.96428571428569"/>
         </view>
     </objects>
 </document>

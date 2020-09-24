@@ -48,7 +48,7 @@ class UserAuthorityCell: UITableViewCell {
             headShot.image = UIImage(named: "single")
         }
     }
-    
+    ///for 新增
     func updateSearchTBCell(name:String, image:String?){
         backgroundColor = .clear
         layer.borderWidth = 5
