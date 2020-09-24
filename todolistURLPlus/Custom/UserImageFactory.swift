@@ -17,8 +17,8 @@ class UserImageFactory{
         }else{
             let  image = UIImage(named: "single")
             imageView.image = image
-            imageView.tintColor = .black
-            imageView.backgroundColor = .white
+//            imageView.tintColor = .black
+//            imageView.backgroundColor = .white
             imageView.contentMode = .scaleAspectFit
         }
         var  radius = ScreenSize.width.value

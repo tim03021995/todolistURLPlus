@@ -204,7 +204,6 @@ class CardEditView: UIView {
             }
             albumButtonBackground.alpha = 0
         }
-        
         func setUpImageView(){
             self.imageView.image = image
             imageView.snp.remakeConstraints{ (make) in
@@ -243,35 +242,35 @@ class CardEditView: UIView {
             make.height.equalTo(deleteButton.snp.width).multipliedBy(0.2)
         }
     }
-    func resetHight(_ scrollView:UIScrollView){
-        let maxHeight:CGFloat = ScreenSize.height.value * 1.5
-        let minHeight:CGFloat = ScreenSize.height.value * 1.1
-        let itemsHeight =
-        titleTextField.frame.height +
-        textView.frame.height +
-        imageView.frame.height +
-        colorsCollectionView.frame.height * 2 +
-        space * 6
-        var height:CGFloat
-        if itemsHeight >= maxHeight{
-            height = maxHeight
-            scrollView.isScrollEnabled = true
-             print(0)
-        }else if itemsHeight < maxHeight && itemsHeight >= minHeight{
-            height = itemsHeight
-            scrollView.isScrollEnabled = true
-             print(1)
-        }else{
-            height = minHeight
-            scrollView.isScrollEnabled = false
-             print(2)
-        }
-
-        scrollView.contentSize.height = height
-        print(itemsHeight)
-        print(scrollView.contentSize.height)
-        print(minHeight)
-    }
+//    func resetHight(_ scrollView:UIScrollView){
+//        let maxHeight:CGFloat = ScreenSize.height.value * 1.5
+//        let minHeight:CGFloat = ScreenSize.height.value * 1.1
+//        let itemsHeight =
+//        titleTextField.frame.height +
+//        textView.frame.height +
+//        imageView.frame.height +
+//        colorsCollectionView.frame.height * 2 +
+//        space * 6
+//        var height:CGFloat
+//        if itemsHeight >= maxHeight{
+//            height = maxHeight
+//            scrollView.isScrollEnabled = true
+//             print(0)
+//        }else if itemsHeight < maxHeight && itemsHeight >= minHeight{
+//            height = itemsHeight
+//            scrollView.isScrollEnabled = true
+//             print(1)
+//        }else{
+//            height = minHeight
+//            scrollView.isScrollEnabled = false
+//             print(2)
+//        }
+//
+//        scrollView.contentSize.height = height
+//        print(itemsHeight)
+//        print(scrollView.contentSize.height)
+//        print(minHeight)
+//    }
 }
 
 
