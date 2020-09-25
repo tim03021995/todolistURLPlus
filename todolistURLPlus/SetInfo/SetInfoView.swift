@@ -41,19 +41,6 @@ class SetInfoView:UIView{
         textField.keyboardType = .asciiCapable
         return textField
     }()
-//    private var albumButton:UIButton = {
-//        var button = UIButton(frame: CGRect(
-//            x: 0,
-//            y: 0,
-//            width: ScreenSize.width.value * 0.1,
-//            height: ScreenSize.width.value * 0.1))
-//        button.setImage(UIImage(systemName: "camera"), for: .normal)
-//        button.layer.cornerRadius = button.frame.height * 0.5
-//        button.addTarget(self, action: #selector(SetInfoVC.takeImage(btn:)), for: .touchUpInside)
-//        print(self)
-//        button.backgroundColor = .gray
-//        return button
-//    }()
     private var saveButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "Save")
         button.addTarget(self , action: #selector(SetInfoVC.save), for: .touchDown)
@@ -65,20 +52,19 @@ class SetInfoView:UIView{
         super .init(frame: frame)
         setSubView()
         setConstraints()
-//
-        
-
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     private func setSubView(){
         addSubview(backgroundImage)
         addSubview(peopleView)
         addSubview(saveButton)
         addSubview(nameTextField)
-//        addSubview(albumButton)
     }
+    
     private func setConstraints(){
         let centerX = ScreenSize.centerX.value
         let centerY = ScreenSize.centerY.value
@@ -90,9 +76,6 @@ class SetInfoView:UIView{
         saveButton.center = CGPoint(
             x: centerX,
             y: nameTextField.frame.maxY + saveButton.frame.height * 0.5 + space )
-//        albumButton.center = CGPoint(
-//            x: peopleView.frame.maxX - peopleView.frame.width * 0.1,
-//            y: peopleView.frame.maxY - peopleView.frame.width * 0.1)
     }
     
     
