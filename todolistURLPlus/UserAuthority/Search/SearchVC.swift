@@ -15,7 +15,8 @@ class SearchVC: UIViewController {
             searchTableView.reloadData()
         }
     }
-
+    var cardID:Int?
+    
     @IBOutlet weak var searchView: UIView!
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -28,7 +29,12 @@ class SearchVC: UIViewController {
         setting()
     }
     
-//MARK:- Func
+    //MARK:- Func
+    
+    convenience init(cardID:Int){
+        self.init(nibName:nil, bundle: nil)
+        self.cardID = cardID
+    }
     
     @IBAction func dismissBtn(_ sender: UIButton) {
         self.dismiss(animated: true)
@@ -46,17 +52,16 @@ class SearchVC: UIViewController {
         searchView.layer.cornerRadius = 15
         searchView.layer.borderWidth = 3
     }
-
+    
     func searchUser(mail:String){
         let headers = ["userToken":UserToken.shared.userToken]
-        let parameters = ["email":mail]
         
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, parameters: parameters, headers: headers).send()
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: mail).send()
         NetworkManager.sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
             switch res {
                 
             case .success(let data ):
-            self.users = [data.userData]
+                self.users = [data.userData]
             //TODO顯示
             case .failure(let err): print(err.description)
             //alert
@@ -64,7 +69,31 @@ class SearchVC: UIViewController {
             }
         }
     }
+    
+    func addUser(mail:String){
+        let headers = ["userToken":UserToken.shared.userToken]
+        let parameters = ["email":mail]
+        let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .POST, parameters: parameters, headers: headers, id: cardID).send()
+        print(request)
+        NetworkManager.sendRequest(with: request) { (res:Result<PostGroupResponse,NetworkError>) in
+            switch res{
+            case .success(let data):
+                self.present(.makeAlert(title: "Success", message: "新增成功", handler: {
+                    let vc = UserAuthorityVC()
+                    guard let cardID = Int(data.groupData.cardID) else {return}
+                    vc.cardID = cardID
+                    
+                    self.dismiss(animated: true) {
+                    }
+                }), animated: true)
+            case .failure(let err): print(err.description)
+            print(err.errMessage)
+            }
+        }
+    }
+    
 
+    
     
 }
 
@@ -93,6 +122,11 @@ extension SearchVC:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        addUser(mail: users[indexPath.row].email)
+        
     }
 }
 

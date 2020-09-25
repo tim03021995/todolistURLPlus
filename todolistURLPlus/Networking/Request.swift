@@ -15,7 +15,9 @@ struct HTTPRequest {
     let endpoint:Endpoint
     var urlString:String {
         if let id = id {
-            return baseURL + endpoint.rawValue + "/" + "\(id)"
+            return baseURL + endpoint.rawValue + "/\(id)"
+        }else if let mail = mail{
+            return baseURL + endpoint.rawValue + "/\(mail)"
         } else {
             return baseURL + endpoint.rawValue
         }
@@ -25,6 +27,7 @@ struct HTTPRequest {
     var parameters: [String : Any]?
     var headers : [String:String]?
     var id : Int?
+    var mail: String?
     
     ///包裝request
     func send()-> URLRequest{

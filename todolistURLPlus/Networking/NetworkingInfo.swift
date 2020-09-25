@@ -25,6 +25,17 @@ enum Endpoint:String {
     case userImage = "user/image"
     case groups
     case groupsCard = "groups/card/users"
+    
+    func addMail(mail:String)-> String?{
+        switch self {
+
+        case .user:
+            return Endpoint.user.rawValue + "/\(mail)"
+        default :
+            break
+        }
+        return nil
+    }
 }
 
 enum ContentType:String{
