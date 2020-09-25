@@ -10,24 +10,19 @@ import Foundation
 class UserInfoModelManager{
     static func getUserData(email:String,complection:@escaping (GetUserResponse.UserData)->Void){
         let headers = ["userToken":UserToken.shared.userToken]
-        let parameters = makeParameters(email)
-        print(parameters)
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, parameters: parameters, headers: headers)
-        NetworkManager.sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
-            switch result {
-            case .success(let data):
+        
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
+        NetworkManager.sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
+            switch res {
+                
+            case .success(let data ):
                 let userData = data.userData
-                print("get user Data success")
                 complection(userData)
-            case .failure(let err):
-                print(err)
+            //TODO顯示
+            case .failure(let err): print(err.description)
+            //alert
+            print(err.errMessage)
             }
         }
-    }
-   private static func makeParameters(_ email:String)->[String:String]{
-        var parameters:[String:String] = [:]
-            parameters["email"] = email
-        print(parameters)
-        return parameters
     }
 }

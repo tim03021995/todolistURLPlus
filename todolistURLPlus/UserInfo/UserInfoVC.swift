@@ -1,19 +1,19 @@
 import UIKit
 
 class UserInfoVC: CanGetImageViewController {
+    var email:String!
     convenience init(email:String){
         self.init(nibName:nil,bundle:nil)
-        getUserData(email: email)
+        self.email = email
     }
     let userInformationView = UserInfoView()
-//    override func loadView() {
-//        super .loadView()
-//        getUserData()
-//        self.view = userInformationView
-//    }
+    override func loadView() {
+        super .loadView()
+        self.view = userInformationView
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-
+        getUserData(email: email)
         self.view = userInformationView
         self.navigationController?.navigationBar.isHidden = true
     }
