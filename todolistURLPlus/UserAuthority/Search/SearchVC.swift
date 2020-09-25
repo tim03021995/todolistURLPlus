@@ -9,6 +9,12 @@
 import UIKit
 
 class SearchVC: UIViewController {
+    
+    var users: [GetUserResponse.UserData] = [] {
+        didSet{
+            searchTableView.reloadData()
+        }
+    }
 
     @IBOutlet weak var searchView: UIView!
     
@@ -16,25 +22,91 @@ class SearchVC: UIViewController {
     
     @IBOutlet weak var searchTableView: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchTableView.register(UserAuthorityCell.self, forCellReuseIdentifier: "Cell")
-
-    }
-
-}
-
-extension SearchVC:UITableViewDataSource,UITableViewDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        setting()
     }
     
+//MARK:- Func
+    
+    @IBAction func dismissBtn(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
+    fileprivate func setting() {
+        searchBar.delegate = self
+        searchBar.becomeFirstResponder()
+        searchTableView.register(UserAuthorityCell.self, forCellReuseIdentifier: "Cell")
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
+        searchTableView.layer.cornerRadius = 15
+        searchView.backgroundColor = #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1)
+        searchView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        searchView.layer.cornerRadius = 15
+        searchView.layer.borderWidth = 3
+    }
+
+    func searchUser(mail:String){
+        let headers = ["userToken":UserToken.shared.userToken]
+        let parameters = ["email":mail]
+        
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, parameters: parameters, headers: headers).send()
+        NetworkManager.sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
+            switch res {
+                
+            case .success(let data ):
+            self.users = [data.userData]
+            //TODO顯示
+            case .failure(let err): print(err.description)
+            //alert
+            print(err.errMessage)
+            }
+        }
+    }
+
+    
+}
+
+//MARK:- TableView
+
+extension SearchVC:UITableViewDataSource,UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchTableView.dequeueReusableCell(withIdentifier: "Cell") as! UserAuthorityCell
-        cell.textLabel?.text = "123"
+        cell.updateSearchTBCell(indexPath: indexPath, data: users)
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        return view
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        100
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+}
+
+//MARK:- Serach
+extension SearchVC: UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let userEmail = searchBar.text{
+            if userEmail.isValidEMail{
+                searchUser(mail: userEmail)
+            }else{
+                self.present(.makeAlert(title: "Error", message: "請輸入正確Email", handler: {
+                    searchBar.becomeFirstResponder()
+                }), animated: true)
+            }
+        }
+    }
 }

@@ -140,6 +140,7 @@
 		97077B852512189E000139E6 /* UserAuthority */ = {
 			isa = PBXGroup;
 			children = (
+				97077B862512189E000139E6 /* searchMemberVC.swift */,
 				FB67FA812519D92500EFF76A /* Search */,
 				97077B892512189E000139E6 /* UserAuthorityVC.swift */,
 				97077B8C2512189E000139E6 /* UserAuthorityCell.swift */,
@@ -253,9 +254,8 @@
 		FB67FA812519D92500EFF76A /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				97077B862512189E000139E6 /* searchMemberVC.swift */,
-				FB7477D7251B41F600FB72B8 /* SearchVC.swift */,
 				FB7477D8251B41F600FB72B8 /* SearchVC.xib */,
+				FB7477D7251B41F600FB72B8 /* SearchVC.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";

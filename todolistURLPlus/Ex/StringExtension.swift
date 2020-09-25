@@ -12,6 +12,7 @@ import Foundation
 extension String {
     
     var isValidEMail : Bool {
+        
 //        "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-Z]{2,64}"
         let format = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,64})$"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", format)

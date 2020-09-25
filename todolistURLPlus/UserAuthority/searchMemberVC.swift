@@ -71,7 +71,7 @@ extension SearchMemberVC : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchTableView.dequeueReusableCell(withIdentifier: "Cell") as! UserAuthorityCell
-        cell.updateSearchTBCell(name: "123", image: nil)
+//        cell.updateSearchTBCell(name: "123", image: nil)
          return cell
     }
 }
