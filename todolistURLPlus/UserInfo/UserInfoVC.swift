@@ -1,28 +1,34 @@
 import UIKit
 
 class UserInfoVC: CanGetImageViewController {
+    var email:String!
+    convenience init(email:String){
+        self.init(nibName:nil,bundle:nil)
+        self.email = email
+    }
     let userInformationView = UserInfoView()
-//    override func loadView() {
-//        super .loadView()
-//        getUserData()
-//        self.view = userInformationView
-//    }
+    override func loadView() {
+        super .loadView()
+        self.view = userInformationView
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getUserData()
+        getUserData(email: email)
         self.view = userInformationView
         self.navigationController?.navigationBar.isHidden = true
     }
     override func viewDidLoad() {
-        Api().getUser()
         super.viewDidLoad()
-        
+        Api().getUser()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(information))
+        userInformationView.peopleView.addGestureRecognizer(tap)
     }
     @objc func information (){
         let vc = SetInfoVC()
         vc.setUserData(
             userImage: userInformationView.peopleView.image,
             userName: userInformationView.userNameLabel.text)
+        
        // vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
         navigationController?.navigationItem.backBarButtonItem?.title = "返回"
@@ -38,23 +44,15 @@ class UserInfoVC: CanGetImageViewController {
             presentingVC?.dismiss(animated: false, completion: nil)
         }
     }
-    func getUserData(){
-        let headers = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers)
-        NetworkManager.sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
-            switch result {
-            case .success(let data):
-                print("get user Data success")
-                let userData = data.userData
-                if let image = userData.image{
-                    self.getImage(type: .gill, imageURL: image ) { (image) in
-                        self.userInformationView.peopleView.image = image
-                    }
+    func getUserData(email:String){
+        UserInfoModelManager.getUserData(email: email) { (userData) in
+            if let image = userData.image{
+                self.getImage(type: .gill, imageURL: image ) { (image) in
+                    self.userInformationView.peopleView.image = image
                 }
-                self.userInformationView.userNameLabel.text = userData.username
-            case .failure(let err):
-                print(err)
             }
+            self.userInformationView.userNameLabel.text = userData.username
         }
     }
+
 }

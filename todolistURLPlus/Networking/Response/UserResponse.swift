@@ -13,25 +13,26 @@ import Foundation
 struct GetUserResponse: Codable {
     let status: Bool
     let userData: UserData
-
+    
     enum CodingKeys: String, CodingKey {
         case status
         case userData = "user_data"
     }
-}
-
-struct UserData: Codable {
-    let id :Int
-    let username:String
-    let email:String
-    let image:String?
-    let createdAt: String
-    let updatedAt: String
-
-    enum CodingKeys: String, CodingKey {
-        case id, username, email, image
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
+    
+    
+    struct UserData: Codable {
+        let id :Int
+        let username:String
+        let email:String
+        let image:String?
+        let createdAt: String
+        let updatedAt: String
+        
+        enum CodingKeys: String, CodingKey {
+            case id, username, email, image
+            case createdAt = "created_at"
+            case updatedAt = "updated_at"
+        }
     }
 }
 
@@ -75,7 +76,7 @@ class Api {
             }
         }
         
-         
+        
     }
     
 }

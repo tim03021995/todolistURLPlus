@@ -11,7 +11,6 @@ import Foundation
 struct NetworkManager {
     
     static func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
-        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
                 if error != nil { completion(.failure(.systemError)) }

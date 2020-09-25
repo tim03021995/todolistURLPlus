@@ -48,19 +48,19 @@ class UserAuthorityCell: UITableViewCell {
             headShot.image = UIImage(named: "single")
         }
     }
-    
-    func updateSearchTBCell(name:String, image:String?){
+    ///for 新增
+    func updateSearchTBCell(indexPath:IndexPath, data: [GetUserResponse.UserData]){
         backgroundColor = .clear
-        layer.borderWidth = 5
-        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        layer.borderWidth = 5
+//        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         layer.cornerRadius = fullScreenMaxX * 0.06
         contentView.layer.borderWidth = 5
         contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
         contentView.layer.cornerRadius = fullScreenMaxX * 0.06
         clipsToBounds = true
-        cellTitleLabel.text = name
-        if let imageURL = image {
+        cellTitleLabel.text = data[indexPath.row].username
+        if let imageURL = data[indexPath.row].image {
             CanGetImageViewController().getImage(type: .gill, imageURL: imageURL) { (image) in
                 self.headShot.image = image
             }

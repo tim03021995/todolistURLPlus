@@ -26,6 +26,7 @@
 		D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011325090A63003E9497 /* ForgotPasswordView.swift */; };
 		D24901162510A41C003E9497 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24901152510A41C003E9497 /* MainVC.swift */; };
 		D24901182511FD2D003E9497 /* SetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24901172511FD2C003E9497 /* SetInfoModel.swift */; };
+		D24B07FD251C66840073917E /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B07FC251C66840073917E /* UserInfoModel.swift */; };
 		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
@@ -80,6 +81,7 @@
 		D249011325090A63003E9497 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		D24901152510A41C003E9497 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		D24901172511FD2C003E9497 /* SetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoModel.swift; sourceTree = "<group>"; };
+		D24B07FC251C66840073917E /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		D24D01D225074D4F00016630 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D291DEAA2500FAB3001FE33E /* SetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoView.swift; sourceTree = "<group>"; };
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		97077B852512189E000139E6 /* UserAuthority */ = {
 			isa = PBXGroup;
 			children = (
+				97077B862512189E000139E6 /* searchMemberVC.swift */,
 				FB67FA812519D92500EFF76A /* Search */,
 				97077B892512189E000139E6 /* UserAuthorityVC.swift */,
 				97077B8C2512189E000139E6 /* UserAuthorityCell.swift */,
@@ -231,6 +234,7 @@
 			children = (
 				D2B0644425008AAB00000444 /* UserInfoVC.swift */,
 				D2B0644625008AC700000444 /* UserInfoView.swift */,
+				D24B07FC251C66840073917E /* UserInfoModel.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -250,9 +254,8 @@
 		FB67FA812519D92500EFF76A /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				97077B862512189E000139E6 /* searchMemberVC.swift */,
-				FB7477D7251B41F600FB72B8 /* SearchVC.swift */,
 				FB7477D8251B41F600FB72B8 /* SearchVC.xib */,
+				FB7477D7251B41F600FB72B8 /* SearchVC.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				D2B064532500E71500000444 /* UserImageFactory.swift in Sources */,
 				D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */,
 				FB43E2C825106C3E00687CFF /* NetworkManager.swift in Sources */,
+				D24B07FD251C66840073917E /* UserInfoModel.swift in Sources */,
 				D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */,
 				9718BB8F2509BE14002C8E71 /* ListTableViewCell.swift in Sources */,
 				FBE0EAED2514B695007083BC /* UserResponse.swift in Sources */,
@@ -579,7 +583,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KA6B4A6D5D;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -600,7 +604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KA6B4A6D5D;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
