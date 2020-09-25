@@ -100,6 +100,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 height: height)
             
             imageView.isHidden = true
+            
             return imageView
     }()
     
