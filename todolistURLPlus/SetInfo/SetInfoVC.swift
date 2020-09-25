@@ -39,13 +39,6 @@ class SetInfoVC:UIViewController{
         present(photoController, animated: true, completion: nil)
     }
     
-//    @objc func takeImage(btn: UIButton) {
-//        print(#function)
-//        let photoController = UIImagePickerController()
-//        photoController.delegate = self
-//        photoController.sourceType = .photoLibrary
-//        present(photoController, animated: true, completion: nil)
-//    }
     func setUserData(userImage:UIImage?, userName: String?){
         setInfoView.setUserData(
             userImage: userImage ?? UIImage(systemName: "photo")!,
