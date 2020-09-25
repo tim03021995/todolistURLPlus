@@ -8,7 +8,7 @@
 
 import Foundation
 class UserInfoModelManager{
-    static func getUserData(email:String,complection:@escaping (UserData)->Void){
+    static func getUserData(email:String,complection:@escaping (GetUserResponse.UserData)->Void){
         let headers = ["userToken":UserToken.shared.userToken]
         let parameters = makeParameters(email)
         print(parameters)
