@@ -18,22 +18,34 @@ class SetInfoVC:UIViewController{
         navigationController?.navigationBar.isHidden = false
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-
     }
     override func viewDidAppear(_ animated: Bool) {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage))
-            setInfoView.peopleView.addGestureRecognizer(tap)
+        setAction()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         autoPushView()
     }
-    @objc func takeImage() {
+    private func setAction(){
+        let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage(reco:)))
+            setInfoView.peopleView.addGestureRecognizer(tap)
+    }
+    
+    @objc func takeImage(reco: UITapGestureRecognizer) {
+        print(#function)
         let photoController = UIImagePickerController()
         photoController.delegate = self
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
+    
+//    @objc func takeImage(btn: UIButton) {
+//        print(#function)
+//        let photoController = UIImagePickerController()
+//        photoController.delegate = self
+//        photoController.sourceType = .photoLibrary
+//        present(photoController, animated: true, completion: nil)
+//    }
     func setUserData(userImage:UIImage?, userName: String?){
         setInfoView.setUserData(
             userImage: userImage ?? UIImage(systemName: "photo")!,

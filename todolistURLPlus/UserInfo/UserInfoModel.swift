@@ -24,8 +24,8 @@ class UserInfoModelManager{
             }
         }
     }
-   private static func makeParameters(_ email:String)->[String:Any]{
-        var parameters:[String:Any] = [:]
+   private static func makeParameters(_ email:String)->[String:String]{
+        var parameters:[String:String] = [:]
             parameters["email"] = email
         print(parameters)
         return parameters
