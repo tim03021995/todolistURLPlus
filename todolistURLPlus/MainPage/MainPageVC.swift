@@ -100,6 +100,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 height: height)
             
             imageView.isHidden = true
+            
             return imageView
     }()
     
@@ -488,7 +489,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @objc func tapToProfileSetting()
     {
         #warning("需要輸入 email")
-        let vc = UserInfoVC(email: "test@test.com")
+        let vc = UserInfoVC(email: userData.email)
         let nc = UINavigationController(rootViewController: vc)
         //       vc.modalPresentationStyle = .overCurrentContext
         present(nc, animated: true, completion: nil)
