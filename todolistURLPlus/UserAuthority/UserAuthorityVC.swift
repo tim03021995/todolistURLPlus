@@ -14,7 +14,7 @@ class UserAuthorityVC: UIViewController {
     var users : [GetGroupResponse.UserData] = []{
         didSet{
             myTableView.reloadData()
-//            print(users)
+            print(users)
         }
     }
     var editor = ["Alvin","Ray","Jimmy","Joey"]
@@ -33,9 +33,7 @@ class UserAuthorityVC: UIViewController {
         setView()
     }
     override func viewWillAppear(_ animated: Bool) {
-        //TODO GET
         getUser(cardID: cardID)
-//        print(cardID)
     }
     
     //MARK:- Func
@@ -43,11 +41,10 @@ class UserAuthorityVC: UIViewController {
     convenience init(id:Int){
         self.init(nibName: nil, bundle: nil)
         self.cardID = id
-//        getUser(cardID: id)
 
     }
     
-    //GET
+    ///GET
     private func getUser(cardID:Int){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: header, id: cardID).send()
@@ -61,16 +58,28 @@ class UserAuthorityVC: UIViewController {
             }
         }
     }
-    #warning("DELETE")
-    private func deleteUser(userID:Int){ // ID應該改成email
-        
+    ///DELETE
+    private func deleteUser(userID:Int){
+        let headers = ["userToken":UserToken.shared.userToken]
+        let parameters = ["user_id":userID]
+        let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .DELETE, parameters: parameters, headers: headers, id: cardID).send()
+        NetworkManager.sendRequest(with: request) { (res:Result<DeleteGroupResponse,NetworkError>) in
+            switch res {
+            case .success(_): print("Delete Success")
+            case .failure(let err): print(err.description)
+            print(err.errMessage)
+                //alert
+            }
+        }
     }
+    #warning("DELETE")
+
     
     //進入搜尋模式
     @objc func inviteSomeone(){
         myTableView.isEditing = false
         
-        let vc = SearchVC()
+        let vc = SearchVC(cardID: cardID)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
@@ -82,14 +91,7 @@ class UserAuthorityVC: UIViewController {
     
     //切換編輯模式
     @objc func removeSomeone(){
-        
         myTableView.setEditing(!myTableView.isEditing, animated: true)
-        
-//        if myTableView.isEditing == true {
-//            myTableView.setEditing(false, animated: true)
-//        }else if myTableView.isEditing == false{
-//            myTableView.setEditing(true, animated: true)
-//        }
     }
         
     //MARK:- UISetting
@@ -305,6 +307,8 @@ extension UserAuthorityVC: UITableViewDelegate{
         let cellSpacingHeight: CGFloat = fullScreenMaxY * 0.015 //0.015
         return cellSpacingHeight
     }
+    
+
 }
 
 //MARK:- UITableViewDataSource
@@ -328,10 +332,11 @@ extension UserAuthorityVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         #warning("TODO: DELETE")
         if editingStyle == .delete {
-            myTableView.beginUpdates()
-            myTableView.deleteRows(at: [indexPath], with: .fade)
-            users.remove(at: indexPath.row)
-            myTableView.endUpdates()
+            let userID = users[indexPath.row].id
+            deleteUser(userID: userID)
+            
+//            users.remove(at: indexPath.row)
+//            myTableView.deleteRows(at: [indexPath], with: .fade)
         }
         
     }
