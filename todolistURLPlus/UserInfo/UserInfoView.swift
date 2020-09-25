@@ -4,13 +4,6 @@ class UserInfoView: UIView {
     private var backgroundImage : UIImageView = {
         return BackGroundFactory.makeImage(type: .background1)
     }()
-//    private var glassView : UIView = {
-//        var glassView = UIView (frame: CGRect(x:0, y:0, width: ScreenSize.width.value * 0.9, height: ScreenSize.height.value * 0.8))
-//        glassView.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value + ScreenSize.height.value * 0.04)
-//        glassView.backgroundColor = .glassColor
-//        glassView.layer.cornerRadius = 15
-//        return glassView
-//    }()
     private var glassView : UIVisualEffectView = {
         var glassView = GlassFactory.makeGlass()
         return glassView
@@ -18,8 +11,10 @@ class UserInfoView: UIView {
     var peopleView:UIImageView = {
         var imageView = UserImageFactory.makeImageView(size: .medium, image: nil)
         imageView.backgroundColor = .gray
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
+
     var userNameLabel:UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.4 , height: ScreenSize.height.value * 0.1))
         label.textAlignment = .center
@@ -27,6 +22,7 @@ class UserInfoView: UIView {
         label.font = .systemFont(ofSize: 40)
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
+        label.isUserInteractionEnabled = true
         return label
     }()
     private var informationButton:UIButton = {

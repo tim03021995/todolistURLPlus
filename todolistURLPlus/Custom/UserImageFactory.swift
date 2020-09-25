@@ -13,13 +13,13 @@ class UserImageFactory{
         let imageView = UIImageView()
         if let image = image {
             imageView.image = image
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleAspectFill
         }else{
             let  image = UIImage(named: "single")
             imageView.image = image
 //            imageView.tintColor = .black
 //            imageView.backgroundColor = .white
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleAspectFill
         }
         var  radius = ScreenSize.width.value
         switch size {

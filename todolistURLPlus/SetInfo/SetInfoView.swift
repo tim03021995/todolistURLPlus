@@ -9,12 +9,6 @@
 import UIKit
 class SetInfoView:UIView{
     
-//    var vc: SetInfoVC? {
-//        didSet {
-//            let tap = UITapGestureRecognizer(target: self.vc, action: #selector(SetInfoVC.takeImage(reco:)))
-//                peopleView.addGestureRecognizer(tap)
-//        }
-//    }
     
     private var backgroundImage : UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
@@ -22,7 +16,6 @@ class SetInfoView:UIView{
     lazy var peopleView:UIImageView = {
         var imageView = UserImageFactory.makeImageView(size: .large, image: nil)
         imageView.backgroundColor = .gray
-        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         return imageView
     }()

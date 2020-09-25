@@ -1,12 +1,12 @@
 import UIKit
 
 class UserInfoVC: CanGetImageViewController {
+    let userInformationView = UserInfoView()
     var email:String!
     convenience init(email:String){
         self.init(nibName:nil,bundle:nil)
         self.email = email
     }
-    let userInformationView = UserInfoView()
     override func loadView() {
         super .loadView()
         self.view = userInformationView
@@ -20,8 +20,7 @@ class UserInfoVC: CanGetImageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Api().getUser()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(information))
-        userInformationView.peopleView.addGestureRecognizer(tap)
+        setAction()
     }
     @objc func information (){
         let vc = SetInfoVC()
@@ -34,6 +33,8 @@ class UserInfoVC: CanGetImageViewController {
     private func setAction(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
             userInformationView.peopleView.addGestureRecognizer(tap)
+            userInformationView.userNameLabel.addGestureRecognizer(tap)
+
     }
     @objc func modifyPassword(){
         
