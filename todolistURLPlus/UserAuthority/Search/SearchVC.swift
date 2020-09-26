@@ -28,7 +28,9 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         setting()
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        presentingViewController?.viewWillAppear(true)
+    }
     //MARK:- Func
     
     convenience init(cardID:Int){
@@ -53,7 +55,7 @@ class SearchVC: UIViewController {
         searchView.layer.borderWidth = 3
     }
     
-    func searchUser(mail:String){
+    private func searchUser(mail:String){
         let headers = ["userToken":UserToken.shared.userToken]
         
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: mail).send()
@@ -62,38 +64,29 @@ class SearchVC: UIViewController {
                 
             case .success(let data ):
                 self.users = [data.userData]
-            //TODO顯示
             case .failure(let err): print(err.description)
-            //alert
-            print(err.errMessage)
+            self.present(.makeAlert("Error", err.errMessage, {
+            }), animated: true)
             }
         }
     }
     
-    func addUser(mail:String){
+    private func addUser(mail:String){
         let headers = ["userToken":UserToken.shared.userToken]
         let parameters = ["email":mail]
         let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .POST, parameters: parameters, headers: headers, id: cardID).send()
         print(request)
         NetworkManager.sendRequest(with: request) { (res:Result<PostGroupResponse,NetworkError>) in
             switch res{
-            case .success(let data):
-                self.present(.makeAlert(title: "Success", message: "新增成功", handler: {
-                    let vc = UserAuthorityVC()
-                    guard let cardID = Int(data.groupData.cardID) else {return}
-                    vc.cardID = cardID
-                    
-                    self.dismiss(animated: true) {
-                    }
+            case .success(_):
+                self.present(.makeAlert("Success", "新增成功", {
+                    self.dismiss(animated: true)
                 }), animated: true)
             case .failure(let err): print(err.description)
             print(err.errMessage)
             }
         }
     }
-    
-
-    
     
 }
 
@@ -137,7 +130,7 @@ extension SearchVC: UISearchBarDelegate{
             if userEmail.isValidEMail{
                 searchUser(mail: userEmail)
             }else{
-                self.present(.makeAlert(title: "Error", message: "請輸入正確Email", handler: {
+                self.present(.makeAlert("Error", "請輸入正確Email", {
                     searchBar.becomeFirstResponder()
                 }), animated: true)
             }

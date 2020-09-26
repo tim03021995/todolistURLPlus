@@ -86,8 +86,7 @@ class SignupVC: UIViewController {
     func register(){
         //驗證資料 成功的話包裝
         guard let parameters = validate() else {
-            self.present(.makeAlert(title: "Error", message: "輸入錯誤", handler: {
-            }), animated: true)
+            self.present(.makeAlert("Error", "輸入錯誤", {}), animated: true)
             return
         }
         
@@ -97,12 +96,12 @@ class SignupVC: UIViewController {
             switch result{
                 
             case .success:
-                self.present(.makeAlert(title: "Success", message: "註冊成功！",  handler: {
+                self.present(.makeAlert("Success", "註冊成功！",  {
                     self.dismiss(animated: true, completion: nil)
                 }), animated: true)
                 
             case .failure(let err):
-                self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
+                self.present(.makeAlert("Error", err.errMessage, {
                 }), animated: true)
                 print(err.description)
                 
@@ -118,7 +117,7 @@ class SignupVC: UIViewController {
             return ["username": name , "password":password , "email" : mail ]
             
         }else if name == "" || mail == "" || password == "" || checkPasswordTF.text == "" {
-            present(.makeAlert(title: "錯誤", message: "輸入框不可空白", handler: {
+            present(.makeAlert("錯誤", "輸入框不可空白", {
             }), animated: true)
         }
         return nil

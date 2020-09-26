@@ -58,3 +58,8 @@ struct NetworkManager {
     
 }
 
+protocol LoadingViewDelegate {
+    func loading()
+    
+    func stopLoading()
+}

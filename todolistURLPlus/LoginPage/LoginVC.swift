@@ -110,7 +110,7 @@ class LoginVC: UIViewController, Storyboarded {
                 
             case .failure(let err):
                 self.signInBtn.isEnabled = true
-                self.present(.makeAlert(title: "Error", message: err.errMessage, handler: {
+                self.present(.makeAlert("Error", err.errMessage, {
                 }), animated: true)
                 print(err.description)
             }

@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController{
     
-    static func makeAlert(title: String?, message: String?, handler:@escaping () -> Void) -> UIAlertController {
+    static func makeAlert(_ title: String?, _ message: String?, _ handler:@escaping (() -> Void?)) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "OK", style: .default, handler: { _ in

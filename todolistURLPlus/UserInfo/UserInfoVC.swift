@@ -19,7 +19,6 @@ class UserInfoVC: CanGetImageViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        Api().getUser()
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
         userInformationView.peopleView.addGestureRecognizer(tap)
     }
