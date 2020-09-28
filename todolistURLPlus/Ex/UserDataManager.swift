@@ -30,6 +30,26 @@ class UserDataManager{
             }
         }
     }
+    func getUserData(email:String,complection:@escaping (GetUserResponse.UserData)->Void){
+        let headers = ["userToken":UserToken.shared.userToken]
+        
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
+        NetworkManager.sendRequest(with: request) { [self] (res:Result<GetUserResponse,NetworkError>) in
+            switch res {
+                
+            case .success(let data ):
+                userData = data.userData
+                if let imageURL = userData!.image{
+                    self.takeImage(imageURL)
+                }
+                complection(userData!)
+            //TODO顯示
+            case .failure(let err): print(err.description)
+            //alert
+            print(err.errMessage)
+            }
+        }
+    }
     
     private func takeImage(_ imageURL:String){
         let controller = CanGetImageViewController()
@@ -37,4 +57,5 @@ class UserDataManager{
             self.userImage = image
         }
     }
+    
 }

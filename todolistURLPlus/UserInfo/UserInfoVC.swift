@@ -2,6 +2,12 @@ import UIKit
 
 class UserInfoVC: CanGetImageViewController {
     let userInformationView = UserInfoView()
+//    var userData = UserDataManager.shared.userData{
+//        didSet {
+//            userInformationView.peopleView.image = UserDataManager.shared.userImage
+//            userInformationView.userNameLabel.text = userData?.username
+//        }
+//    }
     var email:String!
     convenience init(email:String){
         self.init(nibName:nil,bundle:nil)
@@ -12,13 +18,16 @@ class UserInfoVC: CanGetImageViewController {
         self.view = userInformationView
     }
     override func viewWillAppear(_ animated: Bool) {
+        UserDataManager.shared.getUserData(email: email)
         super.viewWillAppear(true)
-        getUserData(email: email)
+        //getUserData(email: email)
         self.view = userInformationView
         self.navigationController?.navigationBar.isHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        userInformationView.peopleView.image = UserDataManager.shared.userImage
+        userInformationView.userNameLabel.text = UserDataManager.shared.userData?.username
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
         userInformationView.peopleView.addGestureRecognizer(tap)
     }
