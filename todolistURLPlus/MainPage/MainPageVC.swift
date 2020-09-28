@@ -220,7 +220,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UserDataManager.shared.getUserData(email: userData.email) { (userData) in
+            self.headImage.image = UserDataManager.shared.userImage
+        }
         
         //        if UserToken.shared.userToken == "" {
         ////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
