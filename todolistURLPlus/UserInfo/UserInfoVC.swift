@@ -43,7 +43,7 @@ class UserInfoVC: CanGetImageViewController {
     }
     @objc func logout(){
         UserToken.shared.clearToken()
-
+        UserDataManager.shared.clearData()
         let presentingVC = self.presentingViewController
         dismiss(animated: false) {
             presentingVC?.dismiss(animated: false, completion: nil)

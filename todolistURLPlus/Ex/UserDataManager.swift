@@ -53,6 +53,12 @@ class UserDataManager{
         }
     }
     
+    func clearData(){
+        self.userData = nil
+        self.userImage = nil
+        self.email = nil
+    }
+    
     private func takeImage(_ imageURL:String,complection:@escaping (UIImage)->Void?){
         let controller = CanGetImageViewController()
         controller.getImage(type: .gill, imageURL: imageURL) { (image) in
