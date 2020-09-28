@@ -57,29 +57,7 @@ struct DeleteUserResponse: Codable {
     let status: Bool
 }
 
-class Api {
-    
-    func getUser(){
-        let header = ["userToken":UserToken.shared.userToken]
-        
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: header)
-        
-        NetworkManager.sendRequest(with: request.send()) { (result:Result<GetUserResponse,NetworkError>) in
-            
-            switch result {
-                
-            case .success(let decodeData):
-                print(decodeData.userData.email)
-                print(decodeData)
-            case .failure(let err):
-                print(err.description)
-            }
-        }
-        
-        
-    }
-    
-}
+
 
 
 
