@@ -21,7 +21,7 @@ class UserDataManager{
         NetworkManager.sendRequest(with: request) { [self] (res:Result<GetUserResponse,NetworkError>) in
             switch res {
             case .success(let data ):
-                userData = data.userData
+                self.userData = data.userData
                 if let imageURL = userData!.image{
                     self.takeImage(imageURL)
                 }
@@ -38,7 +38,7 @@ class UserDataManager{
             switch res {
                 
             case .success(let data ):
-                userData = data.userData
+                self.userData = data.userData
                 if let imageURL = userData!.image{
                     self.takeImage(imageURL)
                 }
