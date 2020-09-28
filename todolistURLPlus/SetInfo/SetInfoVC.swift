@@ -24,6 +24,8 @@ class SetInfoVC:UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setInfoView.peopleView.image = UserDataManager.shared.userImage
+        setInfoView.nameTextField.text = UserDataManager.shared.userData?.username
         autoPushView()
     }
     private func setAction(){
@@ -39,16 +41,17 @@ class SetInfoVC:UIViewController{
         present(photoController, animated: true, completion: nil)
     }
     
-    func setUserData(userImage:UIImage?, userName: String?){
-        setInfoView.setUserData(
-            userImage: userImage ?? UIImage(systemName: "photo")!,
-            userName: userName ?? "Unknow")
-        self.view = setInfoView
-    }
+//    func setUserData(userImage:UIImage?, userName: String?){
+//        setInfoView.setUserData(
+//            userImage: userImage ?? UIImage(systemName: "photo")!,
+//            userName: userName ?? "Unknow")
+//        self.view = setInfoView
+//    }
     @objc func save(){
         if let image = setInfoView.peopleView.image {
             SetInfoModelManerger.updateUserImage(image) {
-            print("updata Image")
+                UserDataManager.shared.getUserData()
+                print("updata Image")
             }
         }else{
             print("not image")

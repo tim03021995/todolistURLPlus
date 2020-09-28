@@ -12,13 +12,13 @@ class UserDataManager{
     static let shared = UserDataManager()
     private(set) var userData:GetUserResponse.UserData?
     private(set) var userImage:UIImage?
+    private(set) var email:String?
     private init(){}
     
-    
-    func getUserData(email:String){
+    func getUserData(){
         let headers = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
-        NetworkManager.sendRequest(with: request) { [self] (res:Result<GetUserResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
             switch res {
             case .success(let data ):
                 self.userData = data.userData
@@ -36,11 +36,12 @@ class UserDataManager{
         let headers = ["userToken":UserToken.shared.userToken]
         
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
-        NetworkManager.sendRequest(with: request) { [self] (res:Result<GetUserResponse,NetworkError>) in
+        NetworkManager.sendRequest(with: request) {  (res:Result<GetUserResponse,NetworkError>) in
             switch res {
                 
             case .success(let data ):
                 self.userData = data.userData
+                self.email = email
                 if let imageURL = self.userData!.image{
                     self.takeImage(imageURL, complection: complection)
                 }
