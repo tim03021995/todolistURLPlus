@@ -22,7 +22,7 @@ class UserDataManager{
             switch res {
             case .success(let data ):
                 self.userData = data.userData
-                if let imageURL = userData!.image{
+                if let imageURL = self.userData!.image{
                     self.takeImage(imageURL)
                 }
             case .failure(let err): print(err.description)
@@ -39,10 +39,10 @@ class UserDataManager{
                 
             case .success(let data ):
                 self.userData = data.userData
-                if let imageURL = userData!.image{
+                if let imageURL = self.userData!.image{
                     self.takeImage(imageURL)
                 }
-                complection(userData!)
+                complection(self.userData!)
             //TODO顯示
             case .failure(let err): print(err.description)
             //alert
