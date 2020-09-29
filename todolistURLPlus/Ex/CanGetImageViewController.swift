@@ -7,6 +7,7 @@
 //
 
 import UIKit
+#warning("使用protocol")
 class CanGetImageViewController:UIViewController{
     let loadIndicatorView:UIActivityIndicatorView = {
         var loading = UIActivityIndicatorView()

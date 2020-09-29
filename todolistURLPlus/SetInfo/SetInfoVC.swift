@@ -51,18 +51,19 @@ class SetInfoVC:CanGetImageViewController{
         loading()
         if let image = setInfoView.peopleView.image {
             SetInfoModelManerger.updateUserImage(image) {
-                UserDataManager.shared.getUserData()
                 print("updata Image")
-                
             }
         }else{
             print("not image")
         }
+        
         if let userName = setInfoView.nameTextField.text {
             SetInfoModelManerger.updateUserName(userName) {
                 print("updata name")
-                self.navigationController?.popViewController(animated: true)
-                self.stopLoading()
+                UserDataManager.shared.getUserData { (image) in
+                    self.stopLoading()
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }else{
             print("not name")
