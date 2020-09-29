@@ -17,7 +17,9 @@ class ForgotPasswordVC: CanGetImageViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.isHidden = false
+        let image = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
     }
     @objc func touchConfirmButton(){
 
@@ -30,9 +32,12 @@ class ForgotPasswordVC: CanGetImageViewController {
                     self.dismiss(animated: true, completion: nil)
                     self.stopLoading()
                 case .failure(let err):
+                    
                     print("update error")
                     print(err.description)
-                    print("錯誤訊息：\(err.errMessage)")
+                    self.forgotPasswordView.alertLabel.text = err.errMessage
+                    self.stopLoading()
+                   // print("錯誤訊息：\(err.errMessage)")
                 }
             }
         }
