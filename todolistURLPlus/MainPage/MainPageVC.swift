@@ -214,9 +214,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         singleCardCollectionView.reloadData()
-        var text: String? = ""
-        text = userData.username
-        welcomeLabel.text = "Welcome back \(text ?? "")"
+        
         
         setupHeadImage()
     }
@@ -550,6 +548,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print(showCards.map({ $0.cardPrivate }))
                 self.singleCardCollectionView.reloadData()
                 self.getSingletonImage(userData: userData)
+                self.welcomeLabel.text = "Welcome back \(userData.username)"
                 
             case .failure(let err):
                 print(err.description)
