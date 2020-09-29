@@ -12,7 +12,7 @@ class ForgotPasswordVC: CanGetImageViewController {
     let forgotPasswordView = ForgotPasswordView()
     override func loadView() {
         super .loadView()
-        forgotPasswordView.nameTextField.delegate = self
+        forgotPasswordView.passwordTextField.delegate = self
         self.view = forgotPasswordView
     }
     override func viewDidLoad() {
@@ -20,10 +20,21 @@ class ForgotPasswordVC: CanGetImageViewController {
         
     }
     @objc func touchConfirmButton(){
-        loading()
-        ForgotPasswordModel.updateUserPassword {
-            self.dismiss(animated: true, completion: nil)
-            self.stopLoading()
+
+        if let password = forgotPasswordView.passwordTextField.text{
+            loading()
+            ForgotPasswordModel.updateUserPassword(password: password) { (result) in
+                switch result {
+                case .success( _):
+                    print("update success")
+                    self.dismiss(animated: true, completion: nil)
+                    self.stopLoading()
+                case .failure(let err):
+                    print("update error")
+                    print(err.description)
+                    print("錯誤訊息：\(err.errMessage)")
+                }
+            }
         }
     }
 
@@ -35,6 +46,9 @@ extension ForgotPasswordVC:UITextFieldDelegate{
         self.view.endEditing(true)
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        forgotPasswordView.nameTextField = passwordTF.text!.isValidPassword ? "" : "密碼格式錯誤"
+        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+            self.forgotPasswordView.alertLabel.alpha = self.forgotPasswordView.passwordTextField.text!.isValidPassword ? 0 : 1
+        }
+        animate.startAnimation()
     }
 }
