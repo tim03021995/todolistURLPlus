@@ -22,21 +22,22 @@ class ForgotPasswordView: UIView {
         label.textColor = .white
         return label
     }()
-    private var confirmButton:UIButton = {
+    var confirmButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "confirm")
+        button.addTarget(nil, action: #selector(ForgotPasswordVC.touchConfirmButton), for: .touchUpInside)
         return button
     }()
-    private var nameTextField:UITextField = {
-        var textField = UITextField(frame: CGRect(
+    var nameTextField:CustomLogINTF = {
+        var textField = CustomLogINTF(frame: CGRect(
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.height.value * 0.1 ))
+            height: ScreenSize.height.value * 0.05 ))
         textField.textAlignment = .center
-        let font = textField.font!
-        let newFont = font.withSize(30)
-        textField.font = newFont
-        textField.backgroundColor = .black
+        //let font = textField.font!
+        //let newFont = font.withSize(30)
+        //textField.font = newFont
+        //textField.backgroundColor = .black
         return textField
     }()
     

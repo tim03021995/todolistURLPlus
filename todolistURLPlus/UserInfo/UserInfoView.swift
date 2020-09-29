@@ -33,6 +33,7 @@ class UserInfoView: UIView {
     private var modifyPasswordButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text:
             "modify password")
+        button.addTarget(nil, action: #selector(UserInfoVC.modifyPassword), for: .touchUpInside)
         return button
     }()
     private var logoutButton:UIButton = {
