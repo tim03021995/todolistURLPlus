@@ -214,14 +214,17 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         singleCardCollectionView.reloadData()
-        welcomeLabel.text = "Welcome back \(self.userData.username ?? "")"
+        var text: String? = ""
+        text = userData.username
+        welcomeLabel.text = "Welcome back \(text ?? "")"
+        
         setupHeadImage()
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        UserDataManager.shared.getUserData(email: userData.email) { (userData) in
-//            self.headImage.image = UserDataManager.shared.userImage
-//        }
+//        getSingletonImage()
         
         //        if UserToken.shared.userToken == "" {
         ////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
@@ -312,7 +315,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    
+    fileprivate func getSingletonImage(userData: GetCardResponse.UserData) {
+        UserDataManager.shared.getUserData(email: userData.email) { (image) in
+            self.headImage.image = image
+//            UserDataManager.shared.userImage = userData
+        }
+    }
     func setupHeadImage()
     {
         let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
@@ -320,8 +328,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         headImage.isHidden = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
         headImage.addGestureRecognizer(tap)
-        getHeadImage()
-        
     }
     
     //blueconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動
@@ -543,6 +549,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
                 print(showCards.map({ $0.cardPrivate }))
                 self.singleCardCollectionView.reloadData()
+                self.getSingletonImage(userData: userData)
                 
             case .failure(let err):
                 print(err.description)
