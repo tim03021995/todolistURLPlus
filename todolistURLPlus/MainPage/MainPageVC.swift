@@ -53,7 +53,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                  y: self.headImage.frame.maxY,
                                  width: ScreenSize.width.value,
                                  height: self.headImage.frame.height * 0.4)
-            
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
             label.font = UIFont.boldSystemFont(ofSize: 30)
@@ -262,6 +261,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
+            print("mutipleCell")
             return mutipleCell
         }
     }
