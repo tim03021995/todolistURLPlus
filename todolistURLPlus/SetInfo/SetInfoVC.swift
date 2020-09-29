@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class SetInfoVC:UIViewController{
+class SetInfoVC:CanGetImageViewController{
     let setInfoView = SetInfoView()
 
     override func loadView() {
@@ -48,10 +48,12 @@ class SetInfoVC:UIViewController{
 //        self.view = setInfoView
 //    }
     @objc func save(){
+        loading()
         if let image = setInfoView.peopleView.image {
             SetInfoModelManerger.updateUserImage(image) {
                 UserDataManager.shared.getUserData()
                 print("updata Image")
+                
             }
         }else{
             print("not image")
@@ -60,9 +62,11 @@ class SetInfoVC:UIViewController{
             SetInfoModelManerger.updateUserName(userName) {
                 print("updata name")
                 self.navigationController?.popViewController(animated: true)
+                self.stopLoading()
             }
         }else{
             print("not name")
+            self.stopLoading()
         }
     }
 

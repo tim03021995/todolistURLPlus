@@ -26,9 +26,6 @@ class UserInfoVC: CanGetImageViewController {
     }
     @objc func information (){
         let vc = SetInfoVC()
-//        vc.setUserData(
-//            userImage: userInformationView.peopleView.image,
-//            userName: userInformationView.userNameLabel.text)
                 navigationController?.pushViewController(vc, animated: true)
         navigationController?.navigationItem.backBarButtonItem?.title = "返回"
     }
@@ -39,7 +36,9 @@ class UserInfoVC: CanGetImageViewController {
 
     }
     @objc func modifyPassword(){
-        
+        let vc = ForgotPasswordVC()
+                navigationController?.pushViewController(vc, animated: true)
+        navigationController?.navigationItem.backBarButtonItem?.title = "返回"
     }
     @objc func logout(){
         UserToken.shared.clearToken()
