@@ -1,6 +1,7 @@
 import UIKit
 
 class UserInfoVC: CanGetImageViewController {
+    weak var delegate: RefreshDelegate!
     let userInformationView = UserInfoView()
     var email:String!
     convenience init(email:String){
@@ -23,6 +24,9 @@ class UserInfoVC: CanGetImageViewController {
         userInformationView.userNameLabel.text = UserDataManager.shared.userData?.username
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
         userInformationView.peopleView.addGestureRecognizer(tap)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate.refreshImage()
     }
     @objc func information (){
         let vc = SetInfoVC()

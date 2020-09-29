@@ -8,8 +8,10 @@
 
 import UIKit
 
+
+
 class ListPageVC: UIViewController {
-    
+    weak var delegate: RefreshDelegate!
     var showCard: GetCardResponse.ShowCard!
     //    lazy var showTasks = self.showCard.showTasks
     var showTasks:[GetCardResponse.ShowTask] = []
@@ -192,17 +194,19 @@ extension ListPageVC: UITableViewDataSource{
     }
     func putCardName(){
         let header = ["userToken":UserToken.shared.userToken]
-//        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, headers: header).send()
-        let parameters = ["card_name": cardTitleTextField.text]
+        let parameters: [String: Any] = ["card_name": cardTitleTextField.text ?? ""]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: header, id: showCard.id).send()
         NetworkManager.sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
             switch result {
                 
-            case .success(let data):
+            case .success( _):
                print("卡片名稱更新成功")
+               self.delegate.refreshCardName()
                 
             case .failure(let err):
                 print(err.description)
+                self.delegate.refreshCardName()
+
             }
         }
     }
@@ -223,3 +227,4 @@ extension ListPageVC: UITextFieldDelegate
         return true
     }
 }
+

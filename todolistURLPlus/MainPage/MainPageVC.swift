@@ -8,7 +8,10 @@
 
 import UIKit
 import SnapKit
-
+protocol RefreshDelegate: AnyObject {
+    func refreshImage()
+    func refreshCardName()
+}
 //點擊震動
 let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
@@ -277,12 +280,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         singleBtn.snp.makeConstraints { (make) in
             make.top.equalTo(view.snp.top).priority(.medium)
         }
-        
-        
     }
     
     fileprivate func toListPageVC(indexPath: IndexPath) {
         let lPVC = ListPageVC()
+        lPVC.delegate = self
         let nVC = UINavigationController(rootViewController: lPVC)
         //        lPVC.cardData = cardDatas[indexPath.row]
         lPVC.showCard = showCards[indexPath.row]
@@ -486,6 +488,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     {
         #warning("需要輸入 email")
         let vc = UserInfoVC(email: userData.email)
+        vc.delegate = self
         let nc = UINavigationController(rootViewController: vc)
         //       vc.modalPresentationStyle = .overCurrentContext
         present(nc, animated: true, completion: nil)
@@ -615,6 +618,21 @@ enum CollectionViewCellIdentifier: String
         case .mutipleCell: return "mutipleCell"
         }
     }
+}
+extension MainPageVC: RefreshDelegate
+{
+    func refreshImage() {
+        if let userImage = UserDataManager.shared.userImage
+        {
+            self.headImage.image = userImage
+        }
+    }
+    
+    func refreshCardName() {
+        getCard()
+    }
+    
+    
 }
 
 
