@@ -135,7 +135,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     //單人模式的按鈕
     lazy var singleBtn: UIButton = 
         {
-            
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
             button.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
@@ -215,14 +214,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         singleCardCollectionView.reloadData()
-        welcomeLabel.text = "Welcome back \(self.userData.username)"
+        welcomeLabel.text = "Welcome back \(self.userData.username ?? "")"
         setupHeadImage()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDataManager.shared.getUserData(email: userData.email) { (userData) in
-            self.headImage.image = UserDataManager.shared.userImage
-        }
+//        UserDataManager.shared.getUserData(email: userData.email) { (userData) in
+//            self.headImage.image = UserDataManager.shared.userImage
+//        }
         
         //        if UserToken.shared.userToken == "" {
         ////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
@@ -251,23 +250,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         switch collectionView {
         case singleCardCollectionView:
-            //            self.indexPath = indexPath
-            
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
-            
             self.cell = singleCell
             singleCell.setUpSingle(showCards: showCards, indexPath: indexPath)
-            
-            
             singleCell.deleteButton.isHidden = state
             singleCell.deleteButton.tag = indexPath.row
-            
-            
             return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
-            
-            
             return mutipleCell
         }
     }
@@ -551,8 +541,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.userData = userData
                 self.showCards = showCards
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
+                print(showCards.map({ $0.cardPrivate }))
                 self.singleCardCollectionView.reloadData()
-                print("使用者照片 ＝", self.userData.image)
+                
             case .failure(let err):
                 print(err.description)
             }

@@ -17,23 +17,24 @@ class ListPageVC: UIViewController {
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
-    lazy var cardTitleLabel: UILabel =
+    lazy var cardTitleTextField: CustomLogINTF =
         {
-            let label = UILabel()
+            let label = CustomLogINTF()
             label.frame = CGRect(x: ScreenSize.width.value * 0.05,
                                  y: self.bottomOfNaviBar * 1.25,
                                  width: ScreenSize.width.value * 0.9,
-                                 height: ScreenSize.height.value * 0.1)
+                                 height: ScreenSize.height.value * 0.05)
             
             
             label.text = self.showCard.cardName
             
             
             label.adjustsFontSizeToFitWidth = true
+            
             label.textAlignment = .center
             
             label.font = UIFont.boldSystemFont(ofSize: 30)
-            label.textColor = .white
+//            label.textColor = .white
             return label
     }()
     
@@ -60,29 +61,29 @@ class ListPageVC: UIViewController {
             
             return btn
     }()
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
-        creatTaskBtn.isEnabled = true
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubview()
         listBaseView.tableView.delegate = self
         listBaseView.tableView.dataSource = self
-        
+        cardTitleTextField.delegate = self
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+        creatTaskBtn.isEnabled = true
     }
     override func viewDidAppear(_ animated: Bool) {
         getTask()
         
         
     }
-    
+  
     func addSubview()
     {
         self.view.addSubview(backgroundImage)
-        self.view.addSubview(cardTitleLabel)
         self.view.addSubview(listBaseView)
+        self.view.addSubview(cardTitleTextField)
         self.view.addSubview(creatTaskBtn)
         
     }
@@ -189,5 +190,36 @@ extension ListPageVC: UITableViewDataSource{
         navigationController?.pushViewController(vc, animated: true)
         
     }
+    func putCardName(){
+        let header = ["userToken":UserToken.shared.userToken]
+//        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, headers: header).send()
+        let parameters = ["card_name": cardTitleTextField.text]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: header, id: showCard.id).send()
+        NetworkManager.sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
+            switch result {
+                
+            case .success(let data):
+               print("卡片名稱更新成功")
+                
+            case .failure(let err):
+                print(err.description)
+            }
+        }
+    }
     
+    
+}
+extension ListPageVC: UITextFieldDelegate
+{
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        putCardName()
+
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        putCardName()
+        return true
+    }
 }

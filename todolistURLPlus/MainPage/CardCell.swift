@@ -80,7 +80,7 @@ class CardCell: UICollectionViewCell {
             self.backgroundColor = .clear
             self.layer.cornerRadius = self.frame.width * 0.05
             self.clipsToBounds = true
-            self.cardTitle.text = String(data.id)
+            self.cardTitle.text = "\(data.id)**\(data.cardName)**\(data.cardPrivate)"
             self.cardTitle.textColor = .red
 //            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
             self.backgroundColor = .lightGray
