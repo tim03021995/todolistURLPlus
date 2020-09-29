@@ -14,13 +14,14 @@ class UserInfoVC: CanGetImageViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //getUserData(email: email)
+        userInformationView.peopleView.image = UserDataManager.shared.userImage
+        userInformationView.userNameLabel.text = UserDataManager.shared.userData?.username
         self.view = userInformationView
         self.navigationController?.navigationBar.isHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        userInformationView.peopleView.image = UserDataManager.shared.userImage
-        userInformationView.userNameLabel.text = UserDataManager.shared.userData?.username
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
         userInformationView.peopleView.addGestureRecognizer(tap)
     }

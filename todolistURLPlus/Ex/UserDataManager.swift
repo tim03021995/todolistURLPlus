@@ -32,6 +32,21 @@ class UserDataManager{
             }
         }
     }
+    func getUserData(complection:@escaping (UIImage)->Void){
+        let headers = ["userToken":UserToken.shared.userToken]
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
+        NetworkManager.sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
+            switch res {
+            case .success(let data ):
+                self.userData = data.userData
+                if let imageURL = self.userData!.image{
+                    self.takeImage(imageURL, complection: complection)
+                }
+            case .failure(let err): print(err.description)
+            print(err.errMessage)
+            }
+        }
+    }
     func getUserData(email:String,complection:@escaping (UIImage)->Void){
         let headers = ["userToken":UserToken.shared.userToken]
         
