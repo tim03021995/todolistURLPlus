@@ -38,8 +38,8 @@ class UserInfoVC: CanGetImageViewController {
     }
     @objc func modifyPassword(){
         let vc = ForgotPasswordVC()
-                navigationController?.pushViewController(vc, animated: true)
         navigationController?.navigationItem.backBarButtonItem?.title = "返回"
+                navigationController?.pushViewController(vc, animated: true)
     }
     @objc func logout(){
         UserToken.shared.clearToken()
