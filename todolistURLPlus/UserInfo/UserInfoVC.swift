@@ -1,45 +1,53 @@
 import UIKit
 
 class UserInfoVC: CanGetImageViewController {
+    weak var delegate: RefreshDelegate!
+    let userInformationView = UserInfoView()
     var email:String!
     convenience init(email:String){
         self.init(nibName:nil,bundle:nil)
         self.email = email
     }
-    let userInformationView = UserInfoView()
     override func loadView() {
         super .loadView()
         self.view = userInformationView
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getUserData(email: email)
+        //getUserData(email: email)
+        userInformationView.peopleView.image = UserDataManager.shared.userImage
+        userInformationView.userNameLabel.text = UserDataManager.shared.userData?.username
         self.view = userInformationView
         self.navigationController?.navigationBar.isHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
         userInformationView.peopleView.addGestureRecognizer(tap)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate.refreshImage()
+    }
     @objc func information (){
         let vc = SetInfoVC()
-        vc.setUserData(
-            userImage: userInformationView.peopleView.image,
-            userName: userInformationView.userNameLabel.text)
                 navigationController?.pushViewController(vc, animated: true)
         navigationController?.navigationItem.backBarButtonItem?.title = "返回"
     }
     private func setAction(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
             userInformationView.peopleView.addGestureRecognizer(tap)
+            userInformationView.userNameLabel.addGestureRecognizer(tap)
+
     }
     @objc func modifyPassword(){
-        
+        let vc = ForgotPasswordVC()
+        navigationController?.navigationItem.backBarButtonItem?.title = "返回"
+                navigationController?.pushViewController(vc, animated: true)
     }
     @objc func logout(){
         UserToken.shared.clearToken()
-
+        UserDataManager.shared.clearData()
         let presentingVC = self.presentingViewController
         dismiss(animated: false) {
             presentingVC?.dismiss(animated: false, completion: nil)

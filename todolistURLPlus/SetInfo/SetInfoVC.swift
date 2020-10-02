@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class SetInfoVC:UIViewController{
+class SetInfoVC:CanGetImageViewController{
     let setInfoView = SetInfoView()
 
     override func loadView() {
@@ -24,6 +24,8 @@ class SetInfoVC:UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setInfoView.peopleView.image = UserDataManager.shared.userImage
+        setInfoView.nameTextField.text = UserDataManager.shared.userData?.username
         autoPushView()
     }
     private func setAction(){
@@ -39,27 +41,33 @@ class SetInfoVC:UIViewController{
         present(photoController, animated: true, completion: nil)
     }
     
-    func setUserData(userImage:UIImage?, userName: String?){
-        setInfoView.setUserData(
-            userImage: userImage ?? UIImage(systemName: "photo")!,
-            userName: userName ?? "Unknow")
-        self.view = setInfoView
-    }
+//    func setUserData(userImage:UIImage?, userName: String?){
+//        setInfoView.setUserData(
+//            userImage: userImage ?? UIImage(systemName: "photo")!,
+//            userName: userName ?? "Unknow")
+//        self.view = setInfoView
+//    }
     @objc func save(){
+        loading()
         if let image = setInfoView.peopleView.image {
             SetInfoModelManerger.updateUserImage(image) {
-            print("updata Image")
+                print("updata Image")
             }
         }else{
             print("not image")
         }
+        
         if let userName = setInfoView.nameTextField.text {
             SetInfoModelManerger.updateUserName(userName) {
                 print("updata name")
-                self.navigationController?.popViewController(animated: true)
+                UserDataManager.shared.getUserData { (image) in
+                    self.stopLoading()
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }else{
             print("not name")
+            self.stopLoading()
         }
     }
 

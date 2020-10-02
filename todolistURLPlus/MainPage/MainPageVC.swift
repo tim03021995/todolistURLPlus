@@ -8,7 +8,10 @@
 
 import UIKit
 import SnapKit
-
+protocol RefreshDelegate: AnyObject {
+    func refreshImage()
+    func refreshCardName()
+}
 //點擊震動
 let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
@@ -25,7 +28,21 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             singleCardCollectionView.reloadData()
         }
     }
-    //    var indexPath: IndexPath!
+    var showSingleCards = [GetCardResponse.ShowCard]()
+    {
+        didSet
+        {
+            singleCardCollectionView.reloadData()
+        }
+    }
+    var showMutipleCards = [GetCardResponse.ShowCard]()
+    {
+        didSet
+        {
+            singleCardCollectionView.reloadData()
+        }
+    }
+    
     ///設置背景
     
     var userName: GetUserResponse!
@@ -50,7 +67,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                  y: self.headImage.frame.maxY,
                                  width: ScreenSize.width.value,
                                  height: self.headImage.frame.height * 0.4)
-            
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
             label.font = UIFont.boldSystemFont(ofSize: 30)
@@ -135,7 +151,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     //單人模式的按鈕
     lazy var singleBtn: UIButton = 
         {
-            
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
             button.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
@@ -143,7 +158,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             button.tintColor = .black
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            //            button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 13)
             button.setTitleColor(.black, for: .normal)
             button.frame = CGRect(x: ScreenSize.width.value * 0.2,
                                   y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.42 + self.welcomeLabel.frame.maxY, //0.33
@@ -154,8 +168,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                                   bottom: -button.frame.height * 1.2, //0.85
                 right: 0)
             
-            //            button.imageEdgeInsets = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
-            //
             
             
             return button
@@ -215,19 +227,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         singleCardCollectionView.reloadData()
-        welcomeLabel.text = "Welcome back \(self.userData.username)"
+        
+        
         setupHeadImage()
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //        if UserToken.shared.userToken == "" {
-        ////            let nc = storyboard?.instantiateViewController(withIdentifier: "LoginNC") as! UINavigationController
-        //            let vc = LoginVC.instantiate()
-        //
-        //            present(vc, animated: true , completion: nil)
-        //        }
         setUI()
     }
     
@@ -240,31 +247,24 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case singleCardCollectionView :
-            return showCards.count
+            return showSingleCards.count
         default:
-            return 2
+            return showMutipleCards.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView {
         case singleCardCollectionView:
-            //            self.indexPath = indexPath
-            
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
-            
             self.cell = singleCell
-            singleCell.setUpSingle(showCards: showCards, indexPath: indexPath)
-            
-            
+            singleCell.setUpSingle(showCards: showSingleCards, indexPath: indexPath)
             singleCell.deleteButton.isHidden = state
             singleCell.deleteButton.tag = indexPath.row
-            
-            
             return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
-            
+            mutipleCell.setUpMutiple(showCards: showMutipleCards, indexPath: indexPath)
             
             return mutipleCell
         }
@@ -278,21 +278,29 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             
         }else
         {
-            toListPageVC(indexPath: indexPath)
+            switch collectionView {
+            case singleCardCollectionView:
+                toListPageVC(indexPath: indexPath, whichStyle: .single)
+                
+            default:
+                toListPageVC(indexPath: indexPath, whichStyle: .mutiple)
+                
+            }
         }
-        
-        singleBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(view.snp.top).priority(.medium)
-        }
-        
-        
     }
     
-    fileprivate func toListPageVC(indexPath: IndexPath) {
+    fileprivate func toListPageVC(indexPath: IndexPath, whichStyle: WhichCollectionView) {
         let lPVC = ListPageVC()
+        lPVC.delegate = self
+        lPVC.collectionStyle = whichStyle
         let nVC = UINavigationController(rootViewController: lPVC)
-        //        lPVC.cardData = cardDatas[indexPath.row]
-        lPVC.showCard = showCards[indexPath.row]
+        if whichStyle == .single
+        {
+            lPVC.showCard = showSingleCards[indexPath.row]
+        }else
+        {
+            lPVC.showCard = showMutipleCards[indexPath.row]
+        }
         lPVC.cardIndexPath = indexPath
         feedbackGenerator.impactOccurred()
         
@@ -320,7 +328,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    
+    fileprivate func getSingletonImage(userData: GetCardResponse.UserData) {
+        UserDataManager.shared.getUserData(email: userData.email) { (image) in
+            self.headImage.image = image
+            //            UserDataManager.shared.userImage = userData
+        }
+    }
     func setupHeadImage()
     {
         let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
@@ -328,8 +341,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         headImage.isHidden = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
         headImage.addGestureRecognizer(tap)
-        getHeadImage()
-        
     }
     
     //blueconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動
@@ -342,12 +353,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         singleBtn.trailingAnchor.constraint(equalTo: singleBtnView.trailingAnchor, constant: -10 ).isActive = true
         
         
-        //        singleBtn.translatesAutoresizingMaskIntoConstraints = false
-        //        singleBtn.centerXAnchor.constraint(equalTo: singleBtnView.centerXAnchor).isActive = true
-        //        singleBtn.bottomAnchor.constraint(equalTo: singleBtnView.bottomAnchor,constant: -17).isActive = true
-        //        singleBtn.heightAnchor.constraint(equalTo: singleBtnView.heightAnchor, multiplier: 0.67).isActive = true
-        //        singleBtn.leadingAnchor.constraint(equalTo: singleBtnView.leadingAnchor, constant: 0).isActive = true
-        //        singleBtn.trailingAnchor.constraint(equalTo: singleBtnView.trailingAnchor, constant: 0 ).isActive = true
+        
     }
     
     
@@ -490,6 +496,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     {
         #warning("需要輸入 email")
         let vc = UserInfoVC(email: userData.email)
+        vc.delegate = self
         let nc = UINavigationController(rootViewController: vc)
         //       vc.modalPresentationStyle = .overCurrentContext
         present(nc, animated: true, completion: nil)
@@ -504,6 +511,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         singleCardCollectionView.isHidden = false
         mutipleCardCollectionView.isHidden = true
         singleCheckMark.isHidden = false
+        singleCardCollectionView.reloadData()
         
     }
     @objc func tapMutipleBtn()
@@ -513,6 +521,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         singleCheckMark.isHidden = true
         singleCardCollectionView.isHidden = true
         mutipleCardCollectionView.isHidden = false
+        mutipleCardCollectionView.reloadData()
         
     }
     @objc func showDeleteButton()
@@ -537,6 +546,20 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         feedbackGenerator.impactOccurred()
     }
     
+    func classifiedSingleAndMutiple(showCards:[GetCardResponse.ShowCard])
+    {
+        self.showSingleCards = []
+        self.showMutipleCards = []
+        showCards.map { card in
+            if card.cardPrivate
+            {
+                self.showSingleCards.append(card)
+            }else
+            {
+                self.showMutipleCards.append(card)
+            }
+        }
+    }
     func getCard(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
@@ -549,8 +572,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.userData = userData
                 self.showCards = showCards
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
+                print(showCards.map({ $0.cardPrivate }))
+                self.classifiedSingleAndMutiple(showCards: showCards)
+                self.getSingletonImage(userData: userData)
+                self.welcomeLabel.text = "Welcome back \(userData.username)"
                 self.singleCardCollectionView.reloadData()
-                print("使用者照片 ＝", self.userData.image)
+                self.mutipleCardCollectionView.reloadData()
             case .failure(let err):
                 print(err.description)
             }
@@ -576,10 +603,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    @objc func buttonTag()
-    {
-        print(self.cell.deleteButton.tag)
-    }
+   
     func deleteCard(indexPath: IndexPath){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: showCards[indexPath.row].id).send()
@@ -617,7 +641,26 @@ enum CollectionViewCellIdentifier: String
         }
     }
 }
+extension MainPageVC: RefreshDelegate
+{
+    func refreshImage() {
+        if let userImage = UserDataManager.shared.userImage
+        {
+            self.headImage.image = userImage
+        }
+    }
+    
+    func refreshCardName() {
+        getCard()
+    }
+    
+    
+}
 
+enum WhichCollectionView {
+    case single
+    case mutiple
+}
 
 
 

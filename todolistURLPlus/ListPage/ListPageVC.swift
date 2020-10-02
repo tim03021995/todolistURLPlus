@@ -8,32 +8,36 @@
 
 import UIKit
 
+
+
 class ListPageVC: UIViewController {
-    
+    weak var delegate: RefreshDelegate!
     var showCard: GetCardResponse.ShowCard!
-    //    lazy var showTasks = self.showCard.showTasks
+    
     var showTasks:[GetCardResponse.ShowTask] = []
     var cardIndexPath = IndexPath()
+    var collectionStyle: WhichCollectionView!
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
-    lazy var cardTitleLabel: UILabel =
+    lazy var cardTitleTextField: CustomLogINTF =
         {
-            let label = UILabel()
+            let label = CustomLogINTF()
             label.frame = CGRect(x: ScreenSize.width.value * 0.05,
                                  y: self.bottomOfNaviBar * 1.25,
                                  width: ScreenSize.width.value * 0.9,
-                                 height: ScreenSize.height.value * 0.1)
+                                 height: ScreenSize.height.value * 0.05)
             
             
             label.text = self.showCard.cardName
             
             
             label.adjustsFontSizeToFitWidth = true
+            
             label.textAlignment = .center
             
             label.font = UIFont.boldSystemFont(ofSize: 30)
-            label.textColor = .white
+//            label.textColor = .white
             return label
     }()
     
@@ -60,29 +64,29 @@ class ListPageVC: UIViewController {
             
             return btn
     }()
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
-        creatTaskBtn.isEnabled = true
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubview()
         listBaseView.tableView.delegate = self
         listBaseView.tableView.dataSource = self
-        
+        cardTitleTextField.delegate = self
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+        creatTaskBtn.isEnabled = true
     }
     override func viewDidAppear(_ animated: Bool) {
         getTask()
-        
+        print("卡片ID是 = ",showCard.id)
         
     }
-    
+  
     func addSubview()
     {
         self.view.addSubview(backgroundImage)
-        self.view.addSubview(cardTitleLabel)
         self.view.addSubview(listBaseView)
+        self.view.addSubview(cardTitleTextField)
         self.view.addSubview(creatTaskBtn)
         
     }
@@ -104,8 +108,7 @@ class ListPageVC: UIViewController {
         if let indexPath = indexPath
         {
             let taskData = data.showTasks[indexPath.section]
-            //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
-            //  let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
+            
             vc.editPage(cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
             navigationController?.pushViewController(vc, animated: true)
             
@@ -116,6 +119,17 @@ class ListPageVC: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func classifiedSingleAndMutiple(showCards:[GetCardResponse.ShowCard])
+    {
+        showCards.map { card in
+            if card.id == self.showCard.id
+            {
+                showTasks = card.showTasks
+            }
+        }
+    }
+    
     func getTask(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
@@ -123,11 +137,13 @@ class ListPageVC: UIViewController {
             switch result {
                 
             case .success(let data):
-                let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
-                self.showTasks = showTasks
-                print("showTasks筆數 = \(showTasks.count)")
+//                let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
+//
+//                self.showTasks = showTasks
+                let showCards = data.userData.showCards
+                self.classifiedSingleAndMutiple(showCards: showCards)
                 self.listBaseView.tableView.reloadData()
-                print("Get成功")
+                
             case .failure(let err):
                 print("Get失敗\(err.description)")
             }
@@ -181,7 +197,7 @@ extension ListPageVC: UITableViewDataSource{
         
         let vc = CardEditVC()
         let task = showTasks[indexPath.section]
-        print("現在點擊的Task ID = \(task.id)")
+        
         //        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
         // vc.setData(data: taskModel)
         vc.editPage(cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: task.image, tag: ColorsButtonType(rawValue: task.tag!))
@@ -189,5 +205,39 @@ extension ListPageVC: UITableViewDataSource{
         navigationController?.pushViewController(vc, animated: true)
         
     }
+    func putCardName(){
+        let header = ["userToken":UserToken.shared.userToken]
+        let parameters: [String: Any] = ["card_name": cardTitleTextField.text ?? ""]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: header, id: showCard.id).send()
+        NetworkManager.sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
+            switch result {
+                
+            case .success( _):
+               print("卡片名稱更新成功")
+               self.delegate.refreshCardName()
+                
+            case .failure(let err):
+                print(err.description)
+                self.delegate.refreshCardName()
+
+            }
+        }
+    }
+    
     
 }
+extension ListPageVC: UITextFieldDelegate
+{
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        putCardName()
+
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        putCardName()
+        return true
+    }
+}
+

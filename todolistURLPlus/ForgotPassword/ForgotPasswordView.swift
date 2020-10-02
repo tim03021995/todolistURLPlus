@@ -22,22 +22,29 @@ class ForgotPasswordView: UIView {
         label.textColor = .white
         return label
     }()
-    private var confirmButton:UIButton = {
+    var confirmButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "confirm")
+        button.addTarget(nil, action: #selector(ForgotPasswordVC.touchConfirmButton), for: .touchUpInside)
         return button
     }()
-    private var nameTextField:UITextField = {
-        var textField = UITextField(frame: CGRect(
+    var passwordTextField:CustomLogINTF = {
+        var textField = CustomLogINTF(frame: CGRect(
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.8,
-            height: ScreenSize.height.value * 0.1 ))
+            height: ScreenSize.height.value * 0.05 ))
         textField.textAlignment = .center
-        let font = textField.font!
-        let newFont = font.withSize(30)
-        textField.font = newFont
-        textField.backgroundColor = .black
         return textField
+    }()
+    var alertLabel:UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.7 , height: ScreenSize.height.value * 0.3))
+        //label.contentMode = .center
+        label.text = "password should over 8 characters and only 0-9,a-z,A-Z."
+        label.font = .systemFont(ofSize: 15)
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .red
+        label.alpha = 0
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -52,7 +59,8 @@ class ForgotPasswordView: UIView {
         addSubview(backgroundImage)
         addSubview(title)
         addSubview(confirmButton)
-        addSubview(nameTextField)
+        addSubview(passwordTextField)
+        addSubview(alertLabel)
     }
     private func constraint(){
         let centerX = ScreenSize.centerX.value
@@ -63,9 +71,14 @@ class ForgotPasswordView: UIView {
         confirmButton.center = CGPoint(
             x: centerX,
             y: ScreenSize.height.value - spaceY * 6 )
-        nameTextField.center = CGPoint(
+        passwordTextField.center = CGPoint(
             x: centerX,
             y: ScreenSize.centerY.value)
+        alertLabel.snp.makeConstraints { (make) in
+            make.left.right.width.equalTo(passwordTextField)
+            make.height.equalTo(passwordTextField).multipliedBy(0.5)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(spaceY)
+        }
 
 
     }

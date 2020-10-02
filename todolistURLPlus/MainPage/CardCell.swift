@@ -77,10 +77,9 @@ class CardCell: UICollectionViewCell {
         {
             
             let data = showCards[indexPath.row]
-            self.backgroundColor = .clear
             self.layer.cornerRadius = self.frame.width * 0.05
             self.clipsToBounds = true
-            self.cardTitle.text = String(data.id)
+            self.cardTitle.text = "\(data.id)**\(data.cardName)**\(data.cardPrivate)"
             self.cardTitle.textColor = .red
 //            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
             self.backgroundColor = .lightGray
@@ -91,21 +90,22 @@ class CardCell: UICollectionViewCell {
         }
     }
     
-    func setUpMutiple(cardDatas: [CardModel]?, indexPath: IndexPath?)
-       {
-        
-        
-           if let cardDatas = cardDatas, let indexPath = indexPath
-           {
-               let data = cardDatas[indexPath.row]
-               self.backgroundColor = .clear
-               self.layer.cornerRadius = self.frame.width * 0.05
-               self.clipsToBounds = true
-               self.cardTitle.text = data.cardTitle
-               self.cardTitle.textColor = .white
-            self.deleteButton.isHidden = false
-               self.backgroundView = UIImageView(image: UIImage(named:"redCard"))
-               self.addSubview(cardTitle)
-           }
-       }
+    func setUpMutiple(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?)
+        {
+            
+            if let indexPath = indexPath
+            {
+                let data = showCards[indexPath.row]
+                self.layer.cornerRadius = self.frame.width * 0.05
+                self.clipsToBounds = true
+                self.cardTitle.text = "\(data.id)**\(data.cardName)**\(data.cardPrivate)"
+                self.cardTitle.textColor = .red
+    //            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
+                self.backgroundColor = .lightGray
+                self.addSubview(cardTitle)
+                self.addGestureRecognizer(longPress)
+                
+                self.addSubview(deleteButton)
+            }
+        }
 }
