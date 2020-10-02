@@ -13,9 +13,10 @@ import UIKit
 class ListPageVC: UIViewController {
     weak var delegate: RefreshDelegate!
     var showCard: GetCardResponse.ShowCard!
-    //    lazy var showTasks = self.showCard.showTasks
+    
     var showTasks:[GetCardResponse.ShowTask] = []
     var cardIndexPath = IndexPath()
+    var collectionStyle: WhichCollectionView!
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
@@ -77,7 +78,7 @@ class ListPageVC: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         getTask()
-        
+        print("卡片ID是 = ",showCard.id)
         
     }
   
@@ -107,8 +108,7 @@ class ListPageVC: UIViewController {
         if let indexPath = indexPath
         {
             let taskData = data.showTasks[indexPath.section]
-            //        print("swction:\(indexPath.section) ,row:\(indexPath.row)")
-            //  let editData = TaskModel(funtionType: .edit, cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
+            
             vc.editPage(cardID: taskData.cardID, taskID: taskData.id, title: taskData.title, description: taskData.description, image: nil, tag: nil)
             navigationController?.pushViewController(vc, animated: true)
             
@@ -119,6 +119,17 @@ class ListPageVC: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func classifiedSingleAndMutiple(showCards:[GetCardResponse.ShowCard])
+    {
+        showCards.map { card in
+            if card.id == self.showCard.id
+            {
+                showTasks = card.showTasks
+            }
+        }
+    }
+    
     func getTask(){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
@@ -126,11 +137,13 @@ class ListPageVC: UIViewController {
             switch result {
                 
             case .success(let data):
-                let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
-                self.showTasks = showTasks
-                print("showTasks筆數 = \(showTasks.count)")
+//                let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
+//
+//                self.showTasks = showTasks
+                let showCards = data.userData.showCards
+                self.classifiedSingleAndMutiple(showCards: showCards)
                 self.listBaseView.tableView.reloadData()
-                print("Get成功")
+                
             case .failure(let err):
                 print("Get失敗\(err.description)")
             }
@@ -184,7 +197,7 @@ extension ListPageVC: UITableViewDataSource{
         
         let vc = CardEditVC()
         let task = showTasks[indexPath.section]
-        print("現在點擊的Task ID = \(task.id)")
+        
         //        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
         // vc.setData(data: taskModel)
         vc.editPage(cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: task.image, tag: ColorsButtonType(rawValue: task.tag!))
