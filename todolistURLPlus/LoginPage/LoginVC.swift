@@ -59,8 +59,6 @@ class LoginVC: UIViewController, Storyboarded {
     }
     //MARK:- Functions
   
-    
-    
     fileprivate func propertiesSetting() {
         naviBarSetting()
         accountTF.delegate = self
@@ -91,7 +89,6 @@ class LoginVC: UIViewController, Storyboarded {
     func signIn(){
         //驗證帳密 , 成功的話包裝
         guard let parameters = validateAccount() else{ return }
-        
         //包裝需要的參數
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
         

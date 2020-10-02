@@ -63,8 +63,7 @@ class UserAuthorityVC: UIViewController {
     ///DELETE 刪除使用者
     private func deleteUser(indexPath:IndexPath){
         guard users[0].id != users[indexPath.row].id else{
-            present(.makeAlert("Error", "Can't Delete Card Owner", {
-            }), animated: true)
+            present(.makeAlert("Error", "Can't Delete Card Owner", {}), animated: true)
             return
         }
         let headers = ["userToken":UserToken.shared.userToken]
@@ -79,8 +78,7 @@ class UserAuthorityVC: UIViewController {
                 self.myTableView.endUpdates()
                 print("Delete Success")
             case .failure(let err): print(err.description)
-            self.present(.makeAlert("Error", err.errMessage, {
-            }), animated: true)
+            self.present(.makeAlert("Error", err.errMessage, {}), animated: true)
             }
         }
     }
