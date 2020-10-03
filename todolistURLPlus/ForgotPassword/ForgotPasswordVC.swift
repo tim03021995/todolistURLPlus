@@ -20,6 +20,7 @@ class ForgotPasswordVC: CanGetImageViewController {
         self.navigationController?.navigationBar.isHidden = false
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        self.navigationController?.navigationBar.shadowImage = image
     }
     @objc func touchConfirmButton(){
 

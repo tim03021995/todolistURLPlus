@@ -156,12 +156,13 @@ class CardEditView: UIView {
         colorsCollectionView.center = CGPoint(
             x: centerX,
             y: imageView.frame.maxY + space + colorsCollectionView.frame.height * 0.5)
-//        imageView.snp.makeConstraints { (make) in
-//            make.top.equalTo(textView.snp.bottom).offset(space)
-//            make.width.equalTo(textView.snp.width)
-//            make.height.equalTo(imageView.snp.width)
-//            make.centerX.equalTo(textView.snp.centerX)
-//        }
+        imageView.snp.makeConstraints { (make) in
+            make.top.equalTo(textView.snp.bottom).offset(space)
+            make.width.equalTo(textView.snp.width)
+            make.height.equalTo(imageView.snp.width)
+            make.height.equalTo(60)
+            make.centerX.equalTo(textView.snp.centerX)
+        }
         colorsCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.bottom).offset(space)
             make.centerX.equalTo(textView)
@@ -192,11 +193,7 @@ class CardEditView: UIView {
     func setImageView(image:UIImage?){
         func setUpNilImageView(){
             self.imageView.image = nil
-            imageView.snp.remakeConstraints{ (make) in
-                make.top.equalTo(textView.snp.bottom).offset(space)
-                make.width.equalTo(textView.snp.width)
-                make.height.equalTo(imageView.snp.width).multipliedBy(0.2)
-                make.centerX.equalTo(textView.snp.centerX)
+            imageView.snp.updateConstraints{ (make) in
                 make.height.equalTo(30)
             }
             albumButtonBackground.snp.remakeConstraints { (make) in
@@ -206,11 +203,8 @@ class CardEditView: UIView {
         }
         func setUpImageView(){
             self.imageView.image = image
-            imageView.snp.remakeConstraints{ (make) in
-                make.top.equalTo(textView.snp.bottom).offset(space)
-                make.width.equalTo(textView.snp.width)
-                make.height.equalTo(imageView.snp.width)
-                make.centerX.equalTo(textView.snp.centerX)
+            imageView.snp.updateConstraints{ (make) in
+                make.height.equalTo(300)
             }
             albumButtonBackground.snp.remakeConstraints { (make) in
                 make.right.equalTo(imageView).offset(-10)
@@ -220,6 +214,7 @@ class CardEditView: UIView {
             }
             albumButtonBackground.alpha = 1
         }
+
         if image != nil{
             setUpImageView()
             //resetHight(scrollView)

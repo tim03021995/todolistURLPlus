@@ -33,6 +33,7 @@ class UserInfoVC: CanGetImageViewController {
         let vc = SetInfoVC()
                 navigationController?.pushViewController(vc, animated: true)
         navigationController?.navigationItem.backBarButtonItem?.title = "返回"
+        navigationController?.navigationItem.backBarButtonItem?.tintColor = .white
     }
     private func setAction(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
@@ -43,6 +44,7 @@ class UserInfoVC: CanGetImageViewController {
     @objc func modifyPassword(){
         let vc = ForgotPasswordVC()
         navigationController?.navigationItem.backBarButtonItem?.title = "返回"
+        navigationController?.navigationItem.backBarButtonItem?.tintColor = .white
                 navigationController?.pushViewController(vc, animated: true)
     }
     @objc func logout(){
