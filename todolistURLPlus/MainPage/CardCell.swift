@@ -70,7 +70,7 @@ class CardCell: UICollectionViewCell {
         
       }
     
-    func setUpSingle(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?)
+    func setupSingle(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?, state: Bool)
     {
         
         if let indexPath = indexPath
@@ -81,8 +81,8 @@ class CardCell: UICollectionViewCell {
             self.clipsToBounds = true
             self.cardTitle.text = "\(data.id)**\(data.cardName)**\(data.cardPrivate)"
             self.cardTitle.textColor = .red
-//            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
             self.backgroundColor = .lightGray
+            self.deleteButton.isHidden = state
             self.addSubview(cardTitle)
             self.addGestureRecognizer(longPress)
             
@@ -90,7 +90,7 @@ class CardCell: UICollectionViewCell {
         }
     }
     
-    func setUpMutiple(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?)
+    func setupMutiple(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?, state: Bool)
         {
             
             if let indexPath = indexPath
@@ -100,8 +100,8 @@ class CardCell: UICollectionViewCell {
                 self.clipsToBounds = true
                 self.cardTitle.text = "\(data.id)**\(data.cardName)**\(data.cardPrivate)"
                 self.cardTitle.textColor = .red
-    //            self.backgroundView = UIImageView(image: UIImage(named:"blueCard"))
                 self.backgroundColor = .lightGray
+                self.deleteButton.isHidden = state
                 self.addSubview(cardTitle)
                 self.addGestureRecognizer(longPress)
                 

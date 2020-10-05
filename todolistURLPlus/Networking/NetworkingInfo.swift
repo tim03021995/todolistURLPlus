@@ -72,6 +72,7 @@ struct UserToken {
         print("Token cleared")
         updateTokenToUserdefault(with: "")
     }
+
     
     static func rememberAccount(account:String){
         UserDefaults.standard.set(account, forKey: "account")
