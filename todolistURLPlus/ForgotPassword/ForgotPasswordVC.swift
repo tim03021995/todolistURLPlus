@@ -23,29 +23,35 @@ class ForgotPasswordVC: CanGetImageViewController {
         self.navigationController?.navigationBar.shadowImage = image
     }
     @objc func touchConfirmButton(){
-
         if let password = forgotPasswordView.passwordTextField.text{
             loading()
-            ForgotPasswordModel.updateUserPassword(password: password) { (result) in
-                switch result {
-                case .success( _):
-                    print("update success")
-                    self.dismiss(animated: true, completion: nil)
-                    self.stopLoading()
-                case .failure(let err):
-                    
-                    print("update error")
-                    print(err.description)
-                    self.forgotPasswordView.alertLabel.text = err.errMessage
-                    self.stopLoading()
-                   // print("錯誤訊息：\(err.errMessage)")
-                }
+            if password.isValidPassword{
+                updataPassWord(password)
+            }else{
+                forgotPasswordView.passwordTextField.text = ""
+                stopLoading()
             }
         }
     }
-
-
-
+    
+    func updataPassWord(_ password:String){
+        ForgotPasswordModel.updateUserPassword(password: password) { (result) in
+            switch result {
+            case .success( _):
+                print("update success")
+                self.dismiss(animated: true, completion: nil)
+                self.stopLoading()
+            case .failure(let err):
+                
+                print("update error")
+                print(err.description)
+                self.forgotPasswordView.alertLabel.text = err.errMessage
+                self.stopLoading()
+            // print("錯誤訊息：\(err.errMessage)")
+            }
+        }
+    }
+    
 }
 extension ForgotPasswordVC:UITextFieldDelegate{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

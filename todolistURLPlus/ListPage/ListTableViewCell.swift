@@ -35,8 +35,6 @@ class ListTableViewCell: UITableViewCell {
     func setCell(){
         let  fullScreenMaxX = UIScreen.main.bounds.maxX
         backgroundColor = .clear
-        contentView.layer.borderWidth = 5
-        contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
         contentView.layer.cornerRadius = fullScreenMaxX * 0.05
         clipsToBounds = true
