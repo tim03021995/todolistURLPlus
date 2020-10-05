@@ -281,30 +281,29 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         {
             switch collectionView {
             case singleCardCollectionView:
-                toListPageVC(indexPath: indexPath, whichStyle: .single)
+                toListPageVC(indexPathRow: indexPath.row, whichStyle: .single)
                 
                 
             default:
-                toListPageVC(indexPath: indexPath, whichStyle: .mutiple)
+                toListPageVC(indexPathRow: indexPath.row, whichStyle: .mutiple)
                 
                 
             }
         }
     }
     
-    fileprivate func toListPageVC(indexPath: IndexPath, whichStyle: WhichCollectionView) {
+    fileprivate func toListPageVC(indexPathRow: Int, whichStyle: WhichCollectionView) {
         let lPVC = ListPageVC()
         lPVC.delegate = self
         lPVC.collectionStyle = whichStyle
         let nVC = UINavigationController(rootViewController: lPVC)
         if whichStyle == .single
         {
-            lPVC.showCard = showSingleCards[indexPath.row]
+            lPVC.showCard = showSingleCards[indexPathRow]
         }else
         {
-            lPVC.showCard = showMutipleCards[indexPath.row]
+            lPVC.showCard = showMutipleCards[indexPathRow]
         }
-        lPVC.cardIndexPath = indexPath
         feedbackGenerator.impactOccurred()
         
         present(nVC, animated: true, completion: nil)
@@ -531,9 +530,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @objc func creatNewCard()
     {
         //        let dis = DispatchQueue.
-        addCard {
-            self.getCard()
-        }
+        addCard()
+        
         
         
         //        DispatchQueue.sync(dis)
@@ -559,7 +557,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    func getCard(){
+    func getCard(isAdd:Bool = false){
         let header = ["userToken":UserToken.shared.userToken]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
@@ -577,12 +575,17 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.welcomeLabel.text = "Welcome back \(userData.username)"
                 self.singleCardCollectionView.reloadData()
                 self.mutipleCardCollectionView.reloadData()
+                if isAdd
+                {
+                    self.toListPageVC(indexPathRow: (self.showSingleCards.count - 1), whichStyle: .single)
+                    
+                }
             case .failure(let err):
                 print(err.description)
             }
         }
     }
-    func addCard(complection:@escaping()->Void){ //新增card的API方法
+    func addCard(){ //新增card的API方法
         let header = ["userToken":UserToken.shared.userToken]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
@@ -594,8 +597,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 
             case .success(let data):
                 print("目前新增的卡片ID = \(data.cardData.id)")
-                complection()
-                
+                self.getCard(isAdd: true)
             case .failure(let err):
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")

@@ -15,7 +15,7 @@ class ListPageVC: UIViewController {
     var showCard: GetCardResponse.ShowCard!
     
     var showTasks:[GetCardResponse.ShowTask] = []
-    var cardIndexPath = IndexPath()
+    
     var collectionStyle: WhichCollectionView!
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
@@ -137,8 +137,7 @@ class ListPageVC: UIViewController {
             switch result {
                 
             case .success(let data):
-//                let showTasks = data.userData.showCards[self.cardIndexPath.row].showTasks
-//
+
 //                self.showTasks = showTasks
                 let showCards = data.userData.showCards
                 self.classifiedSingleAndMutiple(showCards: showCards)
