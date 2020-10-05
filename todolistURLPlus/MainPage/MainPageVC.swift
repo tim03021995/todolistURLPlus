@@ -234,14 +234,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        for family: String in UIFont.familyNames
-               {
-                   print(family)
-                   for names: String in UIFont.fontNames(forFamilyName: family)
-                   {
-                       print("== \(names)")
-                   }
-               }
+       
     }
     
     
@@ -317,30 +310,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         present(nVC, animated: true, completion: nil)
         
     }
-    fileprivate func getHeadImage() {
-        if let imageString = userData.image
-        {
-            if let imageUrl = URL(string: "http://35.185.131.56:8002/" + imageString)
-            {
-                do
-                {
-                    if let imageData = try? Data(contentsOf: imageUrl)
-                    {
-                        if let image = UIImage(data: imageData)
-                        {
-                            headImage.image = image
-                        }
-                    }
-                }catch
-                {
-                    print("Image轉型失敗，MainPageVC ",#line)
-                }
-            }
-        }
-    }
     fileprivate func getSingletonImage(userData: GetCardResponse.UserData) {
         UserDataManager.shared.getUserData(email: userData.email) { (image) in
             self.headImage.image = image
+            print("##")
             //            UserDataManager.shared.userImage = userData
         }
     }
@@ -591,6 +564,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             case .failure(let err):
                 print(err.description)
             }
+            
+            
         }
     }
     func addCard(){ //新增card的API方法

@@ -30,6 +30,7 @@
 	<string>open cam</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>aoyagireisyosimo_ttf_2_01.ttf</string>
 		<string>myFont.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

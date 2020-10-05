@@ -12,16 +12,16 @@ class CardCell: UICollectionViewCell {
     lazy var cardTitle: UILabel =
     {
         let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
-            y: self.frame.height * 0.4,
-            width: self.frame.width * 0.9,
-            height: self.frame.height * 0.2))
+            y: self.frame.height * 0.1,
+            width: self.frame.width * 0.8,
+            height: self.frame.height * 0.8))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-        label.font = UIFont(name: "HanyiSentyZhangjizhi", size: 30)
+        label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.15)
         label.clipsToBounds = true
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.backgroundColor = .black
-//        label.adjustsFontSizeToFitWidth = true
+        
+
         return label
     }()
     
@@ -84,7 +84,10 @@ class CardCell: UICollectionViewCell {
             \(data.id)\n\(data.cardName)\n\(data.cardPrivate)\n
             """
             self.cardTitle.textColor = .red
-            self.backgroundColor = .lightGray
+//            self.backgroundColor = .lightGray
+            let view = UIImageView(image: UIImage(named: "blueCard"))
+            view.alpha = 0.5
+            self.backgroundView = view
             self.deleteButton.isHidden = state
             self.addSubview(cardTitle)
             self.addGestureRecognizer(longPress)
@@ -108,7 +111,6 @@ class CardCell: UICollectionViewCell {
                 self.deleteButton.isHidden = state
                 self.addSubview(cardTitle)
                 self.addGestureRecognizer(longPress)
-                
                 self.addSubview(deleteButton)
             }
         }
