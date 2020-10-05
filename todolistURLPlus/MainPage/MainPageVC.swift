@@ -16,9 +16,7 @@ protocol RefreshDelegate: AnyObject {
 let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-    
-    //    var cardDatas = [CardModel]()
-    var state = true
+    var showDeleteButtonState = true
     var cell: CardCell! = nil
     var userData: GetCardResponse.UserData!
     var showCards = [GetCardResponse.ShowCard]()
@@ -152,7 +150,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     lazy var singleBtn: UIButton = 
         {
             let button = UIButton()
-            button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
+            button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchUpInside)
             button.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
             button.setTitle("Personal", for: .normal)
             button.tintColor = .black
@@ -177,7 +175,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     lazy var mutipleBtn: UIButton =
         {
             let button = UIButton()
-            button.addTarget(self, action: #selector(self.tapMutipleBtn), for: .touchDown)
+            button.addTarget(self, action: #selector(self.tapMutipleBtn), for: .touchUpInside)
             button.setBackgroundImage(UIImage(systemName: "person.3"), for: .normal)
             button.setTitle("Multiple", for: .normal)
             button.tintColor = .black
@@ -258,23 +256,26 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         case singleCardCollectionView:
             let singleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.singleCell.identifier , for: indexPath) as! CardCell
             self.cell = singleCell
-            singleCell.setUpSingle(showCards: showSingleCards, indexPath: indexPath)
-            singleCell.deleteButton.isHidden = state
-            singleCell.deleteButton.tag = indexPath.row
+            singleCell.setupSingle(showCards: showSingleCards, indexPath: indexPath, state: showDeleteButtonState)
             return singleCell
         default:
             let mutipleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.mutipleCell.identifier, for: indexPath) as! CardCell
-            mutipleCell.setUpMutiple(showCards: showMutipleCards, indexPath: indexPath)
-            
+            mutipleCell.setupMutiple(showCards: showMutipleCards, indexPath: indexPath, state: showDeleteButtonState)
             return mutipleCell
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !state
+        if !showDeleteButtonState
         {
-            deleteCard(indexPath: indexPath)
+            switch collectionView {
+            case singleCardCollectionView:
+                deleteCard(indexPath: indexPath, whichData: .single)
+            default:
+                deleteCard(indexPath: indexPath, whichData: .mutiple)
+
+            }
             
         }else
         {
@@ -282,8 +283,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             case singleCardCollectionView:
                 toListPageVC(indexPath: indexPath, whichStyle: .single)
                 
+                
             default:
                 toListPageVC(indexPath: indexPath, whichStyle: .mutiple)
+                
                 
             }
         }
@@ -389,9 +392,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     @objc func editMode()
     {
-        state = !state
+        showDeleteButtonState = !showDeleteButtonState
         singleCardCollectionView.reloadData()
-        trashBtn.tintColor = !state ? .red : .white
+        mutipleCardCollectionView.reloadData()
+        trashBtn.tintColor = !showDeleteButtonState ? .red : .white
         
     }
     ///設定卡片CollectionView
@@ -494,7 +498,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     //增加點擊手勢觸發跳轉個人資料設定
     @objc func tapToProfileSetting()
     {
-        #warning("需要輸入 email")
         let vc = UserInfoVC(email: userData.email)
         vc.delegate = self
         let nc = UINavigationController(rootViewController: vc)
@@ -524,11 +527,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         mutipleCardCollectionView.reloadData()
         
     }
-    @objc func showDeleteButton()
-    {
-        state = !state
-    }
-    
+
     @objc func creatNewCard()
     {
         //        let dis = DispatchQueue.
@@ -604,9 +603,16 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
    
-    func deleteCard(indexPath: IndexPath){
+    func deleteCard(indexPath: IndexPath, whichData:WhichCollectionView){
         let header = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: showCards[indexPath.row].id).send()
+        let id: Int
+        switch whichData {
+        case .single:
+            id = showSingleCards[indexPath.row].id
+        default:
+            id = showMutipleCards[indexPath.row].id
+        }
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: id).send()
         
         NetworkManager.sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
             switch result{

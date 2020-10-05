@@ -189,7 +189,8 @@ extension ListPageVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
-        cell.cellTitleLabel.text = showTasks[indexPath.section].title 
+        cell.setUpCell(showTasks: showTasks, indexPath: indexPath)
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
