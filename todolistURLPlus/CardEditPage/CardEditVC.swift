@@ -33,6 +33,7 @@ class CardEditVC: CanGetImageViewController {
             style: .done,
             target: self,
             action: #selector(save))
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: <#T##String?#>, style: <#T##UIBarButtonItem.Style#>, target: <#T##Any?#>, action: <#T##Selector?#>)
         
     }
     @objc func save(){
@@ -195,6 +196,10 @@ extension CardEditVC:UITextViewDelegate{
         }
         textView.frame.size.height=size.height
         
+    }
+    func leaveAC(){
+        let ac = UIViewController.makeAlert("確定要離開？", "你已編輯此卡片，若離開資料會全部消失。"){}
+        present(ac, animated: true, completion: nil)
     }
 }
 extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
