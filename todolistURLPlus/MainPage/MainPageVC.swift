@@ -606,7 +606,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
    
     func deleteCard(indexPath: IndexPath, whichData:WhichCollectionView){
-        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
+        
         let id: Int
         switch whichData {
         case .single:
@@ -614,7 +616,17 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         default:
             id = showMutipleCards[indexPath.row].id
         }
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: id).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: headers, id: id).send()
+        
+        NetworkManager.sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
+            switch result{
+                
+            case .success(let data):
+                //                self.showCards.remove(at: self.indexPath.row)
+                
+                self.getCard()
+                print("刪除成功，第",self.btnTag,"張卡片")
+                
                 
             case .failure(let err):
                 print("err.description = \(err.description)")
