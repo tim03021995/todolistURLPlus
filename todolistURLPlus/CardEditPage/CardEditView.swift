@@ -159,7 +159,7 @@ class CardEditView: UIView {
         imageView.snp.makeConstraints { (make) in
             make.top.equalTo(textView.snp.bottom).offset(space)
             make.width.equalTo(textView.snp.width)
-            make.height.equalTo(imageView.snp.width)
+       //     make.height.equalTo(imageView.snp.width)
             make.height.equalTo(60)
             make.centerX.equalTo(textView.snp.centerX)
         }
