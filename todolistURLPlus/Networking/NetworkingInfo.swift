@@ -72,6 +72,7 @@ struct UserToken {
         print("Token cleared")
 //        updateTokenToUserdefault(with: "")
     }
+
     
     
 }

@@ -110,14 +110,14 @@ class UserAuthorityVC: UIViewController {
         view.addSubview(backgroundImage)
         setBaseView()
         setTableView()
-        setTableViewConstriants()
-        setBaseViewConstriants()
+        setMemberLabel()
+        setMemberLabelConstriants()
         setInviteBtnViewConstraints()
         setRemoveBtnViewConstrants()
         setInviteBtnConstraints()
         setRemoveBtnConstrants()
-        setMemberLabel()
-        setMemberLabelConstriants()
+        setTableViewConstriants()
+        setBaseViewConstriants()
     }
     
     private func setMemberLabel(){
@@ -168,10 +168,11 @@ class UserAuthorityVC: UIViewController {
     
     private func setMemberLabelConstriants(){
         memberLabel.translatesAutoresizingMaskIntoConstraints = false
-        memberLabel.bottomAnchor.constraint(equalTo:baseView.topAnchor,constant: -50 ).isActive = true
+        memberLabel.topAnchor.constraint(equalTo:view.topAnchor,constant: 10 ).isActive = true
+
         memberLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
-        memberLabel.widthAnchor.constraint(equalTo: baseView.widthAnchor,multiplier: 0.3).isActive = true
-        memberLabel.heightAnchor.constraint(equalTo: baseView.heightAnchor, multiplier: 0.3).isActive = true
+        memberLabel.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.3).isActive = true
+        memberLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
     }
     
     private func setTableViewConstriants(){
@@ -185,8 +186,9 @@ class UserAuthorityVC: UIViewController {
     private func setBaseViewConstriants(){
         baseView.translatesAutoresizingMaskIntoConstraints = false
         baseView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        baseView.topAnchor.constraint(equalTo: inviteBtnView.bottomAnchor,constant: 10).isActive = true
         baseView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: -30).isActive = true
-        baseView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.6).isActive = true
+//        baseView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.6).isActive = true
         baseView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
         baseView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10 ).isActive = true
     }
@@ -195,7 +197,7 @@ class UserAuthorityVC: UIViewController {
         inviteBtnView.translatesAutoresizingMaskIntoConstraints = false
         
         inviteBtnView.leadingAnchor.constraint(equalTo: removeBtnView.trailingAnchor,constant: 20).isActive = true
-        inviteBtnView.bottomAnchor.constraint(equalTo: baseView.topAnchor,constant: -10).isActive = true
+        inviteBtnView.topAnchor.constraint(equalTo: removeBtnView.topAnchor,constant: 0).isActive = true
         inviteBtnView.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier:0.2).isActive = true
         inviteBtnView.heightAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.2).isActive = true
     }
@@ -203,7 +205,7 @@ class UserAuthorityVC: UIViewController {
     private func setRemoveBtnViewConstrants(){
         removeBtnView.translatesAutoresizingMaskIntoConstraints = false
         removeBtnView.leadingAnchor.constraint(equalTo:view.leadingAnchor ,constant: 20).isActive = true
-        removeBtnView.bottomAnchor.constraint(equalTo: baseView.topAnchor,constant: -10).isActive = true
+        removeBtnView.topAnchor.constraint(equalTo: memberLabel.bottomAnchor,constant: 10).isActive = true
         removeBtnView.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier:0.2).isActive = true
         removeBtnView.heightAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.2).isActive = true
     }
