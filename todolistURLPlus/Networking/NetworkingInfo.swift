@@ -57,16 +57,16 @@ struct UserToken {
         return token
     }
     
-    private static func updateTokenToUserdefault(with token:String){
-        UserDefaults.standard.set(token, forKey: "token")
-    }
-
-    
     mutating func updateToken(by token: String){
         userToken = token
         print(userToken)
 //        updateTokenToUserdefault(with: token)
     }
+    
+    private static func updateTokenToUserdefault(with token:String){
+        UserDefaults.standard.set(token, forKey: "token")
+    }
+
     mutating func clearToken(){
         userToken = ""
         print("Token cleared")

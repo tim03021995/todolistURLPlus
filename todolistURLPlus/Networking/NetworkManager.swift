@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct NetworkManager {
+struct NetworkManager: RefreshTokenDelegate{
+    func shoudReturnRootVC() {
+        
+    }
+    
+    var delegate:RefreshTokenDelegate?
     
     static func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -35,7 +40,7 @@ struct NetworkManager {
             do{
                 let decotedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decotedData))
-                print("============= \(T.self) success ============== ")
+                print("============= \(T.self) success ==============")
                 
             }catch{
                 print("======================== Decode Error ========================")
@@ -62,4 +67,8 @@ protocol LoadingViewDelegate {
     func loading()
     
     func stopLoading()
+}
+
+protocol RefreshTokenDelegate {
+    func shoudReturnRootVC()
 }
