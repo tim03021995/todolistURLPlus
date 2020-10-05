@@ -47,9 +47,9 @@ class ListTableViewCell: UITableViewCell {
          addSubview(cellTitleLabel)
     }
     
-    func setLittleCircle() {
+    func setLittleCircle(color: UIColor = .buttonRed) {
         littleBall.layer.cornerRadius = fullScreenMaxY * 0.0155
-        littleBall.backgroundColor = littleBallColor[0]
+        littleBall.backgroundColor = color
         addSubview(littleBall)
     }
     
@@ -67,18 +67,13 @@ class ListTableViewCell: UITableViewCell {
         littleBall.heightAnchor.constraint(equalToConstant: fullScreenMaxY * 0.03 ).isActive = true
         littleBall.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
     }
-    func setUpCell(data: CardModel, indexPath: IndexPath)
+    func setUpCell(showTasks: [GetCardResponse.ShowTask] , indexPath: IndexPath)
     {
-        if let task = data.taskModel?[indexPath.section]
-        {
-        self.backgroundColor = .clear
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
-        self.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
-        self.layer.cornerRadius = 15
-        self.clipsToBounds = true
-            self.cellTitleLabel.text = task.title
-        }
+        self.cellTitleLabel.text = showTasks[indexPath.section].title
+        
+        let tagColor = showTasks[indexPath.section].tag
+        self.littleBall.backgroundColor = ColorsButtonType(rawValue: tagColor!)?.color
+        
     }
 }
 
