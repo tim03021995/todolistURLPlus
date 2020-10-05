@@ -77,9 +77,9 @@ class UserAuthorityCell: UITableViewCell {
     }
     
     func setHeadShot() {
-        headShot.clipsToBounds = true
-        headShot.layer.cornerRadius = fullScreenMaxY * 0.04
-        headShot.contentMode = .scaleAspectFill
+        //headShot.clipsToBounds = true
+        //headShot.layer.cornerRadius = fullScreenMaxY * 0.04
+        //headShot.contentMode = .scaleAspectFill
         contentView.addSubview(headShot)
     }
     
