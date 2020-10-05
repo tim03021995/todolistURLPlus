@@ -565,10 +565,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    func getCard(){
+    func getCard(isAdd:Bool = false){
+//        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
-        let headers = ["userToken":token]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
+        let header = ["userToken":token]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
@@ -594,13 +595,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    func addCard(complection:@escaping()->Void){ //新增card的API方法
+    func addCard(){ //新增card的API方法
+//        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
-        let headers = ["userToken":token]
+        let header = ["userToken":token]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
         
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: headers).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
         
         NetworkManager.sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
             switch result{
