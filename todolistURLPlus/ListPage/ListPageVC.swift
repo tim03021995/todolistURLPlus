@@ -131,8 +131,9 @@ class ListPageVC: UIViewController {
     }
     
     func getTask(){
-        let header = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
         NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
@@ -206,9 +207,10 @@ extension ListPageVC: UITableViewDataSource{
         
     }
     func putCardName(){
-        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
         let parameters: [String: Any] = ["card_name": cardTitleTextField.text ?? ""]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: header, id: showCard.id).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: showCard.id).send()
         NetworkManager.sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
             switch result {
                 

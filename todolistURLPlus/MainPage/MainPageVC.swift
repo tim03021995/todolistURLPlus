@@ -234,6 +234,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        for family: String in UIFont.familyNames
+               {
+                   print(family)
+                   for names: String in UIFont.fontNames(forFamilyName: family)
+                   {
+                       print("== \(names)")
+                   }
+               }
     }
     
     
@@ -558,7 +566,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     func getCard(isAdd:Bool = false){
-        let header = ["userToken":UserToken.shared.userToken]
+//        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let header = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
@@ -586,7 +596,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     func addCard(){ //新增card的API方法
-        let header = ["userToken":UserToken.shared.userToken]
+//        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let header = ["userToken":token]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
         
@@ -606,7 +618,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
    
     func deleteCard(indexPath: IndexPath, whichData:WhichCollectionView){
-        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
+        
         let id: Int
         switch whichData {
         case .single:
@@ -614,7 +628,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         default:
             id = showMutipleCards[indexPath.row].id
         }
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: id).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: headers, id: id).send()
         
         NetworkManager.sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
             switch result{

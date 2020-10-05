@@ -10,6 +10,7 @@
 		530D261D250F445F00AEBCC8 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530D261C250F445F00AEBCC8 /* CardModel.swift */; };
 		5332F8AD250679F900192A5F /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5332F8AC250679F900192A5F /* CardCell.swift */; };
 		53C16106250910E700C91D16 /* ListPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C16105250910E700C91D16 /* ListPageVC.swift */; };
+		53CCD0F9252AF21000A1F03F /* myFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53CCD0F8252AF20F00A1F03F /* myFont.ttf */; };
 		97077B8D2512189E000139E6 /* searchMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B862512189E000139E6 /* searchMemberVC.swift */; };
 		97077B902512189E000139E6 /* UserAuthorityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B892512189E000139E6 /* UserAuthorityVC.swift */; };
 		97077B932512189E000139E6 /* UserAuthorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B8C2512189E000139E6 /* UserAuthorityCell.swift */; };
@@ -68,6 +69,7 @@
 		530D261C250F445F00AEBCC8 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		5332F8AC250679F900192A5F /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		53C16105250910E700C91D16 /* ListPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageVC.swift; sourceTree = "<group>"; };
+		53CCD0F8252AF20F00A1F03F /* myFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = myFont.ttf; sourceTree = "<group>"; };
 		97077B862512189E000139E6 /* searchMemberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchMemberVC.swift; sourceTree = "<group>"; };
 		97077B892512189E000139E6 /* UserAuthorityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityVC.swift; sourceTree = "<group>"; };
 		97077B8C2512189E000139E6 /* UserAuthorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityCell.swift; sourceTree = "<group>"; };
@@ -145,6 +147,14 @@
 			path = ListPage;
 			sourceTree = "<group>";
 		};
+		53CCD0FA252AF21500A1F03F /* myResource */ = {
+			isa = PBXGroup;
+			children = (
+				53CCD0F8252AF20F00A1F03F /* myFont.ttf */,
+			);
+			path = myResource;
+			sourceTree = "<group>";
+		};
 		97077B852512189E000139E6 /* UserAuthority */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +186,7 @@
 		D23505DD24FCCAAF00F4CC6E /* todolistURLPlus */ = {
 			isa = PBXGroup;
 			children = (
+				53CCD0FA252AF21500A1F03F /* myResource */,
 				FBEF303B24FF8531003F5945 /* Networking */,
 				97077B852512189E000139E6 /* UserAuthority */,
 				FBEF303524FF5204003F5945 /* LoginPage */,
@@ -393,6 +404,7 @@
 				FB7477DA251B41F600FB72B8 /* SearchVC.xib in Resources */,
 				D23505EB24FCCAB400F4CC6E /* LaunchScreen.storyboard in Resources */,
 				D23505E824FCCAB400F4CC6E /* Assets.xcassets in Resources */,
+				53CCD0F9252AF21000A1F03F /* myFont.ttf in Resources */,
 				D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */,
 				D2B0644B25009FEB00000444 /* .gitattributes in Resources */,
 			);
@@ -599,14 +611,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KA6B4A6D5D;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlu;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -620,14 +632,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KA6B4A6D5D;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlu;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

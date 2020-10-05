@@ -13,7 +13,8 @@ struct SetInfoModel{
 }
 class SetInfoModelManerger{
     static func updateUserImage(_ image:UIImage,_ compeletion:@escaping ()->Void){
-        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let header = ["userToken":token]
         let boundary = "Boundary+\(arc4random())\(arc4random())"
         let dataPath = makeDataPath(image)
         let body = makeBody(dataPath, boundary)
@@ -32,7 +33,8 @@ class SetInfoModelManerger{
         }
     }
     static func updateUserName(_ userName:String?,_ compeletion:@escaping ()->Void){
-        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let header = ["userToken":token]
         let parameters = makeParameters(userName, nil)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
         NetworkManager.sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in

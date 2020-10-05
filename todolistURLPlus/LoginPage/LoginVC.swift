@@ -32,6 +32,8 @@ extension Storyboarded where Self: UIViewController {
 
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
+    @IBOutlet weak var rememberMeBTN: UIButton!
+    
     @IBOutlet weak var naviItem: UINavigationItem!
     
     @IBOutlet weak var signInBtn: CustomButton!
@@ -60,6 +62,7 @@ class LoginVC: UIViewController, Storyboarded {
     //MARK:- Functions
   
     fileprivate func propertiesSetting() {
+        
         naviBarSetting()
         accountTF.delegate = self
         accountTF.placeholder = "E-Mail"
@@ -100,7 +103,7 @@ class LoginVC: UIViewController, Storyboarded {
                 self.signInBtn.isEnabled = true
                 //存token
                 guard let token = decodedData.loginData?.userToken else {return}
-                UserToken.shared.updateToken(by: token)
+                UserToken.updateToken(by: token)
                 let vc = MainPageVC()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
@@ -159,3 +162,13 @@ extension LoginVC : UITextFieldDelegate{
     
 }
 
+extension UIViewController:Refreshable {
+    func shouldRefresh() {
+        present(.makeAlert("逾時", "請重新登入", {
+            self.present(LoginVC(), animated: true)
+        }) ,animated: true)
+    }
+    
+    
+    
+}
