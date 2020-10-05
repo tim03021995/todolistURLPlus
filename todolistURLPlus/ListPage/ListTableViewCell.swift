@@ -20,6 +20,9 @@ class ListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1)
+            contentView.layer.cornerRadius = frame.height * 0.06
+            contentView.clipsToBounds = true
+        setCell()
         setLittleCircle()
         setTitleLabel()
         setTitleCircleConstriants()
@@ -28,6 +31,15 @@ class ListTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been imp;emented")
+    }
+    func setCell(){
+        let  fullScreenMaxX = UIScreen.main.bounds.maxX
+        backgroundColor = .clear
+        contentView.layer.borderWidth = 5
+        contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
+        contentView.layer.cornerRadius = fullScreenMaxX * 0.05
+        clipsToBounds = true
     }
     
     func setTitleLabel(){
