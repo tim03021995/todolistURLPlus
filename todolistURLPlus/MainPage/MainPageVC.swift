@@ -219,6 +219,25 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchDown)
             return btn
     }()
+    
+    let loadIndicatorView:UIActivityIndicatorView = {
+        var loading = UIActivityIndicatorView()
+        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
+        loading.color = .white
+        loading.style = .large
+        
+        return loading
+    }()
+    
+    let glass:UIView = {
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+        let glassView = UIVisualEffectView(effect: blurEffect)
+        glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+       // glassView.layer.cornerRadius = 15
+       // glassView.clipsToBounds = true
+        return glassView
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         getCard()
         
@@ -341,6 +360,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     fileprivate func getSingletonImage(userData: GetCardResponse.UserData) {
         UserDataManager.shared.getUserData(email: userData.email) { (image) in
             self.headImage.image = image
+            self.stopLoading()
             //            UserDataManager.shared.userImage = userData
         }
     }
@@ -566,6 +586,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     func getCard(isAdd:Bool = false){
+        startLoading()
 //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let header = ["userToken":token]
@@ -646,6 +667,30 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
+    func startLoading(){
+        glass.alpha = 0.5
+        self.view.addSubview(glass)
+        self.view.addSubview(loadIndicatorView)
+        loadIndicatorView.startAnimating()
+        let animate = UIViewPropertyAnimator(duration: 0, curve: .easeIn) {
+            self.navigationController?.navigationBar.isHidden = true
+            self.glass.alpha = 1
+        }
+        animate.startAnimation()
+    }
+    
+    func stopLoading(){
+        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+            self.glass.alpha = 0
+        }
+        animate.addCompletion { (position) in
+            if position == .end {
+                self.loadIndicatorView.removeFromSuperview()
+                self.glass.removeFromSuperview()
+            }
+        }
+        animate.startAnimation()
+    }
 }
 
 
@@ -666,9 +711,11 @@ enum CollectionViewCellIdentifier: String
 extension MainPageVC: RefreshDelegate
 {
     func refreshImage() {
+        startLoading()
         if let userImage = UserDataManager.shared.userImage
         {
             self.headImage.image = userImage
+            self.stopLoading()
         }
     }
     
