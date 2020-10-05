@@ -11,7 +11,7 @@ import UIKit
 class UserAuthorityCell: UITableViewCell {
     
     var cellTitleLabel = UILabel()
-    var headShot = UIImageView()
+    var headShot = UserImageFactory.makeImageView(size: .small, image: UIImage(named: "single")! )
     var backGroundView = UIView()
     var fullScreenMaxX = UIScreen.main.bounds.maxX
     var fullScreenMaxY = UIScreen.main.bounds.maxY
@@ -30,12 +30,13 @@ class UserAuthorityCell: UITableViewCell {
     }
     
     func updateCell(indexPath:IndexPath, data: [GetGroupResponse.UserData]){
-        backgroundColor = .clear
-        layer.borderWidth = 5
-        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        layer.cornerRadius = fullScreenMaxX * 0.06
-        contentView.layer.borderWidth = 5
-        contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let  fullScreenMaxX = UIScreen.main.bounds.maxX
+        backgroundColor = .white
+//        layer.borderWidth = 5
+//        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        layer.cornerRadius = fullScreenMaxX * 0.06
+  //      contentView.layer.borderWidth = 5
+  //      contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
         contentView.layer.cornerRadius = fullScreenMaxX * 0.06
         clipsToBounds = true
@@ -78,7 +79,7 @@ class UserAuthorityCell: UITableViewCell {
     func setHeadShot() {
         headShot.clipsToBounds = true
         headShot.layer.cornerRadius = fullScreenMaxY * 0.04
-            contentView.addSubview(headShot)
+        contentView.addSubview(headShot)
     }
     
     func setTitleLabelConstraints(){
