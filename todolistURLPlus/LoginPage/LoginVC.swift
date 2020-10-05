@@ -50,17 +50,15 @@ class LoginVC: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
-        //IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = "2test@test.com"
-        passwordTF.text = "test12345"
+        accountTF.text = "alvin@gmail.com"
+        passwordTF.text = "a00000000"
     }
     //MARK:- Functions
   
-    
-    
     fileprivate func propertiesSetting() {
         naviBarSetting()
         accountTF.delegate = self
@@ -91,7 +89,6 @@ class LoginVC: UIViewController, Storyboarded {
     func signIn(){
         //驗證帳密 , 成功的話包裝
         guard let parameters = validateAccount() else{ return }
-        
         //包裝需要的參數
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
         

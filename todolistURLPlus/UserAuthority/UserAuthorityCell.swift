@@ -72,13 +72,13 @@ class UserAuthorityCell: UITableViewCell {
     
     func setTitleLabel(){
         cellTitleLabel.backgroundColor = .clear
-        addSubview(cellTitleLabel)
+            contentView.addSubview(cellTitleLabel)
     }
     
     func setHeadShot() {
         headShot.clipsToBounds = true
         headShot.layer.cornerRadius = fullScreenMaxY * 0.04
-        addSubview(headShot)
+            contentView.addSubview(headShot)
     }
     
     func setTitleLabelConstraints(){

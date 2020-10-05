@@ -18,6 +18,7 @@ class SetInfoVC:CanGetImageViewController{
         navigationController?.navigationBar.isHidden = false
         let image = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        self.navigationController?.navigationBar.shadowImage = image
     }
     override func viewDidAppear(_ animated: Bool) {
         setAction()
@@ -48,26 +49,30 @@ class SetInfoVC:CanGetImageViewController{
 //        self.view = setInfoView
 //    }
     @objc func save(){
+        func updataUserName(){
+            if let userName = setInfoView.nameTextField.text {
+                SetInfoModelManerger.updateUserName(userName) {
+                    print("updata name")
+                    UserDataManager.shared.getUserData { (image) in
+                        self.stopLoading()
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }else{
+                print("not name")
+                self.stopLoading()
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
         loading()
         if let image = setInfoView.peopleView.image {
             SetInfoModelManerger.updateUserImage(image) {
                 print("updata Image")
+                updataUserName()
             }
         }else{
             print("not image")
-        }
-        
-        if let userName = setInfoView.nameTextField.text {
-            SetInfoModelManerger.updateUserName(userName) {
-                print("updata name")
-                UserDataManager.shared.getUserData { (image) in
-                    self.stopLoading()
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
-        }else{
-            print("not name")
-            self.stopLoading()
+            updataUserName()
         }
     }
 
