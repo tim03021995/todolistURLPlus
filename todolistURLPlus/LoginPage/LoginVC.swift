@@ -147,7 +147,7 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     func startLoading(){
-        glass.alpha = 0.5
+        glass.alpha = 0
         self.view.addSubview(glass)
         self.view.addSubview(loadIndicatorView)
         loadIndicatorView.startAnimating()
