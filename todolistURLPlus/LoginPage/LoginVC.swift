@@ -162,3 +162,13 @@ extension LoginVC : UITextFieldDelegate{
     
 }
 
+extension UIViewController:Refreshable {
+    func shouldRefresh() {
+        present(.makeAlert("逾時", "請重新登入", {
+            self.present(LoginVC(), animated: true)
+        }) ,animated: true)
+    }
+    
+    
+    
+}

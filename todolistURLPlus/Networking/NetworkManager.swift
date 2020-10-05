@@ -44,7 +44,7 @@ struct NetworkManager{
             }
         case 401 , 403:
             #warning("refresh token")
-            print("Refresh Token !")
+            completion(.failure(.refreshToken))
         default:
             do{
                 let decodedError = try JSONDecoder().decode(ErrorData.self, from: data)
