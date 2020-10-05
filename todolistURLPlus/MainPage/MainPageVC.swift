@@ -254,14 +254,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        for family: String in UIFont.familyNames
-               {
-                   print(family)
-                   for names: String in UIFont.fontNames(forFamilyName: family)
-                   {
-                       print("== \(names)")
-                   }
-               }
+       
     }
     
     
@@ -615,6 +608,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             case .failure(let err):
                 print(err.description)
             }
+            
+            
         }
     }
     func addCard(){ //新增card的API方法
