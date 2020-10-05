@@ -16,15 +16,45 @@ class MainVC: UIViewController{
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if UserToken.shared.userToken == "" {
+        if let token = UserToken.getToken() {
+            let headers = ["userToken":token]
+            let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
+            NetworkManager.sendRequest(with: request) { (res:Result<GetCardResponse,NetworkError>) in
+                switch res{
+                case .success(_):
+                    let vc = MainPageVC()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: false, completion: nil )
+                case .failure(let err):
+                    switch err  {
+                    case .refreshToken:
+                        let vc = LoginVC.instantiate()
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc, animated: false , completion: nil)
+                    default :
+                        print(err.description)
+                    }
+                    let vc = LoginVC.instantiate()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: false , completion: nil)
+                }
+            }
+        }else {
             let vc = LoginVC.instantiate()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: false , completion: nil)
+
         }
-        else{
-            let vc = MainPageVC()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: false, completion: nil )
-        }
+        
+//                if UserToken.getToken() == nil  {
+//                    let vc = LoginVC.instantiate()
+//                    vc.modalPresentationStyle = .fullScreen
+//                    present(vc, animated: false , completion: nil)
+//                }
+//                else{
+//                    let vc = MainPageVC()
+//                    vc.modalPresentationStyle = .fullScreen
+//                    present(vc, animated: false, completion: nil )
+//                }
     }
 }

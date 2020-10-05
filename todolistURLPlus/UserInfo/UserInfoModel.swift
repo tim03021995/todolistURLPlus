@@ -9,8 +9,8 @@
 import Foundation
 class UserInfoModelManager{
     static func getUserData(email:String,complection:@escaping (GetUserResponse.UserData)->Void){
-        let headers = ["userToken":UserToken.shared.userToken]
-        
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
         NetworkManager.sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
             switch res {

@@ -15,6 +15,7 @@ enum NetworkError:Error{
     case noData
     case decodeError(struct: String)
     case responseError(error: ErrorData, statusCode: Int)
+    case refreshToken
 
     
     ///開發者用錯誤訊息 status code 或自定義錯誤訊息
@@ -27,6 +28,7 @@ enum NetworkError:Error{
         case .decodeError(let structure):  return "Decode Error with \(structure)"
         case .responseError(error: _ , statusCode: let statusCode):
                             return "Response Error , Status Code:\(statusCode) "
+        case .refreshToken: return "Refresh Token!"
             
         }
     }
@@ -41,8 +43,15 @@ enum NetworkError:Error{
         }
     }
     
+
+    
 }
 struct ErrorData:Codable{
     let status : Bool
     let error : String
 }
+
+protocol Refreshable {
+    func shouldRefresh()
+}
+

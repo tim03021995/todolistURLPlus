@@ -48,8 +48,9 @@ class UserAuthorityVC: UIViewController {
     
     ///GET 這張卡片有哪些使用者
     func getAllUsers(cardID:Int){
-        let header = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: header, id: cardID).send()
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
+        let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: headers, id: cardID).send()
         NetworkManager.sendRequest(with: request) { (result:Result<GetGroupResponse,NetworkError>) in
             switch result {
             case .success(let data): self.users = data.usersData
@@ -66,7 +67,8 @@ class UserAuthorityVC: UIViewController {
             present(.makeAlert("Error", "Can't Delete Card Owner", {}), animated: true)
             return
         }
-        let headers = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
         let parameters = ["user_id":users[indexPath.row].id]
         let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .DELETE, parameters: parameters, headers: headers, id: cardID).send()
         NetworkManager.sendRequest(with: request) { (res:Result<DeleteGroupResponse,NetworkError>) in

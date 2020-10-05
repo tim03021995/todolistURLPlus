@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct NetworkManager {
-    
+struct NetworkManager{
+        
     static func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
@@ -35,7 +35,7 @@ struct NetworkManager {
             do{
                 let decotedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decotedData))
-                print("============= \(T.self) success ============== ")
+                print("============= \(T.self) success ==============")
                 
             }catch{
                 print("======================== Decode Error ========================")
@@ -44,7 +44,7 @@ struct NetworkManager {
             }
         case 401 , 403:
             #warning("refresh token")
-            print("Refresh Token !")
+            completion(.failure(.refreshToken))
         default:
             do{
                 let decodedError = try JSONDecoder().decode(ErrorData.self, from: data)
@@ -63,3 +63,4 @@ protocol LoadingViewDelegate {
     
     func stopLoading()
 }
+
