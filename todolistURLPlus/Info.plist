@@ -28,6 +28,10 @@
 	<string>open cam</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>open cam</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>myFont.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
