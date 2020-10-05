@@ -54,8 +54,8 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = "2test@test.com"
-        passwordTF.text = "test12345"
+        accountTF.text = "alvin@gmail.com"
+        passwordTF.text = "a00000000"
     }
     //MARK:- Functions
   
