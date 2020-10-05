@@ -46,9 +46,9 @@ enum ContentType:String{
 
 //MARK:- Token
 struct UserToken {
-    private(set) var userToken = ""
-    private init(){}
-    static var shared = UserToken()
+//    private(set) var userToken = ""
+//    private init(){}
+//    static var shared = UserToken()
     
     ///拿token 如果沒有的話 回傳nil
     static func getToken() -> String?{
@@ -57,21 +57,24 @@ struct UserToken {
         return token
     }
     
-    mutating func updateToken(by token: String){
-        userToken = token
-        print(userToken)
-//        updateTokenToUserdefault(with: token)
+    static func updateToken(by token: String){
+//        userToken = token
+//        print(userToken)
+        updateTokenToUserdefault(with: token)
     }
     
     private static func updateTokenToUserdefault(with token:String){
         UserDefaults.standard.set(token, forKey: "token")
     }
 
-    mutating func clearToken(){
-        userToken = ""
+    static func clearToken(){
+//        userToken = ""
         print("Token cleared")
-//        updateTokenToUserdefault(with: "")
+        updateTokenToUserdefault(with: "")
     }
     
+    static func rememberAccount(account:String){
+        UserDefaults.standard.set(account, forKey: "account")
+    }
     
 }

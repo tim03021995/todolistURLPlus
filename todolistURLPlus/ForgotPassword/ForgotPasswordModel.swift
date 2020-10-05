@@ -9,7 +9,8 @@
 import Foundation
 class ForgotPasswordModel{
     static func updateUserPassword(password:String,_ compeletion:@escaping (Result<PutUserResponse,NetworkError>)->Void){
-        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let header = ["userToken":token]
         let parameters = makeParameters(nil, password)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
         NetworkManager.sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in

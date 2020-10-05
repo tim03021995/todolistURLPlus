@@ -561,8 +561,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     func getCard(){
-        let header = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
         NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
@@ -584,11 +585,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     func addCard(complection:@escaping()->Void){ //新增card的API方法
-        let header = ["userToken":UserToken.shared.userToken]
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
         
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: headers).send()
         
         NetworkManager.sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
             switch result{
@@ -605,8 +607,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
    
     func deleteCard(indexPath: IndexPath){
-        let header = ["userToken":UserToken.shared.userToken]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: header, id: showCards[indexPath.row].id).send()
+        guard let token = UserToken.getToken() else{ print("No Token"); return }
+        let headers = ["userToken":token]
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: headers, id: showCards[indexPath.row].id).send()
         
         NetworkManager.sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
             switch result{

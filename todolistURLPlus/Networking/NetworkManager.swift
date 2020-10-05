@@ -8,13 +8,8 @@
 
 import Foundation
 
-struct NetworkManager: RefreshTokenDelegate{
-    func shoudReturnRootVC() {
+struct NetworkManager{
         
-    }
-    
-    var delegate:RefreshTokenDelegate?
-    
     static func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
@@ -69,6 +64,3 @@ protocol LoadingViewDelegate {
     func stopLoading()
 }
 
-protocol RefreshTokenDelegate {
-    func shoudReturnRootVC()
-}

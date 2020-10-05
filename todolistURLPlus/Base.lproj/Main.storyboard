@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,14 +31,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogZ-eP-Qi1" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogZ-eP-Qi1" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="41.5" y="632.5" width="331" height="44.5"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="signInTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zh4-mK-FIH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GY-fj-Wh0" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GY-fj-Wh0" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="41.5" y="707" width="331" height="45"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
@@ -48,28 +50,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH6-ym-TKH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH6-ym-TKH">
                                 <rect key="frame" x="164" y="842" width="86" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Forget Password?">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BA-mA-gQ0">
                                 <rect key="frame" x="41.5" y="291" width="331" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-FN-7h5">
                                 <rect key="frame" x="41.5" y="386" width="331" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ii-GJ-c6k">
+                                <rect key="frame" x="41.5" y="417" width="19.5" height="17.5"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" backgroundImage="square" catalog="system"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="3ii-GJ-c6k" firstAttribute="top" secondItem="jfg-Kb-sf8" secondAttribute="bottom" constant="30" id="8rO-uQ-73J"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.6" id="9cS-Lr-5SN"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AnE-as-rLV"/>
                             <constraint firstItem="9BA-mA-gQ0" firstAttribute="width" secondItem="SQh-C3-qh0" secondAttribute="width" id="Dpl-NJ-hTr"/>
@@ -89,6 +98,7 @@
                             <constraint firstItem="1GY-fj-Wh0" firstAttribute="top" secondItem="ogZ-eP-Qi1" secondAttribute="bottom" constant="30" id="bzh-d3-hBd"/>
                             <constraint firstItem="R0q-FN-7h5" firstAttribute="top" secondItem="jfg-Kb-sf8" secondAttribute="bottom" id="e1c-I3-gq2"/>
                             <constraint firstItem="Fuw-2L-Pfk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="eFC-2K-Hew"/>
+                            <constraint firstItem="3ii-GJ-c6k" firstAttribute="leading" secondItem="jfg-Kb-sf8" secondAttribute="leading" id="epk-DY-KW6"/>
                             <constraint firstItem="zsT-PP-cbg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.25" id="gAd-jw-Bd5"/>
                             <constraint firstItem="ogZ-eP-Qi1" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="i87-ae-Abo"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="kn6-XX-SCh"/>
@@ -102,7 +112,6 @@
                             <constraint firstItem="Fuw-2L-Pfk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xjF-dq-j26"/>
                             <constraint firstItem="1GY-fj-Wh0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yue-3i-Q9d"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="HbE-Nj-duz"/>
                     <connections>
@@ -111,6 +120,7 @@
                         <outlet property="naviItem" destination="HbE-Nj-duz" id="KgG-hT-kxk"/>
                         <outlet property="passwordErrorLabel" destination="R0q-FN-7h5" id="mMU-CV-Q94"/>
                         <outlet property="passwordTF" destination="jfg-Kb-sf8" id="Rqk-h0-kXH"/>
+                        <outlet property="rememberMeBTN" destination="3ii-GJ-c6k" id="cRH-yr-DCK"/>
                         <outlet property="signInBtn" destination="ogZ-eP-Qi1" id="xPN-mc-Q8x"/>
                         <outlet property="signUpBtn" destination="1GY-fj-Wh0" id="6Yv-Uf-Eob"/>
                     </connections>
@@ -142,7 +152,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI6-8t-2RH">
                                         <rect key="frame" x="30" y="107.5" width="271" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5kL-Bd-Nuq" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
@@ -157,7 +167,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cd0-Yj-E2q">
                                         <rect key="frame" x="30" y="197" width="271" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDL-ho-khu" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
@@ -172,7 +182,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxV-jQ-JGH">
                                         <rect key="frame" x="30" y="286.5" width="271" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1uw-d6-u50" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
@@ -187,7 +197,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-eF-6lF">
                                         <rect key="frame" x="30" y="376.5" width="271" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -235,7 +245,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRN-51-uoN" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRN-51-uoN" customClass="CustomButton" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="41.5" y="734.5" width="331" height="54"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
@@ -257,7 +267,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hWV-NR-JIg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="hWV-NR-JIg" firstAttribute="trailing" secondItem="NBB-z2-T7R" secondAttribute="trailing" constant="30" id="34f-Dw-0ok"/>
                             <constraint firstItem="Fc9-ZG-NBr" firstAttribute="centerY" secondItem="f9S-oR-EBy" secondAttribute="centerY" multiplier="0.2" id="350-1d-2MT"/>
@@ -273,7 +284,6 @@
                             <constraint firstItem="zjT-JH-SMO" firstAttribute="width" secondItem="f9S-oR-EBy" secondAttribute="width" multiplier="0.8" id="fmA-Ku-zOW"/>
                             <constraint firstItem="CRN-51-uoN" firstAttribute="width" secondItem="zjT-JH-SMO" secondAttribute="width" id="tO3-cn-PtA"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="hWV-NR-JIg"/>
                     </view>
                     <connections>
                         <outlet property="checkPasswordErrorLabel" destination="h1M-eF-6lF" id="iSc-Qe-erf"/>
@@ -295,6 +305,13 @@
     </scenes>
     <resources>
         <image name="background1" width="768" height="1366"/>
+        <image name="square" catalog="system" width="128" height="114"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
