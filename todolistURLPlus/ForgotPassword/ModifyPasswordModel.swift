@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class ForgotPasswordModel{
+class ModifyPasswordModel{
     static func updateUserPassword(password:String,_ compeletion:@escaping (Result<PutUserResponse,NetworkError>)->Void){
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let header = ["userToken":token]

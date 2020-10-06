@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ForgotPasswordVC: CanGetImageViewController {
-    let forgotPasswordView = ForgotPasswordView()
+class ModifyPasswordVC: CanGetImageViewController {
+    let forgotPasswordView = ModifyPasswordView()
     override func loadView() {
         super .loadView()
         forgotPasswordView.passwordTextField.delegate = self
@@ -35,7 +35,7 @@ class ForgotPasswordVC: CanGetImageViewController {
     }
     
     func updataPassWord(_ password:String){
-        ForgotPasswordModel.updateUserPassword(password: password) { (result) in
+        ModifyPasswordModel.updateUserPassword(password: password) { (result) in
             switch result {
             case .success( _):
                 print("update success")
@@ -53,7 +53,7 @@ class ForgotPasswordVC: CanGetImageViewController {
     }
     
 }
-extension ForgotPasswordVC:UITextFieldDelegate{
+extension ModifyPasswordVC:UITextFieldDelegate{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
