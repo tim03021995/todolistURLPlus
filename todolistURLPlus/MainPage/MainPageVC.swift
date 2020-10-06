@@ -40,9 +40,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             singleCardCollectionView.reloadData()
         }
     }
-    
-    ///設置背景
-    
+    //儲存卡片是新增模式還是編輯模式進到下一頁的
+    var cardStyle: TaskModel.FuntionType?
     var userName: GetUserResponse!
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
@@ -319,10 +318,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
     fileprivate func toListPageVC(indexPathRow: Int, whichStyle: WhichCollectionView) {
-        
+        print("Here")
         let lPVC = ListPageVC()
         lPVC.delegate = self
-        lPVC.collectionStyle = whichStyle
+
         let nVC = UINavigationController(rootViewController: lPVC)
         if whichStyle == .single
         {
@@ -602,7 +601,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             let index = IndexPath(item: (self.showMutipleCards.count - 1), section: 0)
             self.mutipleCardCollectionView.scrollToItem(at: index, at: .right, animated: true)
             self.mutipleCardCollectionView.isHidden = false
-            self.mutipleCardCollectionView.isHidden = true
+            self.singleCardCollectionView.isHidden = true
             self.singleCheckMark.isHidden = true
             self.mutipleCheckMark.isHidden = false
         }
@@ -631,10 +630,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.mutipleCardCollectionView.reloadData()
                 if isAdd
                 {
-                    self.showNewestItem()
                     self.toListPageVC(indexPathRow: (self.showSingleCards.count - 1), whichStyle: .single)
                     
                     
+                    self.showNewestItem()
                 }
             case .failure(let err):
                 print(err.description)
@@ -657,6 +656,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 
             case .success(let data):
                 print("目前新增的卡片ID = \(data.cardData.id)")
+                self.cardStyle = .create
                 self.getCard(isAdd: true)
             case .failure(let err):
                 print("err.description = \(err.description)")
@@ -746,7 +746,17 @@ extension MainPageVC: RefreshDelegate
     }
     
     func refreshCardName() {
+        if let cardStyle = self.cardStyle
+        {
+            if cardStyle == .create
+            {
+                getCard(isAdd: true)
+                self.cardStyle = nil
+            }
+        }else
+        {
         getCard()
+        }
     }
     
     

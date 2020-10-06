@@ -16,7 +16,6 @@ class ListPageVC: UIViewController {
     
     var showTasks:[GetCardResponse.ShowTask] = []
     
-    var collectionStyle: WhichCollectionView!
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
