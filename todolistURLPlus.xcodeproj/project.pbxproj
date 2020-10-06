@@ -71,6 +71,7 @@
 		5332F8AC250679F900192A5F /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		53C16105250910E700C91D16 /* ListPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageVC.swift; sourceTree = "<group>"; };
 		53CCD0F8252AF20F00A1F03F /* myFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = myFont.ttf; sourceTree = "<group>"; };
+		53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RuiZiYunZiKuXingKaiGB-2.ttf"; sourceTree = "<group>"; };
 		97077B862512189E000139E6 /* searchMemberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchMemberVC.swift; sourceTree = "<group>"; };
 		97077B892512189E000139E6 /* UserAuthorityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityVC.swift; sourceTree = "<group>"; };
 		97077B8C2512189E000139E6 /* UserAuthorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityCell.swift; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				53CCD0F8252AF20F00A1F03F /* myFont.ttf */,
+				53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */,
 			);
 			path = myResource;
 			sourceTree = "<group>";
@@ -408,6 +410,7 @@
 				D23505EB24FCCAB400F4CC6E /* LaunchScreen.storyboard in Resources */,
 				D23505E824FCCAB400F4CC6E /* Assets.xcassets in Resources */,
 				53CCD0F9252AF21000A1F03F /* myFont.ttf in Resources */,
+				53CCD102252C246D00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */,
 				D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */,
 				D2B0644B25009FEB00000444 /* .gitattributes in Resources */,
 			);
@@ -615,6 +618,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				DEVELOPMENT_TEAM = KA6B4A6D5D;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
@@ -622,7 +626,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -643,7 +647,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

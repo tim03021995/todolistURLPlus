@@ -9,6 +9,7 @@
 import UIKit
 
 class CardCell: UICollectionViewCell {
+    let fontName = "Reeji-CloudKaiXing-GB-Regular"
     lazy var cardTitle: UILabel =
     {
         let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
@@ -16,8 +17,7 @@ class CardCell: UICollectionViewCell {
             width: self.frame.width * 0.8,
             height: self.frame.height * 0.8))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-        label.font = .preferredFont(forTextStyle: .largeTitle)
-        //label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.2)
+        label.font = UIFont(name: self.fontName, size: self.frame.width * 0.2)
         label.clipsToBounds = true
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -32,8 +32,8 @@ class CardCell: UICollectionViewCell {
             width: self.frame.width * 0.8,
             height: self.frame.height * 0.8))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-        //label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.15)
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = UIFont(name: self.fontName, size: self.frame.width * 0.15)
+//        label.font = 
         label.clipsToBounds = true
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -48,8 +48,7 @@ class CardCell: UICollectionViewCell {
             width: self.frame.width * 0.8,
             height: self.frame.height * 0.8))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-       // label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.15)
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = UIFont(name: self.fontName, size: self.frame.width * 0.15)
         label.clipsToBounds = true
         label.textAlignment = .left
         label.numberOfLines = 0
