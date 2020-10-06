@@ -42,7 +42,7 @@ class UserInfoVC: CanGetImageViewController {
 
     }
     @objc func modifyPassword(){
-        let vc = ForgotPasswordVC()
+        let vc = ModifyPasswordVC()
         navigationController?.navigationItem.backBarButtonItem?.title = "返回"
         navigationController?.navigationItem.backBarButtonItem?.tintColor = .white
                 navigationController?.pushViewController(vc, animated: true)

@@ -24,15 +24,15 @@
 		D23505EB24FCCAB400F4CC6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E924FCCAB400F4CC6E /* LaunchScreen.storyboard */; };
 		D249010C2508EBB2003E9497 /* GlassFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249010B2508EBB2003E9497 /* GlassFactory.swift */; };
 		D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D249010E25090551003E9497 /* IQKeyboardManagerSwift */; };
-		D249011225090A40003E9497 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011125090A40003E9497 /* ForgotPasswordVC.swift */; };
-		D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011325090A63003E9497 /* ForgotPasswordView.swift */; };
+		D249011225090A40003E9497 /* ModifyPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011125090A40003E9497 /* ModifyPasswordVC.swift */; };
+		D249011425090A63003E9497 /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011325090A63003E9497 /* ModifyPasswordView.swift */; };
 		D24901162510A41C003E9497 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24901152510A41C003E9497 /* MainVC.swift */; };
 		D24901182511FD2D003E9497 /* SetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24901172511FD2C003E9497 /* SetInfoModel.swift */; };
 		D24B07FD251C66840073917E /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B07FC251C66840073917E /* UserInfoModel.swift */; };
 		D24B0846251DDF990073917E /* CanGetImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B0845251DDF990073917E /* CanGetImageViewController.swift */; };
 		D24B0849251DE0E90073917E /* KeyBoardPushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B0848251DE0E90073917E /* KeyBoardPushView.swift */; };
 		D24B084C2521A5600073917E /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B084B2521A5600073917E /* UserDataManager.swift */; };
-		D24B085A2522E5770073917E /* ForgotPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B08592522E5770073917E /* ForgotPasswordModel.swift */; };
+		D24B085A2522E5770073917E /* ModifyPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B08592522E5770073917E /* ModifyPasswordModel.swift */; };
 		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
@@ -87,15 +87,15 @@
 		D23505EA24FCCAB400F4CC6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D23505EC24FCCAB400F4CC6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D249010B2508EBB2003E9497 /* GlassFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassFactory.swift; sourceTree = "<group>"; };
-		D249011125090A40003E9497 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
-		D249011325090A63003E9497 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		D249011125090A40003E9497 /* ModifyPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordVC.swift; sourceTree = "<group>"; };
+		D249011325090A63003E9497 /* ModifyPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordView.swift; sourceTree = "<group>"; };
 		D24901152510A41C003E9497 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		D24901172511FD2C003E9497 /* SetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoModel.swift; sourceTree = "<group>"; };
 		D24B07FC251C66840073917E /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		D24B0845251DDF990073917E /* CanGetImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanGetImageViewController.swift; sourceTree = "<group>"; };
 		D24B0848251DE0E90073917E /* KeyBoardPushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardPushView.swift; sourceTree = "<group>"; };
 		D24B084B2521A5600073917E /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
-		D24B08592522E5770073917E /* ForgotPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModel.swift; sourceTree = "<group>"; };
+		D24B08592522E5770073917E /* ModifyPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordModel.swift; sourceTree = "<group>"; };
 		D24D01D225074D4F00016630 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D291DEAA2500FAB3001FE33E /* SetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoView.swift; sourceTree = "<group>"; };
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
@@ -218,9 +218,9 @@
 		D2490110250909ED003E9497 /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
-				D249011125090A40003E9497 /* ForgotPasswordVC.swift */,
-				D249011325090A63003E9497 /* ForgotPasswordView.swift */,
-				D24B08592522E5770073917E /* ForgotPasswordModel.swift */,
+				D249011125090A40003E9497 /* ModifyPasswordVC.swift */,
+				D249011325090A63003E9497 /* ModifyPasswordView.swift */,
+				D24B08592522E5770073917E /* ModifyPasswordModel.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -438,13 +438,13 @@
 				FB43E2C825106C3E00687CFF /* NetworkManager.swift in Sources */,
 				D24B07FD251C66840073917E /* UserInfoModel.swift in Sources */,
 				D24B0849251DE0E90073917E /* KeyBoardPushView.swift in Sources */,
-				D249011425090A63003E9497 /* ForgotPasswordView.swift in Sources */,
+				D249011425090A63003E9497 /* ModifyPasswordView.swift in Sources */,
 				9718BB8F2509BE14002C8E71 /* ListTableViewCell.swift in Sources */,
 				FBE0EAED2514B695007083BC /* UserResponse.swift in Sources */,
 				FB7477D9251B41F600FB72B8 /* SearchVC.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
-				D24B085A2522E5770073917E /* ForgotPasswordModel.swift in Sources */,
-				D249011225090A40003E9497 /* ForgotPasswordVC.swift in Sources */,
+				D24B085A2522E5770073917E /* ModifyPasswordModel.swift in Sources */,
+				D249011225090A40003E9497 /* ModifyPasswordVC.swift in Sources */,
 				D24B084C2521A5600073917E /* UserDataManager.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
 				97077B8D2512189E000139E6 /* searchMemberVC.swift in Sources */,
@@ -622,6 +622,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KA6B4A6D5D;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -22,7 +22,6 @@ class CardCell: UICollectionViewCell {
             label.numberOfLines = 0
             label.clipsToBounds = true
             label.textAlignment = .left
-            label.numberOfLines = 0
             return label
         }()
     lazy var subText: UILabel =
@@ -168,21 +167,21 @@ class CardCell: UICollectionViewCell {
         cardTitle.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(20)
             make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset( -20)
             make.height.equalToSuperview().multipliedBy(0.2)
         }
         subText.snp.makeConstraints { (make) in
             // make.top.equalTo(cardTitle.snp.bottom).offset(10)
             make.bottom.equalTo(subText2.snp.top).offset(-10)
             make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalToSuperview().multipliedBy(0.1)
         }
         subText2.snp.makeConstraints { (make) in
             //make.top.equalTo(cardID.snp.bottom).offset(10)
             make.bottom.equalToSuperview().offset(-10)
             make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalToSuperview().multipliedBy(0.1)
         }
     }
