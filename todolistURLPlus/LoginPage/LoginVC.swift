@@ -32,12 +32,7 @@ extension Storyboarded where Self: UIViewController {
 
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
-    var rememberStatus:Bool? {
-        didSet{
-            rememberStatus = rememberMeBTN.isSelected
-            UserToken.rememberMe(status: rememberStatus ?? false)
-        }
-    }
+
     
     @IBOutlet weak var rememberMeBTN: UIButton!
     
@@ -70,16 +65,31 @@ class LoginVC: UIViewController, Storyboarded {
         glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
         return glassView
     }()
+    
     //MARK:- ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
         IQKeyboardManager.shared.enable = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = "alvin@gmail.com"
-        passwordTF.text = "a00000000"
+        accountTF.text = UserDefaults.standard.getUserAccount()
+        rememberMeBTN.isSelected = UserDefaults.standard.isLoggedIn()
+
+//        accountTF.text = "alvin@gmail.com"
+//        passwordTF.text = "a00000000"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //set userdefault
+        if rememberMeBTN.isSelected{
+            UserDefaults.standard.saveAccount(account: accountTF.text ?? "")
+        }else {
+            UserDefaults.standard.saveAccount(account: "")
+        }
+        UserDefaults.standard.setIsLoggedInStatus(status: rememberMeBTN.isSelected)
     }
     //MARK:- Functions
   
@@ -145,8 +155,6 @@ class LoginVC: UIViewController, Storyboarded {
     
     @IBAction func rememberTapped(_ sender: UIButton) {
         rememberMeBTN.isSelected = !rememberMeBTN.isSelected
-        rememberStatus = !rememberStatus!
-
     }
     
     @IBAction func signInTapped(_ sender: CustomButton) {
@@ -170,6 +178,7 @@ class LoginVC: UIViewController, Storyboarded {
         }
         animate.startAnimation()
     }
+    
     func stopLoading(){
         let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
             self.glass.alpha = 0
