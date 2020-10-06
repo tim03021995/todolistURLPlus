@@ -45,6 +45,7 @@
 		D2B0644B25009FEB00000444 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = D2B0644A25009FEB00000444 /* .gitattributes */; };
 		D2B0644E2500B4C600000444 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2B0644D2500B4C600000444 /* SnapKit */; };
 		D2B064532500E71500000444 /* UserImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* UserImageFactory.swift */; };
+		FB2077B7252B1573000A2BD9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2077B6252B1573000A2BD9 /* Protocols.swift */; };
 		FB2C0D4D25075D9500C68391 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2C0D4C25075D9500C68391 /* StringExtension.swift */; };
 		FB34E1192509E05E000F5EAD /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB34E1182509E05E000F5EAD /* TaskResponse.swift */; };
 		FB43E2C6251054E900687CFF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43E2C5251054E900687CFF /* NetworkError.swift */; };
@@ -105,6 +106,7 @@
 		D2B0644625008AC700000444 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D2B0644A25009FEB00000444 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		D2B064522500E71500000444 /* UserImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageFactory.swift; sourceTree = "<group>"; };
+		FB2077B6252B1573000A2BD9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FB2C0D4C25075D9500C68391 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		FB34E1182509E05E000F5EAD /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		FB43E2C5251054E900687CFF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				FB2C0D4C25075D9500C68391 /* StringExtension.swift */,
 				D24B0845251DDF990073917E /* CanGetImageViewController.swift */,
 				D24B084B2521A5600073917E /* UserDataManager.swift */,
+				FB2077B6252B1573000A2BD9 /* Protocols.swift */,
 			);
 			path = Ex;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				D24D01D325074D4F00016630 /* TaskModel.swift in Sources */,
 				D2B064422500891A00000444 /* ColorSet.swift in Sources */,
 				D291DEB22505D371001FE33E /* CardEditView.swift in Sources */,
+				FB2077B7252B1573000A2BD9 /* Protocols.swift in Sources */,
 				D249010C2508EBB2003E9497 /* GlassFactory.swift in Sources */,
 				D2B064532500E71500000444 /* UserImageFactory.swift in Sources */,
 				D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */,
@@ -616,6 +620,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KA6B4A6D5D;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (

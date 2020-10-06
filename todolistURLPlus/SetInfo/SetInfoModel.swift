@@ -20,7 +20,7 @@ class SetInfoModelManerger{
         let body = makeBody(dataPath, boundary)
         let request = HTTPRequest(endpoint: .userImage, contentType: .formData, method: .POST, headers: header)
         print(#function)
-        NetworkManager.sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostUserImageResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostUserImageResponse,NetworkError>) in
             switch result {
             case .success( _):
                 print("update success")
@@ -37,7 +37,7 @@ class SetInfoModelManerger{
         let header = ["userToken":token]
         let parameters = makeParameters(userName, nil)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
-        NetworkManager.sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in
             switch result {
             case .success( _):
                 print("update success")

@@ -64,6 +64,24 @@ class ListPageVC: UIViewController {
             
             return btn
     }()
+        private let loadIndicatorView:UIActivityIndicatorView = {
+            var loading = UIActivityIndicatorView()
+            loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
+            loading.color = .black
+            loading.style = .large
+            
+            return loading
+        }()
+        private let glass:UIView = {
+            let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+            let glassView = UIVisualEffectView(effect: blurEffect)
+            glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+            glassView.layer.cornerRadius = 15
+            glassView.clipsToBounds = true
+            glassView.alpha = 1
+            return glassView
+        }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubview()
@@ -75,6 +93,7 @@ class ListPageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         creatTaskBtn.isEnabled = true
+        startLoading()
     }
     override func viewDidAppear(_ animated: Bool) {
         getTask()
@@ -131,10 +150,11 @@ class ListPageVC: UIViewController {
     }
     
     func getTask(){
+        startLoading()
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):
@@ -143,9 +163,10 @@ class ListPageVC: UIViewController {
                 let showCards = data.userData.showCards
                 self.classifiedSingleAndMutiple(showCards: showCards)
                 self.listBaseView.tableView.reloadData()
-                
+                self.stopLoading()
             case .failure(let err):
                 print("Get失敗\(err.description)")
+                self.stopLoading()
             }
         }
     }
@@ -194,8 +215,7 @@ extension ListPageVC: UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
+        startLoading()
         let vc = CardEditVC()
         let task = showTasks[indexPath.section]
         
@@ -207,23 +227,45 @@ extension ListPageVC: UITableViewDataSource{
         
     }
     func putCardName(){
+        //startLoading()
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let parameters: [String: Any] = ["card_name": cardTitleTextField.text ?? ""]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: showCard.id).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
             switch result {
                 
             case .success( _):
                print("卡片名稱更新成功")
                self.delegate.refreshCardName()
-                
+                self.stopLoading()
             case .failure(let err):
                 print(err.description)
                 self.delegate.refreshCardName()
-
+                self.stopLoading()
             }
         }
+    }
+    private func startLoading(){
+        //self.view.addSubview(glass)
+        self.view.addSubview(loadIndicatorView)
+        loadIndicatorView.startAnimating()
+//        let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
+//            self.glass.alpha = 1
+//        }
+//        animate.startAnimation()
+    }
+   private func stopLoading(){
+    let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
+            //self.glass.alpha = 0
+        }
+        animate.addCompletion { (position) in
+            if position == .end {
+                self.loadIndicatorView.removeFromSuperview()
+                //self.glass.removeFromSuperview()
+            }
+        }
+        animate.startAnimation()
     }
     
     
@@ -241,5 +283,10 @@ extension ListPageVC: UITextFieldDelegate
         putCardName()
         return true
     }
+}
+
+protocol Loadingable{
+    func startLoading()
+    func stopLoading()
 }
 

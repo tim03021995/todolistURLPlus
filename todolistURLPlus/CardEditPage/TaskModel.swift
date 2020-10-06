@@ -45,7 +45,7 @@ class TaskModelManager{
         let body = makeBody(parameters, dataPath, boundary)
         let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, headers: headers)
         print(#function)
-        NetworkManager.sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostTaskResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PostTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
                 print("create success")
@@ -66,7 +66,7 @@ class TaskModelManager{
         let body = makeBody(parameters, dataPath, boundary)
         print(parameters)
         let request = HTTPRequest(endpoint: .task, contentType: .formData, method: .POST, headers: headers, id: taskID)
-        NetworkManager.sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PutTaskResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request.imageRequest(boundary: boundary, data: body)) { (result:Result<PutTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
                 print("edit success")
@@ -131,7 +131,7 @@ class TaskModelManager{
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let request = HTTPRequest(endpoint:.task, contentType: .json, method:.DELETE, headers: headers, id:taskID).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<DeleteTaskResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<DeleteTaskResponse,NetworkError>) in
             switch result {
             case .success(let a):
                 print("delete success")

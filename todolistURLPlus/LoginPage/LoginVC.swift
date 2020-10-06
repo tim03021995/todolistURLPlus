@@ -32,6 +32,9 @@ extension Storyboarded where Self: UIViewController {
 
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
+
+    @IBOutlet weak var eyeBtn: UIButton!
+    
     @IBOutlet weak var rememberMeBTN: UIButton!
     
     @IBOutlet weak var naviItem: UINavigationItem!
@@ -63,21 +66,38 @@ class LoginVC: UIViewController, Storyboarded {
         glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
         return glassView
     }()
+    
     //MARK:- ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
         IQKeyboardManager.shared.enable = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = "2test@test.com"
-        passwordTF.text = "test12345"
+        accountTF.text = UserDefaults.standard.getUserAccount()
+        rememberMeBTN.isSelected = UserDefaults.standard.isLoggedIn()
+        passwordTF.text = ""
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //set userdefault
+        if rememberMeBTN.isSelected{
+            UserDefaults.standard.saveAccount(account: accountTF.text ?? "")
+        }else {
+            UserDefaults.standard.saveAccount(account: "")
+        }
+        UserDefaults.standard.setIsLoggedInStatus(status: rememberMeBTN.isSelected)
     }
     //MARK:- Functions
   
     fileprivate func propertiesSetting() {
-        
+        eyeBtn.setImage(UIImage(systemName: "eye"), for: .selected)
+        eyeBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+
+        rememberMeBTN.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .selected)
+        rememberMeBTN.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         naviBarSetting()
         accountTF.delegate = self
         accountTF.placeholder = "E-Mail"
@@ -105,13 +125,17 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     func signIn(){
-        startLoading()
         //驗證帳密 , 成功的話包裝
-        guard let parameters = validateAccount() else{ return }
+        guard let parameters = validateAccount() else{
+            present(.makeAlert("Error", "請輸入正確帳號密碼", {
+            }) ,animated: true)
+            signInBtn.isEnabled = true
+            return }
         //包裝需要的參數
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
+        startLoading()
         
-        NetworkManager.sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
+        NetworkManager().sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
                 
@@ -123,7 +147,7 @@ class LoginVC: UIViewController, Storyboarded {
                 let vc = MainPageVC()
                 vc.modalPresentationStyle = .fullScreen
                 self.stopLoading()
-                self.present(vc, animated: false)
+                self.present(vc, animated: true)
                 
             case .failure(let err):
                 self.stopLoading()
@@ -133,6 +157,10 @@ class LoginVC: UIViewController, Storyboarded {
                 print(err.description)
             }
         }
+    }
+    
+    @IBAction func rememberTapped(_ sender: UIButton) {
+        rememberMeBTN.isSelected = !rememberMeBTN.isSelected
     }
     
     @IBAction func signInTapped(_ sender: CustomButton) {
@@ -146,8 +174,12 @@ class LoginVC: UIViewController, Storyboarded {
         
     }
     
+    @IBAction func eyeTapped(_ sender: UIButton) {
+        eyeBtn.isSelected = !eyeBtn.isSelected
+        passwordTF.isSecureTextEntry = !passwordTF.isSecureTextEntry
+    }
     func startLoading(){
-        glass.alpha = 0.5
+        glass.alpha = 0
         self.view.addSubview(glass)
         self.view.addSubview(loadIndicatorView)
         loadIndicatorView.startAnimating()
@@ -156,6 +188,7 @@ class LoginVC: UIViewController, Storyboarded {
         }
         animate.startAnimation()
     }
+    
     func stopLoading(){
         let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
             self.glass.alpha = 0
@@ -199,17 +232,23 @@ extension LoginVC : UITextFieldDelegate{
         }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let count = text.count + string.count - range.length
+        
+        switch textField {
+        case accountTF:
+            accountErrorLabel.text = count > 12 ? "字數不可超過12個字元" : ""
+        case passwordTF:
+            passwordErrorLabel.text = count > 12 ? "密碼不可超過12個字元" : ""
+        default:
+            break
+        }
+        return count <= 12
+
+    }
     
     
 }
 
-extension UIViewController:Refreshable {
-    func shouldRefresh() {
-        present(.makeAlert("逾時", "請重新登入", {
-            self.present(LoginVC(), animated: true)
-        }) ,animated: true)
-    }
-    
-    
-    
-}
+

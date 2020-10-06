@@ -16,15 +16,55 @@ class CardCell: UICollectionViewCell {
             width: self.frame.width * 0.8,
             height: self.frame.height * 0.8))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-        label.font = UIFont(name: "Reeji-CloudKaiXing-GB-Regular", size: self.frame.width * 0.15)
+        label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.2)
         label.clipsToBounds = true
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.numberOfLines = 0
         
 
         return label
     }()
-    
+    lazy var cardID: UILabel =
+    {
+        let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
+            y: self.frame.height * 0.1,
+            width: self.frame.width * 0.8,
+            height: self.frame.height * 0.8))
+        label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
+        label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.15)
+//        label.font = 
+        label.clipsToBounds = true
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        
+
+        return label
+    }()
+    lazy var cardState: UILabel =
+    {
+        let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
+            y: self.frame.height * 0.1,
+            width: self.frame.width * 0.8,
+            height: self.frame.height * 0.8))
+        label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
+        label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.15)
+        label.clipsToBounds = true
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        
+
+        return label
+    }()
+    lazy var myBackgroundView : UIView =
+    {
+        let view = GlassFactory.makeGlass(style: .systemUltraThinMaterial)
+        view.layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        view.layer.shadowOffset = CGSize(width: 10 , height: 10)
+        view.layer.shadowOpacity = 1
+        view.layer.shadowRadius = 5
+        view.alpha = 1
+        return view
+    }()
     lazy var longPress: UILongPressGestureRecognizer =
     {
         let press = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressAction))
@@ -44,13 +84,20 @@ class CardCell: UICollectionViewCell {
 
             return imageView
     }()
+    
+    lazy var backgroundCard:UIView = {
+       var view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
     var buttonTag = 0
 
     
    var deleteButtonIsHidden = true
     @objc func longPressAction()
     {
-        
         if longPress.state == .began
         {
             
@@ -64,6 +111,7 @@ class CardCell: UICollectionViewCell {
             print("long press end")
 
         }
+        
     }
    @objc func btnTag()
       {
@@ -80,18 +128,28 @@ class CardCell: UICollectionViewCell {
             let data = showCards[indexPath.row]
             self.layer.cornerRadius = self.frame.width * 0.05
             self.clipsToBounds = true
-            self.cardTitle.text = """
-            \(data.id)\n\(data.cardName)\n\(data.cardPrivate)\n
-            """
-            self.cardTitle.textColor = .red
+//            self.cardTitle.text = """
+//            \(data.id)\n\(data.cardName)\n\(data.cardPrivate)\n
+//            """
+            self.cardTitle.text = "\(data.cardName)"
+            self.cardID.text = "\(data.id)"
+            self.cardState.text = "\(data.cardPrivate)"
+            
+ //           self.cardTitle.textColor = .red
 //            self.backgroundColor = .lightGray
-            let view = UIImageView(image: UIImage(named: "blueCard"))
-            view.alpha = 0.5
-            self.backgroundView = view
+            //let view = UIImageView(image: UIImage(named: "blueCard"))
+            self.backgroundView = myBackgroundView
+            self.backgroundCard.backgroundColor = .mainColorGlass
+            
             self.deleteButton.isHidden = state
-            self.addSubview(cardTitle)
+            
+            self.addSubview(backgroundCard)
+            backgroundCard.addSubview(cardTitle)
+            backgroundCard.addSubview(cardID)
+            backgroundCard.addSubview(cardState)
+            
             self.addGestureRecognizer(longPress)
-          
+            setConstraints()
 
             self.addSubview(deleteButton)
         }
@@ -105,13 +163,51 @@ class CardCell: UICollectionViewCell {
                 let data = showCards[indexPath.row]
                 self.layer.cornerRadius = self.frame.width * 0.05
                 self.clipsToBounds = true
-                self.cardTitle.text = "\(data.id)**\(data.cardName)**\(data.cardPrivate)"
-                self.cardTitle.textColor = .red
-                self.backgroundColor = .lightGray
+//                self.cardTitle.text = "\(data.id)**\(data.cardName)**\(data.cardPrivate)"
+                
+                self.cardTitle.text = "\(data.cardName)"
+                self.cardID.text = "\(data.id)"
+                self.cardState.text = "\(data.cardPrivate)"
+                
+                //self.cardTitle.textColor = .red
                 self.deleteButton.isHidden = state
-                self.addSubview(cardTitle)
+                self.backgroundView = myBackgroundView
+                self.backgroundCard.backgroundColor = .gray
+                self.addSubview(backgroundCard)
+                backgroundCard.addSubview(cardTitle)
+                backgroundCard.addSubview(cardID)
+                backgroundCard.addSubview(cardState)
                 self.addGestureRecognizer(longPress)
+                
                 self.addSubview(deleteButton)
+                setConstraints()
             }
         }
+    func setConstraints(){
+        backgroundCard.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(20)
+            make.width.equalToSuperview().multipliedBy(0.8)
+          //  make.height.equalToSuperview().multipliedBy(0.9)
+        }
+        cardTitle.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(20)
+            make.height.equalToSuperview().multipliedBy(0.4)
+            make.width.equalToSuperview()
+        }
+        cardID.snp.makeConstraints { (make) in
+            make.top.equalTo(cardTitle.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(20)
+            make.height.equalToSuperview().multipliedBy(0.2)
+            make.width.equalToSuperview()
+        }
+        cardState.snp.makeConstraints { (make) in
+            make.top.equalTo(cardID.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(20)
+            make.height.equalToSuperview().multipliedBy(0.2)
+            make.width.equalToSuperview()
+        }
+    }
 }

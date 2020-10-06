@@ -72,10 +72,29 @@ struct UserToken {
         print("Token cleared")
         updateTokenToUserdefault(with: "")
     }
-
     
-    static func rememberAccount(account:String){
-        UserDefaults.standard.set(account, forKey: "account")
+}
+
+extension UserDefaults{
+    
+    func setIsLoggedInStatus (status:Bool) {
+        set(status, forKey: "loginStatus")
+        synchronize()
+    }
+    func isLoggedIn() -> Bool{
+        return bool(forKey: "loginStatus")
     }
     
+    func saveAccount(account:String) {
+        set(account, forKey: "userAccount")
+        synchronize()
+    }
+    
+    func getUserAccount() -> String {
+        if isLoggedIn(){
+            return string(forKey: "userAccount") ?? ""
+        }else {
+            return ""
+        }
+    }
 }

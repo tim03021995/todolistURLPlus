@@ -92,9 +92,9 @@ class SignupVC: UIViewController {
         
         let registerRequest = HTTPRequest(endpoint: .register, contentType: .json, method: .POST, parameters: parameters).send()
         
-        NetworkManager.sendRequest(with: registerRequest) { (result:Result<LoginInReaponse,NetworkError>) in
+        NetworkManager().sendRequest(with: registerRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             switch result{
-                
+            
             case .success:
                 self.present(.makeAlert("Success", "註冊成功！",  {
                     self.dismiss(animated: true, completion: nil)
@@ -164,6 +164,26 @@ extension SignupVC:UITextFieldDelegate{
     }
     
     
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let count = text.count + string.count - range.length
+        
+        switch textField {
+        case userNameTF:
+            nameErrorLabel.text = count > 10 ? "字數不可超過10個字元" : ""
+            return count <= 10
+        case mailTF:
+            mailErrorLabel.text = count > 20 ? "字數不可超過20個字元" : ""
+            return count <= 20
+        case passwordTF:
+            passwordErrorLabel.text = count > 12 ? "密碼不可超過12個字元" : ""
+            return count <= 12
+        case checkPasswordTF:
+            checkPasswordErrorLabel.text = count > 12 ? "密碼不可超過12個字元" : ""
+        return count <= 12
+        default:
+            return true
+        }
+    }
     
 }
