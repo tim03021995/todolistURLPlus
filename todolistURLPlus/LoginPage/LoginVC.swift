@@ -13,21 +13,13 @@ class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
     
     @IBOutlet weak var eyeBtn: UIButton!
-    
     @IBOutlet weak var rememberMeBTN: UIButton!
-    
     @IBOutlet weak var naviItem: UINavigationItem!
-    
     @IBOutlet weak var signInBtn: CustomButton!
-    
     @IBOutlet weak var signUpBtn: CustomButton!
-    
     @IBOutlet weak var accountTF: CustomLogINTF!
-    
     @IBOutlet weak var passwordTF: CustomLogINTF!
-    //
     @IBOutlet weak var accountErrorLabel: UILabel!
-    
     @IBOutlet weak var passwordErrorLabel: UILabel!
     
     let loadIndicatorView:UIActivityIndicatorView = {
@@ -72,7 +64,6 @@ class LoginVC: UIViewController, Storyboarded {
         
         rememberMeBTN.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .selected)
         rememberMeBTN.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
-        naviBarSetting()
         accountTF.delegate = self
         accountTF.placeholder = "E-Mail"
         passwordTF.delegate = self
@@ -81,15 +72,8 @@ class LoginVC: UIViewController, Storyboarded {
         signUpBtn.backgroundColor = .mainColor
     }
     
-    fileprivate func naviBarSetting(){
-        let barAppearance =  UINavigationBarAppearance()
-        barAppearance.configureWithTransparentBackground()
-        navigationController?.navigationBar.standardAppearance = barAppearance
-        
-    }
     
-    
-    func validateAccount()->[String:Any]?{
+    private func validateAccount()->[String:Any]?{
         if let account = accountTF.text , let password = passwordTF.text {
             if account.isValidEMail && password.isValidPassword{
                 return ["password":password,"email":account]
