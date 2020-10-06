@@ -16,7 +16,7 @@ class CardCell: UICollectionViewCell {
             width: self.frame.width * 0.8,
             height: self.frame.height * 0.8))
         label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-        label.font = UIFont(name: "HanyiSentyZhangjizhi", size: self.frame.width * 0.15)
+        label.font = UIFont(name: "Reeji-CloudKaiXing-GB-Regular", size: self.frame.width * 0.15)
         label.clipsToBounds = true
         label.textAlignment = .center
         label.numberOfLines = 0

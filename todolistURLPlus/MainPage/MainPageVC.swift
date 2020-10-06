@@ -244,7 +244,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         singleCardCollectionView.reloadData()
-        
+       
         
         setupHeadImage()
     }
@@ -287,6 +287,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
         if !showDeleteButtonState
         {
             switch collectionView {
@@ -312,7 +314,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     
+    
+    
+    
     fileprivate func toListPageVC(indexPathRow: Int, whichStyle: WhichCollectionView) {
+        
         let lPVC = ListPageVC()
         lPVC.delegate = self
         lPVC.collectionStyle = whichStyle
@@ -578,6 +584,29 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
+    
+    func showNewestItem()
+    {
+        let cardPrivate = showCards[showCards.count - 1].cardPrivate
+        if cardPrivate
+        {
+            let index = IndexPath(item: (self.showSingleCards.count - 1), section: 0)
+            self.singleCardCollectionView.scrollToItem(at: index, at: .right, animated: true)
+            self.singleCardCollectionView.isHidden = false
+            self.mutipleCardCollectionView.isHidden = true
+            self.singleCheckMark.isHidden = false
+            self.mutipleCheckMark.isHidden = true
+        }else
+        {
+            let index = IndexPath(item: (self.showMutipleCards.count - 1), section: 0)
+            self.mutipleCardCollectionView.scrollToItem(at: index, at: .right, animated: true)
+            self.mutipleCardCollectionView.isHidden = false
+            self.mutipleCardCollectionView.isHidden = true
+            self.singleCheckMark.isHidden = true
+            self.mutipleCheckMark.isHidden = false
+        }
+    }
+    
     func getCard(isAdd:Bool = false){
         startLoading()
 //        let header = ["userToken":UserToken.shared.userToken]
@@ -601,7 +630,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.mutipleCardCollectionView.reloadData()
                 if isAdd
                 {
+                    self.showNewestItem()
                     self.toListPageVC(indexPathRow: (self.showSingleCards.count - 1), whichStyle: .single)
+                    
                     
                 }
             case .failure(let err):
