@@ -121,7 +121,7 @@ class LoginVC: UIViewController, Storyboarded {
                 let vc = MainPageVC()
                 vc.modalPresentationStyle = .fullScreen
                 self.stopLoading()
-                self.present(vc, animated: true)
+                self.present(vc, animated: false)
                 
             case .failure(let err):
                 self.stopLoading()
@@ -211,9 +211,6 @@ extension LoginVC : UITextFieldDelegate{
         let count = text.count + string.count - range.length
         
         switch textField {
-//        case accountTF:
-//            accountErrorLabel.text = count > 12 ? "字數不可超過12個字元" : ""
-//            return count <= 20
         case passwordTF:
             passwordErrorLabel.text = count > 12 ? "密碼不可超過12個字元" : ""
             return count <= 12
