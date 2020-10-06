@@ -10,7 +10,12 @@ import Foundation
 
 
 extension String {
-    
+    var isValidUserName:Bool {
+        let format =
+            "^([-_a-zA-Z0-9]{4,16})$"
+        let userNamePredicate = NSPredicate(format: "SELF MATCHES %@", format)
+        return userNamePredicate.evaluate(with: self)
+    }
     var isValidEMail : Bool {
         
 //        "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-Z]{2,64}"

@@ -49,30 +49,41 @@ class SetInfoVC:CanGetImageViewController{
 //        self.view = setInfoView
 //    }
     @objc func save(){
-        func updataUserName(){
+        func updataUserName(_ userName:String){
+            SetInfoModelManerger.updateUserName(userName) {
+                print("updata name")
+                UserDataManager.shared.getUserData { (image) in
+                    self.stopLoading()
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+        func errorType(){
+            self.stopLoading()
+            isEditing = false
+            let ac = UIViewController.makeAlert("格式錯誤", "^([-_a-zA-Z0-9]{4,16})$"){}
+            present(ac, animated: true, completion: nil)
+        }
+        func getUserName(){
             if let userName = setInfoView.nameTextField.text {
-                SetInfoModelManerger.updateUserName(userName) {
-                    print("updata name")
-                    UserDataManager.shared.getUserData { (image) in
-                        self.stopLoading()
-                        self.navigationController?.popViewController(animated: true)
-                    }
+                if userName.isValidUserName {
+                    updataUserName(userName)
+                }else{
+                    errorType()
                 }
             }else{
-                print("not name")
-                self.stopLoading()
-                self.navigationController?.popViewController(animated: true)
+                errorType()
             }
         }
         loading()
         if let image = setInfoView.peopleView.image {
             SetInfoModelManerger.updateUserImage(image) {
                 print("updata Image")
-                updataUserName()
+                getUserName()
             }
         }else{
             print("not image")
-            updataUserName()
+            getUserName()
         }
     }
 

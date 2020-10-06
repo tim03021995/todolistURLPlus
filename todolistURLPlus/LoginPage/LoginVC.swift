@@ -54,8 +54,23 @@ class LoginVC: UIViewController, Storyboarded {
     @IBOutlet weak var accountErrorLabel: UILabel!
     
     @IBOutlet weak var passwordErrorLabel: UILabel!
-    //MARK:- ViewDidLoad
     
+    let loadIndicatorView:UIActivityIndicatorView = {
+        var loading = UIActivityIndicatorView()
+        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
+        loading.color = .white
+        loading.style = .large
+        
+        return loading
+    }()
+    
+    let glass:UIView = {
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+        let glassView = UIVisualEffectView(effect: blurEffect)
+        glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+        return glassView
+    }()
+    //MARK:- ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         propertiesSetting()
@@ -63,8 +78,8 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        accountTF.text = "2test@test.com"
-        passwordTF.text = "test12345"
+        accountTF.text = "alvin@gmail.com"
+        passwordTF.text = "a00000000"
     }
     //MARK:- Functions
   
@@ -98,6 +113,7 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     func signIn(){
+        startLoading()
         //驗證帳密 , 成功的話包裝
         guard let parameters = validateAccount() else{ return }
         //包裝需要的參數
@@ -114,9 +130,11 @@ class LoginVC: UIViewController, Storyboarded {
                 UserToken.updateToken(by: token)
                 let vc = MainPageVC()
                 vc.modalPresentationStyle = .fullScreen
+                self.stopLoading()
                 self.present(vc, animated: true) 
                 
             case .failure(let err):
+                self.stopLoading()
                 self.signInBtn.isEnabled = true
                 self.present(.makeAlert("Error", err.errMessage, {
                 }), animated: true)
@@ -140,6 +158,29 @@ class LoginVC: UIViewController, Storyboarded {
         let vc = self.storyboard?.instantiateViewController(identifier: StoryboardID.signUpVC ) as! SignupVC
         present(vc, animated: true, completion: nil)
         
+    }
+    
+    func startLoading(){
+        glass.alpha = 0.5
+        self.view.addSubview(glass)
+        self.view.addSubview(loadIndicatorView)
+        loadIndicatorView.startAnimating()
+        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+            self.glass.alpha = 1
+        }
+        animate.startAnimation()
+    }
+    func stopLoading(){
+        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+            self.glass.alpha = 0
+        }
+        animate.addCompletion { (position) in
+            if position == .end {
+                self.loadIndicatorView.removeFromSuperview()
+                self.glass.removeFromSuperview()
+            }
+        }
+        animate.startAnimation()
     }
     
 }

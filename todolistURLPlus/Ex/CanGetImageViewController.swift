@@ -37,11 +37,15 @@ class CanGetImageViewController:UIViewController{
         animate.startAnimation()
     }
     func stopLoading(){
-        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
             self.glass.alpha = 0
-            self.navigationController?.navigationBar.isHidden = false
-            self.glass.removeFromSuperview()
-            self.loadIndicatorView.removeFromSuperview()
+        }
+        animate.addCompletion { (position) in
+            if position == .end {
+                self.navigationController?.navigationBar.isHidden = false
+                self.loadIndicatorView.removeFromSuperview()
+                self.glass.removeFromSuperview()
+            }
         }
         animate.startAnimation()
     }
