@@ -27,25 +27,14 @@ class MainVC: UIViewController{
                     self.present(vc, animated: false, completion: nil )
                 case .failure(let err):
                     self.shouldRefreshToken()
-                        print(err.description)
+                    print(err.description)
                 }
             }
         }else {
             let vc = LoginVC.instantiate()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: false , completion: nil)
-
+            
         }
-        
-//                if UserToken.getToken() == nil  {
-//                    let vc = LoginVC.instantiate()
-//                    vc.modalPresentationStyle = .fullScreen
-//                    present(vc, animated: false , completion: nil)
-//                }
-//                else{
-//                    let vc = MainPageVC()
-//                    vc.modalPresentationStyle = .fullScreen
-//                    present(vc, animated: false, completion: nil )
-//                }
     }
 }
