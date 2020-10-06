@@ -9,10 +9,7 @@
 import UIKit
 
 class NetworkManager{
-    
-    //    static let shared = NetworkManager()
-    //    private init(){}
-    
+        
     var delegate : RefreshTokenDelegate?
     
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
@@ -63,10 +60,6 @@ class NetworkManager{
     
 }
 
-protocol LoadingViewDelegate {
-    func loading()
-    
-    func stopLoading()
-}
+
 
 

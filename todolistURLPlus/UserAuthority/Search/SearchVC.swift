@@ -122,7 +122,6 @@ extension SearchVC:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         addUser(mail: users[indexPath.row].email)
-        
     }
 }
 

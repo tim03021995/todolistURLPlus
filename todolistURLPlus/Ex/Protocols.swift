@@ -15,3 +15,9 @@ protocol RefreshTokenDelegate {
 protocol Storyboarded {
     static func instantiate() -> Self
 }
+
+protocol LoadingViewDelegate {
+    func startLoading()
+    
+    func stopLoading()
+}

@@ -46,10 +46,7 @@ enum ContentType:String{
 
 //MARK:- Token
 struct UserToken {
-//    private(set) var userToken = ""
-//    private init(){}
-//    static var shared = UserToken()
-    
+
     ///拿token 如果沒有的話 回傳nil
     static func getToken() -> String?{
         guard let tokenFromUserDefault = UserDefaults.standard.string(forKey: "token") else {return nil}
@@ -58,8 +55,6 @@ struct UserToken {
     }
     
     static func updateToken(by token: String){
-//        userToken = token
-//        print(userToken)
         updateTokenToUserdefault(with: token)
     }
     
@@ -68,7 +63,6 @@ struct UserToken {
     }
 
     static func clearToken(){
-//        userToken = ""
         print("Token cleared")
         updateTokenToUserdefault(with: "")
     }
