@@ -23,7 +23,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="123" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQh-C3-qh0" customClass="CustomLogINTF" customModule="todolistURLPlus" customModuleProvider="target">
                                 <rect key="frame" x="41.5" y="246.5" width="331" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To DODO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsT-PP-cbg">
                                 <rect key="frame" x="20" y="94" width="374" height="36"/>
@@ -81,7 +81,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yd-6G-eNL">
-                                <rect key="frame" x="81.5" y="419" width="112" height="21"/>
+                                <rect key="frame" x="81.5" y="419" width="124" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -110,7 +110,7 @@
                             <constraint firstItem="NBa-rC-CO2" firstAttribute="centerY" secondItem="jfg-Kb-sf8" secondAttribute="centerY" id="IYg-4D-bVM"/>
                             <constraint firstAttribute="bottom" secondItem="Fuw-2L-Pfk" secondAttribute="bottom" id="Kb0-c8-pX6"/>
                             <constraint firstItem="1GY-fj-Wh0" firstAttribute="height" secondItem="ogZ-eP-Qi1" secondAttribute="height" id="N1c-B5-nUH"/>
-                            <constraint firstItem="8yd-6G-eNL" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.270531" id="PF2-EZ-wOK"/>
+                            <constraint firstItem="8yd-6G-eNL" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.3" id="PF2-EZ-wOK"/>
                             <constraint firstItem="jfg-Kb-sf8" firstAttribute="top" secondItem="SQh-C3-qh0" secondAttribute="bottom" constant="50" id="UUZ-JC-zhP"/>
                             <constraint firstItem="R0q-FN-7h5" firstAttribute="width" secondItem="9BA-mA-gQ0" secondAttribute="width" id="VZl-ny-DqG"/>
                             <constraint firstItem="ogZ-eP-Qi1" firstAttribute="width" secondItem="jfg-Kb-sf8" secondAttribute="width" id="Vtd-RL-TwP"/>
