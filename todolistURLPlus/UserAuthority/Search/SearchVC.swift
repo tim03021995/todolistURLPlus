@@ -53,6 +53,7 @@ class SearchVC: UIViewController {
         searchView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         searchView.layer.cornerRadius = 15
         searchView.layer.borderWidth = 3
+        searchBar.placeholder = "請輸入使用者email"
     }
     
     private func searchUser(mail:String){

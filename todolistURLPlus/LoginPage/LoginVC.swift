@@ -33,6 +33,7 @@ extension Storyboarded where Self: UIViewController {
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
 
+    @IBOutlet weak var eyeBtn: UIButton!
     
     @IBOutlet weak var rememberMeBTN: UIButton!
     
@@ -78,8 +79,6 @@ class LoginVC: UIViewController, Storyboarded {
         accountTF.text = UserDefaults.standard.getUserAccount()
         rememberMeBTN.isSelected = UserDefaults.standard.isLoggedIn()
         passwordTF.text = ""
-//        accountTF.text = "alvin@gmail.com"
-//        passwordTF.text = "a00000000"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -94,8 +93,11 @@ class LoginVC: UIViewController, Storyboarded {
     //MARK:- Functions
   
     fileprivate func propertiesSetting() {
-        rememberMeBTN.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
-        rememberMeBTN.setImage(UIImage(systemName: "square"), for: .normal)
+        eyeBtn.setImage(UIImage(systemName: "eye"), for: .selected)
+        eyeBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+
+        rememberMeBTN.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .selected)
+        rememberMeBTN.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         naviBarSetting()
         accountTF.delegate = self
         accountTF.placeholder = "E-Mail"
@@ -172,6 +174,10 @@ class LoginVC: UIViewController, Storyboarded {
         
     }
     
+    @IBAction func eyeTapped(_ sender: UIButton) {
+        eyeBtn.isSelected = !eyeBtn.isSelected
+        passwordTF.isSecureTextEntry = !passwordTF.isSecureTextEntry
+    }
     func startLoading(){
         glass.alpha = 0
         self.view.addSubview(glass)
@@ -226,6 +232,21 @@ extension LoginVC : UITextFieldDelegate{
         }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let count = text.count + string.count - range.length
+        
+        switch textField {
+        case accountTF:
+            accountErrorLabel.text = count > 12 ? "字數不可超過12個字元" : ""
+        case passwordTF:
+            passwordErrorLabel.text = count > 12 ? "密碼不可超過12個字元" : ""
+        default:
+            break
+        }
+        return count <= 12
+
+    }
     
     
 }
