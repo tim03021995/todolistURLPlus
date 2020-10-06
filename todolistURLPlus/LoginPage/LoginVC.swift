@@ -147,7 +147,7 @@ class LoginVC: UIViewController, Storyboarded {
                 let vc = MainPageVC()
                 vc.modalPresentationStyle = .fullScreen
                 self.stopLoading()
-                self.present(vc, animated: true) 
+                self.present(vc, animated: true)
                 
             case .failure(let err):
                 self.stopLoading()
