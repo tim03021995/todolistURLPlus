@@ -235,6 +235,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
        // glassView.layer.cornerRadius = 15
        // glassView.clipsToBounds = true
+        glassView.alpha = 1
         return glassView
     }()
     
@@ -663,11 +664,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     func startLoading(){
-        glass.alpha = 0.5
         self.view.addSubview(glass)
         self.view.addSubview(loadIndicatorView)
         loadIndicatorView.startAnimating()
-        let animate = UIViewPropertyAnimator(duration: 0, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
             self.navigationController?.navigationBar.isHidden = true
             self.glass.alpha = 1
         }
