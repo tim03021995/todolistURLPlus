@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-class ForgotPasswordView: UIView {
+class ModifyPasswordView: UIView {
     private var backgroundImage : UIImageView = {
         return BackGroundFactory.makeImage(type: .background1)
     }()
@@ -16,7 +16,7 @@ class ForgotPasswordView: UIView {
     var title:UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.7 , height: ScreenSize.height.value * 0.3))
         label.contentMode = .center
-        label.text = "Forgot password?"
+        label.text = "Modify password?"
         label.font = .systemFont(ofSize: 100)
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
@@ -24,7 +24,7 @@ class ForgotPasswordView: UIView {
     }()
     var confirmButton:UIButton = {
         var button = ButtonFactory.makeButton(type: .normal, text: "confirm")
-        button.addTarget(nil, action: #selector(ForgotPasswordVC.touchConfirmButton), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(ModifyPasswordVC.touchConfirmButton), for: .touchUpInside)
         return button
     }()
     var passwordTextField:CustomLogINTF = {

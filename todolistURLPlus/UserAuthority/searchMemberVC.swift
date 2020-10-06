@@ -59,8 +59,6 @@ extension SearchMemberVC:UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
     }
-    
-    
 }
 
 extension SearchMemberVC : UITableViewDelegate , UITableViewDataSource{

@@ -10,30 +10,30 @@ import UIKit
 
 class NetworkManager{
     
-//    static let shared = NetworkManager()
-//    private init(){}
-        
+    //    static let shared = NetworkManager()
+    //    private init(){}
+    
     var delegate : RefreshTokenDelegate?
     
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
                 if error != nil { completion(.failure(.systemError)) }
                 
                 guard let response = response as? HTTPURLResponse else { completion(.failure(.noResponse))
                     return
                 }
-                guard let data = data else { completion(.failure(.noData))
+                guard let data = data else {
+                    completion(.failure(.noData))
                     return
                 }
                 self.responseHandler(data: data, response: response, completion: completion)
             }
-        }
-        task.resume()
+        }.resume()
     }
     
     private func responseHandler<T:Codable>
-        (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
+    (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
         
         switch response.statusCode {
         case 200 ... 299:
@@ -48,7 +48,6 @@ class NetworkManager{
                 completion(.failure(.decodeError(struct: "\(T.self)")))
             }
         case 401 , 403:
-//            #warning("refresh token")
             completion(.failure(.refreshToken))
             delegate?.shouldRefreshToken()
         default:
@@ -70,14 +69,4 @@ protocol LoadingViewDelegate {
     func stopLoading()
 }
 
-extension UIViewController: RefreshTokenDelegate {
-    func shouldRefreshToken() {
-        present(.makeAlert("逾時", "請重新登入", {
-            let vc = LoginVC.instantiate()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
-            return nil
-        }) ,animated: true)
-    }
-    
-}
+

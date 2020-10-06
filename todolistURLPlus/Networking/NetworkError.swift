@@ -35,7 +35,6 @@ enum NetworkError:Error{
     ///response拿到的錯誤訊息
     var errMessage:String {
         switch self {
-            
         case .responseError(error: let error, statusCode: _ ):
             return error.error
         default:

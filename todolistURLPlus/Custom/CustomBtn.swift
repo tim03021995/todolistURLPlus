@@ -12,7 +12,7 @@ import UIKit
 class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame:frame)
-        setUpBtn()
+//        setUpBtn()
     }
     
     //for storyboard

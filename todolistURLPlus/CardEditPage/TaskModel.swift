@@ -23,7 +23,7 @@ struct TaskModel{
     }
 }
 class TaskModelManager{
-    
+
     private static func getViewData(view:CardEditView)->TaskModel{
         var data = TaskModel()
         data.title = view.titleTextField.text
@@ -50,6 +50,13 @@ class TaskModelManager{
             case .success(let a):
                 print("create success")
             case .failure(let err):
+                switch err {
+                case .refreshToken:
+//                    self.shouldRefreshToken(Self)
+                break
+                default:
+                    break
+                }
                 print(" create error")
                 print(err.description)
                 print("錯誤訊息：\(err.errMessage)")
@@ -57,7 +64,7 @@ class TaskModelManager{
             compeletion()
         }
     }
-    static func edit(_ cardID:Int,_ taskID:Int, _ view:CardEditView,_ compeletion:@escaping ()->Void){
+    static func edit(_ cardID:Int,_ taskID:Int, _ view:CardEditView,_ compeletion:@escaping ()->Void,refreshToken:@escaping () -> Void){
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let boundary = "Boundary+\(arc4random())\(arc4random())"
@@ -72,9 +79,14 @@ class TaskModelManager{
                 print("edit success")
                 print(a)
             case .failure(let err):
-                print("edit error")
-                print(err.description)
-                print("錯誤訊息：\(err.errMessage)")
+                switch err {
+                case .refreshToken:
+                    refreshToken()
+                default:
+                    print("edit error")
+                    print(err.description)
+                    print("錯誤訊息：\(err.errMessage)")
+                }
             }
             compeletion()
         }

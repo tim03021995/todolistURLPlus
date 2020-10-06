@@ -33,7 +33,6 @@ class CardEditVC: CanGetImageViewController {
             style: .done,
             target: self,
             action: #selector(save))
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: <#T##String?#>, style: <#T##UIBarButtonItem.Style#>, target: <#T##Any?#>, action: <#T##Selector?#>)
         
     }
     @objc func save(){
@@ -117,9 +116,13 @@ class CardEditVC: CanGetImageViewController {
     
     private func editTask(){
         loading()
+
         TaskModelManager.edit(cardID, taskID!, cardEditView) {
             self.popView()
+        } refreshToken: {
+            self.shouldRefreshToken()
         }
+
     }
     private func createTask(){
         loading()
