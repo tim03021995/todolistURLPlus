@@ -332,11 +332,6 @@ extension UserAuthorityVC: UITableViewDataSource{
         return users.count
     }
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        //刪掉時更新 section數量
-//        return 1
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UserAuthorityCell
         cell.updateCell(indexPath:indexPath, data: users)

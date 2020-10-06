@@ -9,30 +9,9 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-protocol Storyboarded {
-    static func instantiate() -> Self
-}
-
-extension Storyboarded where Self: UIViewController {
-    static func instantiate() -> Self {
-        // this pulls out "MyApp.MyViewController"
-        let fullName = NSStringFromClass(self)
-        
-        // this splits by the dot and uses everything after, giving "MyViewController"
-        let className = fullName.components(separatedBy: ".")[1]
-        
-        // load our storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        // instantiate a view controller with that identifier, and force cast as the type that was requested
-        return storyboard.instantiateViewController(withIdentifier: className) as! Self
-    }
-}
-
-
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
-
+    
     @IBOutlet weak var eyeBtn: UIButton!
     
     @IBOutlet weak var rememberMeBTN: UIButton!
@@ -72,7 +51,6 @@ class LoginVC: UIViewController, Storyboarded {
         super.viewDidLoad()
         propertiesSetting()
         IQKeyboardManager.shared.enable = true
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,20 +60,16 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //set userdefault
-        if rememberMeBTN.isSelected{
-            UserDefaults.standard.saveAccount(account: accountTF.text ?? "")
-        }else {
-            UserDefaults.standard.saveAccount(account: "")
-        }
+        UserDefaults.standard.saveAccount(account: rememberMeBTN.isSelected ? accountTF.text ?? "" : "")
+        
         UserDefaults.standard.setIsLoggedInStatus(status: rememberMeBTN.isSelected)
     }
     //MARK:- Functions
-  
+    
     fileprivate func propertiesSetting() {
         eyeBtn.setImage(UIImage(systemName: "eye"), for: .selected)
         eyeBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-
+        
         rememberMeBTN.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .selected)
         rememberMeBTN.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         naviBarSetting()
@@ -119,29 +93,29 @@ class LoginVC: UIViewController, Storyboarded {
         if let account = accountTF.text , let password = passwordTF.text {
             if account.isValidEMail && password.isValidPassword{
                 return ["password":password,"email":account]
+            }else {
+                present(.makeAlert("Error", "請輸入正確帳號密碼", {
+                }) ,animated: true)
             }
         }
         return nil
     }
     
-    func signIn(){
+    private func signIn(){
+        signInBtn.isEnabled = false
         //驗證帳密 , 成功的話包裝
         guard let parameters = validateAccount() else{
-            present(.makeAlert("Error", "請輸入正確帳號密碼", {
-            }) ,animated: true)
             signInBtn.isEnabled = true
             return }
-        //包裝需要的參數
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
         startLoading()
         
         NetworkManager().sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
-                
+            
             case .success(let decodedData):
                 self.signInBtn.isEnabled = true
-                //存token
                 guard let token = decodedData.loginData?.userToken else {return}
                 UserToken.updateToken(by: token)
                 let vc = MainPageVC()
@@ -164,7 +138,6 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     @IBAction func signInTapped(_ sender: CustomButton) {
-        signInBtn.isEnabled = false
         signIn()
     }
     
@@ -178,6 +151,7 @@ class LoginVC: UIViewController, Storyboarded {
         eyeBtn.isSelected = !eyeBtn.isSelected
         passwordTF.isSecureTextEntry = !passwordTF.isSecureTextEntry
     }
+    
     func startLoading(){
         glass.alpha = 0
         self.view.addSubview(glass)
@@ -237,15 +211,16 @@ extension LoginVC : UITextFieldDelegate{
         let count = text.count + string.count - range.length
         
         switch textField {
-        case accountTF:
-            accountErrorLabel.text = count > 12 ? "字數不可超過12個字元" : ""
+//        case accountTF:
+//            accountErrorLabel.text = count > 12 ? "字數不可超過12個字元" : ""
+//            return count <= 20
         case passwordTF:
             passwordErrorLabel.text = count > 12 ? "密碼不可超過12個字元" : ""
+            return count <= 12
         default:
             break
         }
-        return count <= 12
-
+        return true
     }
     
     

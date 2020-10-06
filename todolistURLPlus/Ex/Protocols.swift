@@ -11,3 +11,7 @@ import Foundation
 protocol RefreshTokenDelegate {
     func shouldRefreshToken()
 }
+
+protocol Storyboarded {
+    static func instantiate() -> Self
+}
