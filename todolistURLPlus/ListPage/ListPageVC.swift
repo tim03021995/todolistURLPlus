@@ -285,8 +285,5 @@ extension ListPageVC: UITextFieldDelegate
     }
 }
 
-protocol Loadingable{
-    func startLoading()
-    func stopLoading()
-}
+
 
