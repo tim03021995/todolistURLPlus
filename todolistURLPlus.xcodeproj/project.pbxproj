@@ -204,7 +204,7 @@
 				D291DEA92500FA81001FE33E /* SetInfo */,
 				D2B06440250088B400000444 /* Ex */,
 				FBEF303A24FF6D23003F5945 /* Custom */,
-				D2490110250909ED003E9497 /* ForgotPassword */,
+				D2490110250909ED003E9497 /* ModifyPassword */,
 				D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */,
 				D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */,
 				D23505E424FCCAAF00F4CC6E /* Main.storyboard */,
@@ -215,14 +215,14 @@
 			path = todolistURLPlus;
 			sourceTree = "<group>";
 		};
-		D2490110250909ED003E9497 /* ForgotPassword */ = {
+		D2490110250909ED003E9497 /* ModifyPassword */ = {
 			isa = PBXGroup;
 			children = (
 				D249011125090A40003E9497 /* ModifyPasswordVC.swift */,
 				D249011325090A63003E9497 /* ModifyPasswordView.swift */,
 				D24B08592522E5770073917E /* ModifyPasswordModel.swift */,
 			);
-			path = ForgotPassword;
+			path = ModifyPassword;
 			sourceTree = "<group>";
 		};
 		D291DEA92500FA81001FE33E /* SetInfo */ = {
