@@ -32,11 +32,11 @@ class UserAuthorityCell: UITableViewCell {
     func updateCell(indexPath:IndexPath, data: [GetGroupResponse.UserData]){
         let  fullScreenMaxX = UIScreen.main.bounds.maxX
         backgroundColor = .white
-//        layer.borderWidth = 5
-//        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-//        layer.cornerRadius = fullScreenMaxX * 0.06
-  //      contentView.layer.borderWidth = 5
-  //      contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        layer.cornerRadius = fullScreenMaxX * 0.06
+        contentView.layer.borderWidth = 5
+        contentView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
         contentView.layer.cornerRadius = fullScreenMaxX * 0.06
         clipsToBounds = true
