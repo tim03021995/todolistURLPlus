@@ -77,7 +77,7 @@ class LoginVC: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         accountTF.text = UserDefaults.standard.getUserAccount()
         rememberMeBTN.isSelected = UserDefaults.standard.isLoggedIn()
-
+        passwordTF.text = ""
 //        accountTF.text = "alvin@gmail.com"
 //        passwordTF.text = "a00000000"
     }
@@ -123,11 +123,15 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     func signIn(){
-        startLoading()
         //驗證帳密 , 成功的話包裝
-        guard let parameters = validateAccount() else{ return }
+        guard let parameters = validateAccount() else{
+            present(.makeAlert("Error", "請輸入正確帳號密碼", {
+            }) ,animated: true)
+            signInBtn.isEnabled = true
+            return }
         //包裝需要的參數
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
+        startLoading()
         
         NetworkManager().sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             
