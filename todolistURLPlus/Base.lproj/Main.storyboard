@@ -70,22 +70,34 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ii-GJ-c6k">
-                                <rect key="frame" x="41.5" y="417" width="19.5" height="17.5"/>
+                                <rect key="frame" x="41.5" y="416" width="30" height="34"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" backgroundImage="square" catalog="system"/>
+                                <connections>
+                                    <action selector="rememberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cva-vm-Aw5"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yd-6G-eNL">
+                                <rect key="frame" x="76.5" y="416" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="8yd-6G-eNL" firstAttribute="top" secondItem="3ii-GJ-c6k" secondAttribute="top" id="4gx-O7-Pkc"/>
                             <constraint firstItem="3ii-GJ-c6k" firstAttribute="top" secondItem="jfg-Kb-sf8" secondAttribute="bottom" constant="30" id="8rO-uQ-73J"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.6" id="9cS-Lr-5SN"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AnE-as-rLV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8yd-6G-eNL" secondAttribute="trailing" constant="225.5" id="CUv-oY-cgT"/>
                             <constraint firstItem="9BA-mA-gQ0" firstAttribute="width" secondItem="SQh-C3-qh0" secondAttribute="width" id="Dpl-NJ-hTr"/>
                             <constraint firstItem="jfg-Kb-sf8" firstAttribute="width" secondItem="SQh-C3-qh0" secondAttribute="width" id="Fqd-vn-ndw"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="FrY-TG-Ief"/>
+                            <constraint firstItem="8yd-6G-eNL" firstAttribute="leading" secondItem="3ii-GJ-c6k" secondAttribute="trailing" constant="5" id="HvH-VF-2fn"/>
                             <constraint firstAttribute="bottom" secondItem="Fuw-2L-Pfk" secondAttribute="bottom" id="Kb0-c8-pX6"/>
                             <constraint firstItem="1GY-fj-Wh0" firstAttribute="height" secondItem="ogZ-eP-Qi1" secondAttribute="height" id="N1c-B5-nUH"/>
+                            <constraint firstItem="8yd-6G-eNL" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.270531" id="PF2-EZ-wOK"/>
                             <constraint firstItem="jfg-Kb-sf8" firstAttribute="top" secondItem="SQh-C3-qh0" secondAttribute="bottom" constant="50" id="UUZ-JC-zhP"/>
                             <constraint firstItem="R0q-FN-7h5" firstAttribute="width" secondItem="9BA-mA-gQ0" secondAttribute="width" id="VZl-ny-DqG"/>
                             <constraint firstItem="ogZ-eP-Qi1" firstAttribute="width" secondItem="jfg-Kb-sf8" secondAttribute="width" id="Vtd-RL-TwP"/>
@@ -99,6 +111,7 @@
                             <constraint firstItem="R0q-FN-7h5" firstAttribute="top" secondItem="jfg-Kb-sf8" secondAttribute="bottom" id="e1c-I3-gq2"/>
                             <constraint firstItem="Fuw-2L-Pfk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="eFC-2K-Hew"/>
                             <constraint firstItem="3ii-GJ-c6k" firstAttribute="leading" secondItem="jfg-Kb-sf8" secondAttribute="leading" id="epk-DY-KW6"/>
+                            <constraint firstItem="8yd-6G-eNL" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0234375" id="ewW-mu-Cqb"/>
                             <constraint firstItem="zsT-PP-cbg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.25" id="gAd-jw-Bd5"/>
                             <constraint firstItem="ogZ-eP-Qi1" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="i87-ae-Abo"/>
                             <constraint firstItem="SQh-C3-qh0" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="kn6-XX-SCh"/>
@@ -305,7 +318,6 @@
     </scenes>
     <resources>
         <image name="background1" width="768" height="1366"/>
-        <image name="square" catalog="system" width="128" height="114"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

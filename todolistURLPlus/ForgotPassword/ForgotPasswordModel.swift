@@ -13,7 +13,7 @@ class ForgotPasswordModel{
         let header = ["userToken":token]
         let parameters = makeParameters(nil, password)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
-        NetworkManager.sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in
             compeletion(result)
         }
     }

@@ -6,11 +6,16 @@
 //  Copyright © 2020 Alvin Tseng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct NetworkManager{
+class NetworkManager{
+    
+//    static let shared = NetworkManager()
+//    private init(){}
         
-    static func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
+    var delegate : RefreshTokenDelegate?
+    
+    func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
                 if error != nil { completion(.failure(.systemError)) }
@@ -21,13 +26,13 @@ struct NetworkManager{
                 guard let data = data else { completion(.failure(.noData))
                     return
                 }
-                responseHandler(data: data, response: response, completion: completion)
+                self.responseHandler(data: data, response: response, completion: completion)
             }
         }
         task.resume()
     }
     
-    private static func responseHandler<T:Codable>
+    private func responseHandler<T:Codable>
         (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
         
         switch response.statusCode {
@@ -43,8 +48,9 @@ struct NetworkManager{
                 completion(.failure(.decodeError(struct: "\(T.self)")))
             }
         case 401 , 403:
-            #warning("refresh token")
+//            #warning("refresh token")
             completion(.failure(.refreshToken))
+            delegate?.shouldRefreshToken()
         default:
             do{
                 let decodedError = try JSONDecoder().decode(ErrorData.self, from: data)
@@ -64,3 +70,14 @@ protocol LoadingViewDelegate {
     func stopLoading()
 }
 
+extension UIViewController: RefreshTokenDelegate {
+    func shouldRefreshToken() {
+        present(.makeAlert("逾時", "請重新登入", {
+            let vc = LoginVC.instantiate()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+            return nil
+        }) ,animated: true)
+    }
+    
+}

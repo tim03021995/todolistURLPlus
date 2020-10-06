@@ -570,7 +570,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let header = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):
@@ -604,7 +604,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
         
-        NetworkManager.sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
             switch result{
                 
             case .success(let data):
@@ -630,10 +630,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: headers, id: id).send()
         
-        NetworkManager.sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
             switch result{
                 
-            case .success(let data):
+            case .success(_):
                 //                self.showCards.remove(at: self.indexPath.row)
                 
                 self.getCard()

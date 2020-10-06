@@ -74,8 +74,8 @@ struct UserToken {
     }
 
     
-    static func rememberAccount(account:String){
-        UserDefaults.standard.set(account, forKey: "account")
+    static func rememberMe(status:Bool){
+        UserDefaults.standard.set(status, forKey: "loginstatus")
+
     }
-    
 }

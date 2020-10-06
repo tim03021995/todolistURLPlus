@@ -43,15 +43,13 @@ enum NetworkError:Error{
         }
     }
     
-
     
 }
+
 struct ErrorData:Codable{
     let status : Bool
     let error : String
 }
 
-protocol Refreshable {
-    func shouldRefresh()
-}
+
 

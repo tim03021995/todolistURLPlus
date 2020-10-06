@@ -32,6 +32,13 @@ extension Storyboarded where Self: UIViewController {
 
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
+    var rememberStatus:Bool? {
+        didSet{
+            rememberStatus = rememberMeBTN.isSelected
+            UserToken.rememberMe(status: rememberStatus ?? false)
+        }
+    }
+    
     @IBOutlet weak var rememberMeBTN: UIButton!
     
     @IBOutlet weak var naviItem: UINavigationItem!
@@ -62,7 +69,8 @@ class LoginVC: UIViewController, Storyboarded {
     //MARK:- Functions
   
     fileprivate func propertiesSetting() {
-        
+        rememberMeBTN.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
+        rememberMeBTN.setImage(UIImage(systemName: "square"), for: .normal)
         naviBarSetting()
         accountTF.delegate = self
         accountTF.placeholder = "E-Mail"
@@ -95,7 +103,7 @@ class LoginVC: UIViewController, Storyboarded {
         //包裝需要的參數
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
         
-        NetworkManager.sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
+        NetworkManager().sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
                 
@@ -106,7 +114,7 @@ class LoginVC: UIViewController, Storyboarded {
                 UserToken.updateToken(by: token)
                 let vc = MainPageVC()
                 vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
+                self.present(vc, animated: true) 
                 
             case .failure(let err):
                 self.signInBtn.isEnabled = true
@@ -115,6 +123,12 @@ class LoginVC: UIViewController, Storyboarded {
                 print(err.description)
             }
         }
+    }
+    
+    @IBAction func rememberTapped(_ sender: UIButton) {
+        rememberMeBTN.isSelected = !rememberMeBTN.isSelected
+        rememberStatus = !rememberStatus!
+
     }
     
     @IBAction func signInTapped(_ sender: CustomButton) {
@@ -162,13 +176,4 @@ extension LoginVC : UITextFieldDelegate{
     
 }
 
-extension UIViewController:Refreshable {
-    func shouldRefresh() {
-        present(.makeAlert("逾時", "請重新登入", {
-            self.present(LoginVC(), animated: true)
-        }) ,animated: true)
-    }
-    
-    
-    
-}
+

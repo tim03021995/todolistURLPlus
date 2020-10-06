@@ -92,7 +92,7 @@ class SignupVC: UIViewController {
         
         let registerRequest = HTTPRequest(endpoint: .register, contentType: .json, method: .POST, parameters: parameters).send()
         
-        NetworkManager.sendRequest(with: registerRequest) { (result:Result<LoginInReaponse,NetworkError>) in
+        NetworkManager().sendRequest(with: registerRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             switch result{
                 
             case .success:

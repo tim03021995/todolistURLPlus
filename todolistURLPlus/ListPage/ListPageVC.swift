@@ -134,7 +134,7 @@ class ListPageVC: UIViewController {
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
                 
             case .success(let data):
@@ -211,7 +211,7 @@ extension ListPageVC: UITableViewDataSource{
         let headers = ["userToken":token]
         let parameters: [String: Any] = ["card_name": cardTitleTextField.text ?? ""]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: showCard.id).send()
-        NetworkManager.sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (result:Result<PutCardResponse,NetworkError>) in
             switch result {
                 
             case .success( _):
