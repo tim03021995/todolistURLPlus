@@ -205,7 +205,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             let btn = CustomButton()
             let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.6
             btn.frame = CGRect(x: ScreenSize.width.value * 0.25,
-                               y: self.singleCardCollectionView.frame.maxY + 15,
+                               y: self.singleCardCollectionView.frame.maxY,
                                width: ScreenSize.width.value * 0.5,
                                height: height)
             btn.backgroundColor = .mainColorGlass
@@ -436,7 +436,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         // cell的寬、高
         layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
-                                 height: ScreenSize.height.value * 0.45)
+                                 height: ScreenSize.height.value * 0.35)
         
         // cell與cell的間距
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
@@ -473,7 +473,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         // cell的寬、高
         layout.itemSize = CGSize(width: (ScreenSize.width.value) * 0.75,
-                                 height: ScreenSize.height.value * 0.45) //0.45
+                                 height: ScreenSize.height.value * 0.35) //0.45
         
         // cell與cell的間距
         layout.minimumLineSpacing = CGFloat(integerLiteral: Int(ScreenSize.width.value * 0.05))
