@@ -323,7 +323,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
     fileprivate func toListPageVC(indexPathRow: Int, whichStyle: WhichCollectionView) {
-        print("Here")
+        
         let lPVC = ListPageVC()
         lPVC.delegate = self
         
@@ -340,27 +340,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         present(nVC, animated: true, completion: nil)
         
     }
-    fileprivate func getHeadImage() {
-        if let imageString = userData.image
-        {
-            if let imageUrl = URL(string: "http://35.185.131.56:8002/" + imageString)
-            {
-                do
-                {
-                    if let imageData = try? Data(contentsOf: imageUrl)
-                    {
-                        if let image = UIImage(data: imageData)
-                        {
-                            headImage.image = image
-                        }
-                    }
-                }catch
-                {
-                    print("Image轉型失敗，MainPageVC ",#line)
-                }
-            }
-        }
-    }
+    
     fileprivate func getSingletonImage(userData: GetCardResponse.UserData) {
         UserDataManager.shared.getUserData(email: userData.email) { (image) in
             self.headImage.image = image
@@ -641,7 +621,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.userData = userData
                 self.showCards = showCards
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
-                print(showCards.map({ $0.cardPrivate }))
+                
                 self.classifiedSingleAndMutiple(showCards: showCards)
                 self.welcomeLabel.text = "Welcome back \(userData.username)"
                 self.singleCardCollectionView.reloadData()
