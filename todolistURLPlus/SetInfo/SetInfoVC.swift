@@ -27,7 +27,6 @@ class SetInfoVC:CanGetImageViewController{
         super.viewDidLoad()
         setInfoView.peopleView.image = UserDataManager.shared.userImage
         setInfoView.nameTextField.text = UserDataManager.shared.userData?.username
-        autoPushView()
     }
     private func setAction(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage(reco:)))

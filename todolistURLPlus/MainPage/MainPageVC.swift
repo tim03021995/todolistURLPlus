@@ -426,7 +426,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         showDeleteButtonState = !showDeleteButtonState
         singleCardCollectionView.reloadData()
         mutipleCardCollectionView.reloadData()
-        trashBtn.tintColor = !showDeleteButtonState ? .red : .white
+        let animate = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.trashBtn.tintColor = !self.showDeleteButtonState ? .red : .white
+        }
+        animate.startAnimation()
+        
         
     }
     ///設定卡片CollectionView
@@ -540,21 +544,31 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @objc func tapSingleBtn()
     {
         
-        mutipleCheckMark.isHidden = true
         btnTag = 0
-        singleCardCollectionView.isHidden = false
-        mutipleCardCollectionView.isHidden = true
-        singleCheckMark.isHidden = false
+        let animate = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.mutipleCheckMark.alpha = 0
+            self.singleCardCollectionView.alpha = 1
+            self.mutipleCardCollectionView.alpha = 0
+            self.singleCheckMark.alpha = 1
+        }
+        animate.startAnimation()
         singleCardCollectionView.reloadData()
         
     }
     @objc func tapMutipleBtn()
     {
+        self.mutipleCheckMark.isHidden = false
+        self.singleCardCollectionView.isHidden = false
+        self.mutipleCardCollectionView.isHidden = false
+        self.singleCheckMark.isHidden = false
         btnTag = 1
-        mutipleCheckMark.isHidden = false
-        singleCheckMark.isHidden = true
-        singleCardCollectionView.isHidden = true
-        mutipleCardCollectionView.isHidden = false
+        let animate = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.mutipleCheckMark.alpha = 1
+            self.singleCardCollectionView.alpha = 0
+            self.mutipleCardCollectionView.alpha = 1
+            self.singleCheckMark.alpha = 0
+        }
+        animate.startAnimation()
         mutipleCardCollectionView.reloadData()
         
     }
@@ -739,7 +753,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         let worngText:UILabel = {
             let label = UILabel(frame: CGRect(
                                     x: 0, y: ScreenSize.centerY.value * 0.75, width: ScreenSize.width.value, height: 100))
-            label.text = "Too many requests, please wait one min"
+            label.text = "系統存取中，稍後再試..."
 
             label.textColor = .red
             label.textAlignment = .center
@@ -750,10 +764,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(loadIndicatorView)
         self.view.addSubview(worngText)
         loadIndicatorView.startAnimating()
-        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 5, curve: .easeIn) {
             self.glass.alpha = 1
         }
-        let endAnimate = UIViewPropertyAnimator(duration: 60, curve: .easeIn) {
+        let endAnimate = UIViewPropertyAnimator(duration: 5, curve: .easeIn) {
             self.glass.alpha = 0.1
         }
         endAnimate.addCompletion { (position) in
