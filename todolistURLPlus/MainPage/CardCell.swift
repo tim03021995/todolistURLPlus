@@ -9,9 +9,9 @@
 import UIKit
 
 class CardCell: UICollectionViewCell {
-    let TCBold = "Taipei Sans TC Beta Bold"
-    let TCLight = "Taipei Sans TC Beta Light"
-    let TCRegular = "Taipei Sans TC Beta Regular"
+    let TCBold = "TaipeiSansTCBeta-Bold"
+    let TCLight = "TaipeiSansTCBeta-Light"
+    let TCRegular = "TaipeiSansTCBeta-Regular"
     var data : GetCardResponse.ShowCard!
     lazy var cardTitle: UILabel =
         {
