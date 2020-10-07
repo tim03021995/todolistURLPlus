@@ -8,8 +8,14 @@
 
 import UIKit
 
-extension UIViewController: RefreshTokenDelegate {
-
+extension UIViewController: ResponseActionDelegate {
+    func shouldRetry() {
+        present(.makeAlert("錯誤", "請稍後再試", {
+            UserToken.clearToken()
+            self.dismiss(animated: false, completion: nil)
+            return nil
+        }) ,animated: true)
+    }
     
     func shouldRefreshToken() {
         present(.makeAlert("逾時", "請重新登入", {

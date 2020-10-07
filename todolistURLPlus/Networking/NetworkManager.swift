@@ -10,20 +10,24 @@ import UIKit
 
 class NetworkManager{
         
-    var delegate : RefreshTokenDelegate?
+    var delegate : ResponseActionDelegate?
     
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
-                if error != nil { completion(.failure(.systemError)) }
+                if error != nil {
+                    completion(.failure(.systemError))
+                }
                 
                 guard let response = response as? HTTPURLResponse else { completion(.failure(.noResponse))
                     return
                 }
+                
                 guard let data = data else {
                     completion(.failure(.noData))
                     return
                 }
+                
                 self.responseHandler(data: data, response: response, completion: completion)
             }
         }.resume()
@@ -47,6 +51,10 @@ class NetworkManager{
         case 401 , 403:
             completion(.failure(.refreshToken))
             delegate?.shouldRefreshToken()
+        case 429 :
+            completion(.failure(.retry))
+            delegate?.shouldRetry()
+            break
         default:
             do{
                 let decodedError = try JSONDecoder().decode(ErrorData.self, from: data)

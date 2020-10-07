@@ -16,6 +16,7 @@ enum NetworkError:Error{
     case decodeError(struct: String)
     case responseError(error: ErrorData, statusCode: Int)
     case refreshToken
+    case retry
 
     
     ///開發者用錯誤訊息 status code 或自定義錯誤訊息
@@ -29,6 +30,8 @@ enum NetworkError:Error{
         case .responseError(error: _ , statusCode: let statusCode):
                             return "Response Error , Status Code:\(statusCode) "
         case .refreshToken: return "Refresh Token!"
+            
+        case .retry: return "Retry"
             
         }
     }

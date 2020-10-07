@@ -8,8 +8,10 @@
 
 import Foundation
 
-protocol RefreshTokenDelegate {
+protocol ResponseActionDelegate {
     func shouldRefreshToken()
+    
+    func shouldRetry()
 }
 
 protocol Storyboarded {
