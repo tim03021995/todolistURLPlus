@@ -117,9 +117,9 @@ class CardEditVC: CanGetImageViewController {
     private func editTask(){
         loading()
 
-        TaskModelManager.edit(cardID, taskID!, cardEditView) {
+        TaskModelManager.edit(cardID, taskID!, cardEditView, {
             self.popView()
-        } refreshToken: {
+        }) {
             self.shouldRefreshToken()
         }
 
