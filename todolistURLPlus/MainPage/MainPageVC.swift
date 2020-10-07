@@ -42,6 +42,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     //儲存卡片是新增模式還是編輯模式進到下一頁的
     var cardStyle: TaskModel.FuntionType?
+    
+    //判斷第一次進來頁面
+    var isFirstLoading = true
     var userName: GetUserResponse!
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .backgroundBlurred)
@@ -625,10 +628,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
                 print(showCards.map({ $0.cardPrivate }))
                 self.classifiedSingleAndMutiple(showCards: showCards)
-                self.getSingletonImage(userData: userData)
                 self.welcomeLabel.text = "Welcome back \(userData.username)"
                 self.singleCardCollectionView.reloadData()
                 self.mutipleCardCollectionView.reloadData()
+                if self.isFirstLoading
+                {
+                    self.getSingletonImage(userData: userData)
+                    self.isFirstLoading = !self.isFirstLoading
+                }
                 if isAdd
                 {
                     self.showNewestItem()
