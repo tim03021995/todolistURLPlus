@@ -789,7 +789,7 @@ extension MainPageVC: RefreshDelegate
         if let userImage = UserDataManager.shared.userImage
         {
             self.headImage.image = userImage
-            //self.stopLoading()
+            self.stopLoading()
         }
     }
     
