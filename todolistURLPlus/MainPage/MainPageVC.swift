@@ -229,14 +229,15 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         return loading
     }()
     
-    let glass:UIView = {
+   lazy var glass:UIView = {
+    let view = UIView(frame: self.view.frame)
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let glassView = UIVisualEffectView(effect: blurEffect)
         glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-        // glassView.layer.cornerRadius = 15
-        // glassView.clipsToBounds = true
         glassView.alpha = 1
-        return glassView
+        view.addSubview(glassView)
+    view.isUserInteractionEnabled = true
+        return view
     }()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -289,7 +290,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
+        startLoading()
         if !showDeleteButtonState
         {
             switch collectionView {
@@ -609,9 +610,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     
     func getCard(isAdd:Bool = false){
-        startLoading()
         //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
+        startLoading()
         let header = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager().sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
@@ -638,9 +639,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                     self.showNewestItem()
                     self.cardStyle = nil
                 }
-                
+                self.stopLoading()
             case .failure(let err):
                 print(err.description)
+                self.startLoading429()
             }
             
             
@@ -649,6 +651,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func addCard(){ //新增card的API方法
         //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
+        startLoading()
         let header = ["userToken":token]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
@@ -665,6 +668,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             case .failure(let err):
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
+                self.startLoading429()
             }
         }
     }
@@ -691,10 +695,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.getCard()
                 print("刪除成功，第",self.btnTag,"張卡片")
                 
-                
             case .failure(let err):
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
+                self.startLoading429()
             }
         }
     }
@@ -702,6 +706,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         self.view.addSubview(glass)
         self.view.addSubview(loadIndicatorView)
         loadIndicatorView.startAnimating()
+        glass.alpha = 0.1
         let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
             self.navigationController?.navigationBar.isHidden = true
             self.glass.alpha = 1
@@ -710,7 +715,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     
     func stopLoading(){
-        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
             self.glass.alpha = 0
         }
         animate.addCompletion { (position) in
@@ -720,6 +725,44 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
         animate.startAnimation()
+    }
+    func startLoading429(){
+        self.loadIndicatorView.removeFromSuperview()
+        self.glass.removeFromSuperview()
+        let worngText:UILabel = {
+            let label = UILabel(frame: CGRect(
+                                    x: 0, y: ScreenSize.centerY.value * 0.75, width: ScreenSize.width.value, height: 100))
+            label.text = "Too many requests, please wait one min"
+
+            label.textColor = .red
+            label.textAlignment = .center
+            return label
+        }()
+        glass.alpha = 0
+        self.view.addSubview(glass)
+        self.view.addSubview(loadIndicatorView)
+        self.view.addSubview(worngText)
+        loadIndicatorView.startAnimating()
+        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+            self.glass.alpha = 1
+        }
+        let endAnimate = UIViewPropertyAnimator(duration: 60, curve: .easeIn) {
+            self.glass.alpha = 0.1
+        }
+        endAnimate.addCompletion { (position) in
+            if position == .end {
+            self.loadIndicatorView.removeFromSuperview()
+            self.glass.removeFromSuperview()
+            worngText.removeFromSuperview()
+            }
+        }
+        animate.addCompletion { (position) in
+            if position == .end {
+            endAnimate.startAnimation()
+            }
+        }
+        animate.startAnimation()
+
     }
 }
 
@@ -746,7 +789,7 @@ extension MainPageVC: RefreshDelegate
         if let userImage = UserDataManager.shared.userImage
         {
             self.headImage.image = userImage
-            self.stopLoading()
+            //self.stopLoading()
         }
     }
     
@@ -762,8 +805,3 @@ enum WhichCollectionView {
     case single
     case mutiple
 }
-
-
-
-
-
