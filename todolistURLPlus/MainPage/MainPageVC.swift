@@ -48,13 +48,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }()
     ///設置頭貼
     var headImage: UIImageView =
-    {
-        let head = UserImageFactory.makeImageView(size: .small, image: nil)
-        head.backgroundColor = .gray
-        head.isUserInteractionEnabled = true
-        head.isHidden = true
-        return head
-    }()
+        {
+            let head = UserImageFactory.makeImageView(size: .small, image: nil)
+            head.backgroundColor = .gray
+            head.isUserInteractionEnabled = true
+            head.isHidden = true
+            return head
+        }()
     ///設置歡迎標籤
     lazy var welcomeLabel: UILabel =
         {
@@ -69,16 +69,16 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             label.font = UIFont.boldSystemFont(ofSize: 30)
             label.textColor = .white
             return label
-    }()
+        }()
     ///設置垃圾桶
-    let trashBtn: UIButton =
-    {
-        let btn = UIButton(frame: CGRect(x: ScreenSize.width.value * 0.75, y: ScreenSize.height.value * 0.05, width: ScreenSize.width.value * 0.15, height: ScreenSize.width.value * 0.15))
-        btn.tintColor = .white
-        btn.setBackgroundImage(UIImage(systemName: "trash.fill"), for: .normal)
-        btn.addTarget(self, action: #selector(MainPageVC.editMode), for: .touchUpInside)
-        return btn
-    }()
+    lazy var trashBtn: UIButton =
+        {
+            let btn = UIButton(frame: CGRect(x: ScreenSize.width.value * 0.8, y: 50, width: ScreenSize.width.value * 0.15, height: ScreenSize.width.value * 0.15))
+            btn.tintColor = .white
+            btn.setBackgroundImage(UIImage(systemName: "trash.fill"), for: .normal)
+            btn.addTarget(self, action: #selector(MainPageVC.editMode), for: .touchUpInside)
+            return btn
+        }()
     //切換作業模式按鈕的標籤值
     var btnTag = 0
     //點擊單人按鈕附加打勾圖案
@@ -96,7 +96,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 height: height)
             
             return imageView
-    }()
+        }()
     
     //點擊雙人按鈕附加打勾圖案
     lazy var mutipleCheckMark: UIImageView =
@@ -115,7 +115,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             imageView.isHidden = true
             
             return imageView
-    }()
+        }()
     
     //單人模式按鈕底圖
     lazy var singleBtnView: UIView =
@@ -125,11 +125,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             singleBtnView.layer.cornerRadius = 10
             singleBtnView.frame = CGRect(x: ScreenSize.width.value * 0.2,
                                          y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.25 + self.welcomeLabel.frame.maxY,//0.25
-                width: ScreenSize.width.value * 0.25,
-                height: ScreenSize.width.value * 0.25)
+                                         width: ScreenSize.width.value * 0.25,
+                                         height: ScreenSize.width.value * 0.25)
             
             return singleBtnView
-    }()
+        }()
     
     //雙人模式按鈕底圖
     lazy var mutipleBtnView: UIView =
@@ -143,7 +143,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                           height: ScreenSize.width.value * 0.25)
             
             return mutipleBtnView
-    }()
+        }()
     
     //單人模式的按鈕
     lazy var singleBtn: UIButton = 
@@ -158,17 +158,17 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             button.setTitleColor(.black, for: .normal)
             button.frame = CGRect(x: ScreenSize.width.value * 0.2,
                                   y: (self.mutipleCardCollectionView.frame.minY - self.welcomeLabel.frame.maxY) * 0.42 + self.welcomeLabel.frame.maxY, //0.33
-                width: ScreenSize.width.value * 0.25,
-                height: ScreenSize.width.value * 0.168) //0.15
+                                  width: ScreenSize.width.value * 0.25,
+                                  height: ScreenSize.width.value * 0.168) //0.15
             button.titleEdgeInsets = UIEdgeInsets(top: 0,
                                                   left: 0,
                                                   bottom: -button.frame.height * 1.2, //0.85
-                right: 0)
+                                                  right: 0)
             
             
             
             return button
-    }()
+        }()
     
     //雙人模式的按鈕
     lazy var mutipleBtn: UIButton =
@@ -194,7 +194,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                                                   bottom: -button.frame.height * 1.05,
                                                   right: 0)
             return button
-    }()
+        }()
     
     ///設置卡片(collectionView)
     var singleCardCollectionView: UICollectionView!
@@ -202,22 +202,23 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     lazy var creatBtn: UIButton =
         {
-            let btn = UIButton()
-            let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.8
+            let btn = CustomButton()
+            let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.6
             btn.frame = CGRect(x: ScreenSize.width.value * 0.25,
-                               y: self.singleCardCollectionView.frame.maxY,
+                               y: self.singleCardCollectionView.frame.maxY + 15,
                                width: ScreenSize.width.value * 0.5,
                                height: height)
-            btn.backgroundColor = .clear
+            btn.backgroundColor = .mainColorGlass
             btn.setTitle("Creat a new card", for: .normal)
-            btn.setTitleColor(.black, for: .normal)
+            btn.setTitleColor(.white, for: .normal)
             btn.contentHorizontalAlignment = .center
             btn.contentVerticalAlignment = .center
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
-            btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
-            btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchDown)
+            btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchUpInside)
+            btn.layer.cornerRadius = btn.frame.height * 0.25
             return btn
-    }()
+        }()
     
     let loadIndicatorView:UIActivityIndicatorView = {
         var loading = UIActivityIndicatorView()
@@ -232,8 +233,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
         let glassView = UIVisualEffectView(effect: blurEffect)
         glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-       // glassView.layer.cornerRadius = 15
-       // glassView.clipsToBounds = true
+        // glassView.layer.cornerRadius = 15
+        // glassView.clipsToBounds = true
         glassView.alpha = 1
         return glassView
     }()
@@ -244,7 +245,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         singleCardCollectionView.reloadData()
-       
+        
         
         setupHeadImage()
     }
@@ -253,7 +254,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-       
+        
     }
     
     
@@ -296,7 +297,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 deleteCard(indexPath: indexPath, whichData: .single)
             default:
                 deleteCard(indexPath: indexPath, whichData: .mutiple)
-
+                
             }
             
         }else
@@ -321,7 +322,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         print("Here")
         let lPVC = ListPageVC()
         lPVC.delegate = self
-
+        
         let nVC = UINavigationController(rootViewController: lPVC)
         if whichStyle == .single
         {
@@ -366,7 +367,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func setupHeadImage()
     {
         let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        headImage.frame = CGRect(x: 0, y: statusBarHeight * 1.5, width: headImage.frame.width, height: headImage.frame.height)
+        headImage.frame = CGRect(x: ScreenSize.width.value * 0.05, y: trashBtn.frame.minY, width: headImage.frame.width, height: headImage.frame.height)
         headImage.isHidden = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToProfileSetting))
         headImage.addGestureRecognizer(tap)
@@ -448,10 +449,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         //        設定collectionView的大小
         self.singleCardCollectionView = UICollectionView(frame: CGRect(
-            x: 0,
-            y: (ScreenSize.height.value * 0.4),   //
-            width: ScreenSize.width.value ,
-            height: (ScreenSize.height.value * 0.5)),
+                                                            x: 0,
+                                                            y: (ScreenSize.height.value * 0.4),   //
+                                                            width: ScreenSize.width.value ,
+                                                            height: (ScreenSize.height.value * 0.5)),
                                                          collectionViewLayout: layout)
         self.singleCardCollectionView.dataSource = self
         self.singleCardCollectionView.delegate = self
@@ -485,10 +486,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         //設定collectionView的大小
         self.mutipleCardCollectionView = UICollectionView(frame: CGRect(
-            x: 0,
-            y: (ScreenSize.height.value * 0.4),
-            width: ScreenSize.width.value ,
-            height: (ScreenSize.height.value * 0.5)),
+                                                            x: 0,
+                                                            y: (ScreenSize.height.value * 0.4),
+                                                            width: ScreenSize.width.value ,
+                                                            height: (ScreenSize.height.value * 0.5)),
                                                           collectionViewLayout: layout)
         self.mutipleCardCollectionView.dataSource = self
         self.mutipleCardCollectionView.delegate = self
@@ -553,7 +554,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         mutipleCardCollectionView.reloadData()
         
     }
-
+    
     @objc func creatNewCard()
     {
         //        let dis = DispatchQueue.
@@ -609,13 +610,13 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func getCard(isAdd:Bool = false){
         startLoading()
-//        let header = ["userToken":UserToken.shared.userToken]
+        //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let header = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager().sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
             switch result {
-                
+            
             case .success(let data):
                 let showCards = data.userData.showCards
                 let userData = data.userData
@@ -643,7 +644,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
     }
     func addCard(){ //新增card的API方法
-//        let header = ["userToken":UserToken.shared.userToken]
+        //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let header = ["userToken":token]
         //TODO 新增的card name
@@ -653,7 +654,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         NetworkManager().sendRequest(with: request) { (result:Result<PostCardResponse,NetworkError>) in
             switch result{
-                
+            
             case .success(let data):
                 print("目前新增的卡片ID = \(data.cardData.id)")
                 self.cardStyle = .create
@@ -664,7 +665,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-   
+    
     func deleteCard(indexPath: IndexPath, whichData:WhichCollectionView){
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
@@ -680,7 +681,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         
         NetworkManager().sendRequest(with: request) { (result:Result<DeleteCardResponse,NetworkError>) in
             switch result{
-                
+            
             case .success(_):
                 //                self.showCards.remove(at: self.indexPath.row)
                 
@@ -755,7 +756,7 @@ extension MainPageVC: RefreshDelegate
             }
         }else
         {
-        getCard()
+            getCard()
         }
     }
     
