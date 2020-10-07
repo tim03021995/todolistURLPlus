@@ -207,10 +207,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         {
             let btn = CustomButton()
             let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.6
-            btn.frame = CGRect(x: ScreenSize.width.value * 0.25,
-                               y: self.singleCardCollectionView.frame.maxY,
-                               width: ScreenSize.width.value * 0.5,
-                               height: height)
+            btn.frame = CGRect(
+                x: ScreenSize.width.value * 0.25,
+                y:self.singleCardCollectionView.frame.maxY,
+                width: ScreenSize.width.value * 0.5,
+                height: height)
             btn.backgroundColor = .mainColorGlass
             btn.setTitle("Creat a new card", for: .normal)
             btn.setTitleColor(.white, for: .normal)
