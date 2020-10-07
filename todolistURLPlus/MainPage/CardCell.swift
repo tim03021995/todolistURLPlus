@@ -9,7 +9,9 @@
 import UIKit
 
 class CardCell: UICollectionViewCell {
-    let fontName = "Reeji-CloudKaiXing-GB-Regular"
+    let TCBold = "Taipei Sans TC Beta Bold"
+    let TCLight = "Taipei Sans TC Beta Light"
+    let TCRegular = "Taipei Sans TC Beta Regular"
     var data : GetCardResponse.ShowCard!
     lazy var cardTitle: UILabel =
         {
@@ -18,7 +20,7 @@ class CardCell: UICollectionViewCell {
                                               width: self.frame.width * 0.8,
                                               height: self.frame.height * 0.8))
             label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.1)
+            label.font = UIFont(name: self.TCBold, size: self.frame.width * 0.1)
             label.numberOfLines = 0
             label.clipsToBounds = true
             label.textAlignment = .left
@@ -31,7 +33,7 @@ class CardCell: UICollectionViewCell {
                                               width: self.frame.width * 0.8,
                                               height: self.frame.height * 0.8))
             label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.05)
+            label.font = UIFont(name: self.TCRegular, size: self.frame.width * 0.05)
             label.clipsToBounds = true
             label.textAlignment = .left
             label.numberOfLines = 0
@@ -46,7 +48,7 @@ class CardCell: UICollectionViewCell {
                                               width: self.frame.width * 0.8,
                                               height: self.frame.height * 0.8))
             label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.05)
+            label.font = UIFont(name: self.TCLight, size: self.frame.width * 0.05)
             label.clipsToBounds = true
             label.textAlignment = .left
             label.numberOfLines = 0

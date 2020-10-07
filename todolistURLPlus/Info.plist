@@ -32,6 +32,9 @@
 	<array>
 		<string>RuiZiYunZiKuXingKaiGB-2.ttf</string>
 		<string>myFont.ttf</string>
+		<string>TaipeiSansTCBeta-Regular.ttf</string>
+		<string>TaipeiSansTCBeta-Light.ttf</string>
+		<string>TaipeiSansTCBeta-Bold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
