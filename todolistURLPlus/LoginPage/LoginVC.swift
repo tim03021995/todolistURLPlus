@@ -102,8 +102,7 @@ class LoginVC: UIViewController, Storyboarded {
                 self.signInBtn.isEnabled = true
                 guard let token = decodedData.loginData?.userToken else {return}
                 UserToken.updateToken(by: token)
-                let vc = MainPageVC()
-                vc.modalPresentationStyle = .fullScreen
+                let vc = MainPageVC(.fullScreen, nil)
                 self.stopLoading()
                 self.present(vc, animated: false)
                 

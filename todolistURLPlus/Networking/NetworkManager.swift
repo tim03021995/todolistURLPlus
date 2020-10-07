@@ -35,14 +35,12 @@ class NetworkManager{
     
     private func responseHandler<T:Codable>
     (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
-        
         switch response.statusCode {
         case 200 ... 299:
             do{
                 let decotedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decotedData))
                 print("============= \(T.self) success ==============")
-                
             }catch{
                 print("======================== Decode Error ========================")
                 print(error,"statuscode:\(response.statusCode)")

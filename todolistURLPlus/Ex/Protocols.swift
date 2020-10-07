@@ -6,7 +6,7 @@
 //  Copyright © 2020 Alvin Tseng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ResponseActionDelegate {
     func shouldRefreshToken()
@@ -19,7 +19,9 @@ protocol Storyboarded {
 }
 
 protocol LoadingViewDelegate {
-    func startLoading()
+    var loadingView : UIView { get }
     
-    func stopLoading()
+    func loadingActivityView()
+    
+    func stopLoadActivityView()
 }

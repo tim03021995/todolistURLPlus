@@ -22,8 +22,8 @@ class MainVC: UIViewController{
             NetworkManager().sendRequest(with: request) { (res:Result<GetCardResponse,NetworkError>) in
                 switch res{
                 case .success(_):
-                    let vc = MainPageVC()
-                    vc.modalPresentationStyle = .fullScreen
+                    let vc = MainPageVC(.fullScreen, nil)
+//                    vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: false, completion: nil )
                 case .failure(let err):
                     print(err.description)
