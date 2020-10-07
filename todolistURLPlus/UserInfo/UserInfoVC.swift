@@ -27,7 +27,7 @@ class UserInfoVC: CanGetImageViewController {
         userInformationView.peopleView.addGestureRecognizer(tap)
     }
     override func viewWillDisappear(_ animated: Bool) {
-        delegate.refreshImage()
+        delegate.refreshUserInfo()
     }
     @objc func information (){
         let vc = SetInfoVC()
