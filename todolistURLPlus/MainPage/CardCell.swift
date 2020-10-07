@@ -9,19 +9,20 @@
 import UIKit
 
 class CardCell: UICollectionViewCell {
-    let fontName = "Reeji-CloudKaiXing-GB-Regular"
+    let fontName = "HanyiSentyZhangjizhi"
     var data : GetCardResponse.ShowCard!
     lazy var cardTitle: UILabel =
         {
             let label = UILabel(frame: CGRect(x: self.frame.width * 0.1,
                                               y: self.frame.height * 0.1,
                                               width: self.frame.width * 0.8,
-                                              height: self.frame.height * 0.8))
+                                              height: self.frame.height * 0.7))
             label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.1)
+            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.15)
             label.numberOfLines = 0
             label.clipsToBounds = true
             label.textAlignment = .left
+            
             return label
         }()
     lazy var subText: UILabel =
@@ -31,7 +32,7 @@ class CardCell: UICollectionViewCell {
                                               width: self.frame.width * 0.8,
                                               height: self.frame.height * 0.8))
             label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.05)
+            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.08)
             label.clipsToBounds = true
             label.textAlignment = .left
             label.numberOfLines = 0
@@ -46,19 +47,14 @@ class CardCell: UICollectionViewCell {
                                               width: self.frame.width * 0.8,
                                               height: self.frame.height * 0.8))
             label.layer.cornerRadius = self.frame.width * 0.8 * 0.05
-            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.05)
+            label.font = UIFont(name: self.fontName, size: self.frame.width * 0.08)
             label.clipsToBounds = true
             label.textAlignment = .left
             label.numberOfLines = 0
             return label
         }()
 
-    lazy var longPress: UILongPressGestureRecognizer =
-        {
-            let press = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressAction))
-            press.minimumPressDuration = 1.0
-            return press
-        }()
+    
     var deleteButton: UIImageView =
         {
             let imageView = UIImageView()
@@ -84,23 +80,7 @@ class CardCell: UICollectionViewCell {
     
     
     var deleteButtonIsHidden = true
-    @objc func longPressAction()
-    {
-        if longPress.state == .began
-        {
-            
-            feedbackGenerator.impactOccurred()
-            
-            deleteButtonIsHidden = false
-            deleteButton.isHidden = deleteButtonIsHidden
-            
-        }else if longPress.state == .ended
-        {
-            print("long press end")
-            
-        }
-        
-    }
+   
     @objc func btnTag()
     {
         print(self.deleteButton.tag,"||",self.buttonTag)
@@ -128,7 +108,7 @@ class CardCell: UICollectionViewCell {
             addSubview(subText)
             addSubview(subText2)
             
-            self.addGestureRecognizer(longPress)
+            
             setConstraints()
             
             self.addSubview(deleteButton)
@@ -156,7 +136,7 @@ class CardCell: UICollectionViewCell {
             addSubview(subText)
             addSubview(subText2)
             
-            self.addGestureRecognizer(longPress)
+            
             setConstraints()
             
             self.addSubview(deleteButton)
@@ -168,7 +148,7 @@ class CardCell: UICollectionViewCell {
             make.top.equalToSuperview().offset(20)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset( -20)
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalToSuperview().multipliedBy(0.7)
         }
         subText.snp.makeConstraints { (make) in
             // make.top.equalTo(cardTitle.snp.bottom).offset(10)

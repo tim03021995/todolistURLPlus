@@ -630,11 +630,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.mutipleCardCollectionView.reloadData()
                 if isAdd
                 {
-                    self.toListPageVC(indexPathRow: (self.showSingleCards.count - 1), whichStyle: .single)
-                    
-                    
                     self.showNewestItem()
+                    self.toListPageVC(indexPathRow: (self.showSingleCards.count - 1), whichStyle: .single)
+                }else if self.cardStyle == .create
+                {
+                    self.showNewestItem()
+                    self.cardStyle = nil
                 }
+                
             case .failure(let err):
                 print(err.description)
             }
@@ -736,7 +739,8 @@ enum CollectionViewCellIdentifier: String
 }
 extension MainPageVC: RefreshDelegate
 {
-    func refreshImage() {
+    func refreshImage()
+    {
         startLoading()
         if let userImage = UserDataManager.shared.userImage
         {
@@ -745,18 +749,9 @@ extension MainPageVC: RefreshDelegate
         }
     }
     
-    func refreshCardName() {
-        if let cardStyle = self.cardStyle
-        {
-            if cardStyle == .create
-            {
-                getCard(isAdd: true)
-                self.cardStyle = nil
-            }
-        }else
-        {
+    func refreshCardName()
+    {
         getCard()
-        }
     }
     
     
