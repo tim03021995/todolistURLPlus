@@ -49,16 +49,19 @@ class ListPageVC: UIViewController {
     lazy var bottomOfNaviBar = navigationController?.navigationBar.frame.maxY ?? 0
     lazy var creatTaskBtn: UIButton =
         {
+            let btn = CustomButton()
             let y = (ScreenSize.height.value - self.listBaseView.frame.maxY) * 0.1 +  self.listBaseView.frame.maxY
             let height = (ScreenSize.height.value - self.listBaseView.frame.maxY) * 0.8
-            let btn = UIButton()
-            btn.frame = CGRect(x: ScreenSize.width.value * 0.25, y: ScreenSize.height.value * 0.85, width: ScreenSize.width.value * 0.5, height: ScreenSize.height.value * 0.08)
+           
+            btn.frame = CGRect(x: ScreenSize.width.value * 0.25, y: ScreenSize.height.value * 0.85, width: ScreenSize.width.value * 0.5, height: ScreenSize.height.value * 0.06)
             btn.setTitle("Add a new task", for: .normal)
-            btn.setTitleColor(.black, for: .normal)
+            btn.backgroundColor = .mainColorGlass
+            btn.setTitleColor(.white, for: .normal)
             btn.contentHorizontalAlignment = .center
             btn.contentVerticalAlignment = .center
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
-            btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+            btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            btn.layer.cornerRadius = btn.frame.height * 0.25
             btn.addTarget(self, action: #selector(self.tapCreatTaskBtn), for: .touchDown)
             
             return btn
@@ -92,7 +95,6 @@ class ListPageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         creatTaskBtn.isEnabled = true
-        startLoading()
     }
     override func viewDidAppear(_ animated: Bool) {
         getTask()

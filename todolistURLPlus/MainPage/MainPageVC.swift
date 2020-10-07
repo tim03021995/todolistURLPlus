@@ -207,19 +207,21 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         {
             let btn = CustomButton()
             let height = (ScreenSize.height.value - self.singleCardCollectionView.frame.maxY) * 0.6
-            btn.frame = CGRect(x: ScreenSize.width.value * 0.25,
-                               y: self.singleCardCollectionView.frame.maxY,
-                               width: ScreenSize.width.value * 0.5,
-                               height: height)
-            btn.backgroundColor = .mainColorGlass
+            btn.frame = CGRect(
+                x: ScreenSize.width.value * 0.25,
+                y:self.singleCardCollectionView.frame.maxY,
+                width: ScreenSize.width.value * 0.5,
+                height: height)
             btn.setTitle("Creat a new card", for: .normal)
+            btn.backgroundColor = .mainColorGlass
             btn.setTitleColor(.white, for: .normal)
             btn.contentHorizontalAlignment = .center
             btn.contentVerticalAlignment = .center
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-            btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchUpInside)
             btn.layer.cornerRadius = btn.frame.height * 0.25
+            btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchUpInside)
+
             return btn
         }()
     
