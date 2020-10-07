@@ -45,6 +45,9 @@
 		D2B0644B25009FEB00000444 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = D2B0644A25009FEB00000444 /* .gitattributes */; };
 		D2B0644E2500B4C600000444 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D2B0644D2500B4C600000444 /* SnapKit */; };
 		D2B064532500E71500000444 /* UserImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064522500E71500000444 /* UserImageFactory.swift */; };
+		D2B79C60252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B79C5D252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf */; };
+		D2B79C61252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B79C5E252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf */; };
+		D2B79C62252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B79C5F252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf */; };
 		D2F61C72252C4F3400D8D717 /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */; };
 		FB2077B7252B1573000A2BD9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2077B6252B1573000A2BD9 /* Protocols.swift */; };
 		FB2077BD252C42F2000A2BD9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2077BC252C42F2000A2BD9 /* Extension.swift */; };
@@ -107,6 +110,9 @@
 		D2B0644625008AC700000444 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D2B0644A25009FEB00000444 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		D2B064522500E71500000444 /* UserImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageFactory.swift; sourceTree = "<group>"; };
+		D2B79C5D252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TaipeiSansTCBeta-Regular.ttf"; sourceTree = "<group>"; };
+		D2B79C5E252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TaipeiSansTCBeta-Light.ttf"; sourceTree = "<group>"; };
+		D2B79C5F252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TaipeiSansTCBeta-Bold.ttf"; sourceTree = "<group>"; };
 		FB2077B6252B1573000A2BD9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FB2077BC252C42F2000A2BD9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		FB2C0D4C25075D9500C68391 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -155,6 +161,9 @@
 		53CCD0FA252AF21500A1F03F /* myResource */ = {
 			isa = PBXGroup;
 			children = (
+				D2B79C5F252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf */,
+				D2B79C5E252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf */,
+				D2B79C5D252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf */,
 				53CCD0F8252AF20F00A1F03F /* myFont.ttf */,
 				53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */,
 			);
@@ -411,10 +420,13 @@
 				FB7477DA251B41F600FB72B8 /* SearchVC.xib in Resources */,
 				D23505EB24FCCAB400F4CC6E /* LaunchScreen.storyboard in Resources */,
 				D23505E824FCCAB400F4CC6E /* Assets.xcassets in Resources */,
+				D2B79C62252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf in Resources */,
 				53CCD0F9252AF21000A1F03F /* myFont.ttf in Resources */,
 				53CCD103252C620900A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */,
 				D2F61C72252C4F3400D8D717 /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */,
 				D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */,
+				D2B79C61252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf in Resources */,
+				D2B79C60252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf in Resources */,
 				D2B0644B25009FEB00000444 /* .gitattributes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -622,6 +634,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6X5J69Q9BS;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -629,6 +642,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.Jimmy;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
