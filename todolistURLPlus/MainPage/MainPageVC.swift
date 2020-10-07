@@ -149,7 +149,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }()
     
     //單人模式的按鈕
-    lazy var singleBtn: UIButton = 
+    lazy var singleBtn: UIButton =
         {
             let button = UIButton()
             button.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchUpInside)

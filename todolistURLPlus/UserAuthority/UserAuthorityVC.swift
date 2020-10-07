@@ -47,7 +47,7 @@ class UserAuthorityVC: UIViewController {
     }
     
     ///GET 這張卡片有哪些使用者
-    func getAllUsers(cardID:Int){
+    private func getAllUsers(cardID:Int){
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: headers, id: cardID).send()
@@ -84,7 +84,6 @@ class UserAuthorityVC: UIViewController {
             }
         }
     }
-    #warning("DELETE")
     
     
     //進入搜尋模式
@@ -96,9 +95,6 @@ class UserAuthorityVC: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
         
-        //        let rootVC = SearchMemberVC()
-        //        let navVC = UINavigationController(rootViewController: rootVC)
-        //        present(navVC,animated: true)
     }
     
     //切換編輯模式
@@ -133,6 +129,7 @@ class UserAuthorityVC: UIViewController {
     }
     
     private func setTableView(){
+        
         myTableView.backgroundColor = .clear
         myTableView.separatorStyle = .none
         myTableView.rowHeight = fullScreenMaxY * 0.13
@@ -247,7 +244,7 @@ class UserAuthorityVC: UIViewController {
     }()
     lazy var inviteBtn: UIButton = {
         let inviteBtn = UIButton()
-        inviteBtn.backgroundColor = .clear
+//        inviteBtn.backgroundColor = .clear
         inviteBtn.setBackgroundImage(UIImage(systemName: "person.badge.plus"), for: .normal)
         inviteBtn.addTarget(self, action: #selector(inviteSomeone), for: .touchUpInside)
         inviteBtn.setTitle("Invite", for: .normal)
@@ -268,8 +265,7 @@ class UserAuthorityVC: UIViewController {
     
     lazy var removeBtn: UIButton = {
         let removeBtn = UIButton()
-        removeBtn.backgroundColor = .clear
-        //                inviteBtn.addTarget(self, action: #selector(self.tapSingleBtn), for: .touchDown)
+//        removeBtn.backgroundColor = .clear
         removeBtn.setBackgroundImage(UIImage(systemName: "person.badge.minus"), for: .normal)
         removeBtn.addTarget(self, action: #selector(removeSomeone), for: .touchUpInside)
         removeBtn.setTitle("Remove", for: .normal)
@@ -322,7 +318,6 @@ extension UserAuthorityVC: UITableViewDelegate{
         return cellSpacingHeight
     }
     
-    
 }
 
 //MARK:- UITableViewDataSource
@@ -339,12 +334,9 @@ extension UserAuthorityVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        #warning("TODO: DELETE")
         if editingStyle == .delete {
             deleteUser(indexPath: indexPath)
-            
         }
-        
     }
     
 }

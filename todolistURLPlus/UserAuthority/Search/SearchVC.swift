@@ -48,6 +48,7 @@ class SearchVC: UIViewController {
         searchTableView.register(UserAuthorityCell.self, forCellReuseIdentifier: "Cell")
         searchTableView.delegate = self
         searchTableView.dataSource = self
+        searchTableView.backgroundColor = .white
         searchTableView.layer.cornerRadius = 15
         searchView.backgroundColor = #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1)
         searchView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -122,7 +123,6 @@ extension SearchVC:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         addUser(mail: users[indexPath.row].email)
-        
     }
 }
 
