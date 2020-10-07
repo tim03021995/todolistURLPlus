@@ -26,8 +26,8 @@ class MainVC: UIViewController{
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: false, completion: nil )
                 case .failure(let err):
-                    self.shouldRefreshToken()
                     print(err.description)
+                    self.shouldRefreshToken()
                 }
             }
         }else {
