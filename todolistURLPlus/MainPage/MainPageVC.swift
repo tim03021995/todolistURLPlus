@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 protocol RefreshDelegate: AnyObject {
-    func refreshImage()
+    func refreshUserInfo()
     func refreshCardName()
 }
 //點擊震動
@@ -790,7 +790,7 @@ enum CollectionViewCellIdentifier: String
 }
 extension MainPageVC: RefreshDelegate
 {
-    func refreshImage()
+    func refreshUserInfo()
     {
         startLoading()
         if let userImage = UserDataManager.shared.userImage
@@ -798,6 +798,7 @@ extension MainPageVC: RefreshDelegate
             self.headImage.image = userImage
             self.stopLoading()
         }
+        
     }
     
     func refreshCardName()

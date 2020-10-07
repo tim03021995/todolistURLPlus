@@ -65,7 +65,8 @@ class CardCell: UICollectionViewCell {
                                           height: ScreenSize.width.value * 0.15)
             
             imageView.image = UIImage(systemName: "xmark.circle")
-            imageView.isHidden = true
+//            imageView.isHidden = true
+            imageView.alpha = 0
             imageView.tintColor = .red
             
             return imageView
@@ -104,7 +105,13 @@ class CardCell: UICollectionViewCell {
             self.subText2.text = "CreateAt: " + "\(dataStr)"
             let myBackgroundView = GlassFactory.makeGlass(style: .systemUltraThinMaterial)
             self.backgroundView = myBackgroundView
-            self.deleteButton.isHidden = state
+            
+            let animate = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
+                var alpha: CGFloat = state ? 0 : 1
+                self.deleteButton.alpha = alpha
+            }
+            animate.startAnimation()
+            
             
             addSubview(cardTitle)
             addSubview(subText)
@@ -132,7 +139,11 @@ class CardCell: UICollectionViewCell {
             self.subText2.text = "CreateAt: " + "\(dataStr)"
             let myBackgroundView = GlassFactory.makeGlass(style: .regular)
             self.backgroundView = myBackgroundView
-            self.deleteButton.isHidden = state
+            let animate = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn) {
+                var alpha: CGFloat = state ? 0 : 1
+                self.deleteButton.alpha = alpha
+            }
+            animate.startAnimation()
             
             addSubview(cardTitle)
             addSubview(subText)
