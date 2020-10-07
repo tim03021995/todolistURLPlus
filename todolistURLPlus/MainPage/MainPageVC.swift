@@ -212,15 +212,16 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 y:self.singleCardCollectionView.frame.maxY,
                 width: ScreenSize.width.value * 0.5,
                 height: height)
-            btn.backgroundColor = .mainColorGlass
             btn.setTitle("Creat a new card", for: .normal)
+            btn.backgroundColor = .mainColorGlass
             btn.setTitleColor(.white, for: .normal)
             btn.contentHorizontalAlignment = .center
             btn.contentVerticalAlignment = .center
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-            btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchUpInside)
             btn.layer.cornerRadius = btn.frame.height * 0.25
+            btn.addTarget(self, action: #selector(self.creatNewCard), for: .touchUpInside)
+
             return btn
         }()
     
