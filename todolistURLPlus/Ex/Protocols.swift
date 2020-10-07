@@ -8,10 +8,18 @@
 
 import Foundation
 
-protocol RefreshTokenDelegate {
+protocol ResponseActionDelegate {
     func shouldRefreshToken()
+    
+    func shouldRetry()
 }
 
 protocol Storyboarded {
     static func instantiate() -> Self
+}
+
+protocol LoadingViewDelegate {
+    func startLoading()
+    
+    func stopLoading()
 }
