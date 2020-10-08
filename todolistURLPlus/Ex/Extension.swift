@@ -94,8 +94,8 @@ class LoadingManager:UIViewController{
         let glassView = UIVisualEffectView(effect: blurEffect)
         glassView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width.value, height: ScreenSize.height.value)
         glassView.alpha = 1
-        view.isUserInteractionEnabled = true
-        return view
+        glassView.isUserInteractionEnabled = true
+        return glassView
     }()
     func startLoading(vc:UIViewController){
         vc.view.addSubview(glass)
