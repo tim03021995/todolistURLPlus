@@ -84,11 +84,7 @@ class CardCell: UICollectionViewCell {
     
     var deleteButtonIsHidden = true
    
-    @objc func btnTag()
-    {
-        print(self.deleteButton.tag,"||",self.buttonTag)
-        
-    }
+
     
     func setupSingle(showCards: [GetCardResponse.ShowCard], indexPath: IndexPath?, state: Bool)
     {
