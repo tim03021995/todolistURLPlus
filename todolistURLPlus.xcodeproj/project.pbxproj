@@ -634,6 +634,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KA6B4A6D5D;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -641,6 +642,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -655,6 +657,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KA6B4A6D5D;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -662,6 +665,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
