@@ -92,19 +92,21 @@ extension UIViewController:LoadingViewDelegate{
 
     func loadingActivityView() {
         self.view.addSubview(loadingView)
-        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 10, curve: .easeIn) {
             self.navigationController?.navigationBar.isHidden = true
         }
         animate.startAnimation()
+        print("startLoading")
     }
     
     func stopLoadActivityView() {
-        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 10, curve: .easeIn) {
         }
-        animate.addCompletion { (position) in
-                self.loadingView.removeFromSuperview()
+        animate.addCompletion { _ in
+            self.loadingView.removeFromSuperview()
         }
         animate.startAnimation()
+        print("finishLoading")
     }
     
     var loadingView: UIView {
@@ -116,7 +118,7 @@ extension UIViewController:LoadingViewDelegate{
             glassView.alpha = 1
             view.addSubview(glassView)
         view.isUserInteractionEnabled = true
-            return view
+        return view
     }
 
     

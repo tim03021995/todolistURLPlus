@@ -11,8 +11,17 @@ import UIKit
 class NetworkManager{
         
     var delegate : ResponseActionDelegate?
+    var loadingDelegate : LoadingViewDelegate?
+    
+    init(){}
+    
+    convenience init(_ loadingVC:UIViewController){
+        self.init()
+        loadingDelegate = loadingVC
+    }
     
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
+        loadingDelegate?.loadingActivityView()
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
                 if error != nil {
@@ -46,6 +55,8 @@ class NetworkManager{
                 print(error,"statuscode:\(response.statusCode)")
                 completion(.failure(.decodeError(struct: "\(T.self)")))
             }
+            loadingDelegate?.stopLoadActivityView()
+
         case 401 , 403:
             completion(.failure(.refreshToken))
             delegate?.shouldRefreshToken()

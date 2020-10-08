@@ -19,6 +19,8 @@ protocol Storyboarded {
 }
 
 protocol LoadingViewDelegate {
+    
+    
     var loadingView : UIView { get }
     
     func loadingActivityView()
