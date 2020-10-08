@@ -18,10 +18,13 @@ class UserInfoVC: CanGetImageViewController {
         userInformationView.peopleView.image = UserDataManager.shared.userImage
         userInformationView.userNameLabel.text = UserDataManager.shared.userData?.username
         self.view = userInformationView
-        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.isHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let barAppearance =  UINavigationBarAppearance()
+        barAppearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = barAppearance
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(information))
         userInformationView.peopleView.addGestureRecognizer(tap)

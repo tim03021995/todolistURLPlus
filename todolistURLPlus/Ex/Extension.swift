@@ -27,6 +27,14 @@ extension UIViewController: ResponseActionDelegate {
         }) ,animated: true)
     }
     
+    convenience init(_ presentationStyle:UIModalPresentationStyle , _ transitionStyle:UIModalTransitionStyle?) {
+        self.init(nibName:nil, bundle: nil)
+        self.modalPresentationStyle = presentationStyle
+        if let transitionStyle = transitionStyle {
+            self.modalTransitionStyle = transitionStyle
+        }
+    }
+    
     static func makeAlert(_ title: String?, _ message: String?, _ handler:@escaping (() -> Void?)) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -79,6 +87,41 @@ extension Storyboarded where Self: UIViewController {
     }
 }
 
+extension UIViewController:LoadingViewDelegate{
 
 
+    func loadingActivityView() {
+        self.view.addSubview(loadingView)
+        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
+            self.navigationController?.navigationBar.isHidden = true
+        }
+        animate.startAnimation()
+        print("startLoading")
+    }
+    
+    func stopLoadActivityView() {
+        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
+        }
+        animate.addCompletion { (pos) in
+            self.loadingView.removeFromSuperview()
+        }
+        animate.startAnimation()
+        print("finishLoading")
+    }
+    
+    var loadingView: UIView {
+        
+        let view = UIView(frame: self.view.frame)
+            let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+            let glassView = UIVisualEffectView(effect: blurEffect)
+            glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+            glassView.alpha = 1
+            view.addSubview(glassView)
+        view.isUserInteractionEnabled = true
+        return view
+    }
 
+
+    
+    
+}
