@@ -11,7 +11,7 @@ import IQKeyboardManagerSwift
 
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
-    
+    let loadingManger = LoadingManager()
     @IBOutlet weak var eyeBtn: UIButton!
     @IBOutlet weak var rememberMeBTN: UIButton!
     @IBOutlet weak var naviItem: UINavigationItem!
@@ -22,21 +22,21 @@ class LoginVC: UIViewController, Storyboarded {
     @IBOutlet weak var accountErrorLabel: UILabel!
     @IBOutlet weak var passwordErrorLabel: UILabel!
     
-    let loadIndicatorView:UIActivityIndicatorView = {
-        var loading = UIActivityIndicatorView()
-        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
-        loading.color = .white
-        loading.style = .large
-        
-        return loading
-    }()
-    
-    let glass:UIView = {
-        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
-        let glassView = UIVisualEffectView(effect: blurEffect)
-        glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-        return glassView
-    }()
+//    let loadIndicatorView:UIActivityIndicatorView = {
+//        var loading = UIActivityIndicatorView()
+//        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
+//        loading.color = .white
+//        loading.style = .large
+//
+//        return loading
+//    }()
+//
+//    let glass:UIView = {
+//        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+//        let glassView = UIVisualEffectView(effect: blurEffect)
+//        glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+//        return glassView
+//    }()
     
     //MARK:- ViewDidLoad
     override func viewDidLoad() {
@@ -92,7 +92,7 @@ class LoginVC: UIViewController, Storyboarded {
             signInBtn.isEnabled = true
             return }
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
-        startLoading()
+        loadingManger.startLoading(vc: self)
         
         NetworkManager().sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             
@@ -104,11 +104,11 @@ class LoginVC: UIViewController, Storyboarded {
                 UserToken.updateToken(by: token)
                 let vc = MainPageVC()
                 vc.modalPresentationStyle = .fullScreen
-                self.stopLoading()
+                //self.stopLoading()
                 self.present(vc, animated: false)
                 
             case .failure(let err):
-                self.stopLoading()
+                //self.stopLoading()
                 self.signInBtn.isEnabled = true
                 self.present(.makeAlert("Error", err.errMessage, {
                 }), animated: true)
@@ -136,29 +136,29 @@ class LoginVC: UIViewController, Storyboarded {
         passwordTF.isSecureTextEntry = !passwordTF.isSecureTextEntry
     }
     
-    func startLoading(){
-        glass.alpha = 0
-        self.view.addSubview(glass)
-        self.view.addSubview(loadIndicatorView)
-        loadIndicatorView.startAnimating()
-        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
-            self.glass.alpha = 1
-        }
-        animate.startAnimation()
-    }
-    
-    func stopLoading(){
-        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
-            self.glass.alpha = 0
-        }
-        animate.addCompletion { (position) in
-            if position == .end {
-                self.loadIndicatorView.removeFromSuperview()
-                self.glass.removeFromSuperview()
-            }
-        }
-        animate.startAnimation()
-    }
+//    func startLoading(){
+//        glass.alpha = 0
+//        self.view.addSubview(glass)
+//        self.view.addSubview(loadIndicatorView)
+//        loadIndicatorView.startAnimating()
+//        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
+//            self.glass.alpha = 1
+//        }
+//        animate.startAnimation()
+//    }
+//
+//    func stopLoading(){
+//        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+//            self.glass.alpha = 0.1
+//        }
+//        animate.addCompletion { (position) in
+//            if position == .end {
+//                self.loadIndicatorView.removeFromSuperview()
+//                self.glass.removeFromSuperview()
+//            }
+//        }
+//        animate.startAnimation()
+//    }
     
 }
 
