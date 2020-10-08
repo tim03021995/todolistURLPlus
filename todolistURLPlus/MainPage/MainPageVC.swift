@@ -716,7 +716,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         }
         animate.startAnimation()
     }
-    
+
     func stopLoading(){
         let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
             self.glass.alpha = 0

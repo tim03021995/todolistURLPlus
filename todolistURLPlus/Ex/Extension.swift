@@ -92,7 +92,7 @@ extension UIViewController:LoadingViewDelegate{
 
     func loadingActivityView() {
         self.view.addSubview(loadingView)
-        let animate = UIViewPropertyAnimator(duration: 10, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
             self.navigationController?.navigationBar.isHidden = true
         }
         animate.startAnimation()
@@ -100,9 +100,9 @@ extension UIViewController:LoadingViewDelegate{
     }
     
     func stopLoadActivityView() {
-        let animate = UIViewPropertyAnimator(duration: 10, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
         }
-        animate.addCompletion { _ in
+        animate.addCompletion { (pos) in
             self.loadingView.removeFromSuperview()
         }
         animate.startAnimation()
@@ -119,69 +119,8 @@ extension UIViewController:LoadingViewDelegate{
             view.addSubview(glassView)
         view.isUserInteractionEnabled = true
         return view
-    }()
-    func startLoading(vc:UIViewController){
-        vc.view.addSubview(glass)
-        vc.view.addSubview(loadIndicatorView)
-        glass.alpha = 0.1
-        let animate = UIViewPropertyAnimator(duration: 0, curve: .easeIn) {
-            vc.navigationController?.navigationBar.isHidden = true
-            self.glass.alpha = 1
-        }
-        loadIndicatorView.startAnimating()
-        animate.startAnimation()
     }
-    
-    func stopLoading(){
-        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
-            self.glass.alpha = 0
-        }
-        animate.addCompletion { (position) in
-            if position == .end {
-                self.loadIndicatorView.removeFromSuperview()
-                self.glass.removeFromSuperview()
-            }
-        }
-        animate.startAnimation()
-    }
-    func startLoading429(){
-        self.loadIndicatorView.removeFromSuperview()
-        self.glass.removeFromSuperview()
-        let worngText:UILabel = {
-            let label = UILabel(frame: CGRect(
-                                    x: 0, y: ScreenSize.centerY.value * 0.75, width: ScreenSize.width.value, height: 100))
-            label.text = "系統存取中，稍後再試..."
 
-            label.textColor = .red
-            label.textAlignment = .center
-            return label
-        }()
-        glass.alpha = 0
-        self.view.addSubview(glass)
-        self.view.addSubview(loadIndicatorView)
-        self.view.addSubview(worngText)
-        loadIndicatorView.startAnimating()
-        let animate = UIViewPropertyAnimator(duration: 5, curve: .easeIn) {
-            self.glass.alpha = 1
-        }
-        let endAnimate = UIViewPropertyAnimator(duration: 5, curve: .easeIn) {
-            self.glass.alpha = 0.1
-        }
-        endAnimate.addCompletion { (position) in
-            if position == .end {
-            self.loadIndicatorView.removeFromSuperview()
-            self.glass.removeFromSuperview()
-            worngText.removeFromSuperview()
-            }
-        }
-        animate.addCompletion { (position) in
-            if position == .end {
-            endAnimate.startAnimation()
-            }
-        }
-        animate.startAnimation()
-
-    }
 
     
     

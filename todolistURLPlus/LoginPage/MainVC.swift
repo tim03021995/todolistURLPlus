@@ -19,21 +19,22 @@ class MainVC: UIViewController{
         if let token = UserToken.getToken() {
             let headers = ["userToken":token]
             let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
-            NetworkManager(self).sendRequest(with: request) { (res:Result<GetCardResponse,NetworkError>) in
+            NetworkManager().sendRequest(with: request) { (res:Result<GetCardResponse,NetworkError>) in
                 switch res{
                 case .success(_):
                     let vc = MainPageVC(.fullScreen, nil)
-//                    vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: false, completion: nil )
                 case .failure(let err):
                     print(err.description)
                     self.shouldRefreshToken()
+
                 }
             }
         }else {
             let vc = LoginVC.instantiate()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: false , completion: nil)
+
             
         }
     }
