@@ -29,7 +29,7 @@ class LoadingManager:UIViewController{
         vc.view.addSubview(glass)
         vc.view.addSubview(loadIndicatorView)
         glass.alpha = 0.1
-        let animate = UIViewPropertyAnimator(duration: 0, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 0.5, curve: .linear) {
             vc.navigationController?.navigationBar.isHidden = true
             self.glass.alpha = 1
         }
@@ -38,7 +38,7 @@ class LoadingManager:UIViewController{
     }
     
     func stopLoading(){
-        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
+        let animate = UIViewPropertyAnimator(duration: 3, curve: .linear) {
             self.glass.alpha = 0
         }
         animate.addCompletion { (position) in
@@ -49,7 +49,7 @@ class LoadingManager:UIViewController{
         }
         animate.startAnimation()
     }
-    func startLoading429(){
+    func startLoading429(vc:UIViewController){
         self.loadIndicatorView.removeFromSuperview()
         self.glass.removeFromSuperview()
         let worngText:UILabel = {
@@ -62,9 +62,9 @@ class LoadingManager:UIViewController{
             return label
         }()
         glass.alpha = 0
-        self.view.addSubview(glass)
-        self.view.addSubview(loadIndicatorView)
-        self.view.addSubview(worngText)
+        vc.view.addSubview(glass)
+        vc.view.addSubview(loadIndicatorView)
+        vc.view.addSubview(worngText)
         loadIndicatorView.startAnimating()
         let animate = UIViewPropertyAnimator(duration: 5, curve: .easeIn) {
             self.glass.alpha = 1
