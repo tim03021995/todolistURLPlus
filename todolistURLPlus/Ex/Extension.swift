@@ -112,12 +112,13 @@ extension UIViewController:LoadingViewDelegate{
     var loadingView: UIView {
         
         let view = UIView(frame: self.view.frame)
-            let blurEffect = UIBlurEffect(style: .systemMaterialDark)
-            let glassView = UIVisualEffectView(effect: blurEffect)
-            glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-            glassView.alpha = 1
-            view.addSubview(glassView)
-        view.isUserInteractionEnabled = true
+        view.backgroundColor = .red
+//            let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+//            let glassView = UIVisualEffectView(effect: blurEffect)
+//            glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
+//            glassView.alpha = 1
+//            view.addSubview(glassView)
+//        view.isUserInteractionEnabled = true
         return view
     }
 
