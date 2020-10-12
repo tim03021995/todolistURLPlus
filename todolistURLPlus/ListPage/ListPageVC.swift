@@ -166,7 +166,7 @@ class ListPageVC: UIViewController {
                 self.listBaseView.tableView.reloadData()
                 self.stopLoading()
             case .failure(let err):
-                print("Get失敗\(err.description)")
+                self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.stopLoading()
             }
         }
@@ -204,7 +204,6 @@ extension ListPageVC: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         let taskCount = showTasks.count
-        showCard.showTasks.count
         return taskCount
     }
     
@@ -243,6 +242,7 @@ extension ListPageVC: UITableViewDataSource{
             case .failure(let err):
                 print(err.description)
                 self.delegate.refreshCardName()
+                self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.stopLoading()
             }
         }

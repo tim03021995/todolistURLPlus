@@ -12,6 +12,8 @@
 		53C16106250910E700C91D16 /* ListPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C16105250910E700C91D16 /* ListPageVC.swift */; };
 		53CCD0F9252AF21000A1F03F /* myFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53CCD0F8252AF20F00A1F03F /* myFont.ttf */; };
 		53CCD103252C620900A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */; };
+		53D4C87C252F025B003CD01F /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4C87B252F025B003CD01F /* UIAlertControllerExtension.swift */; };
+		53D4C880252F0564003CD01F /* ExtensionUIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4C87F252F0564003CD01F /* ExtensionUIAlertController.swift */; };
 		97077B8D2512189E000139E6 /* searchMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B862512189E000139E6 /* searchMemberVC.swift */; };
 		97077B902512189E000139E6 /* UserAuthorityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B892512189E000139E6 /* UserAuthorityVC.swift */; };
 		97077B932512189E000139E6 /* UserAuthorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B8C2512189E000139E6 /* UserAuthorityCell.swift */; };
@@ -77,6 +79,8 @@
 		53C16105250910E700C91D16 /* ListPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageVC.swift; sourceTree = "<group>"; };
 		53CCD0F8252AF20F00A1F03F /* myFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = myFont.ttf; sourceTree = "<group>"; };
 		53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RuiZiYunZiKuXingKaiGB-2.ttf"; sourceTree = "<group>"; };
+		53D4C87B252F025B003CD01F /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		53D4C87F252F0564003CD01F /* ExtensionUIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIAlertController.swift; sourceTree = "<group>"; };
 		97077B862512189E000139E6 /* searchMemberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchMemberVC.swift; sourceTree = "<group>"; };
 		97077B892512189E000139E6 /* UserAuthorityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityVC.swift; sourceTree = "<group>"; };
 		97077B8C2512189E000139E6 /* UserAuthorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityCell.swift; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 				D24B084B2521A5600073917E /* UserDataManager.swift */,
 				FB2077B6252B1573000A2BD9 /* Protocols.swift */,
 				FB2077BC252C42F2000A2BD9 /* Extension.swift */,
+				53D4C87F252F0564003CD01F /* ExtensionUIAlertController.swift */,
+				53D4C87B252F025B003CD01F /* UIAlertControllerExtension.swift */,
 			);
 			path = Ex;
 			sourceTree = "<group>";
@@ -467,8 +473,10 @@
 				FB2077BD252C42F2000A2BD9 /* Extension.swift in Sources */,
 				D24901182511FD2D003E9497 /* SetInfoModel.swift in Sources */,
 				FBC901962500E02400F6FA40 /* MainPageVC.swift in Sources */,
+				53D4C87C252F025B003CD01F /* UIAlertControllerExtension.swift in Sources */,
 				FBEF303924FF6D1B003F5945 /* CustomBtn.swift in Sources */,
 				D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */,
+				53D4C880252F0564003CD01F /* ExtensionUIAlertController.swift in Sources */,
 				D24901162510A41C003E9497 /* MainVC.swift in Sources */,
 				D2B0644725008AC700000444 /* UserInfoView.swift in Sources */,
 				D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */,

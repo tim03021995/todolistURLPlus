@@ -645,6 +645,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.stopLoading()
             case .failure(let err):
                 print(err.description)
+                self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.startLoading429()
             }
             
@@ -671,6 +672,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             case .failure(let err):
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
+                self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.startLoading429()
             }
         }
@@ -701,6 +703,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             case .failure(let err):
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
+                self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.startLoading429()
             }
         }
