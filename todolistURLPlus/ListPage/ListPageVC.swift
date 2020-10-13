@@ -13,9 +13,7 @@ import UIKit
 class ListPageVC: UIViewController {
     weak var delegate: RefreshDelegate!
     var showCard: GetCardResponse.ShowCard!
-    
     var showTasks:[GetCardResponse.ShowTask] = []
-    
     let backgroundImage:UIImageView = {
         return BackGroundFactory.makeImage(type: .background2)
     }()
@@ -26,17 +24,10 @@ class ListPageVC: UIViewController {
                                  y: self.bottomOfNaviBar * 1.25,
                                  width: ScreenSize.width.value * 0.9,
                                  height: ScreenSize.height.value * 0.05)
-            
-            
             label.text = self.showCard.cardName
-            
-            
             label.adjustsFontSizeToFitWidth = true
-            
             label.textAlignment = .center
-            
             label.font = UIFont.boldSystemFont(ofSize: 30)
-//            label.textColor = .white
             return label
     }()
     
@@ -63,7 +54,6 @@ class ListPageVC: UIViewController {
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
             btn.layer.cornerRadius = btn.frame.height * 0.25
             btn.addTarget(self, action: #selector(self.tapCreatTaskBtn), for: .touchDown)
-            
             return btn
     }()
         private let loadIndicatorView:UIActivityIndicatorView = {
@@ -71,7 +61,6 @@ class ListPageVC: UIViewController {
             loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
             loading.color = .black
             loading.style = .large
-            
             return loading
         }()
         private let glass:UIView = {
@@ -90,7 +79,6 @@ class ListPageVC: UIViewController {
         listBaseView.tableView.delegate = self
         listBaseView.tableView.dataSource = self
         cardTitleTextField.delegate = self
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
@@ -98,8 +86,6 @@ class ListPageVC: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         getTask()
-        print("卡片ID是 = ",showCard.id)
-        
     }
   
     func addSubview()
@@ -108,22 +94,21 @@ class ListPageVC: UIViewController {
         self.view.addSubview(listBaseView)
         self.view.addSubview(cardTitleTextField)
         self.view.addSubview(creatTaskBtn)
-        
     }
     
     @objc func tapCreatTaskBtn()
     {
         creatTaskBtn.isEnabled = false
+        feedbackGenerator.impactOccurred()
         toCardEditVC(data: showCard, indexPath: nil)
     }
     @objc func tapToUserAuthority(){
         let vc = UserAuthorityVC(id: showCard.id)
+        feedbackGenerator.impactOccurred()
         present(vc, animated: true, completion: nil)
-        
     }
     func toCardEditVC(data: GetCardResponse.ShowCard, indexPath: IndexPath?)
     {
-        feedbackGenerator.impactOccurred()
         let vc = CardEditVC()
         if let indexPath = indexPath
         {
@@ -150,7 +135,8 @@ class ListPageVC: UIViewController {
         }
     }
     
-    func getTask(){
+    func getTask()
+    {
         startLoading()
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
@@ -159,24 +145,22 @@ class ListPageVC: UIViewController {
             switch result {
                 
             case .success(let data):
-
-//                self.showTasks = showTasks
                 let showCards = data.userData.showCards
                 self.classifiedSingleAndMutiple(showCards: showCards)
                 self.listBaseView.tableView.reloadData()
                 self.stopLoading()
             case .failure(let err):
-                print("Get失敗\(err.description)")
+                self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.stopLoading()
             }
         }
     }
-    private func reloadListTableView(){
+    private func reloadListTableView()
+    {
         let reloadView = self.listBaseView
         reloadView.tableView.delegate = self
         reloadView.tableView.dataSource = self
         reloadView.reloadTableView()
-        //           self.listBaseView = reloadView
     }
     
 }
@@ -204,7 +188,6 @@ extension ListPageVC: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         let taskCount = showTasks.count
-        showCard.showTasks.count
         return taskCount
     }
     
@@ -219,16 +202,12 @@ extension ListPageVC: UITableViewDataSource{
         startLoading()
         let vc = CardEditVC()
         let task = showTasks[indexPath.section]
-        
-        //        let taskModel = TaskModel(funtionType: .edit, cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: nil, tag: ColorsButtonType(rawValue: task.tag!) )
-        // vc.setData(data: taskModel)
         vc.editPage(cardID: task.cardID, taskID: task.id, title: task.title, description: task.description, image: task.image, tag: ColorsButtonType(rawValue: task.tag!))
         
         navigationController?.pushViewController(vc, animated: true)
         
     }
     func putCardName(){
-        //startLoading()
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let parameters: [String: Any] = ["card_name": cardTitleTextField.text ?? ""]
@@ -243,6 +222,7 @@ extension ListPageVC: UITableViewDataSource{
             case .failure(let err):
                 print(err.description)
                 self.delegate.refreshCardName()
+                self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.stopLoading()
             }
         }

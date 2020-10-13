@@ -12,7 +12,7 @@ import Foundation
 extension String {
     var isValidUserName:Bool {
         let format =
-            "^([-_a-zA-Z0-9]{4,16})$"
+            "^([-_a-zA-Z0-9]{1,16})$"
         let userNamePredicate = NSPredicate(format: "SELF MATCHES %@", format)
         return userNamePredicate.evaluate(with: self)
     }

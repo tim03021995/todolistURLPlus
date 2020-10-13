@@ -79,6 +79,7 @@ class NetworkManager{
             do{
                 let decodedError = try JSONDecoder().decode(ErrorData.self, from: data)
                 completion(.failure(.responseError(error: decodedError, statusCode: response.statusCode)))
+//                self.loadingDelegate?.stopLoadActivityView()
 
             }catch{
                 print("錯誤訊息decode失敗,status code:\(response.statusCode)")
