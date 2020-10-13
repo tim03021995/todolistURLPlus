@@ -22,22 +22,7 @@ class LoginVC: UIViewController, Storyboarded {
     @IBOutlet weak var accountErrorLabel: UILabel!
     @IBOutlet weak var passwordErrorLabel: UILabel!
     
-//    let loadIndicatorView:UIActivityIndicatorView = {
-//        var loading = UIActivityIndicatorView()
-//        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
-//        loading.color = .white
-//        loading.style = .large
-//
-//        return loading
-//    }()
-//
-//    let glass:UIView = {
-//        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
-//        let glassView = UIVisualEffectView(effect: blurEffect)
-//        glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-//        return glassView
-//    }()
-    
+
     //MARK:- ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +90,6 @@ class LoginVC: UIViewController, Storyboarded {
                 self.present(vc, animated: false)
                 
             case .failure(let err):
-                //self.stopLoading()
                 self.signInBtn.isEnabled = true
                 self.present(.makeAlert("Error", err.errMessage, {
                 }), animated: true)
