@@ -18,7 +18,4 @@ struct CardModel
     var taskModel: [TaskModel]?
 }
 
-enum WorkStatus
-{
-    case personal, mutiple
-}
+

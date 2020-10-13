@@ -21,6 +21,8 @@ class NetworkManager{
     }
     
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
+//        self.loadingDelegate?.loadingActivityView()
+
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async{
                 if error != nil {
@@ -39,17 +41,22 @@ class NetworkManager{
                 self.responseHandler(data: data, response: response, completion: completion)
 
             }
+
         }.resume()
+//        self.loadingDelegate?.stopLoadActivityView()
+
     }
     
     private func responseHandler<T:Codable>
     (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
+
         switch response.statusCode {
         case 200 ... 299:
             do{
                 let decotedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decotedData))
                 print("============= \(T.self) success ==============")
+
 
             }catch{
                 print("======================== Decode Error ========================")
@@ -80,10 +87,9 @@ class NetworkManager{
 
             }
         }
+
     }
     
 }
-
-
 
 

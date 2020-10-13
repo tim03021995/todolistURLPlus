@@ -62,7 +62,8 @@ class SearchVC: UIViewController {
         let headers = ["userToken":token]
         
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: mail).send()
-        NetworkManager().sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
+        NetworkManager(self).sendRequest(with: request) {
+            (res:Result<GetUserResponse,NetworkError>) in
             switch res {
                 
             case .success(let data ):
