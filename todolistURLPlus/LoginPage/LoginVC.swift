@@ -11,7 +11,7 @@ import IQKeyboardManagerSwift
 
 class LoginVC: UIViewController, Storyboarded {
     //MARK:- Properties
-//    let loadingManger = LoadingManager()
+    let loadingManger = LoadingManager()
     @IBOutlet weak var eyeBtn: UIButton!
     @IBOutlet weak var rememberMeBTN: UIButton!
     @IBOutlet weak var naviItem: UINavigationItem!
@@ -92,7 +92,7 @@ class LoginVC: UIViewController, Storyboarded {
             signInBtn.isEnabled = true
             return }
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
-//        loadingManger.startLoading(vc: self)
+        loadingManger.startLoading(vc: self)
         NetworkManager().sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in
             
             switch result{
@@ -102,7 +102,6 @@ class LoginVC: UIViewController, Storyboarded {
                 guard let token = decodedData.loginData?.userToken else {return}
                 UserToken.updateToken(by: token)
                 let vc = MainPageVC(.fullScreen, nil)
-//                self.stopLoading()
                 self.present(vc, animated: false)
                 
             case .failure(let err):
@@ -112,6 +111,7 @@ class LoginVC: UIViewController, Storyboarded {
                 }), animated: true)
                 print(err.description)
             }
+            self.loadingManger.stopLoading()
         }
     }
     

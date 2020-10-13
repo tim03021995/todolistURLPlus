@@ -42,6 +42,7 @@
 		D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAF2505D0D8001FE33E /* CardEditVC.swift */; };
 		D291DEB22505D371001FE33E /* CardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEB12505D371001FE33E /* CardEditView.swift */; };
 		D291DEB42505D9D7001FE33E /* BackGroundFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEB32505D9D7001FE33E /* BackGroundFactory.swift */; };
+		D29EC745252EE24E000D7B64 /* LoadingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29EC744252EE24E000D7B64 /* LoadingManager.swift */; };
 		D2B064422500891A00000444 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B064412500891A00000444 /* ColorSet.swift */; };
 		D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B0644425008AAB00000444 /* UserInfoVC.swift */; };
 		D2B0644725008AC700000444 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B0644625008AC700000444 /* UserInfoView.swift */; };
@@ -111,6 +112,7 @@
 		D291DEAF2505D0D8001FE33E /* CardEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditVC.swift; sourceTree = "<group>"; };
 		D291DEB12505D371001FE33E /* CardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditView.swift; sourceTree = "<group>"; };
 		D291DEB32505D9D7001FE33E /* BackGroundFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundFactory.swift; sourceTree = "<group>"; };
+		D29EC744252EE24E000D7B64 /* LoadingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingManager.swift; sourceTree = "<group>"; };
 		D2B064412500891A00000444 /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		D2B0644425008AAB00000444 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		D2B0644625008AC700000444 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				FB2077BC252C42F2000A2BD9 /* Extension.swift */,
 				53D4C87F252F0564003CD01F /* ExtensionUIAlertController.swift */,
 				53D4C87B252F025B003CD01F /* UIAlertControllerExtension.swift */,
+				D29EC744252EE24E000D7B64 /* LoadingManager.swift */,
 			);
 			path = Ex;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				FB7477D9251B41F600FB72B8 /* SearchVC.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
 				53A6CD492534C311006335C4 /* EnumForMainPageVC.swift in Sources */,
+				D29EC745252EE24E000D7B64 /* LoadingManager.swift in Sources */,
 				D24B085A2522E5770073917E /* ModifyPasswordModel.swift in Sources */,
 				D249011225090A40003E9497 /* ModifyPasswordVC.swift in Sources */,
 				D24B084C2521A5600073917E /* UserDataManager.swift in Sources */,
@@ -646,6 +650,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6X5J69Q9BS;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -653,6 +658,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.Jimmy;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -667,6 +673,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6X5J69Q9BS;
+				DEVELOPMENT_TEAM = VH4XC348YR;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -19,6 +19,7 @@ let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+    var loadingManager = LoadingManager()
     var showDeleteButtonState = true
     var cell: CardCell! = nil
     var userData: GetCardResponse.UserData!
@@ -294,6 +295,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        loadingManager.startLoading(vc: self)
         if !showDeleteButtonState
         {
             startLoading()
@@ -337,6 +339,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     
     fileprivate func getSingletonImage(userData: GetCardResponse.UserData) {
+        self.loadingManager.startLoading(vc: self)
         UserDataManager.shared.getUserData(email: userData.email) { (image) in
             self.headImage.image = image
             self.stopLoading()
@@ -586,7 +589,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func getCard(isAdd:Bool = false){
         
         guard let token = UserToken.getToken() else{ print("No Token"); return }
-        startLoading()
+        loadingManager.startLoading(vc: self)
         let header = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager().sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
@@ -618,11 +621,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                     self.showNewestItem()
                     self.cardStyle = nil
                 }
-                self.stopLoading()
+                if !self.isFirstLoading {
+                    self.loadingManager.stopLoading()
+                }
             case .failure(let err):
                 print(err.description)
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.startLoading429()
+                self.loadingManager.startLoading429(vc: self)
             }
             
             
@@ -631,7 +637,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func addCard(){ //新增card的API方法
         //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
-        startLoading()
+        self.loadingManager.startLoading(vc: self)
         let header = ["userToken":token]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
@@ -650,6 +656,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("err.errormessage = \(err.errMessage)")
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 self.startLoading429()
+                self.loadingManager.startLoading429(vc: self)
             }
         }
     }
@@ -756,10 +763,11 @@ extension MainPageVC: RefreshDelegate
 {
     func refreshUserInfo()
     {
-        startLoading()
+        loadingManager.startLoading(vc: self)
         if let userImage = UserDataManager.shared.userImage
         {
             self.headImage.image = userImage
+            loadingManager.stopLoading()
         }
         getCard()
     }
