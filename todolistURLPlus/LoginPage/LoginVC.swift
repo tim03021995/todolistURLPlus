@@ -46,7 +46,6 @@ class LoginVC: UIViewController, Storyboarded {
     fileprivate func propertiesSetting() {
         eyeBtn.setImage(UIImage(systemName: "eye"), for: .selected)
         eyeBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-        
         rememberMeBTN.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .selected)
         rememberMeBTN.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         accountTF.delegate = self
@@ -118,29 +117,6 @@ class LoginVC: UIViewController, Storyboarded {
         passwordTF.isSecureTextEntry = !passwordTF.isSecureTextEntry
     }
     
-//    func startLoading(){
-//        glass.alpha = 0
-//        self.view.addSubview(glass)
-//        self.view.addSubview(loadIndicatorView)
-//        loadIndicatorView.startAnimating()
-//        let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
-//            self.glass.alpha = 1
-//        }
-//        animate.startAnimation()
-//    }
-//
-//    func stopLoading(){
-//        let animate = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
-//            self.glass.alpha = 0.1
-//        }
-//        animate.addCompletion { (position) in
-//            if position == .end {
-//                self.loadIndicatorView.removeFromSuperview()
-//                self.glass.removeFromSuperview()
-//            }
-//        }
-//        animate.startAnimation()
-//    }
     
 }
 
