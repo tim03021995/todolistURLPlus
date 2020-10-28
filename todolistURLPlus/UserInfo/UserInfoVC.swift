@@ -56,6 +56,7 @@ class UserInfoVC: CanGetImageViewController {
         let presentingVC = self.presentingViewController
         dismiss(animated: false) {
             presentingVC?.dismiss(animated: false, completion: nil)
+            
         }
     }
     func getUserData(email:String){

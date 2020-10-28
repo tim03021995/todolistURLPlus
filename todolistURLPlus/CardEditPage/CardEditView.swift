@@ -99,7 +99,7 @@ class CardEditView: UIView {
             y: 0,
             width: ScreenSize.width.value * 0.7,
             height: ScreenSize.height.value * 0.2),
-                                    collectionViewLayout: layout
+            collectionViewLayout: layout
         )
         view.layer.cornerRadius = view.frame.width * 0.05
         view.backgroundColor = .lightGray
