@@ -209,8 +209,10 @@ struct PutCardResponse: Codable {
         let updatedAt: String
         let pivot: Pivot
         let showTasks: [ShowTask?]
+        let isPrivate: Bool
         
         enum CodingKeys: String, CodingKey {
+            case isPrivate = "private"
             case id
             case cardName = "card_name"
             case createUser = "create_user"
@@ -233,7 +235,7 @@ struct PutCardResponse: Codable {
     struct ShowTask: Codable {
         let id: Int
         let title: String
-        let status: Int
+        let status: Bool
         let createUser, updateUser: String
         let description:String?
         let cardID: Int
