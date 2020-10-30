@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+
 protocol RefreshDelegate: AnyObject {
     func refreshUserInfo()
     func refreshCardName()
@@ -15,11 +16,8 @@ protocol RefreshDelegate: AnyObject {
 // 全域變數點擊震動
 let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
-
-
-
-class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-    var loadingManager = LoadingManager()
+class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,LoadAnimationAble{
+   // var loadingManager = LoadingManager()
     var showDeleteButtonState = true
     var cell: CardCell! = nil
     var userData: GetCardResponse.UserData!
@@ -233,37 +231,20 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             
             return btn
         }()
-    
-    let loadIndicatorView:UIActivityIndicatorView = {
-        var loading = UIActivityIndicatorView()
-        loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
-        loading.color = .white
-        loading.style = .large
-        
-        return loading
-    }()
-    
-    lazy var glass:UIView = {
-        let view = UIView(frame: self.view.frame)
-        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
-        let glassView = UIVisualEffectView(effect: blurEffect)
-        glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-        glassView.alpha = 1
-        view.addSubview(glassView)
-        view.isUserInteractionEnabled = true
-        return view
-    }()
-    
+  //MARK: Loading
     
     override func viewDidAppear(_ animated: Bool) {
         setupHeadImage()
+       // stop()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        #warning("123")
         setUI()
         getCard()
+        startLoading(self)
     }
     
     
@@ -294,11 +275,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        loadingManager.startLoading(vc: self)
         if !showDeleteButtonState
         {
-            startLoading()
+//            startLoading()
+//            show(view: self.view)
             switch collectionView {
             case singleCardCollectionView:
                 deleteCard(indexPath: indexPath, whichData: .single)
@@ -339,10 +319,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     
     fileprivate func getSingletonImage(userData: GetCardResponse.UserData) {
-        self.loadingManager.startLoading(vc: self)
         UserDataManager.shared.getUserData(email: userData.email) { (image) in
             self.headImage.image = image
             self.stopLoading()
+//            self.stopLoading()
+//self.stop()
         }
     }
     func setupHeadImage()
@@ -585,11 +566,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             self.mutipleCheckMark.isHidden = false
         }
     }
-    
+    // MARK: getcard
     func getCard(isAdd:Bool = false){
         
         guard let token = UserToken.getToken() else{ print("No Token"); return }
-        loadingManager.startLoading(vc: self)
         let header = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
         NetworkManager().sendRequest(with: request) { (result:Result<GetCardResponse,NetworkError>) in
@@ -601,7 +581,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 self.userData = userData
                 self.showCards = showCards
                 print("讀取資料成功，目前資料有\(showCards.count)張卡片")
-                
                 self.classifiedSingleAndMutiple(showCards: showCards)
                 self.welcomeLabel.text = "Welcome back \(self.userData.username)"
                 print("現在的使用者名稱", userData.username)
@@ -611,6 +590,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 {
                     self.getSingletonImage(userData: userData)
                     self.isFirstLoading = !self.isFirstLoading
+                }else{
+                    self.stopLoading()
                 }
                 if isAdd
                 {
@@ -621,23 +602,20 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                     self.showNewestItem()
                     self.cardStyle = nil
                 }
-                if !self.isFirstLoading {
-                    self.loadingManager.stopLoading()
-                }
             case .failure(let err):
                 print(err.description)
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
-                self.loadingManager.startLoading429(vc: self)
-                self.loadingManager.startLoading429(vc: self)
             }
             
             
         }
     }
+    // MARK:addCard
     func addCard(){ //新增card的API方法
+        startLoading(self)
         //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
-        self.loadingManager.startLoading(vc: self)
+
         let header = ["userToken":token]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
@@ -655,13 +633,14 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
-                self.loadingManager.startLoading429(vc: self)
-                self.loadingManager.startLoading429(vc: self)
+               
+                
             }
         }
     }
-    
+    // MARK: deleteCard
     func deleteCard(indexPath: IndexPath, whichData:WhichCollectionView){
+        startLoading(self)
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         
@@ -687,97 +666,29 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
-                self.loadingManager.startLoading429(vc: self)
+                
             }
         }
-    }
-    func startLoading(){
-        self.view.addSubview(glass)
-        self.view.addSubview(loadIndicatorView)
-        loadIndicatorView.startAnimating()
-        glass.alpha = 0.1
-        let animate = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
-            self.navigationController?.navigationBar.isHidden = true
-            self.glass.alpha = 1
-        }
-        animate.startAnimation()
-    }
-    
-    func stopLoading(){
-        let animate = UIViewPropertyAnimator(duration: 2, curve: .easeIn) {
-            self.glass.alpha = 0
-        }
-        animate.addCompletion { (position) in
-            if position == .end {
-                self.loadIndicatorView.removeFromSuperview()
-                self.glass.removeFromSuperview()
-            }
-        }
-        animate.startAnimation()
-    }
-    func startLoading429(){
-        self.loadIndicatorView.removeFromSuperview()
-        self.glass.removeFromSuperview()
-        let worngText:UILabel = {
-            let label = UILabel(frame: CGRect(
-                                    x: 0, y: ScreenSize.centerY.value * 0.75, width: ScreenSize.width.value, height: 100))
-            label.text = "系統存取中，稍後再試..."
-            
-            label.textColor = .red
-            label.textAlignment = .center
-            return label
-        }()
-        glass.alpha = 0
-        self.view.addSubview(glass)
-        self.view.addSubview(loadIndicatorView)
-        self.view.addSubview(worngText)
-        loadIndicatorView.startAnimating()
-        let animate = UIViewPropertyAnimator(duration: 5, curve: .easeIn) {
-            self.glass.alpha = 1
-        }
-        let endAnimate = UIViewPropertyAnimator(duration: 5, curve: .easeIn) {
-            self.glass.alpha = 0.1
-        }
-        endAnimate.addCompletion { (position) in
-            if position == .end {
-                self.loadIndicatorView.removeFromSuperview()
-                self.glass.removeFromSuperview()
-                worngText.removeFromSuperview()
-            }
-        }
-        animate.addCompletion { (position) in
-            if position == .end {
-                endAnimate.startAnimation()
-            }
-        }
-        animate.startAnimation()
-        
     }
 }
-
-
-
-
-
 extension MainPageVC: RefreshDelegate
 {
     func refreshUserInfo()
     {
-        loadingManager.startLoading(vc: self)
+        
         if let userImage = UserDataManager.shared.userImage
         {
             self.headImage.image = userImage
-            loadingManager.stopLoading()
         }
         getCard()
     }
     
     func refreshCardName()
     {
+        startLoading(self)
         getCard()
     }
     
     
 }
-
 

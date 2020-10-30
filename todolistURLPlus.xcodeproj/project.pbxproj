@@ -39,6 +39,8 @@
 		D24B084C2521A5600073917E /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B084B2521A5600073917E /* UserDataManager.swift */; };
 		D24B085A2522E5770073917E /* ModifyPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B08592522E5770073917E /* ModifyPasswordModel.swift */; };
 		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
+		D276D17C254AB8330099612B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D276D17B254AB8330099612B /* Lottie */; };
+		D276D194254ABCD90099612B /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D276D193254ABCD90099612B /* loading.json */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
 		D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAF2505D0D8001FE33E /* CardEditVC.swift */; };
@@ -112,6 +114,7 @@
 		D24B084B2521A5600073917E /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		D24B08592522E5770073917E /* ModifyPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordModel.swift; sourceTree = "<group>"; };
 		D24D01D225074D4F00016630 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		D276D193254ABCD90099612B /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		D291DEAA2500FAB3001FE33E /* SetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoView.swift; sourceTree = "<group>"; };
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
 		D291DEAF2505D0D8001FE33E /* CardEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditVC.swift; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 				D2B0644E2500B4C600000444 /* SnapKit in Frameworks */,
 				D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */,
 				AFF1DA14764309888F8BB86A /* Pods_todolistURLPlus.framework in Frameworks */,
+				D276D17C254AB8330099612B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +257,7 @@
 				D23505E424FCCAAF00F4CC6E /* Main.storyboard */,
 				D23505E724FCCAB400F4CC6E /* Assets.xcassets */,
 				D23505E924FCCAB400F4CC6E /* LaunchScreen.storyboard */,
+				D276D193254ABCD90099612B /* loading.json */,
 				D201BDFF25494A36004B9786 /* GoogleService-Info.plist */,
 				D23505EC24FCCAB400F4CC6E /* Info.plist */,
 			);
@@ -411,6 +416,7 @@
 			packageProductDependencies = (
 				D2B0644D2500B4C600000444 /* SnapKit */,
 				D249010E25090551003E9497 /* IQKeyboardManagerSwift */,
+				D276D17B254AB8330099612B /* Lottie */,
 			);
 			productName = todolistURLPlus;
 			productReference = D23505DB24FCCAAF00F4CC6E /* todolistURLPlus.app */;
@@ -443,6 +449,7 @@
 			packageReferences = (
 				D2B0644C2500B4C600000444 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D249010D25090551003E9497 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				D276D17A254AB8330099612B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = D23505DC24FCCAAF00F4CC6E /* Products */;
 			projectDirPath = "";
@@ -464,6 +471,7 @@
 				D2B79C62252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf in Resources */,
 				53CCD0F9252AF21000A1F03F /* myFont.ttf in Resources */,
 				53CCD103252C620900A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */,
+				D276D194254ABCD90099612B /* loading.json in Resources */,
 				D2F61C72252C4F3400D8D717 /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */,
 				D201BE0025494A36004B9786 /* GoogleService-Info.plist in Resources */,
 				D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */,
@@ -791,6 +799,14 @@
 				minimumVersion = 6.5.6;
 			};
 		};
+		D276D17A254AB8330099612B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.8;
+			};
+		};
 		D2B0644C2500B4C600000444 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -806,6 +822,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D249010D25090551003E9497 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		D276D17B254AB8330099612B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D276D17A254AB8330099612B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		D2B0644D2500B4C600000444 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

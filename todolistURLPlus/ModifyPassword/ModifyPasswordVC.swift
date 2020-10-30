@@ -24,12 +24,12 @@ class ModifyPasswordVC: CanGetImageViewController {
     }
     @objc func touchConfirmButton(){
         if let password = forgotPasswordView.passwordTextField.text{
-            loading()
+//            loading()
             if password.isValidPassword{
                 updataPassWord(password)
             }else{
                 forgotPasswordView.passwordTextField.text = ""
-                stopLoading()
+//                stopLoading()
             }
         }
     }
@@ -40,13 +40,13 @@ class ModifyPasswordVC: CanGetImageViewController {
             case .success( _):
                 print("update success")
                 self.dismiss(animated: true, completion: nil)
-                self.stopLoading()
+//                self.stopLoading()
             case .failure(let err):
                 
                 print("update error")
                 print(err.description)
                 self.forgotPasswordView.alertLabel.text = err.errMessage
-                self.stopLoading()
+//                self.stopLoading()
             // print("錯誤訊息：\(err.errMessage)")
             }
         }

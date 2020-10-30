@@ -115,7 +115,7 @@ class CardEditVC: CanGetImageViewController {
     }
     
     private func editTask(){
-        loading()
+//        loading()
 
         TaskModelManager.edit(cardID, taskID!, cardEditView, {
             self.popView()
@@ -125,13 +125,13 @@ class CardEditVC: CanGetImageViewController {
 
     }
     private func createTask(){
-        loading()
+//        loading()
         TaskModelManager.create(cardID,cardEditView) {
             self.popView()
         }
     }
     @objc func deleteTask(){
-        loading()
+//        loading()
         TaskModelManager.delete(taskID!) {
              self.popView()
         }
@@ -207,7 +207,7 @@ extension CardEditVC:UITextViewDelegate{
 }
 extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        loading()
+//        loading()
         if let image = info[.originalImage] as? UIImage{
             let _image = UIImage(data: image.jpegData(compressionQuality: 0.05)!)
 //            print("origin", image.pngData())
@@ -215,7 +215,7 @@ extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDel
 //            cardEditView.imageView.image = _image
             cardEditView.setImageView(image: _image)
         }
-        stopLoading()
+//        stopLoading()
         dismiss(animated: true, completion: nil)
     }
 }
