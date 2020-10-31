@@ -1,6 +1,6 @@
 import UIKit
 
-class UserInfoVC: CanGetImageViewController {
+class UserInfoVC: CanGetImageViewController,LoadAnimationAble {
     weak var delegate: RefreshDelegate!
     let userInformationView = UserInfoView()
     var email:String!
@@ -60,10 +60,12 @@ class UserInfoVC: CanGetImageViewController {
         }
     }
     func getUserData(email:String){
+        startLoading(self)
         UserInfoModelManager.getUserData(email: email) { (userData) in
             if let image = userData.image{
                 self.getImage(type: .gill, imageURL: image ) { (image) in
                     self.userInformationView.peopleView.image = image
+                    self.stopLoading()
                 }
             }
             self.userInformationView.userNameLabel.text = userData.username

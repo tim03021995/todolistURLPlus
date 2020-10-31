@@ -34,6 +34,7 @@ class ModifyPasswordView: UIView {
             width: ScreenSize.width.value * 0.8,
             height: ScreenSize.height.value * 0.05 ))
         textField.textAlignment = .center
+        textField.keyboardType = .emailAddress
         return textField
     }()
     var alertLabel:UILabel = {

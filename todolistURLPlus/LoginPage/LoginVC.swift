@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class LoginVC: UIViewController, Storyboarded {
+class LoginVC: UIViewController, Storyboarded ,LoadAnimationAble{
     //MARK:- Properties
     @IBOutlet weak var eyeBtn: UIButton!
     @IBOutlet weak var rememberMeBTN: UIButton!
@@ -69,6 +69,7 @@ class LoginVC: UIViewController, Storyboarded {
     }
     
     private func signIn(){
+        startLoading(self)
         signInBtn.isEnabled = false
         //驗證帳密 , 成功的話包裝
         guard let parameters = validateAccount() else{
@@ -88,6 +89,7 @@ class LoginVC: UIViewController, Storyboarded {
                 self.present(vc, animated: false)
                 
             case .failure(let err):
+                self.stopLoading()
                 self.signInBtn.isEnabled = true
                 self.present(.makeAlert("Error", err.errMessage, {
                 }), animated: true)

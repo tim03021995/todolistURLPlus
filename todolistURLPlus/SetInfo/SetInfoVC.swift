@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class SetInfoVC:CanGetImageViewController{
+class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
     let setInfoView = SetInfoView()
 
     override func loadView() {
@@ -52,13 +52,13 @@ class SetInfoVC:CanGetImageViewController{
             SetInfoModelManerger.updateUserName(userName) {
                 print("updata name")
                 UserDataManager.shared.getUserData { (image) in
-//                    self.stopLoading()
+                    self.stopLoading()
                     self.navigationController?.popViewController(animated: true)
                 }
             }
         }
         func errorType(){
-//            self.stopLoading()
+           self.stopLoading()
             isEditing = false
             let ac = UIViewController.makeAlert("格式錯誤", "^([-_a-zA-Z0-9]{4,16})$"){}
             present(ac, animated: true, completion: nil)
@@ -74,7 +74,7 @@ class SetInfoVC:CanGetImageViewController{
                 errorType()
             }
         }
-//        loading()
+        startLoading(self)
         if let image = setInfoView.peopleView.image {
             SetInfoModelManerger.updateUserImage(image) {
                 print("updata Image")

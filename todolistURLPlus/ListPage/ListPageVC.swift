@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class ListPageVC: UIViewController {
+class ListPageVC: UIViewController,LoadAnimationAble {
     weak var delegate: RefreshDelegate!
     var showCard: GetCardResponse.ShowCard!
     var showTasks:[GetCardResponse.ShowTask] = []
@@ -56,22 +56,7 @@ class ListPageVC: UIViewController {
             btn.addTarget(self, action: #selector(self.tapCreatTaskBtn), for: .touchDown)
             return btn
     }()
-//        private let loadIndicatorView:UIActivityIndicatorView = {
-//            var loading = UIActivityIndicatorView()
-//            loading.center = CGPoint(x: ScreenSize.centerX.value, y: ScreenSize.centerY.value)
-//            loading.color = .black
-//            loading.style = .large
-//            return loading
-//        }()
-//        private let glass:UIView = {
-//            let blurEffect = UIBlurEffect(style: .systemMaterialDark)
-//            let glassView = UIVisualEffectView(effect: blurEffect)
-//            glassView.frame = CGRect(x:0, y:0, width: ScreenSize.width.value, height: ScreenSize.height.value)
-//            glassView.layer.cornerRadius = 15
-//            glassView.clipsToBounds = true
-//            glassView.alpha = 1
-//            return glassView
-//        }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,10 +119,10 @@ class ListPageVC: UIViewController {
             }
         }
     }
-    
+    // MARK : getTask
     func getTask()
     {
-        
+        startLoading(self)
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let headers = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
@@ -148,7 +133,7 @@ class ListPageVC: UIViewController {
                 let showCards = data.userData.showCards
                 self.classifiedSingleAndMutiple(showCards: showCards)
                 self.listBaseView.tableView.reloadData()
-               
+                self.stopLoading()
             case .failure(let err):
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                

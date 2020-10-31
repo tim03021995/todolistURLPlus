@@ -76,13 +76,13 @@ class UserDataManager{
         self.userImage = nil
         self.email = nil
     }
-    
+    #warning("異步")
     private func takeImage(_ imageURL:String,complection:@escaping (UIImage)->Void?){
+        
         let controller = CanGetImageViewController()
         controller.getImage(type: .gill, imageURL: imageURL) { (image) in
-            self.userImage = image
-            complection(image!)
+                self.userImage = image
+                complection(image!)
+            }
         }
     }
-    
-}

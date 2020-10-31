@@ -11,7 +11,7 @@ import UIKit
 //TODO 鍵盤位置 
 
 
-class SignupVC: UIViewController {
+class SignupVC: UIViewController, LoadAnimationAble {
     //MARK:- Properties
     
     @IBOutlet weak var userNameTF: CustomLogINTF!
@@ -89,7 +89,7 @@ class SignupVC: UIViewController {
             self.present(.makeAlert("Error", "輸入錯誤", {}), animated: true)
             return
         }
-        
+        startLoading(self)
         let registerRequest = HTTPRequest(endpoint: .register, contentType: .json, method: .POST, parameters: parameters).send()
         
         NetworkManager().sendRequest(with: registerRequest) { (result:Result<LoginInReaponse,NetworkError>) in
@@ -99,12 +99,12 @@ class SignupVC: UIViewController {
                 self.present(.makeAlert("Success", "註冊成功！",  {
                     self.dismiss(animated: true, completion: nil)
                 }), animated: true)
-                
+                self.stopLoading()
             case .failure(let err):
                 self.present(.makeAlert("Error", err.errMessage, {
                 }), animated: true)
                 print(err.description)
-                
+                self.stopLoading()
             }
         }
         

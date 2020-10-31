@@ -50,6 +50,7 @@ class LoadManager
         disenableView.addSubview(animationView)
         animationView.addSubview(loadingLabel)
         vc.view.addSubview(disenableView)
+        disenableView.alpha = 0
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height
         let frame = CGRect(x: width / 2, y: height / 2, width: width / 2, height: width / 2)
@@ -62,11 +63,22 @@ class LoadManager
         loadingLabel.frame.size = CGSize(width: animationView.bounds.width / 2, height: animationView.bounds.width / 4)
         loadingLabel.center.x = animationView.bounds.midX
         loadingLabel.center.y = animationView.bounds.height / 4
-        
+        let animate = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.disenableView.alpha = 1
+        }
+        animate.startAnimation()
     }
      func stopLoading()
     {
-        self.disenableView.removeFromSuperview()
+        let animate = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+            self.disenableView.alpha = 0
+        }
+        animate.addCompletion { (position) in
+            if position == .end {
+                self.disenableView.removeFromSuperview()
+            }
+        }
+        animate.startAnimation()
     }
     
 }

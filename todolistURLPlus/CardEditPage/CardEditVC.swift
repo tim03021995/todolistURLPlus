@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardEditVC: CanGetImageViewController {
+class CardEditVC: CanGetImageViewController,LoadAnimationAble {
     private var funtionType:TaskModel.FuntionType?
     private var cardID:Int = 0
     private var taskID:Int?
@@ -115,8 +115,7 @@ class CardEditVC: CanGetImageViewController {
     }
     
     private func editTask(){
-//        loading()
-
+        startLoading(self)
         TaskModelManager.edit(cardID, taskID!, cardEditView, {
             self.popView()
         }) {
@@ -125,13 +124,13 @@ class CardEditVC: CanGetImageViewController {
 
     }
     private func createTask(){
-//        loading()
+        startLoading(self)
         TaskModelManager.create(cardID,cardEditView) {
             self.popView()
         }
     }
     @objc func deleteTask(){
-//        loading()
+        startLoading(self)
         TaskModelManager.delete(taskID!) {
              self.popView()
         }
@@ -215,7 +214,7 @@ extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDel
 //            cardEditView.imageView.image = _image
             cardEditView.setImageView(image: _image)
         }
-//        stopLoading()
+
         dismiss(animated: true, completion: nil)
     }
 }
