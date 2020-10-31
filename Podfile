@@ -13,5 +13,5 @@ pod 'Firebase/Analytics'
 # For example, to use Firebase Authentication and Cloud Firestore
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
-
+pod 'Google-Mobile-Ads-SDK'
 end
