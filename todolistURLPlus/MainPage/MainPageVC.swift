@@ -247,6 +247,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         getCard()
         startLoading(self)
         interstitial = createAndLoadInterstitial()
+        #if DEBUG
+        print("test\n\n\n")
+        #endif
     }
     
     
@@ -691,7 +694,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
       }
     }
     func createAndLoadInterstitial() -> GADInterstitial {
-      var interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+    let adString = AdManager.share.getAdString()
+      var interstitial = GADInterstitial(adUnitID: adString)
       interstitial.delegate = self
       interstitial.load(GADRequest())
       return interstitial

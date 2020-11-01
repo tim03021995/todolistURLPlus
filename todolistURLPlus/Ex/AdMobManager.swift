@@ -48,4 +48,18 @@ class AdManager{
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
       interstitial = createAndLoadInterstitial()
     }
+    func getAdString() -> String{
+        #if release
+        return "ca-app-pub-8485646219002983/4023130639"
+        #else
+        return "ca-app-pub-3940256099942544/4411468910"
+        #endif
+        }
+    func getAdStringTest() -> String{
+        #if release
+        return "ca-app-pub-8485646219002983/4023130639"
+        #else
+        return "ca-app-pub-3940256099942544/4411468910"
+        #endif
+        }
 }
