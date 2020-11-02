@@ -11,20 +11,12 @@ import UIKit
 class NetworkManager{
         
     var delegate : ResponseActionDelegate?
-    var loadingDelegate : LoadingViewDelegate?
     
-    init(){}
-    
-    convenience init(_ loadingVC:UIViewController){
-        self.init()
-        loadingDelegate = loadingVC
-    }
     
     func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
-//        self.loadingDelegate?.loadingActivityView()
 
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async{
+            DispatchQueue.global(qos: .default).async{
                 if error != nil {
                     completion(.failure(.systemError))
                 }
@@ -37,13 +29,14 @@ class NetworkManager{
                     completion(.failure(.noData))
                     return
                 }
-
-                self.responseHandler(data: data, response: response, completion: completion)
+                
+                DispatchQueue.main.async {
+                    self.responseHandler(data: data, response: response, completion: completion)
+                }
 
             }
 
         }.resume()
-//        self.loadingDelegate?.stopLoadActivityView()
 
     }
     

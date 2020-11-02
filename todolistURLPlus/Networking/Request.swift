@@ -11,7 +11,7 @@ import Foundation
 
 struct HTTPRequest {
     
-    let baseURL = "http://35.185.131.56:8002/api/"
+    let baseURL = "https://dodo.gill.gq/api/"
     let endpoint:Endpoint
     var urlString:String {
         if let id = id {
