@@ -48,12 +48,16 @@ class NetworkManager{
             do{
                 let decotedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decotedData))
+                #if DEBUG
                 print("============= \(T.self) success ==============")
-
+                #endif
 
             }catch{
+                
+                #if DEBUG
                 print("======================== Decode Error ========================")
                 print(error,"statuscode:\(response.statusCode)")
+                #endif
                 completion(.failure(.decodeError(struct: "\(T.self)")))
 
             }
@@ -75,7 +79,11 @@ class NetworkManager{
 //                self.loadingDelegate?.stopLoadActivityView()
 
             }catch{
+                #if DEBUG
+                print("======================== Decode Error ========================")
                 print("錯誤訊息decode失敗,status code:\(response.statusCode)")
+                #endif
+                
                 completion(.failure(.decodeError(struct: "\(ErrorData.self)")))
 
             }

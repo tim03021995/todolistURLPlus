@@ -69,12 +69,13 @@ class LoginVC: UIViewController, Storyboarded ,LoadAnimationAble{
     }
     
     private func signIn(){
-        startLoading(self)
+        
         signInBtn.isEnabled = false
         //驗證帳密 , 成功的話包裝
         guard let parameters = validateAccount() else{
             signInBtn.isEnabled = true
             return }
+        startLoading(self)
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
 //        loadingManger.startLoading(vc: self)
         NetworkManager().sendRequest(with: getTokenRequest) { (result:Result<LoginInReaponse,NetworkError>) in

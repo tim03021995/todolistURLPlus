@@ -20,13 +20,13 @@
 		97077B932512189E000139E6 /* UserAuthorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B8C2512189E000139E6 /* UserAuthorityCell.swift */; };
 		9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8C2509BE14002C8E71 /* ListBaseView.swift */; };
 		9718BB8F2509BE14002C8E71 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8D2509BE14002C8E71 /* ListTableViewCell.swift */; };
-		AFF1DA14764309888F8BB86A /* Pods_todolistURLPlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184A84ABC180C62062688CC /* Pods_todolistURLPlus.framework */; };
-		D201BE0025494A36004B9786 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D201BDFF25494A36004B9786 /* GoogleService-Info.plist */; };
 		D23505DF24FCCAAF00F4CC6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */; };
 		D23505E124FCCAAF00F4CC6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */; };
 		D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E424FCCAAF00F4CC6E /* Main.storyboard */; };
 		D23505E824FCCAB400F4CC6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D23505E724FCCAB400F4CC6E /* Assets.xcassets */; };
 		D23505EB24FCCAB400F4CC6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23505E924FCCAB400F4CC6E /* LaunchScreen.storyboard */; };
+		D23F4268254EC0B90032F67C /* Pods_todolistURLPlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184A84ABC180C62062688CC /* Pods_todolistURLPlus.framework */; };
+		D23F42B62550F53A0032F67C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D23F42B52550F53A0032F67C /* GoogleService-Info.plist */; };
 		D249010C2508EBB2003E9497 /* GlassFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249010B2508EBB2003E9497 /* GlassFactory.swift */; };
 		D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D249010E25090551003E9497 /* IQKeyboardManagerSwift */; };
 		D249011225090A40003E9497 /* ModifyPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249011125090A40003E9497 /* ModifyPasswordVC.swift */; };
@@ -41,6 +41,7 @@
 		D24D01D325074D4F00016630 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24D01D225074D4F00016630 /* TaskModel.swift */; };
 		D276D17C254AB8330099612B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D276D17B254AB8330099612B /* Lottie */; };
 		D276D194254ABCD90099612B /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D276D193254ABCD90099612B /* loading.json */; };
+		D276D23E254D4EE50099612B /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276D23D254D4EE50099612B /* AdMobManager.swift */; };
 		D291DEAB2500FAB3001FE33E /* SetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAA2500FAB3001FE33E /* SetInfoView.swift */; };
 		D291DEAD2500FACF001FE33E /* SetInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAC2500FACF001FE33E /* SetInfoVC.swift */; };
 		D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291DEAF2505D0D8001FE33E /* CardEditVC.swift */; };
@@ -95,7 +96,6 @@
 		97077B8C2512189E000139E6 /* UserAuthorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityCell.swift; sourceTree = "<group>"; };
 		9718BB8C2509BE14002C8E71 /* ListBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBaseView.swift; sourceTree = "<group>"; };
 		9718BB8D2509BE14002C8E71 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		D201BDFF25494A36004B9786 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D23505DB24FCCAAF00F4CC6E /* todolistURLPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todolistURLPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23505DE24FCCAAF00F4CC6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D23505E024FCCAAF00F4CC6E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +103,7 @@
 		D23505E724FCCAB400F4CC6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D23505EA24FCCAB400F4CC6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D23505EC24FCCAB400F4CC6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D23F42B52550F53A0032F67C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D249010B2508EBB2003E9497 /* GlassFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassFactory.swift; sourceTree = "<group>"; };
 		D249011125090A40003E9497 /* ModifyPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordVC.swift; sourceTree = "<group>"; };
 		D249011325090A63003E9497 /* ModifyPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordView.swift; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 		D24B08592522E5770073917E /* ModifyPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordModel.swift; sourceTree = "<group>"; };
 		D24D01D225074D4F00016630 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D276D193254ABCD90099612B /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		D276D23D254D4EE50099612B /* AdMobManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
 		D291DEAA2500FAB3001FE33E /* SetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoView.swift; sourceTree = "<group>"; };
 		D291DEAC2500FACF001FE33E /* SetInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInfoVC.swift; sourceTree = "<group>"; };
 		D291DEAF2505D0D8001FE33E /* CardEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditVC.swift; sourceTree = "<group>"; };
@@ -157,9 +159,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D23F4268254EC0B90032F67C /* Pods_todolistURLPlus.framework in Frameworks */,
 				D2B0644E2500B4C600000444 /* SnapKit in Frameworks */,
 				D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */,
-				AFF1DA14764309888F8BB86A /* Pods_todolistURLPlus.framework in Frameworks */,
 				D276D17C254AB8330099612B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,8 +260,8 @@
 				D23505E724FCCAB400F4CC6E /* Assets.xcassets */,
 				D23505E924FCCAB400F4CC6E /* LaunchScreen.storyboard */,
 				D276D193254ABCD90099612B /* loading.json */,
-				D201BDFF25494A36004B9786 /* GoogleService-Info.plist */,
 				D23505EC24FCCAB400F4CC6E /* Info.plist */,
+				D23F42B52550F53A0032F67C /* GoogleService-Info.plist */,
 			);
 			path = todolistURLPlus;
 			sourceTree = "<group>";
@@ -308,6 +310,7 @@
 				53D4C87F252F0564003CD01F /* ExtensionUIAlertController.swift */,
 				53D4C87B252F025B003CD01F /* UIAlertControllerExtension.swift */,
 				D29EC744252EE24E000D7B64 /* LoadingManager.swift */,
+				D276D23D254D4EE50099612B /* AdMobManager.swift */,
 			);
 			path = Ex;
 			sourceTree = "<group>";
@@ -472,8 +475,8 @@
 				53CCD0F9252AF21000A1F03F /* myFont.ttf in Resources */,
 				53CCD103252C620900A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */,
 				D276D194254ABCD90099612B /* loading.json in Resources */,
+				D23F42B62550F53A0032F67C /* GoogleService-Info.plist in Resources */,
 				D2F61C72252C4F3400D8D717 /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */,
-				D201BE0025494A36004B9786 /* GoogleService-Info.plist in Resources */,
 				D23505E624FCCAAF00F4CC6E /* Main.storyboard in Resources */,
 				D2B79C61252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf in Resources */,
 				D2B79C60252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf in Resources */,
@@ -556,6 +559,7 @@
 				97077B8D2512189E000139E6 /* searchMemberVC.swift in Sources */,
 				53C16106250910E700C91D16 /* ListPageVC.swift in Sources */,
 				FBEAB4D5250F1CE9005041F3 /* CardResponse.swift in Sources */,
+				D276D23E254D4EE50099612B /* AdMobManager.swift in Sources */,
 				D291DEB02505D0D8001FE33E /* CardEditVC.swift in Sources */,
 				FBEF303D24FF8550003F5945 /* CustomTF.swift in Sources */,
 				FB2077BD252C42F2000A2BD9 /* Extension.swift in Sources */,
@@ -705,6 +709,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -716,6 +721,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -737,6 +743,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -753,12 +760,21 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VH4XC348YR;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"PB_FIELD_32BIT=1",
+					"PB_NO_PACKED_STRUCTS=1",
+					"PB_ENABLE_MALLOC=1",
+				);
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

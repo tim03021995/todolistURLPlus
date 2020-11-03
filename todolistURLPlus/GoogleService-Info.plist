@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>361492884760-ih0n4gfvjdfp2095kfo8pajdmlapnje4.apps.googleusercontent.com</string>
+	<string>361492884760-5svl0lj1siof8ebggq22rthnfh7k30mg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.361492884760-ih0n4gfvjdfp2095kfo8pajdmlapnje4</string>
+	<string>com.googleusercontent.apps.361492884760-5svl0lj1siof8ebggq22rthnfh7k30mg</string>
 	<key>API_KEY</key>
 	<string>AIzaSyByv4n0FvmUb_5_LMQ2qXp7AoQ0Z3TGf78</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>GoodIdeaIOS.todolistURLPlus</string>
+	<string>GoodIdeaIOS.todolistURLPlus.alvin</string>
 	<key>PROJECT_ID</key>
 	<string>doittogether-d48a3</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,8 +29,10 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:361492884760:ios:5166b678e83a66695d426d</string>
+	<string>1:361492884760:ios:e257d975ccff67365d426d</string>
 	<key>DATABASE_URL</key>
 	<string>https://doittogether-d48a3.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-8485646219002983~2091936014</string>
 </dict>
 </plist>

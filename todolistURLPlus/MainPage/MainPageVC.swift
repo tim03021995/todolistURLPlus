@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-
+import GoogleMobileAds
 protocol RefreshDelegate: AnyObject {
     func refreshUserInfo()
     func refreshCardName()
@@ -16,12 +16,14 @@ protocol RefreshDelegate: AnyObject {
 // 全域變數點擊震動
 let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
-class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,LoadAnimationAble{
+class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,LoadAnimationAble, GADInterstitialDelegate{
    // var loadingManager = LoadingManager()
     var showDeleteButtonState = true
     var cell: CardCell! = nil
     var userData: GetCardResponse.UserData!
+    var interstitialView: GADInterstitial!
     
+    var tabTimes = 0
     //所有卡片的陣列
     var showCards = [GetCardResponse.ShowCard]()
     {
@@ -237,7 +239,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         setupHeadImage()
        // stop()
     }
-    
+    //MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -245,6 +247,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         setUI()
         getCard()
         startLoading(self)
+        DispatchQueue.global(qos: .default).async {
+            self.interstitialView = self.createAd()
+        }
     }
     
     
@@ -277,14 +282,15 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !showDeleteButtonState
         {
-//            startLoading()
-//            show(view: self.view)
             switch collectionView {
             case singleCardCollectionView:
-                deleteCard(indexPath: indexPath, whichData: .single)
+                tabTimesToAD {
+                    deleteCard(indexPath: indexPath, whichData: .single)
+                }
             default:
-                deleteCard(indexPath: indexPath, whichData: .mutiple)
-                
+                tabTimesToAD {
+                    deleteCard(indexPath: indexPath, whichData: .mutiple)
+                }
             }
             
         }else
@@ -524,10 +530,12 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     @objc func creatNewCard()
     {
-        addCard()
-        singleCardCollectionView.reloadData()
-        //點擊觸發震動
-        feedbackGenerator.impactOccurred()
+        tabTimesToAD {
+            addCard()
+            singleCardCollectionView.reloadData()
+            //點擊觸發震動
+            feedbackGenerator.impactOccurred()
+        }
     }
     
     func classifiedSingleAndMutiple(showCards:[GetCardResponse.ShowCard])
@@ -568,7 +576,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     }
     // MARK: getcard
     func getCard(isAdd:Bool = false){
-        
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let header = ["userToken":token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
@@ -658,7 +665,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             
             case .success(_):
                 //                self.showCards.remove(at: self.indexPath.row)
-                
                 self.getCard()
                 print("刪除成功，第",self.btnTag,"張卡片")
                 
@@ -670,6 +676,71 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
+    func tabTimesToAD(complection:()->Void){
+        print(tabTimes)
+        if tabTimes == 5{
+            tabTimes = 0
+            DispatchQueue.main.async {
+                self.showAd()
+            }
+        }else{
+            tabTimes = tabTimes + 1
+            complection()
+        }
+    }
+    func createAd() -> GADInterstitial {
+        interstitialView = GADInterstitial(adUnitID: AdManager.share.getAdString())
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers =
+            [ "d009f3ac077bf94a3ba18be0d5ad4caa" ]
+        interstitialView.delegate = self
+        let request = GADRequest()
+        interstitialView.load(request)
+        return interstitialView
+    }
+    func showAd() {
+            if interstitialView != nil {
+                if (interstitialView.isReady == true){
+                    interstitialView.present(fromRootViewController:self)
+                } else {
+                    print("ad wasn't ready")
+                    interstitialView = createAd()
+                }
+            } else {
+                print("ad wasn't ready")
+                interstitialView = createAd()
+            }
+        }
+
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+            print("Ad Received")
+            if ad.isReady {
+                interstitialView.present(fromRootViewController: self)
+            }
+       }
+
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+            print("Did Dismiss Screen")
+        }
+
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+            print("Will Dismiss Screen")
+        }
+
+    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+            print("Will present screen")
+        }
+
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+            print("Will leave application")
+        }
+
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+            print("Failed to present screen")
+        }
+
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        print("\(String(describing: ad)) did fail to receive ad with error \(String(describing: error))")
+        }
 }
 extension MainPageVC: RefreshDelegate
 {
