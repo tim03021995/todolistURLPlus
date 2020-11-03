@@ -41,7 +41,7 @@ class AdManager{
         self.interstitial.delegate = vc
     }
     func createAndLoadInterstitial() -> GADInterstitial{
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let interstitial = GADInterstitial(adUnitID: getAdString())
           interstitial.load(GADRequest())
           return interstitial
     }
@@ -49,16 +49,11 @@ class AdManager{
       interstitial = createAndLoadInterstitial()
     }
     func getAdString() -> String{
-        #if release
+        #if RELEASE
+        print("\n\n\nrelease\n\n\n")
         return "ca-app-pub-8485646219002983/4023130639"
         #else
-        return "ca-app-pub-3940256099942544/4411468910"
-        #endif
-        }
-    func getAdStringTest() -> String{
-        #if release
-        return "ca-app-pub-8485646219002983/4023130639"
-        #else
+        print("\n\n\ndebug\n\n\n")
         return "ca-app-pub-3940256099942544/4411468910"
         #endif
         }

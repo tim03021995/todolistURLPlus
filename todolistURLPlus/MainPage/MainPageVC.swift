@@ -21,7 +21,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     var showDeleteButtonState = true
     var cell: CardCell! = nil
     var userData: GetCardResponse.UserData!
-    var interstitial: GADInterstitial!
+    var interstitialView: GADInterstitial!
+    
     var tabTimes = 0
     //所有卡片的陣列
     var showCards = [GetCardResponse.ShowCard]()
@@ -246,10 +247,9 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         setUI()
         getCard()
         startLoading(self)
-        interstitial = createAndLoadInterstitial()
-        #if DEBUG
-        print("test\n\n\n")
-        #endif
+        DispatchQueue.global(qos: .default).async {
+            self.interstitialView = self.createAd()
+        }
     }
     
     
@@ -680,30 +680,67 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         print(tabTimes)
         if tabTimes == 5{
             tabTimes = 0
-            presentAD()
+            DispatchQueue.main.async {
+                self.showAd()
+            }
         }else{
             tabTimes = tabTimes + 1
             complection()
         }
     }
-    func presentAD() {
-    if interstitial.isReady {
-        interstitial.present(fromRootViewController: self)
-      } else {
-        print("Ad wasn't ready")
-      }
+    func createAd() -> GADInterstitial {
+        interstitialView = GADInterstitial(adUnitID: AdManager.share.getAdString())
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers =
+            [ "d009f3ac077bf94a3ba18be0d5ad4caa" ]
+        interstitialView.delegate = self
+        let request = GADRequest()
+        interstitialView.load(request)
+        return interstitialView
     }
-    func createAndLoadInterstitial() -> GADInterstitial {
-    let adString = AdManager.share.getAdString()
-      var interstitial = GADInterstitial(adUnitID: adString)
-      interstitial.delegate = self
-      interstitial.load(GADRequest())
-      return interstitial
-    }
+    func showAd() {
+            if interstitialView != nil {
+                if (interstitialView.isReady == true){
+                    interstitialView.present(fromRootViewController:self)
+                } else {
+                    print("ad wasn't ready")
+                    interstitialView = createAd()
+                }
+            } else {
+                print("ad wasn't ready")
+                interstitialView = createAd()
+            }
+        }
+
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+            print("Ad Received")
+            if ad.isReady {
+                interstitialView.present(fromRootViewController: self)
+            }
+       }
 
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-      interstitial = createAndLoadInterstitial()
-    }
+            print("Did Dismiss Screen")
+        }
+
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+            print("Will Dismiss Screen")
+        }
+
+    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+            print("Will present screen")
+        }
+
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+            print("Will leave application")
+        }
+
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+            print("Failed to present screen")
+        }
+
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        print("\(String(describing: ad)) did fail to receive ad with error \(String(describing: error))")
+        }
 }
 extension MainPageVC: RefreshDelegate
 {

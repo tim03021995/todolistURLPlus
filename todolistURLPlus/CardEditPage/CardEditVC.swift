@@ -67,7 +67,6 @@ class CardEditVC: CanGetImageViewController,LoadAnimationAble {
                        viewData.tag = .red
                        self.funtionType = .create
                        viewData.description = "Please input text"
-                       //viewData.image = UIImage(systemName: "photo")!
                        viewData.title = ""
 
                    self.cardID = cardID
@@ -96,9 +95,6 @@ class CardEditVC: CanGetImageViewController,LoadAnimationAble {
                 viewData.image = image
             })
             }
-//            }else{
-//                viewData.image = UIImage(systemName: "photo")
-//            }
             viewData.tag = tag ?? ColorsButtonType.red
             return viewData
         }()
@@ -206,12 +202,8 @@ extension CardEditVC:UITextViewDelegate{
 }
 extension CardEditVC:UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        loading()
         if let image = info[.originalImage] as? UIImage{
             let _image = UIImage(data: image.jpegData(compressionQuality: 0.05)!)
-//            print("origin", image.pngData())
-//            print("resize", _image?.pngData())
-//            cardEditView.imageView.image = _image
             cardEditView.setImageView(image: _image)
         }
 
