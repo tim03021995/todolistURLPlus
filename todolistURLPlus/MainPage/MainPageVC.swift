@@ -612,6 +612,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 }
             case .failure(let err):
                 print(err.description)
+                if err == .retry {
+                    self.stopLoading()
+                    self.showAd()
+                }
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
             }
             
@@ -641,8 +645,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
-                
-                
             }
         }
     }
@@ -672,6 +674,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             case .failure(let err):
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
+                if err == .retry {
+                    self.stopLoading()
+                    self.showAd()
+                }
+
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
                 
             }
@@ -717,12 +724,15 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
         print("Ad Received")
         if ad.isReady {
-            
+            print("Ad Ready")
         }
     }
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         print("Did Dismiss Screen")
+        DispatchQueue.global(qos: .default).async {
+            self.interstitialView = self.createAd()
+        }
     }
     
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {

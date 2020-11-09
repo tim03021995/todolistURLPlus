@@ -69,7 +69,7 @@ class NetworkManager{
 
         case 429 :
             completion(.failure(.retry))
-            delegate?.shouldRetry()
+            //delegate?.shouldRetry()
 
             break
         default:

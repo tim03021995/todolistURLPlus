@@ -9,7 +9,15 @@
 import Foundation
 
 
-enum NetworkError:Error{
+enum NetworkError:Error, Comparable{
+    static func < (lhs: NetworkError, rhs: NetworkError) -> Bool {
+        false
+    }
+    
+    static func == (lhs: NetworkError, rhs: NetworkError) -> Bool {
+        true
+    }
+    
     case systemError
     case noResponse
     case noData
@@ -32,6 +40,7 @@ enum NetworkError:Error{
         case .refreshToken: return "Refresh Token!"
             
         case .retry: return "Retry"
+        
             
         }
     }
