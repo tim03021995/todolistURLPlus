@@ -17,7 +17,7 @@ protocol RefreshDelegate: AnyObject {
 let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 
 class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,LoadAnimationAble, GADInterstitialDelegate{
-   // var loadingManager = LoadingManager()
+    // var loadingManager = LoadingManager()
     var showDeleteButtonState = true
     var cell: CardCell! = nil
     var userData: GetCardResponse.UserData!
@@ -233,11 +233,11 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             
             return btn
         }()
-  //MARK: Loading
+    //MARK: Loading
     
     override func viewDidAppear(_ animated: Bool) {
         setupHeadImage()
-       // stop()
+        // stop()
     }
     //MARK: viewDidLoad
     
@@ -328,8 +328,8 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         UserDataManager.shared.getUserData(email: userData.email) { (image) in
             self.headImage.image = image
             self.stopLoading()
-//            self.stopLoading()
-//self.stop()
+            //            self.stopLoading()
+            //self.stop()
         }
     }
     func setupHeadImage()
@@ -530,6 +530,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     @objc func creatNewCard()
     {
+        print(#function)
         tabTimesToAD {
             addCard()
             singleCardCollectionView.reloadData()
@@ -622,7 +623,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         startLoading(self)
         //        let header = ["userToken":UserToken.shared.userToken]
         guard let token = UserToken.getToken() else{ print("No Token"); return }
-
+        
         let header = ["userToken":token]
         //TODO 新增的card name
         let parameter = ["card_name":"新增的卡片"]
@@ -640,7 +641,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
-               
+                
                 
             }
         }
@@ -676,9 +677,10 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
+    // MARK: ADmob
     func tabTimesToAD(complection:()->Void){
         print(tabTimes)
-        if tabTimes == 5{
+        if tabTimes >= 5{
             tabTimes = 0
             DispatchQueue.main.async {
                 self.showAd()
@@ -687,6 +689,7 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             tabTimes = tabTimes + 1
             complection()
         }
+        
     }
     func createAd() -> GADInterstitial {
         interstitialView = GADInterstitial(adUnitID: AdManager.share.getAdString())
@@ -698,49 +701,49 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
         return interstitialView
     }
     func showAd() {
-            if interstitialView != nil {
-                if (interstitialView.isReady == true){
-                    interstitialView.present(fromRootViewController:self)
-                } else {
-                    print("ad wasn't ready")
-                    interstitialView = createAd()
-                }
+        if interstitialView != nil {
+            if (interstitialView.isReady == true){
+                interstitialView.present(fromRootViewController:self)
             } else {
                 print("ad wasn't ready")
                 interstitialView = createAd()
             }
+        } else {
+            print("ad wasn't ready")
+            interstitialView = createAd()
         }
-
+    }
+    
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-            print("Ad Received")
-            if ad.isReady {
-                interstitialView.present(fromRootViewController: self)
-            }
-       }
-
+        print("Ad Received")
+        if ad.isReady {
+            
+        }
+    }
+    
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-            print("Did Dismiss Screen")
-        }
-
+        print("Did Dismiss Screen")
+    }
+    
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
-            print("Will Dismiss Screen")
-        }
-
+        print("Will Dismiss Screen")
+    }
+    
     func interstitialWillPresentScreen(_ ad: GADInterstitial) {
-            print("Will present screen")
-        }
-
+        print("Will present screen")
+    }
+    
     func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
-            print("Will leave application")
-        }
-
+        print("Will leave application")
+    }
+    
     func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
-            print("Failed to present screen")
-        }
-
+        print("Failed to present screen")
+    }
+    
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
         print("\(String(describing: ad)) did fail to receive ad with error \(String(describing: error))")
-        }
+    }
 }
 extension MainPageVC: RefreshDelegate
 {

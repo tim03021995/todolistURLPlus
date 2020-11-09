@@ -744,7 +744,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -775,7 +775,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus.alvin;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
