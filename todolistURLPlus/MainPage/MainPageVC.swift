@@ -237,7 +237,6 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     
     override func viewDidAppear(_ animated: Bool) {
         setupHeadImage()
-        // stop()
     }
     //MARK: viewDidLoad
     
@@ -553,26 +552,20 @@ class MainPageVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
             }
         }
     }
-    
+    // MARK: showNewestItem()
     func showNewestItem()
     {
         let cardPrivate = showCards[showCards.count - 1].cardPrivate
         if cardPrivate
         {
+            tapSingleBtn()
             let index = IndexPath(item: (self.showSingleCards.count - 1), section: 0)
             self.singleCardCollectionView.scrollToItem(at: index, at: .right, animated: true)
-            self.singleCardCollectionView.isHidden = false
-            self.mutipleCardCollectionView.isHidden = true
-            self.singleCheckMark.isHidden = false
-            self.mutipleCheckMark.isHidden = true
         }else
         {
+            tapMutipleBtn()
             let index = IndexPath(item: (self.showMutipleCards.count - 1), section: 0)
             self.mutipleCardCollectionView.scrollToItem(at: index, at: .right, animated: true)
-            self.mutipleCardCollectionView.isHidden = false
-            self.singleCardCollectionView.isHidden = true
-            self.singleCheckMark.isHidden = true
-            self.mutipleCheckMark.isHidden = false
         }
     }
     // MARK: getcard
