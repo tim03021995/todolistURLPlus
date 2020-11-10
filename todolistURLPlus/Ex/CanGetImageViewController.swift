@@ -13,8 +13,8 @@ class CanGetImageViewController:UIViewController{
             var urlStr:String
             switch type {
             case .gill:
-                urlStr = "http://35.185.131.56:8002/" + imageURL
-                print(imageURL)
+                urlStr = "https://storage.googleapis.com/gcs.gill.gq/" + imageURL
+            //print("https://storage.googleapis.com/gcs.gill.gq" + imageURL)
             case .other:
                 urlStr = imageURL
             }
@@ -28,6 +28,7 @@ class CanGetImageViewController:UIViewController{
             }catch
             {
                 print("image is error")
+                completion(UIImage(named: "single"))
             }
 //            }
         }

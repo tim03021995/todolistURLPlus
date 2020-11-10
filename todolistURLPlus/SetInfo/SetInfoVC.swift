@@ -14,8 +14,6 @@ class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
         super .loadView()
         self.view = setInfoView
     }
-    override func viewWillAppear(_ animated: Bool) {
-    }
     override func viewDidAppear(_ animated: Bool) {
         setAction()
     }
@@ -28,6 +26,10 @@ class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage(reco:)))
             setInfoView.peopleView.addGestureRecognizer(tap)
     }
+    private func popVC(){
+        self.stopLoading()
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @objc func takeImage(reco: UITapGestureRecognizer) {
         print(#function)
@@ -37,37 +39,35 @@ class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
         present(photoController, animated: true, completion: nil)
     }
     
-//    func setUserData(userImage:UIImage?, userName: String?){
-//        setInfoView.setUserData(
-//            userImage: userImage ?? UIImage(systemName: "photo")!,
-//            userName: userName ?? "Unknow")
-//        self.view = setInfoView
-//    }
     @objc func save(){
         func updataUserName(_ userName:String){
             SetInfoModelManerger.updateUserName(userName) { (result) in
                 switch result{
                 
                 case .success(_):
-                    self.stopLoading()
-                    self.navigationController?.popViewController(animated: true)
+                    self.popVC()
                 case .failure(let err ):
-                    self.present(.makeAlert("Error", err.description, { () -> Void? in
+                    self.present(.makeAlert("Error", err.errMessage, { () -> Void? in
                         self.stopLoading()
                     }), animated: true)
                 }
             }
         }
+        
         func errorType(){
            self.stopLoading()
             isEditing = false
-            let ac = UIViewController.makeAlert("格式錯誤", "^([-_a-zA-Z0-9]{4,16})$"){}
+            let ac = UIViewController.makeAlert("格式錯誤", "名稱字元必須介於2 - 16"){}
             present(ac, animated: true, completion: nil)
         }
         func getUserName(){
             if let userName = setInfoView.nameTextField.text {
                 if userName.isValidUserName {
-                    updataUserName(userName)
+                    if userName != UserDataManager.shared.userData?.username {
+                        updataUserName(userName)
+                    }else{
+                        self.popVC()
+                    }
                 }else{
                     errorType()
                 }
