@@ -8,15 +8,14 @@
 
 import Foundation
 
-
-enum HTTPMethod:String{
+enum HTTPMethod: String {
     case GET
     case POST
     case PUT
     case DELETE
 }
 
-enum Endpoint:String {
+enum Endpoint: String {
     case userToken
     case register
     case task
@@ -25,48 +24,43 @@ enum Endpoint:String {
     case userImage = "user/image"
     case groups
     case groupsCard = "groups/card/users"
-    
-    func addMail(mail:String)-> String?{
-        switch self {
 
+    func addMail(mail: String) -> String? {
+        switch self {
         case .user:
             return Endpoint.user.rawValue + "/\(mail)"
-        default :
+        default:
             break
         }
         return nil
     }
 }
 
-enum ContentType:String{
+enum ContentType: String {
     case json = "application/json"
     case formData = "multipart/form-data"
 }
 
+// MARK: - Token
 
-//MARK:- Token
-struct UserToken {
-
-    ///拿token 如果沒有的話 回傳nil
-    static func getToken() -> String?{
-        guard let tokenFromUserDefault = UserDefaults.standard.string(forKey: "token") else {return nil}
+enum UserToken {
+    /// 拿token 如果沒有的話 回傳nil
+    static func getToken() -> String? {
+        guard let tokenFromUserDefault = UserDefaults.standard.string(forKey: "token") else { return nil }
         let token = tokenFromUserDefault.isEmpty ? nil : tokenFromUserDefault
         return token
     }
-    
-    static func updateToken(by token: String){
+
+    static func updateToken(by token: String) {
         updateTokenToUserdefault(with: token)
     }
-    
-    private static func updateTokenToUserdefault(with token:String){
+
+    private static func updateTokenToUserdefault(with token: String) {
         UserDefaults.standard.set(token, forKey: "token")
     }
 
-    static func clearToken(){
+    static func clearToken() {
         print("Token cleared")
         updateTokenToUserdefault(with: "")
     }
-    
 }
-
-

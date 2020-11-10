@@ -412,6 +412,7 @@
 				D23505D824FCCAAF00F4CC6E /* Frameworks */,
 				D23505D924FCCAAF00F4CC6E /* Resources */,
 				3845649D185F555FA2DECBA8 /* [CP] Embed Pods Frameworks */,
+				D208368E255A7C910030579F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -529,6 +530,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-todolistURLPlus/Pods-todolistURLPlus-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D208368E255A7C910030579F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftformat >/dev/null; then\nswiftformat .\nelse\necho \"warning: SwiftFormat not installed.\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

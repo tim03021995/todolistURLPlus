@@ -7,23 +7,15 @@
 //
 
 import UIKit
-extension UIViewController
-{
-    func alertMessage(alertTitle: String, alertMessage: String, actionTitle: String)
-    {
+extension UIViewController {
+    func alertMessage(alertTitle: String, alertMessage: String, actionTitle: String) {
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-      
-        let okAction = UIAlertAction(title: actionTitle, style: .destructive){ (action) in
-            
-         
-            }
-            
-        
-     
+
+        let okAction = UIAlertAction(title: actionTitle, style: .destructive) { _ in
+        }
+
         alert.addAction(okAction)
-        
-        
+
         present(alert, animated: true, completion: nil)
     }
-    
 }

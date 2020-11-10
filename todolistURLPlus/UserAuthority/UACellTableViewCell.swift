@@ -9,10 +9,6 @@
 import UIKit
 
 class UACellTableViewCell: ListTableViewCell {
-    
-  
-
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,5 +18,4 @@ class UACellTableViewCell: ListTableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-
 }

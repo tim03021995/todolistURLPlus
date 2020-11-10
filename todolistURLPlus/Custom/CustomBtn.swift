@@ -8,43 +8,42 @@
 
 import UIKit
 
-
 class CustomButton: UIButton {
     override init(frame: CGRect) {
-        super.init(frame:frame)
+        super.init(frame: frame)
 //        setUpBtn()
     }
-    
-    //for storyboard
+
+    // for storyboard
     required init?(coder: NSCoder) {
-        super.init(coder:coder)
+        super.init(coder: coder)
         setUpBtn()
     }
-    
-    convenience init(title:String){
-        self.init(frame:.zero)
-        self.setTitle(title, for: .normal)
+
+    convenience init(title: String) {
+        self.init(frame: .zero)
+        setTitle(title, for: .normal)
     }
-    
-    private func setUpBtn(){
-        //TODO 設置按鈕
-        
+
+    private func setUpBtn() {
+        // TODO: 設置按鈕
+
         backgroundColor = .glassColor
-        layer.cornerRadius = frame.size.height/3
+        layer.cornerRadius = frame.size.height / 3
         tintColor = .white
-        
-        
     }
 }
-class ButtonFactory{
-    static func makeButton(type:ButtonType,text:String) -> UIButton {
+
+enum ButtonFactory {
+    static func makeButton(type: ButtonType, text: String) -> UIButton {
         let button = UIButton(frame: CGRect(
             x: 0,
             y: 0,
             width: ScreenSize.width.value * 0.35,
-            height: ScreenSize.height.value * 0.075))
+            height: ScreenSize.height.value * 0.075
+        ))
         button.setTitle(text, for: .normal)
-        button.layer.cornerRadius = button.frame.size.height/4
+        button.layer.cornerRadius = button.frame.size.height / 4
         switch type {
         case .normal:
             button.backgroundColor = .gray
@@ -55,20 +54,23 @@ class ButtonFactory{
         }
         return button
     }
-    enum  ButtonType{
-        case normal,cancel
+
+    enum ButtonType {
+        case normal, cancel
     }
 }
-class ColorButtonFactory{
-    enum  ButtonType:CaseIterable{
-        case red,orange,yellow,green,blue,darkBlue,purple
+
+enum ColorButtonFactory {
+    enum ButtonType: CaseIterable {
+        case red, orange, yellow, green, blue, darkBlue, purple
     }
 }
-enum  ColorsButtonType:String,CaseIterable{
-    case red,orange,yellow,green,blue,darkBlue,purple
-    
-    var color:UIColor{
-        switch self{
+
+enum ColorsButtonType: String, CaseIterable {
+    case red, orange, yellow, green, blue, darkBlue, purple
+
+    var color: UIColor {
+        switch self {
         case .red:
             return UIColor.buttonRed
         case .orange:
@@ -86,17 +88,17 @@ enum  ColorsButtonType:String,CaseIterable{
         }
     }
 }
+
 class ConerRadiusButton: UIButton {
-     override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = self.frame.height / 2
-    }
-}
-class ConerRadiusButtonBackground: UIVisualEffectView{
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layer.cornerRadius = self.frame.height / 2
+        layer.cornerRadius = frame.height / 2
     }
 }
 
-
+class ConerRadiusButtonBackground: UIVisualEffectView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = frame.height / 2
+    }
+}

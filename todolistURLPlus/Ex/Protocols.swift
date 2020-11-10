@@ -10,7 +10,7 @@ import UIKit
 
 protocol ResponseActionDelegate {
     func shouldRefreshToken()
-    
+
     func shouldRetry()
 }
 
@@ -19,11 +19,9 @@ protocol Storyboarded {
 }
 
 protocol LoadingViewDelegate {
-    
-    
-    var loadingView : UIView { get }
-    
+    var loadingView: UIView { get }
+
     func loadingActivityView()
-    
+
     func stopLoadActivityView()
 }

@@ -7,7 +7,4 @@
 //
 
 import UIKit
-extension UIViewController
-{
-    
-}
+extension UIViewController {}

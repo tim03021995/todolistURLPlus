@@ -7,26 +7,21 @@
 //
 
 import Foundation
-enum CollectionViewCellIdentifier: String
-{
+enum CollectionViewCellIdentifier: String {
     case singleCell, mutipleCell
-    var identifier: String
-    {
-        switch self
-        {
+    var identifier: String {
+        switch self {
         case .singleCell: return "singleCell"
         case .mutipleCell: return "mutipleCell"
         }
     }
 }
 
-enum WhichCollectionView
-{
+enum WhichCollectionView {
     case single
     case mutiple
 }
 
-enum WorkStatus
-{
+enum WorkStatus {
     case personal, mutiple
 }
