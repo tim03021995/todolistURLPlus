@@ -15,10 +15,6 @@ class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
         self.view = setInfoView
     }
     override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.navigationBar.isHidden = false
-//        let image = UIImage()
-//        self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-//        self.navigationController?.navigationBar.shadowImage = image
     }
     override func viewDidAppear(_ animated: Bool) {
         setAction()
@@ -49,11 +45,16 @@ class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
 //    }
     @objc func save(){
         func updataUserName(_ userName:String){
-            SetInfoModelManerger.updateUserName(userName) {
-                print("updata name")
-                UserDataManager.shared.getUserData { (image) in
+            SetInfoModelManerger.updateUserName(userName) { (result) in
+                switch result{
+                
+                case .success(_):
                     self.stopLoading()
                     self.navigationController?.popViewController(animated: true)
+                case .failure(let err ):
+                    self.present(.makeAlert("Error", err.description, { () -> Void? in
+                        self.stopLoading()
+                    }), animated: true)
                 }
             }
         }

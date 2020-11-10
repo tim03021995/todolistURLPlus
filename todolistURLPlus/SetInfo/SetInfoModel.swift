@@ -32,21 +32,13 @@ class SetInfoModelManerger{
             compeletion()
         }
     }
-    static func updateUserName(_ userName:String?,_ compeletion:@escaping ()->Void){
+    static func updateUserName(_ userName:String?,_ compeletion:@escaping (Result<PutUserResponse,NetworkError>)->Void){
         guard let token = UserToken.getToken() else{ print("No Token"); return }
         let header = ["userToken":token]
         let parameters = makeParameters(userName, nil)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
         NetworkManager().sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in
-            switch result {
-            case .success( _):
-                print("update success")
-            case .failure(let err):
-                print("update error")
-                print(err.description)
-                print("錯誤訊息：\(err.errMessage)")
-            }
-            compeletion()
+            compeletion(result)
         }
     }
     static func makeParameters(_ userName:String?,_ passWord:String?)->[String:Any]{
