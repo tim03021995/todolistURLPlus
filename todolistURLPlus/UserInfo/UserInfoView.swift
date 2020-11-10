@@ -14,7 +14,6 @@ class UserInfoView: UIView {
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
-
     var userNameLabel:UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width:ScreenSize.width.value * 0.4 , height: ScreenSize.height.value * 0.1))
         label.textAlignment = .center
