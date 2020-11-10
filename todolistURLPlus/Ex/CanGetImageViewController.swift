@@ -8,25 +8,28 @@
 
 import UIKit
 #warning("使用protocol")
-class CanGetImageViewController: UIViewController {
-    func getImage(type: ImageURLType, imageURL: String, completion: @escaping (UIImage?) -> Void) {
-        var urlStr: String
-        switch type {
-        case .gill:
-            urlStr = "http://35.185.131.56:8002/" + imageURL
-            print(imageURL)
-        case .other:
-            urlStr = imageURL
-        }
-        let url = URL(string: urlStr)!
-        //         DispatchQueue.main.sync {
-        do {
-            let data = try Data(contentsOf: url)
-            let image = UIImage(data: data)
-            completion(image)
-        } catch {
-            print("image is error")
-        }
+class CanGetImageViewController:UIViewController{
+    func getImage(type:ImageURLType,imageURL:String,completion:@escaping(UIImage?)->Void){
+            var urlStr:String
+            switch type {
+            case .gill:
+                urlStr = "https://storage.googleapis.com/gcs.gill.gq/" + imageURL
+            //print("https://storage.googleapis.com/gcs.gill.gq" + imageURL)
+            case .other:
+                urlStr = imageURL
+            }
+            let url = URL(string: urlStr)!
+   //         DispatchQueue.main.sync {
+                do
+            {
+                let data = try Data(contentsOf: url)
+                let image = UIImage(data: data)
+                completion(image)
+            }catch
+            {
+                print("image is error")
+                completion(UIImage(named: "single"))
+            }
 //            }
     }
 }
