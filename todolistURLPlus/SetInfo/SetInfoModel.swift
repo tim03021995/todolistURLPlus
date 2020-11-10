@@ -33,12 +33,13 @@ enum SetInfoModelManerger {
             compeletion()
         }
     }
-    static func updateUserName(_ userName:String?,_ compeletion:@escaping (Result<PutUserResponse,NetworkError>)->Void){
-        guard let token = UserToken.getToken() else{ print("No Token"); return }
-        let header = ["userToken":token]
+
+    static func updateUserName(_ userName: String?, _ compeletion: @escaping (Result<PutUserResponse, NetworkError>) -> Void) {
+        guard let token = UserToken.getToken() else { print("No Token"); return }
+        let header = ["userToken": token]
         let parameters = makeParameters(userName, nil)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
-        NetworkManager().sendRequest(with: request.send()) { (result:Result<PutUserResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request.send()) { (result: Result<PutUserResponse, NetworkError>) in
             compeletion(result)
         }
     }

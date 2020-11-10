@@ -14,7 +14,8 @@ class SetInfoVC: CanGetImageViewController, LoadAnimationAble {
         super.loadView()
         view = setInfoView
     }
-    override func viewDidAppear(_ animated: Bool) {
+
+    override func viewDidAppear(_: Bool) {
         setAction()
     }
 
@@ -28,38 +29,38 @@ class SetInfoVC: CanGetImageViewController, LoadAnimationAble {
         let tap = UITapGestureRecognizer(target: self, action: #selector(takeImage(reco:)))
         setInfoView.peopleView.addGestureRecognizer(tap)
     }
-    private func popVC(){
-        self.stopLoading()
-        self.navigationController?.popViewController(animated: true)
+
+    private func popVC() {
+        stopLoading()
+        navigationController?.popViewController(animated: true)
     }
-    
-    @objc func takeImage(reco: UITapGestureRecognizer) {
+
+    @objc func takeImage(reco _: UITapGestureRecognizer) {
         print(#function)
         let photoController = UIImagePickerController()
         photoController.delegate = self
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
-    
-    @objc func save(){
-        func updataUserName(_ userName:String){
-            SetInfoModelManerger.updateUserName(userName) { (result) in
-                switch result{
-                
-                case .success(_):
+
+    @objc func save() {
+        func updataUserName(_ userName: String) {
+            SetInfoModelManerger.updateUserName(userName) { result in
+                switch result {
+                case .success:
                     self.popVC()
-                case .failure(let err ):
-                    self.present(.makeAlert("Error", err.errMessage, { () -> Void? in
+                case let .failure(err):
+                    self.present(.makeAlert("Error", err.errMessage) { () -> Void? in
                         self.stopLoading()
-                    }), animated: true)
+                    }, animated: true)
                 }
             }
         }
-        
-        func errorType(){
-           self.stopLoading()
+
+        func errorType() {
+            stopLoading()
             isEditing = false
-            let ac = UIViewController.makeAlert("格式錯誤", "名稱字元必須介於2 - 16"){}
+            let ac = UIViewController.makeAlert("格式錯誤", "名稱字元必須介於2 - 16") {}
             present(ac, animated: true, completion: nil)
         }
         func getUserName() {
@@ -67,10 +68,10 @@ class SetInfoVC: CanGetImageViewController, LoadAnimationAble {
                 if userName.isValidUserName {
                     if userName != UserDataManager.shared.userData?.username {
                         updataUserName(userName)
-                    }else{
-                        self.popVC()
+                    } else {
+                        popVC()
                     }
-                }else{
+                } else {
                     errorType()
                 }
             } else {
