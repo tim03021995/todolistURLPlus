@@ -43,7 +43,7 @@ enum ContentType: String {
 
 // MARK: - Token
 
-enum UserToken {
+struct UserToken {
     /// 拿token 如果沒有的話 回傳nil
     static func getToken() -> String? {
         guard let tokenFromUserDefault = UserDefaults.standard.string(forKey: "token") else { return nil }
