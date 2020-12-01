@@ -8,14 +8,11 @@
 
 import UIKit
 
-struct CardModel
-{
+struct CardModel {
     var headImage: UIImage?
     var userName: String?
     var workStatus: WorkStatus?
-    var cardID:Int?
+    var cardID: Int?
     var cardTitle: String?
     var taskModel: [TaskModel]?
 }
-
-

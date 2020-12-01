@@ -8,6 +8,4 @@
 
 import UIKit
 
-class UserAuthorityCellCollectionViewCell: UICollectionViewCell {
-    
-}
+class UserAuthorityCellCollectionViewCell: UICollectionViewCell {}

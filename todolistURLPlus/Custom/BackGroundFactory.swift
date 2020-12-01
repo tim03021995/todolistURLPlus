@@ -7,15 +7,15 @@
 //
 
 import UIKit
-class BackGroundFactory{
-    enum backGroundType{
-        case background1,background2,backgroundBlurred
+class BackGroundFactory {
+    enum backGroundType {
+        case background1, background2, backgroundBlurred
     }
-    static func makeImage(type:backGroundType)->UIImageView{
-        
-        let backgroundImage : UIImageView = {
-            var uiImage:UIImage
-            switch type{
+
+    static func makeImage(type: backGroundType) -> UIImageView {
+        let backgroundImage: UIImageView = {
+            var uiImage: UIImage
+            switch type {
             case .background1:
                 uiImage = #imageLiteral(resourceName: "background1.png")
             case .background2:
@@ -30,5 +30,4 @@ class BackGroundFactory{
         }()
         return backgroundImage
     }
-
 }

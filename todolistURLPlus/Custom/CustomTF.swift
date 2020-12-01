@@ -8,31 +8,24 @@
 
 import UIKit
 
-class CustomLogINTF:UITextField{
+class CustomLogINTF: UITextField {
     override init(frame: CGRect) {
-        super.init(frame:frame)
+        super.init(frame: frame)
         setTF()
     }
-    
+
     required init?(coder: NSCoder) {
-        super.init(coder:coder)
+        super.init(coder: coder)
         setTF()
     }
-    
-    func setTF(){
+
+    func setTF() {
         textColor = .black
         backgroundColor = .white
         borderStyle = .roundedRect
         layer.cornerRadius = 10
-        
-        //改placeholder 顏色
-        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray ])
 
-        
-        
-        
-
-        
+        // 改placeholder 顏色
+        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
 }
-

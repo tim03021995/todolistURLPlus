@@ -8,55 +8,58 @@
 
 import UIKit
 
-class ModifyPasswordVC: CanGetImageViewController,LoadAnimationAble {
+class ModifyPasswordVC: CanGetImageViewController, LoadAnimationAble {
     let forgotPasswordView = ModifyPasswordView()
     override func loadView() {
-        super .loadView()
+        super.loadView()
         forgotPasswordView.passwordTextField.delegate = self
-        self.view = forgotPasswordView
+        view = forgotPasswordView
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
         let image = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        self.navigationController?.navigationBar.shadowImage = image
+        navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        navigationController?.navigationBar.shadowImage = image
     }
-    @objc func touchConfirmButton(){
-        if let password = forgotPasswordView.passwordTextField.text{
-            if password.isValidPassword{
+
+    @objc func touchConfirmButton() {
+        if let password = forgotPasswordView.passwordTextField.text {
+            if password.isValidPassword {
                 updataPassWord(password)
-            }else{
+            } else {
                 forgotPasswordView.passwordTextField.text = ""
             }
         }
     }
-    
-    func updataPassWord(_ password:String){
-        self.startLoading(self)
-        ModifyPasswordModel.updateUserPassword(password: password) { (result) in
+
+    func updataPassWord(_ password: String) {
+        startLoading(self)
+        ModifyPasswordModel.updateUserPassword(password: password) { result in
             switch result {
-            case .success( _):
+            case .success:
                 print("update success")
                 self.dismiss(animated: true, completion: nil)
                 self.stopLoading()
-            case .failure(let err):
-                
+            case let .failure(err):
+
                 print("update error")
                 print(err.description)
                 self.forgotPasswordView.alertLabel.text = err.errMessage
                 self.stopLoading()
-            // print("錯誤訊息：\(err.errMessage)")
+                // print("錯誤訊息：\(err.errMessage)")
             }
         }
     }
-    
 }
-extension ModifyPasswordVC:UITextFieldDelegate{
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+
+extension ModifyPasswordVC: UITextFieldDelegate {
+    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+        view.endEditing(true)
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
+
+    func textFieldDidEndEditing(_: UITextField) {
         let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {
             self.forgotPasswordView.alertLabel.alpha = self.forgotPasswordView.passwordTextField.text!.isValidPassword ? 0 : 1
         }

@@ -8,34 +8,31 @@
 
 import UIKit
 
-class MainVC: UIViewController{
-    
-    override func viewDidLoad(){
+class MainVC: UIViewController {
+    override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let token = UserToken.getToken() {
-            let headers = ["userToken":token]
+            let headers = ["userToken": token]
             let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
-            NetworkManager().sendRequest(with: request) { (res:Result<GetCardResponse,NetworkError>) in
-                switch res{
-                case .success(_):
+            NetworkManager().sendRequest(with: request) { (res: Result<GetCardResponse, NetworkError>) in
+                switch res {
+                case .success:
                     let vc = MainPageVC(.fullScreen, nil)
-                    self.present(vc, animated: false, completion: nil )
-                case .failure(let err):
+                    self.present(vc, animated: false, completion: nil)
+                case let .failure(err):
                     print(err.description)
                     self.shouldRefreshToken()
-
                 }
             }
-        }else {
+        } else {
             let vc = LoginVC.instantiate()
             vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: false , completion: nil)
-
-            
+            present(vc, animated: false, completion: nil)
         }
     }
 }

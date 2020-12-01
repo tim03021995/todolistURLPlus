@@ -8,16 +8,16 @@
 
 import UIKit
 
-struct StoryboardID{
+struct StoryboardID {
     static let signUpVC = "signUpVC"
     static let signInVC = "signInVC"
-    
 }
+
 let fullScreenSize = UIScreen.main.bounds.size
 
-enum ScreenSize{
-    case centerX,centerY,width,height,spaceX,spaceY
-    var value:CGFloat{
+enum ScreenSize {
+    case centerX, centerY, width, height, spaceX, spaceY
+    var value: CGFloat {
         switch self {
         case .centerX:
             return fullScreenSize.width * 0.5
@@ -35,28 +35,25 @@ enum ScreenSize{
     }
 }
 
-extension UITextView{
-    func resetHight(_ textView:UITextView){
-        let maxHeight:CGFloat = ScreenSize.height.value * 0.4
+extension UITextView {
+    func resetHight(_ textView: UITextView) {
+        let maxHeight: CGFloat = ScreenSize.height.value * 0.4
         let frame = textView.frame
-        let constrainSize=CGSize(width:frame.size.width,height:CGFloat(MAXFLOAT))
+        let constrainSize = CGSize(width: frame.size.width, height: CGFloat(MAXFLOAT))
         var size = textView.sizeThatFits(constrainSize)
-        if size.height >= maxHeight{
+        if size.height >= maxHeight {
             size.height = maxHeight
-            textView.isScrollEnabled=true
-        }else{
-            textView.isScrollEnabled=false
+            textView.isScrollEnabled = true
+        } else {
+            textView.isScrollEnabled = false
         }
-        textView.frame.size.height=size.height
+        textView.frame.size.height = size.height
     }
 }
-extension Data{
-    
+
+extension Data {
     mutating func appendString(string: String) {
         let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
         append(data!)
     }
 }
-
-
-

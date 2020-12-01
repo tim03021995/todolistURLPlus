@@ -31,9 +31,9 @@ class CanGetImageViewController:UIViewController{
                 completion(UIImage(named: "single"))
             }
 //            }
-        }
     }
-    enum ImageURLType{
-        case gill,other
-    }
+}
 
+enum ImageURLType {
+    case gill, other
+}

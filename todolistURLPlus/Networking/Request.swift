@@ -8,61 +8,56 @@
 
 import Foundation
 
-
 struct HTTPRequest {
-    
     let baseURL = "https://dodo.gill.gq/api/"
-    let endpoint:Endpoint
-    var urlString:String {
+    let endpoint: Endpoint
+    var urlString: String {
         if let id = id {
             return baseURL + endpoint.rawValue + "/\(id)"
-        }else if let mail = mail{
+        } else if let mail = mail {
             return baseURL + endpoint.rawValue + "/\(mail)"
         } else {
             return baseURL + endpoint.rawValue
         }
     }
-    let contentType:ContentType
+
+    let contentType: ContentType
     let method: HTTPMethod
-    var parameters: [String : Any]?
-    var headers : [String:String]?
-    var id : Int?
+    var parameters: [String: Any]?
+    var headers: [String: String]?
+    var id: Int?
     var mail: String?
-    
-    ///包裝request
-    func send()-> URLRequest{
-        
-        let url = URL(string: self.urlString)
+
+    /// 包裝request
+    func send() -> URLRequest {
+        let url = URL(string: urlString)
         var request = URLRequest(url: url!)
-        
+
         request.httpMethod = method.rawValue
-        
+
         request.addValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
-        
-        if let headers = headers{
+
+        if let headers = headers {
             request.allHTTPHeaderFields = headers
         }
-        if let parameters = parameters{
+        if let parameters = parameters {
             request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
         }
         return request
     }
-    
+
     func imageRequest(boundary: String, data: Data) -> URLRequest {
-        let url = URL(string: self.urlString)
+        let url = URL(string: urlString)
         var request = URLRequest(url: url!)
         request.httpMethod = method.rawValue
         request.addValue(contentType.rawValue + "; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
+
         request.httpBody = data
-        
-        if let headers = headers{
+
+        if let headers = headers {
             request.allHTTPHeaderFields = headers
         }
-        
-        
+
         return request
     }
-    
-    
 }

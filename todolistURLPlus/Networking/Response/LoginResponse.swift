@@ -8,18 +8,18 @@
 
 import Foundation
 
-//MARK:- 登入註冊的資料結構
+// MARK: - 登入註冊的資料結構
 
-struct LoginInReaponse:Codable{
+struct LoginInReaponse: Codable {
     let status: Bool
     var loginData: LoginData?
-    
+
     enum CodingKeys: String, CodingKey {
         case status
         case loginData = "login_data"
     }
 }
 
-struct LoginData : Codable {
-    var userToken:String
+struct LoginData: Codable {
+    var userToken: String
 }

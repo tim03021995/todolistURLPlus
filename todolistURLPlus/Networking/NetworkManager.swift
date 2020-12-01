@@ -8,89 +8,74 @@
 
 import UIKit
 
-class NetworkManager{
-        
-    var delegate : ResponseActionDelegate?
-    
-    
-    func sendRequest<T:Codable>(with request: URLRequest, completion: @escaping (Result<T,NetworkError>) -> Void){
+class NetworkManager {
+    var delegate: ResponseActionDelegate?
 
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.global(qos: .default).async{
+    func sendRequest<T: Codable>(with request: URLRequest, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.global(qos: .default).async {
                 if error != nil {
                     completion(.failure(.systemError))
                 }
-                
+
                 guard let response = response as? HTTPURLResponse else { completion(.failure(.noResponse))
                     return
                 }
-                
+
                 guard let data = data else {
                     completion(.failure(.noData))
                     return
                 }
-                
+
                 DispatchQueue.main.async {
                     self.responseHandler(data: data, response: response, completion: completion)
                 }
-
             }
 
         }.resume()
-
     }
-    
-    private func responseHandler<T:Codable>
-    (data:Data, response:HTTPURLResponse, completion:@escaping (Result<T,NetworkError>) -> Void){
 
+    private func responseHandler<T: Codable>
+    (data: Data, response: HTTPURLResponse, completion: @escaping (Result<T, NetworkError>) -> Void) {
         switch response.statusCode {
         case 200 ... 299:
-            do{
+            do {
                 let decotedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decotedData))
                 #if DEBUG
-                print("============= \(T.self) success ==============")
+                    print("============= \(T.self) success ==============")
                 #endif
 
-            }catch{
-                
+            } catch {
                 #if DEBUG
-                print("======================== Decode Error ========================")
-                print(error,"statuscode:\(response.statusCode)")
+                    print("======================== Decode Error ========================")
+                    print(error, "statuscode:\(response.statusCode)")
                 #endif
                 completion(.failure(.decodeError(struct: "\(T.self)")))
-
             }
-            
 
-        case 401 , 403:
+        case 401, 403:
             completion(.failure(.refreshToken))
             delegate?.shouldRefreshToken()
 
-        case 429 :
+        case 429:
             completion(.failure(.retry))
-            //delegate?.shouldRetry()
+            // delegate?.shouldRetry()
 
-            break
         default:
-            do{
+            do {
                 let decodedError = try JSONDecoder().decode(ErrorData.self, from: data)
                 completion(.failure(.responseError(error: decodedError, statusCode: response.statusCode)))
 //                self.loadingDelegate?.stopLoadActivityView()
 
-            }catch{
+            } catch {
                 #if DEBUG
-                print("======================== Decode Error ========================")
-                print("錯誤訊息decode失敗,status code:\(response.statusCode)")
+                    print("======================== Decode Error ========================")
+                    print("錯誤訊息decode失敗,status code:\(response.statusCode)")
                 #endif
-                
-                completion(.failure(.decodeError(struct: "\(ErrorData.self)")))
 
+                completion(.failure(.decodeError(struct: "\(ErrorData.self)")))
             }
         }
-
     }
-    
 }
-
-

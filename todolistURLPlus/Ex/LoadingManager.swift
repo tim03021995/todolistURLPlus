@@ -6,46 +6,44 @@
 //  Copyright © 2020 Alvin Tseng. All rights reserved.
 //
 
-import UIKit
 import Lottie
+import UIKit
 
 protocol LoadAnimationAble {
     func startLoading(_ vc: UIViewController)
     func stopLoading()
 }
-//extension內的where Self意思是這個擴充只在UIViewController生效，若是其他類別遵從這個協議，則這個擴充無效
-extension LoadAnimationAble where Self: UIViewController
-{
-    func startLoading(_ vc: UIViewController)
-    {
+
+// extension內的where Self意思是這個擴充只在UIViewController生效，若是其他類別遵從這個協議，則這個擴充無效
+extension LoadAnimationAble where Self: UIViewController {
+    func startLoading(_ vc: UIViewController) {
         LoadManager.share.startLoading(vc)
     }
-    func stopLoading()
-    {
+
+    func stopLoading() {
         LoadManager.share.stopLoading()
     }
 }
-class LoadManager
-{
-     
+
+class LoadManager {
     static let share = LoadManager()
-    let disenableView: UIView =
-        {
-            let disenableView = UIView()
-            disenableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-            return disenableView
-        }()
+    let disenableView: UIView = {
+        let disenableView = UIView()
+        disenableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+        return disenableView
+    }()
+
     let animationView = AnimationView(name: "loading")
-    let loadingLabel: UILabel =
-        {
-            let label = UILabel()
-            label.font = UIFont.boldSystemFont(ofSize: 30)
-            label.text = "Loading..."
-            label.textColor = .white
-            label.adjustsFontSizeToFitWidth = true
-            return label
-        }()
-    func startLoading(_ vc:UIViewController){
+    let loadingLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.text = "Loading..."
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+
+    func startLoading(_ vc: UIViewController) {
         disenableView.frame = vc.view.frame
         disenableView.addSubview(animationView)
         animationView.addSubview(loadingLabel)
@@ -68,17 +66,16 @@ class LoadManager
         }
         animate.startAnimation()
     }
-     func stopLoading()
-    {
+
+    func stopLoading() {
         let animate = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
             self.disenableView.alpha = 0
         }
-        animate.addCompletion { (position) in
+        animate.addCompletion { position in
             if position == .end {
                 self.disenableView.removeFromSuperview()
             }
         }
         animate.startAnimation()
     }
-    
 }

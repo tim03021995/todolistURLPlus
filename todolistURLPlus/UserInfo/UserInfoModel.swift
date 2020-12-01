@@ -7,21 +7,20 @@
 //
 
 import Foundation
-class UserInfoModelManager{
-    static func getUserData(email:String,complection:@escaping (GetUserResponse.UserData)->Void){
-        guard let token = UserToken.getToken() else{ print("No Token"); return }
-        let headers = ["userToken":token]
+class UserInfoModelManager {
+    static func getUserData(email: String, complection: @escaping (GetUserResponse.UserData) -> Void) {
+        guard let token = UserToken.getToken() else { print("No Token"); return }
+        let headers = ["userToken": token]
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
-        NetworkManager().sendRequest(with: request) { (res:Result<GetUserResponse,NetworkError>) in
+        NetworkManager().sendRequest(with: request) { (res: Result<GetUserResponse, NetworkError>) in
             switch res {
-                
-            case .success(let data ):
+            case let .success(data):
                 let userData = data.userData
                 complection(userData)
-            //TODO顯示
-            case .failure(let err): print(err.description)
-            //alert
-            print(err.errMessage)
+            // TODO顯示
+            case let .failure(err): print(err.description)
+                // alert
+                print(err.errMessage)
             }
         }
     }

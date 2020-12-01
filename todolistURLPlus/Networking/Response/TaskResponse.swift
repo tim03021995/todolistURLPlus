@@ -8,32 +8,30 @@
 
 import Foundation
 
+// MARK: - GET Task
 
-//MARK:- GET Task
-
-///GET TASK
+/// GET TASK
 struct GetTaskResponse: Codable {
     let status: Bool
     let taskData: [TaskData?]
-    
+
     enum CodingKeys: String, CodingKey {
         case status
         case taskData = "task_data"
     }
-    
-    
+
     struct TaskData: Codable {
         let id: Int
         let title: String
         let status: Bool
         let createUser: String
         let updateUser: String
-        let description:String?
+        let description: String?
         let tag: String?
         let image: String?
         let cardID: Int
         let createdAt, updatedAt: String
-        
+
         enum CodingKeys: String, CodingKey {
             case id, title, status, description
             case createUser = "create_user"
@@ -46,22 +44,22 @@ struct GetTaskResponse: Codable {
     }
 }
 
-//MARK:- POST Task (新增task)
+// MARK: - POST Task (新增task)
 
-///POST TASK
+/// POST TASK
 struct PostTaskResponse: Codable {
     let status: Bool
     let taskData: TaskData
-    
+
     enum CodingKeys: String, CodingKey {
         case status
         case taskData = "task_data"
     }
-    
+
     struct TaskData: Codable {
         let title: String
         let status: Bool
-        let createUser:String
+        let createUser: String
         let updateUser: String
         let description: String?
         let tag: String
@@ -70,7 +68,7 @@ struct PostTaskResponse: Codable {
         let updatedAt: String
         let createdAt: String
         let id: Int
-        
+
         enum CodingKeys: String, CodingKey {
             case title, status, tag, image, description
             case createUser = "create_user"
@@ -83,13 +81,13 @@ struct PostTaskResponse: Codable {
     }
 }
 
-//MARK:- PUT Task （更新Task）
+// MARK: - PUT Task （更新Task）
 
-///PUT TASK
+/// PUT TASK
 struct PutTaskResponse: Codable {
     let status: Bool
     let taskData: TaskData
-    
+
     enum CodingKeys: String, CodingKey {
         case status
         case taskData = "task_data"
@@ -101,14 +99,14 @@ struct TaskData: Codable {
     let title: String
     let status: Bool
     let image: String?
-    let createUser:String
-    let updateUser:String
+    let createUser: String
+    let updateUser: String
     let description: String
     let tag: String
-    let cardID:Int
+    let cardID: Int
     let createdAt: String
     let updatedAt: String
-    
+
     enum CodingKeys: String, CodingKey {
         case id, title, status, description, tag, image
         case createUser = "create_user"
@@ -117,13 +115,11 @@ struct TaskData: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }
-    
 }
 
-//MARK:- DELETE Task
+// MARK: - DELETE Task
 
-
-///DELETE TASK
+/// DELETE TASK
 struct DeleteTaskResponse: Codable {
     let status: Bool
 }
