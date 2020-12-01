@@ -39,6 +39,7 @@ class NetworkManager {
     
     private func responseHandler<T: Codable>
     (data: Data, response: HTTPURLResponse, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        
         switch response.statusCode {
         case 200 ... 299:
             do {
