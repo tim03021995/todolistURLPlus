@@ -77,7 +77,6 @@ class LoginVC: UIViewController, Storyboarded, LoadAnimationAble {
         }
         startLoading(self)
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
-//        loadingManger.startLoading(vc: self)
         NetworkManager().sendRequest(with: getTokenRequest) { (result: Result<LoginInReaponse, NetworkError>) in
 
             switch result {
@@ -94,7 +93,6 @@ class LoginVC: UIViewController, Storyboarded, LoadAnimationAble {
                 self.present(.makeAlert("Error", err.errMessage) {}, animated: true)
                 print(err.description)
             }
-            // self.loadingManger.stopLoading()
         }
     }
 

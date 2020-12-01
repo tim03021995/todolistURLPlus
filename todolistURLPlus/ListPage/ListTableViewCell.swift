@@ -38,6 +38,7 @@ class ListTableViewCell: UITableViewCell {
         contentView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
         contentView.layer.cornerRadius = fullScreenMaxX * 0.05
         clipsToBounds = true
+        selectionStyle = .none
     }
 
     func setTitleLabel() {

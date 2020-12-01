@@ -57,7 +57,6 @@
 		D2B79C60252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B79C5D252D553F007837B6 /* TaipeiSansTCBeta-Regular.ttf */; };
 		D2B79C61252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B79C5E252D553F007837B6 /* TaipeiSansTCBeta-Light.ttf */; };
 		D2B79C62252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B79C5F252D553F007837B6 /* TaipeiSansTCBeta-Bold.ttf */; };
-		D2D052BC255A3671006D9004 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = D2D052BB255A3671006D9004 /* SwiftFormat */; };
 		D2F61C72252C4F3400D8D717 /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */; };
 		FB2077B7252B1573000A2BD9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2077B6252B1573000A2BD9 /* Protocols.swift */; };
 		FB2077BD252C42F2000A2BD9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2077BC252C42F2000A2BD9 /* Extension.swift */; };
@@ -163,7 +162,6 @@
 				D23F4268254EC0B90032F67C /* Pods_todolistURLPlus.framework in Frameworks */,
 				D2B0644E2500B4C600000444 /* SnapKit in Frameworks */,
 				D249010F25090551003E9497 /* IQKeyboardManagerSwift in Frameworks */,
-				D2D052BC255A3671006D9004 /* SwiftFormat in Frameworks */,
 				D276D17C254AB8330099612B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,7 +421,6 @@
 				D2B0644D2500B4C600000444 /* SnapKit */,
 				D249010E25090551003E9497 /* IQKeyboardManagerSwift */,
 				D276D17B254AB8330099612B /* Lottie */,
-				D2D052BB255A3671006D9004 /* SwiftFormat */,
 			);
 			productName = todolistURLPlus;
 			productReference = D23505DB24FCCAAF00F4CC6E /* todolistURLPlus.app */;
@@ -457,7 +454,6 @@
 				D2B0644C2500B4C600000444 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D249010D25090551003E9497 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				D276D17A254AB8330099612B /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D2D052BA255A3670006D9004 /* XCRemoteSwiftPackageReference "SwiftFormat" */,
 			);
 			productRefGroup = D23505DC24FCCAAF00F4CC6E /* Products */;
 			projectDirPath = "";
@@ -758,7 +754,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VH4XC348YR;
+				DEVELOPMENT_TEAM = KA6B4A6D5D;
 				INFOPLIST_FILE = todolistURLPlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -766,7 +762,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -797,7 +793,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURLPlus;
+				PRODUCT_BUNDLE_IDENTIFIER = GoodIdeaIOS.todolistURL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -853,14 +849,6 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		D2D052BA255A3670006D9004 /* XCRemoteSwiftPackageReference "SwiftFormat" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nicklockwood/SwiftFormat.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.47.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -878,11 +866,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D2B0644C2500B4C600000444 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		D2D052BB255A3671006D9004 /* SwiftFormat */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D2D052BA255A3670006D9004 /* XCRemoteSwiftPackageReference "SwiftFormat" */;
-			productName = SwiftFormat;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
