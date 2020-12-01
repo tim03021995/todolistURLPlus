@@ -71,6 +71,11 @@ class ListPageVC: UIViewController, LoadAnimationAble {
         getTask()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        putCardName()
+    }
+    
     func addSubview() {
         view.addSubview(backgroundImage)
         view.addSubview(listBaseView)
@@ -106,7 +111,7 @@ class ListPageVC: UIViewController, LoadAnimationAble {
     }
     
     func classifiedSingleAndMutiple(showCards: [GetCardResponse.ShowCard]) {
-        showCards.map { card in
+    showCards.map { card in
             if card.id == self.showCard.id {
                 showTasks = card.showTasks
             }
@@ -202,7 +207,7 @@ extension ListPageVC: UITableViewDataSource {
 extension ListPageVC: UITextFieldDelegate {
     override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
         view.endEditing(true)
-        putCardName()
+        
     }
     
     func textFieldShouldReturn(_: UITextField) -> Bool {
