@@ -42,14 +42,13 @@ class SetInfoVC: CanGetImageViewController, LoadAnimationAble {
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
-    
-    @objc func save(){
-        func updataUserName(_ userName:String){
-            SetInfoModelManerger.updateUserName(userName) { (result) in
-                switch result{
-                
-                case .success(_):
-                    UserDataManager.shared.getUserData { (UIImage) in
+
+    @objc func save() {
+        func updataUserName(_ userName: String) {
+            SetInfoModelManerger.updateUserName(userName) { result in
+                switch result {
+                case .success:
+                    UserDataManager.shared.getUserData { _ in
                         self.popVC()
                     }
                     self.popVC()
@@ -72,8 +71,8 @@ class SetInfoVC: CanGetImageViewController, LoadAnimationAble {
                 if userName.isValidUserName {
                     if userName != UserDataManager.shared.userData?.username {
                         updataUserName(userName)
-                    }else{
-                        UserDataManager.shared.getUserData { (UIImage) in
+                    } else {
+                        UserDataManager.shared.getUserData { _ in
                             self.popVC()
                         }
                     }

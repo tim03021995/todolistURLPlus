@@ -26,13 +26,12 @@ enum SetInfoModelManerger {
             case .success:
                 print("update success")
                 compeletion()
-            case .failure(let err):
+            case let .failure(err):
                 print("update error")
                 print(err.description)
                 print("錯誤訊息：\(err.errMessage)")
                 compeletion()
             }
-            
         }
     }
 
