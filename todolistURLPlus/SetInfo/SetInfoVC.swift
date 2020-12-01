@@ -45,6 +45,9 @@ class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
                 switch result{
                 
                 case .success(_):
+                    UserDataManager.shared.getUserData { (UIImage) in
+                        self.popVC()
+                    }
                     self.popVC()
                 case .failure(let err ):
                     self.present(.makeAlert("Error", err.errMessage, { () -> Void? in
@@ -66,7 +69,9 @@ class SetInfoVC:CanGetImageViewController,LoadAnimationAble{
                     if userName != UserDataManager.shared.userData?.username {
                         updataUserName(userName)
                     }else{
-                        self.popVC()
+                        UserDataManager.shared.getUserData { (UIImage) in
+                            self.popVC()
+                        }
                     }
                 }else{
                     errorType()

@@ -24,12 +24,14 @@ class SetInfoModelManerger{
             switch result {
             case .success( _):
                 print("update success")
+                compeletion()
             case .failure(let err):
                 print("update error")
                 print(err.description)
                 print("錯誤訊息：\(err.errMessage)")
+                compeletion()
             }
-            compeletion()
+            
         }
     }
     static func updateUserName(_ userName:String?,_ compeletion:@escaping (Result<PutUserResponse,NetworkError>)->Void){

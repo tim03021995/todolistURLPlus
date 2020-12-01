@@ -14,7 +14,7 @@ class CanGetImageViewController:UIViewController{
             switch type {
             case .gill:
                 urlStr = "https://storage.googleapis.com/gcs.gill.gq/" + imageURL
-            //print("https://storage.googleapis.com/gcs.gill.gq" + imageURL)
+                print(urlStr)
             case .other:
                 urlStr = imageURL
             }
