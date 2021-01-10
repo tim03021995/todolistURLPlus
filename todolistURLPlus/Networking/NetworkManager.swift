@@ -10,6 +10,10 @@ import UIKit
 
 class NetworkManager {
     var delegate: ResponseActionDelegate?
+    static let shared = NetworkManager()
+    
+    private init(){}
+
     
     func sendRequest<T: Codable>(with request: URLRequest,
                                  completion: @escaping (Result<T, NetworkError>) -> Void) {

@@ -12,7 +12,7 @@ class UserInfoModelManager {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
-        NetworkManager().sendRequest(with: request) { (res: Result<GetUserResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (res: Result<GetUserResponse, NetworkError>) in
             switch res {
             case let .success(data):
                 let userData = data.userData

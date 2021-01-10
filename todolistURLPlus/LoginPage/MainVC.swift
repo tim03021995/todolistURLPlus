@@ -19,7 +19,7 @@ class MainVC: UIViewController {
         if let token = UserToken.getToken() {
             let headers = ["userToken": token]
             let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
-            NetworkManager().sendRequest(with: request) { (res: Result<GetCardResponse, NetworkError>) in
+            NetworkManager.shared.sendRequest(with: request) { (res: Result<GetCardResponse, NetworkError>) in
                 switch res {
                 case .success:
                     let vc = MainPageVC(.fullScreen, nil)

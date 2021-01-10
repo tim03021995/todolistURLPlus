@@ -77,7 +77,7 @@ class LoginVC: UIViewController, Storyboarded, LoadAnimationAble {
         }
         startLoading(self)
         let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
-        NetworkManager().sendRequest(with: getTokenRequest) { (result: Result<LoginInReaponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: getTokenRequest) { (result: Result<LoginInReaponse, NetworkError>) in
 
             switch result {
             case let .success(decodedData):

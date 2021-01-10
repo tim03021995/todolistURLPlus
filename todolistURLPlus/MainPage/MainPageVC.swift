@@ -555,7 +555,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let header = ["userToken": token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
-        NetworkManager().sendRequest(with: request) { (result: Result<GetCardResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (result: Result<GetCardResponse, NetworkError>) in
             switch result {
             case let .success(data):
                 let showCards = data.userData.showCards
@@ -605,7 +605,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
 
-        NetworkManager().sendRequest(with: request) { (result: Result<PostCardResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (result: Result<PostCardResponse, NetworkError>) in
             switch result {
             case let .success(data):
                 print("目前新增的卡片ID = \(data.cardData.id)")
@@ -635,7 +635,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: headers, id: id).send()
 
-        NetworkManager().sendRequest(with: request) { (result: Result<DeleteCardResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (result: Result<DeleteCardResponse, NetworkError>) in
             switch result {
             case .success:
                 //                self.showCards.remove(at: self.indexPath.row)

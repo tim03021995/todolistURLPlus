@@ -15,7 +15,6 @@
 		53CCD103252C620900A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53CCD101252C246C00A1F03F /* RuiZiYunZiKuXingKaiGB-2.ttf */; };
 		53D4C87C252F025B003CD01F /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4C87B252F025B003CD01F /* UIAlertControllerExtension.swift */; };
 		53D4C880252F0564003CD01F /* ExtensionUIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4C87F252F0564003CD01F /* ExtensionUIAlertController.swift */; };
-		97077B8D2512189E000139E6 /* searchMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B862512189E000139E6 /* searchMemberVC.swift */; };
 		97077B902512189E000139E6 /* UserAuthorityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B892512189E000139E6 /* UserAuthorityVC.swift */; };
 		97077B932512189E000139E6 /* UserAuthorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97077B8C2512189E000139E6 /* UserAuthorityCell.swift */; };
 		9718BB8E2509BE14002C8E71 /* ListBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9718BB8C2509BE14002C8E71 /* ListBaseView.swift */; };
@@ -91,7 +90,6 @@
 		53D4C87B252F025B003CD01F /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		53D4C87F252F0564003CD01F /* ExtensionUIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIAlertController.swift; sourceTree = "<group>"; };
 		8361AE1B999FE2F43B011185 /* Pods-todolistURLPlus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todolistURLPlus.debug.xcconfig"; path = "Target Support Files/Pods-todolistURLPlus/Pods-todolistURLPlus.debug.xcconfig"; sourceTree = "<group>"; };
-		97077B862512189E000139E6 /* searchMemberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchMemberVC.swift; sourceTree = "<group>"; };
 		97077B892512189E000139E6 /* UserAuthorityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityVC.swift; sourceTree = "<group>"; };
 		97077B8C2512189E000139E6 /* UserAuthorityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthorityCell.swift; sourceTree = "<group>"; };
 		9718BB8C2509BE14002C8E71 /* ListBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBaseView.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 		97077B852512189E000139E6 /* UserAuthority */ = {
 			isa = PBXGroup;
 			children = (
-				97077B862512189E000139E6 /* searchMemberVC.swift */,
 				FB67FA812519D92500EFF76A /* Search */,
 				97077B892512189E000139E6 /* UserAuthorityVC.swift */,
 				97077B8C2512189E000139E6 /* UserAuthorityCell.swift */,
@@ -574,7 +571,6 @@
 				D249011225090A40003E9497 /* ModifyPasswordVC.swift in Sources */,
 				D24B084C2521A5600073917E /* UserDataManager.swift in Sources */,
 				D2B0644525008AAB00000444 /* UserInfoVC.swift in Sources */,
-				97077B8D2512189E000139E6 /* searchMemberVC.swift in Sources */,
 				53C16106250910E700C91D16 /* ListPageVC.swift in Sources */,
 				FBEAB4D5250F1CE9005041F3 /* CardResponse.swift in Sources */,
 				D276D23E254D4EE50099612B /* AdMobManager.swift in Sources */,

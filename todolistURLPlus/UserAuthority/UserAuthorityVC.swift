@@ -51,7 +51,7 @@ class UserAuthorityVC: UIViewController {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
         let request = HTTPRequest(endpoint: .groupsCard, contentType: .json, method: .GET, headers: headers, id: cardID).send()
-        NetworkManager().sendRequest(with: request) { (result: Result<GetGroupResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (result: Result<GetGroupResponse, NetworkError>) in
             switch result {
             case let .success(data): self.users = data.usersData
             case let .failure(err): print(err.description)
@@ -72,7 +72,7 @@ class UserAuthorityVC: UIViewController {
         let headers = ["userToken": token]
         let parameters = ["user_id": users[indexPath.row].id]
         let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .DELETE, parameters: parameters, headers: headers, id: cardID).send()
-        NetworkManager().sendRequest(with: request) { (res: Result<DeleteGroupResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (res: Result<DeleteGroupResponse, NetworkError>) in
             switch res {
             case let .success(a): print(a.status)
                 self.myTableView.beginUpdates()

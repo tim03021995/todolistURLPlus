@@ -63,7 +63,7 @@ class SearchVC: UIViewController {
         let headers = ["userToken": token]
 
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: mail).send()
-        NetworkManager().sendRequest(with: request) {
+        NetworkManager.shared.sendRequest(with: request) {
             (res: Result<GetUserResponse, NetworkError>) in
             switch res {
             case let .success(data):
@@ -80,7 +80,7 @@ class SearchVC: UIViewController {
         let parameters = ["email": mail]
         let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .POST, parameters: parameters, headers: headers, id: cardID).send()
         print(request)
-        NetworkManager().sendRequest(with: request) { (res: Result<PostGroupResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (res: Result<PostGroupResponse, NetworkError>) in
             switch res {
             case .success:
                 self.present(.makeAlert("Success", "新增成功") {

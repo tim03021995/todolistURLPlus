@@ -87,7 +87,7 @@ class SignupVC: UIViewController, LoadAnimationAble {
         startLoading(self)
         let registerRequest = HTTPRequest(endpoint: .register, contentType: .json, method: .POST, parameters: parameters).send()
 
-        NetworkManager().sendRequest(with: registerRequest) { (result: Result<LoginInReaponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: registerRequest) { (result: Result<LoginInReaponse, NetworkError>) in
             switch result {
             case .success:
                 self.present(.makeAlert("Success", "註冊成功！") {

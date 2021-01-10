@@ -125,7 +125,7 @@ class ListPageVC: UIViewController, LoadAnimationAble {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
-        NetworkManager().sendRequest(with: request) { (result: Result<GetCardResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (result: Result<GetCardResponse, NetworkError>) in
             switch result {
             case let .success(data):
                 let showCards = data.userData.showCards
@@ -189,7 +189,7 @@ extension ListPageVC: UITableViewDataSource {
         let headers = ["userToken": token]
         let parameters: [String: Any] = ["card_name": cardTitleTextField.text == "" ? "新增的卡片" : cardTitleTextField.text! ]
         let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: showCard.id).send()
-        NetworkManager().sendRequest(with: request) { (result: Result<PutCardResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request) { (result: Result<PutCardResponse, NetworkError>) in
             switch result {
             case .success:
                 print("卡片名稱更新成功")
