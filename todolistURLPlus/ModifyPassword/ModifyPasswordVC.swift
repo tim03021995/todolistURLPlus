@@ -55,9 +55,6 @@ class ModifyPasswordVC: CanGetImageViewController, LoadAnimationAble {
 }
 
 extension ModifyPasswordVC: UITextFieldDelegate {
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        view.endEditing(true)
-    }
 
     func textFieldDidEndEditing(_: UITextField) {
         let animate = UIViewPropertyAnimator(duration: 1, curve: .easeIn) {

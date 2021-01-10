@@ -146,7 +146,7 @@ enum TaskModelManager {
     static func delete(_ taskID: Int, _ compeletion: @escaping () -> Void) {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
-        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .DELETE, headers: headers, id: taskID).send()
+        let request = HTTPRequest(endpoint: .task, contentType: .json, method: .DELETE, headers: headers, id: taskID).build()
         NetworkManager.shared.sendRequest(with: request) { (result: Result<DeleteTaskResponse, NetworkError>) in
             switch result {
             case let .success(a):

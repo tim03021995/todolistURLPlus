@@ -29,7 +29,7 @@ struct HTTPRequest {
     var mail: String?
 
     /// 包裝request
-    func send() -> URLRequest {
+    func build() -> URLRequest {
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
 

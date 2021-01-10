@@ -554,7 +554,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     func getCard(isAdd: Bool = false) {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let header = ["userToken": token]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: header).build()
         NetworkManager.shared.sendRequest(with: request) { (result: Result<GetCardResponse, NetworkError>) in
             switch result {
             case let .success(data):
@@ -583,9 +583,12 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 }
             case let .failure(err):
                 print(err.description)
-                if err == .retry {
+                switch err {
+                case .retry :
                     self.stopLoading()
                     self.showAd()
+                default:
+                    break
                 }
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
             }
@@ -603,7 +606,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         // TODO: 新增的card name
         let parameter = ["card_name": "新增的卡片"]
 
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .POST, parameters: parameter, headers: header).build()
 
         NetworkManager.shared.sendRequest(with: request) { (result: Result<PostCardResponse, NetworkError>) in
             switch result {
@@ -633,7 +636,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         default:
             id = showMutipleCards[indexPath.row].id
         }
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: headers, id: id).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .DELETE, parameters: .none, headers: headers, id: id).build()
 
         NetworkManager.shared.sendRequest(with: request) { (result: Result<DeleteCardResponse, NetworkError>) in
             switch result {
@@ -645,9 +648,13 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             case let .failure(err):
                 print("err.description = \(err.description)")
                 print("err.errormessage = \(err.errMessage)")
-                if err == .retry {
+                
+                switch err {
+                case .retry:
                     self.stopLoading()
                     self.showAd()
+                default :
+                    break
                 }
 
                 self.alertMessage(alertTitle: "發生錯誤", alertMessage: err.description, actionTitle: "稍後再試")
@@ -703,7 +710,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     func interstitialDidDismissScreen(_: GADInterstitial) {
         print("Did Dismiss Screen")
-        DispatchQueue.global(qos: .default).async {
+        DispatchQueue.main.async {
             self.interstitialView = self.createAd()
         }
     }

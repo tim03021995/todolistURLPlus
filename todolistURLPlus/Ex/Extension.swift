@@ -44,6 +44,11 @@ extension UIViewController: ResponseActionDelegate {
         alert.addAction(action)
         return alert
     }
+    
+    open override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+        view.endEditing(true)
+    }
+
 }
 
 extension UserDefaults {

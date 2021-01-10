@@ -82,7 +82,4 @@ class SetInfoView: UIView {
         peopleView.image = userImage
     }
 
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        endEditing(true)
-    }
 }

@@ -124,7 +124,7 @@ class ListPageVC: UIViewController, LoadAnimationAble {
         startLoading(self)
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).build()
         NetworkManager.shared.sendRequest(with: request) { (result: Result<GetCardResponse, NetworkError>) in
             switch result {
             case let .success(data):
@@ -188,7 +188,7 @@ extension ListPageVC: UITableViewDataSource {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
         let parameters: [String: Any] = ["card_name": cardTitleTextField.text == "" ? "新增的卡片" : cardTitleTextField.text! ]
-        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: showCard.id).send()
+        let request = HTTPRequest(endpoint: .card, contentType: .json, method: .PUT, parameters: parameters, headers: headers, id: showCard.id).build()
         NetworkManager.shared.sendRequest(with: request) { (result: Result<PutCardResponse, NetworkError>) in
             switch result {
             case .success:
@@ -205,10 +205,6 @@ extension ListPageVC: UITableViewDataSource {
 }
 
 extension ListPageVC: UITextFieldDelegate {
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        view.endEditing(true)
-        
-    }
     
     func textFieldShouldReturn(_: UITextField) -> Bool {
         view.endEditing(true)

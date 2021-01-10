@@ -32,9 +32,8 @@ class CardEditView: UIView {
         textField.textAlignment = .center
         textField.placeholder = "Please input title"
         textField.textColor = .black
-        let font = textField.font!
-        let newFont = font.withSize(30)
-        textField.font = newFont
+        textField.becomeFirstResponder()
+        textField.font = .systemFont(ofSize: 30)
         return textField
     }()
 

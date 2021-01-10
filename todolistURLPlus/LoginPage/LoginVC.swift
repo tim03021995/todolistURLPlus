@@ -76,7 +76,7 @@ class LoginVC: UIViewController, Storyboarded, LoadAnimationAble {
             return
         }
         startLoading(self)
-        let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).send()
+        let getTokenRequest = HTTPRequest(endpoint: .userToken, contentType: .json, method: .POST, parameters: parameters).build()
         NetworkManager.shared.sendRequest(with: getTokenRequest) { (result: Result<LoginInReaponse, NetworkError>) in
 
             switch result {
@@ -118,9 +118,6 @@ class LoginVC: UIViewController, Storyboarded, LoadAnimationAble {
 // MARK: - Textfield
 
 extension LoginVC: UITextFieldDelegate {
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        view.endEditing(true)
-    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {

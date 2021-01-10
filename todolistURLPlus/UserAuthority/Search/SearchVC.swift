@@ -62,7 +62,7 @@ class SearchVC: UIViewController {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
 
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: mail).send()
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: mail).build()
         NetworkManager.shared.sendRequest(with: request) {
             (res: Result<GetUserResponse, NetworkError>) in
             switch res {
@@ -78,7 +78,7 @@ class SearchVC: UIViewController {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
         let parameters = ["email": mail]
-        let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .POST, parameters: parameters, headers: headers, id: cardID).send()
+        let request = HTTPRequest(endpoint: .groups, contentType: .json, method: .POST, parameters: parameters, headers: headers, id: cardID).build()
         print(request)
         NetworkManager.shared.sendRequest(with: request) { (res: Result<PostGroupResponse, NetworkError>) in
             switch res {

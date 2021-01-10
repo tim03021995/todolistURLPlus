@@ -18,7 +18,7 @@ class MainVC: UIViewController {
         super.viewDidAppear(animated)
         if let token = UserToken.getToken() {
             let headers = ["userToken": token]
-            let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).send()
+            let request = HTTPRequest(endpoint: .card, contentType: .json, method: .GET, headers: headers).build()
             NetworkManager.shared.sendRequest(with: request) { (res: Result<GetCardResponse, NetworkError>) in
                 switch res {
                 case .success:

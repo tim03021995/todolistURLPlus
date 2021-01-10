@@ -40,7 +40,7 @@ enum SetInfoModelManerger {
         let header = ["userToken": token]
         let parameters = makeParameters(userName, nil)
         let request = HTTPRequest(endpoint: .user, contentType: .json, method: .PUT, parameters: parameters, headers: header)
-        NetworkManager.shared.sendRequest(with: request.send()) { (result: Result<PutUserResponse, NetworkError>) in
+        NetworkManager.shared.sendRequest(with: request.build()) { (result: Result<PutUserResponse, NetworkError>) in
             compeletion(result)
         }
     }

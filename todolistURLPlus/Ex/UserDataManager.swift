@@ -18,7 +18,7 @@ class UserDataManager {
     func getUserData() {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).build()
         NetworkManager.shared.sendRequest(with: request) { (res: Result<GetUserResponse, NetworkError>) in
             switch res {
             case let .success(data):
@@ -37,7 +37,7 @@ class UserDataManager {
     func getUserData(complection: @escaping (UIImage) -> Void) {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).build()
         NetworkManager.shared.sendRequest(with: request) { (res: Result<GetUserResponse, NetworkError>) in
             switch res {
             case let .success(data):
@@ -55,7 +55,7 @@ class UserDataManager {
         guard let token = UserToken.getToken() else { print("No Token"); return }
         let headers = ["userToken": token]
 
-        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).send()
+        let request = HTTPRequest(endpoint: .user, contentType: .json, method: .GET, headers: headers, mail: email).build()
         NetworkManager.shared.sendRequest(with: request) { (res: Result<GetUserResponse, NetworkError>) in
             switch res {
             case let .success(data):

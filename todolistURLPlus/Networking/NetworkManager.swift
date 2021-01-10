@@ -14,11 +14,12 @@ class NetworkManager {
     
     private init(){}
 
+    var task : URLSessionDataTask?
     
     func sendRequest<T: Codable>(with request: URLRequest,
                                  completion: @escaping (Result<T, NetworkError>) -> Void) {
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        task = URLSession.shared.dataTask(with: request) { data, response, error in
             
             DispatchQueue.main.async {
                 if error != nil {
@@ -35,10 +36,13 @@ class NetworkManager {
                     return
                 }
                 
-                self.responseHandler(data: data, response: response, completion: completion)
+                self.responseHandler(data: data,
+                                     response: response,
+                                     completion: completion)
             }
             
-        }.resume()
+        }
+        task?.resume()
     }
     
     private func responseHandler<T: Codable>

@@ -8,14 +8,7 @@
 
 import Foundation
 
-enum NetworkError: Error, Comparable {
-    static func < (_: NetworkError, _: NetworkError) -> Bool {
-        false
-    }
-
-    static func == (_: NetworkError, _: NetworkError) -> Bool {
-        true
-    }
+enum NetworkError: Error {
 
     case systemError
     case noResponse

@@ -85,7 +85,7 @@ class SignupVC: UIViewController, LoadAnimationAble {
             return
         }
         startLoading(self)
-        let registerRequest = HTTPRequest(endpoint: .register, contentType: .json, method: .POST, parameters: parameters).send()
+        let registerRequest = HTTPRequest(endpoint: .register, contentType: .json, method: .POST, parameters: parameters).build()
 
         NetworkManager.shared.sendRequest(with: registerRequest) { (result: Result<LoginInReaponse, NetworkError>) in
             switch result {
@@ -118,9 +118,6 @@ class SignupVC: UIViewController, LoadAnimationAble {
 // MARK: - TextFieldDelegate
 
 extension SignupVC: UITextFieldDelegate {
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        view.endEditing(true)
-    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
