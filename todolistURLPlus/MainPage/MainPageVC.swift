@@ -80,7 +80,7 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
 
     /// 設置垃圾桶
     lazy var trashBtn: UIButton = {
-        let btn = UIButton(frame: CGRect(x: ScreenSize.width.value * 0.8, y: 50, width: ScreenSize.width.value * 0.15, height: ScreenSize.width.value * 0.15))
+        let btn = UIButton()
         btn.tintColor = .white
         btn.setBackgroundImage(UIImage(systemName: "trash.fill"), for: .normal)
         btn.addTarget(self, action: #selector(MainPageVC.editMode), for: .touchUpInside)
@@ -223,21 +223,14 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         return btn
     }()
 
-    // MARK: Loading
-
-    override func viewDidAppear(_: Bool) {
-        setupHeadImage()
-    }
-
     // MARK: viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        #warning("123")
         setUI()
         getCard()
         startLoading(self)
-        DispatchQueue.global(qos: .default).async {
+        DispatchQueue.main.async {
             self.interstitialView = self.createAd()
         }
     }
@@ -309,16 +302,32 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         UserDataManager.shared.getUserData(email: userData.email) { image in
             self.headImage.image = image
             self.stopLoading()
-            //            self.stopLoading()
-            // self.stop()
         }
     }
 
     func setupHeadImage() {
-        headImage.frame = CGRect(x: ScreenSize.width.value * 0.05, y: trashBtn.frame.minY, width: headImage.frame.width, height: headImage.frame.height)
+        headImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            headImage.leftAnchor.constraint(equalTo: view.leftAnchor, constant: ScreenSize.width.value * 0.05),
+            headImage.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            headImage.widthAnchor.constraint(equalToConstant: headImage.frame.width),
+            headImage.heightAnchor.constraint(equalToConstant: headImage.frame.height)
+        ])
+
         headImage.isHidden = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapToProfileSetting))
         headImage.addGestureRecognizer(tap)
+    }
+    
+    func setupTrashBtn() {
+        trashBtn.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            trashBtn.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -ScreenSize.width.value * 0.05),
+            trashBtn.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            trashBtn.widthAnchor.constraint(equalToConstant: ScreenSize.width.value * 0.15),
+            trashBtn.heightAnchor.constraint(equalToConstant: ScreenSize.width.value * 0.15)
+        ])
+
     }
 
     // blueconstraints 讓btn和灰色左右底部固定距離，高度隨比例更動
@@ -461,6 +470,8 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         setMutipleBtnConstraints()
         SetSingleCardCollectionView()
         SetMultipleCardCollectionView()
+        setupHeadImage()
+        setupTrashBtn()
     }
 
     // 增加點擊手勢觸發跳轉個人資料設定
@@ -475,13 +486,12 @@ class MainPageVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     @objc func tapSingleBtn() {
         feedbackGenerator.impactOccurred()
         btnTag = 0
-        let animate = UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
+        UIViewPropertyAnimator(duration: 0.2, curve: .linear) {
             self.mutipleCheckMark.alpha = 0
             self.singleCardCollectionView.alpha = 1
             self.mutipleCardCollectionView.alpha = 0
             self.singleCheckMark.alpha = 1
-        }
-        animate.startAnimation()
+        }.startAnimation()
         singleCardCollectionView.reloadData()
     }
 

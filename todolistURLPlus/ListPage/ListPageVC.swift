@@ -111,7 +111,7 @@ class ListPageVC: UIViewController, LoadAnimationAble {
     }
     
     func classifiedSingleAndMutiple(showCards: [GetCardResponse.ShowCard]) {
-    showCards.map { card in
+        showCards.forEach { card in
             if card.id == self.showCard.id {
                 showTasks = card.showTasks
             }

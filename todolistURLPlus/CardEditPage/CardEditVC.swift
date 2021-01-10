@@ -13,6 +13,12 @@ class CardEditVC: CanGetImageViewController, LoadAnimationAble {
     private var cardID: Int = 0
     private var taskID: Int?
     private let cardEditView = CardEditView()
+    
+    private let photoController : UIImagePickerController = {
+        let photoController = UIImagePickerController()
+        photoController.sourceType = .photoLibrary
+        return photoController
+    }()
 
     override func loadView() {
         super.loadView()
@@ -25,6 +31,7 @@ class CardEditVC: CanGetImageViewController, LoadAnimationAble {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoController.delegate = self
         setNC()
     }
 
@@ -137,15 +144,21 @@ class CardEditVC: CanGetImageViewController, LoadAnimationAble {
     }
 
     @objc func takeImage() {
-        DispatchQueue.main.async {
-            let photoController = UIImagePickerController()
-            photoController.delegate = self
-            photoController.sourceType = .photoLibrary
-            self.present(photoController, animated: true, completion: nil)
+        startLoading(self)
+        presentImageController{ [unowned self] in
+            stopLoading()
+        }
+        
+    }
+    
+    private func presentImageController(_ completion: (()-> Void)?){
+        DispatchQueue.main.async { [unowned self] in
+            present(photoController, animated: true, completion: nil)
+            completion?()
         }
     }
 
-    func popView() {
+    private func popView() {
         navigationController?.popToRootViewController(animated: true)
     }
 }
